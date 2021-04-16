@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Test</title>
+    <script src="../dist/js/index.js"></script>
+</head>
+
+<body>
+    <h1>Tests</h1>
+    <script>
+        class StrModel extends mvc.Model {
+            constructor(data) {
+                super({ value: data });
+            }
+        }
+
+        mvc.Model.define(StrModel, {
+            "value": "string",
+        });
+
+        class KeyModel extends mvc.Model {
+            constructor(data) {
+                super(data);
+            }
+            getClassName() {
+                return this.$className;
+            }
+            get override() {
+                return "done!";
+            }
+        }
+
+        mvc.Model.define(KeyModel, {
+            "str": "_id string",
+            "map": "{}number",
+            "arr": "[]StrModel",
+            "override": "string",
+        });
+        
+        var obj = new KeyModel({ _id: "[this is the key]", map: { a: 1, b: 2 }, arr: [ "a", "b" ], override: "not done" });
+        obj.$type.forEach((v,k) =>{
+            console.log(`${k} => `,v);
+        });
+        console.log("className=",obj.$className);
+        console.log("getClassName=",obj.getClassName());
+        console.log("str=",obj.str);
+        console.log("map=",obj.map);
+        console.log("arr=",obj.arr);
+        console.log("override=",obj.override);
+        console.log("toString=","" + obj);
+    </script>
+</body>
+
+</html>

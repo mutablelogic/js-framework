@@ -1,0 +1,34 @@
+{
+  "name": "js-framework",
+  "version": "0.0.2",
+  "description": "Javascript UI Framework",
+  "main": "dist/js/index.js",
+  "scripts": {
+    "all": "npm-run-all js-lint js-compile js-minify",
+    "js-lint": "eslint js",
+    "js-compile": "rollup js/index.js --format iife --name mvc --file dist/js/index.js --sourcemap",
+    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djthorpe/js-framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djthorpe/js-framework/issues"
+  },
+  "homepage": "https://github.com/djthorpe/js-framework#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.45.2",
+    "terser": "^5.1.0"
+  },
+  "dependencies": {
+    "all": "*",
+    "bootstrap": "^5.0.0-beta3"
+  }
+}

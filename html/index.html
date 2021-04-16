@@ -36,18 +36,29 @@
             "arr": "[]StrModel",
             "override": "string",
         });
-        
-        var obj = new KeyModel({ _id: "[this is the key]", map: { a: 1, b: 2 }, arr: [ "a", "b" ], override: "not done" });
-        obj.$type.forEach((v,k) =>{
-            console.log(`${k} => `,v);
+
+        var obj = new KeyModel({ _id: "[this is the key]", map: { a: 1, b: 2 }, arr: ["a", "b"], override: "not done" });
+        obj.$type.forEach((v, k) => {
+            console.log(`${k} => `, v);
         });
-        console.log("className=",obj.$className);
-        console.log("getClassName=",obj.getClassName());
-        console.log("str=",obj.str);
-        console.log("map=",obj.map);
-        console.log("arr=",obj.arr);
-        console.log("override=",obj.override);
-        console.log("toString=","" + obj);
+        console.log("className=", obj.$className);
+        console.log("getClassName=", obj.getClassName());
+        console.log("str=", obj.str);
+        console.log("map=", obj.map);
+        console.log("arr=", obj.arr);
+        console.log("override=", obj.override);
+        console.log("toString=", "" + obj);
+
+        var provider = new mvc.Provider();
+        provider.addEventListener('mvc.provider.completed', (sender) => {
+            console.log("Completed", sender);
+        });
+        provider.addEventListener('mvc.provider.error', (sender, error) => {
+            console.log("Error", error);
+        });
+        provider.fetch('https://rpi4b.mutablelogic.com/', {
+            mode: 'no-cors',
+        });
     </script>
 </body>
 

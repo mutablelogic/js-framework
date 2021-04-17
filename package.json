@@ -1,6 +1,6 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {
@@ -36,6 +36,6 @@
     "bootstrap-icons": "^1.4.1"
   },
   "files": [
-    "dist/*.{js,map,woff,woff}"
+    "dist/**/*.{js,map,woff,woff2,txt}"
   ]
 }

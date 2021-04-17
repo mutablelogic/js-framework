@@ -5,11 +5,12 @@ module.exports = {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'index.js',
+    filename: 'js/index.js',
     library: {
       name: 'mvc',
       type: 'umd',
     },
+    clean: true,
   },
   module: {
     rules: [

@@ -18,7 +18,7 @@ import Error from './error';
 import Emitter from './events';
 import './string';
 
-// CSS and fonts
+// CSS and Fonts
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap-icons/font/fonts/bootstrap-icons.woff';

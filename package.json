@@ -4,43 +4,34 @@
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {
-    "all": "npm-run-all js-lint js-compile js-minify",
-    "js-lint": "eslint js",
-    "js-compile": "rollup --name mvc --config config/rollup.config.js --sourcemap",
-    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js"
+    "build": "webpack --config config/webpack.config.js",
+    "js-lint": "eslint js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/djthorpe/js-framework.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  },  
-  "author": "",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "David Thorpe",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/djthorpe/js-framework/issues"
   },
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "css-loader": "^5.2.2",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.10",
-    "postcss-url": "^10.1.3",
-    "rollup": "^2.45.2",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-font": "^1.1.1",
-    "rollup-plugin-import-css": "^2.0.1",
-    "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-smart-asset": "^2.1.1",
-    "terser": "^5.1.0"
+    "style-loader": "^2.0.0",
+    "terser": "^5.1.0",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
-    "all": "*",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1"
   }

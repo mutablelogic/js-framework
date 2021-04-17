@@ -10,3 +10,16 @@
     font-size: 36px;
     line-height: 0;
 }
+
+/* Copy Paste */
+.mvc-copypaste:before {
+    content: "\f28b";
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    margin: 1px;    
+}

@@ -3,6 +3,7 @@
 import { Tooltip } from 'bootstrap';
 import View from './view';
 import Provider from './provider';
+import CopyPaste from './copypaste';
 
 export default class Controller {
   constructor() {
@@ -13,6 +14,17 @@ export default class Controller {
     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((node) => {
       // eslint-disable-next-line no-new
       new Tooltip(node);
+    });
+
+    // Set up copypaste
+    document.querySelectorAll('.mvc-copypaste').forEach((node) => {
+      const copypaste = new CopyPaste(node);
+      copypaste.addEventListener('mvc.copypaste.click', (sender, target) => {
+        copypaste.clipboard = target.innerText;
+      });
+      copypaste.addEventListener('mvc.copypaste.change', (sender) => {
+        console.log('copied');
+      });
     });
   }
 
@@ -35,7 +47,11 @@ export default class Controller {
     });
   }
 
-  static New() {
-    return new Controller();
+  static New(constructor) {
+    const C = constructor || Controller;
+    if (C.prototype instanceof Controller) {
+      return new C();
+    }
+    throw new Error(`Controller: Class ${C.name} is not a controller`);
   }
 }

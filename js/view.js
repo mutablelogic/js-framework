@@ -24,11 +24,13 @@ export default class View extends Emitter {
   }
 
   append(node) {
-    return this.$node.appendChild(node);
+    this.$node.appendChild(node);
+    return this;
   }
 
   preprend(node) {
-    return this.$node.insertBefore(node, this.$node.firstChild);
+    this.$node.insertBefore(node, this.$node.firstChild);
+    return this;
   }
 
   replace(selector, ...args) {
@@ -36,7 +38,8 @@ export default class View extends Emitter {
     if (!node) {
       throw new Error(`View: Invalid selector ${selector}`);
     }
-    return node.replaceChildren(...args);
+    node.replaceChildren(...args);
+    return this;
   }
 
   $show() {

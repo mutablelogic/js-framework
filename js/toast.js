@@ -31,8 +31,8 @@ export default class Toast extends View {
   show(reason, code) {
     if (reason instanceof Error) {
       this.replace('._title', 'ERROR');
-      this.replace('._reason', reason.reason);
-      this.replace('._code', reason.code ? `Code ${reason.code}` : '');
+      this.replace('._reason', reason.$reason);
+      this.replace('._code', reason.$code ? `Code ${reason.$code}` : '');
     } else {
       this.replace('._title', 'INFO');
       this.replace('._reason', reason);

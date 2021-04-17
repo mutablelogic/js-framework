@@ -36,6 +36,22 @@
         </div>
     </nav>
 
+    <!-- TABLE -->
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                </tr>
+            </thead>
+            <tbody id="table">
+                <tr class="_template">
+                    <td class="_name">Project</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- PLUS BUTTON -->
     <div class="fixed-bottom d-flex flex-row-reverse">
         <button id="plus" class="btn btn-circle bg-danger text-white onclick-item" title="Add">+</button>
@@ -75,13 +91,13 @@
                             <label class="col-sm-4 col-form-label">Radio Buttons</label>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="radio"
-                                        id="inlineRadio1" value="option1">
+                                    <input class="form-check-input" type="radio" name="radio" id="inlineRadio1"
+                                        value="option1">
                                     <label class="form-check-label" for="inlineRadio1">1</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="radio"
-                                        id="inlineRadio2" value="option2">
+                                    <input class="form-check-input" type="radio" name="radio" id="inlineRadio2"
+                                        value="option2">
                                     <label class="form-check-label" for="inlineRadio2">2</label>
                                 </div>
                             </div>
@@ -121,19 +137,33 @@
             var app = mvc.Controller.New();
 
             // Models
-            class Project extends mvc.Model {};
+            class Project extends mvc.Model {
+                constructor(data) {
+                    super(data);
+                    console.log(data);
+                }
+            };
+            mvc.Model.define(Project, {
+                key: "_id string",
+                name: "string",
+                status: "string",
+                createdDate: "created_date date",
+                updatedDate: "updated_date date",
+                tags: "{}string",
+            });
 
             // Add objects to the application
             app.Add('nav', new mvc.Nav(document.querySelector("#nav")));
             app.Add('toast', new mvc.Toast(document.querySelector("#toast")));
             app.Add('plus', new mvc.Button(document.querySelector("#plus")));
             app.Add('form', new mvc.Form(document.querySelector("#form")));
-            app.Add('projects', new mvc.Provider(Project,'https://rpi4b.mutablelogic.com'));
+            app.Add('projects', new mvc.Provider(Project, 'https://rpi4b.mutablelogic.com'));
+            app.Add('table', new mvc.List(document.querySelector("#table"), "_template"));
 
             // Show toast when button pressed
             app.plus.addEventListener('mvc.button.click', (sender, target) => {
-                app.form.replace("._range",'');
-                app.form.show({ 
+                app.form.replace("._range", '');
+                app.form.show({
                     name: 'default',
                     radio: 'option2',
                     range: '0',
@@ -157,8 +187,31 @@
                 }
             });
 
-            // Request projects
-            app.projects.request('/api/project/');
+            // Set active row
+            app.table.addEventListener('mvc.list.click', (sender, target, key) => {
+                app.table.setClassForKey(key, 'table-active');
+            });
+
+            // Projects
+            app.projects.addEventListener('mvc.provider.error', (sender, error) => {
+                app.toast.show(error);
+            });
+            app.projects.addEventListener('mvc.provider.added', (sender, project) => {
+                app.table.set(project, project.key).replace('._name', project.$json);
+            });
+            app.projects.addEventListener('mvc.provider.changed', (sender, project) => {
+                app.table.set(project, project.key).replace('._name', project.$json);
+            });
+            app.projects.addEventListener('mvc.provider.deleted', (sender, project) => {
+                app.table.deleteForKey(project.key);
+            });
+            app.projects.addEventListener('mvc.provider.completed', (sender, changed) => {
+                // Resort table if changed
+                console.log("Projects loaded, changed=", changed);
+            });
+
+            // Request projects every 30 secs
+            app.projects.request('/api/project/', null, null, 30 * 1000);
 
         });
     </script>

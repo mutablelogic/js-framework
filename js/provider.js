@@ -31,7 +31,7 @@ export default class Provider extends Emitter {
       this.$fetch(url, req, userInfo);
     }
     if (interval) {
-      this.$timer = setInterval(this.$fetch.bind(this, url, req, userInfo));
+      this.$timer = setInterval(this.$fetch.bind(this, url, req, userInfo), interval);
     }
   }
 
@@ -44,6 +44,7 @@ export default class Provider extends Emitter {
 
   $fetch(url, req, userInfo) {
     let status;
+    let changed = false;
     fetch(this.$origin + url, req)
       .then((response) => {
         status = response;
@@ -67,13 +68,15 @@ export default class Provider extends Emitter {
             throw new Error(status.statusText, status.status);
           }
         } else if (typeof (data) === 'object' && Array.isArray(data)) {
-          this.$array(data);
-        } else {
-          this.$object(data);
+          if (this.$array(data)) {
+            changed = true;
+          }
+        } else if (this.$object(data)) {
+          changed = true;
         }
       })
       .then(() => {
-        this.dispatchEvent(EVENT_COMPLETED, this, userInfo);
+        this.dispatchEvent(EVENT_COMPLETED, this, changed, userInfo);
       })
       .catch((error) => {
         if (error instanceof Error) {
@@ -105,8 +108,9 @@ export default class Provider extends Emitter {
   }
 
   $array(data) {
+    const changed = false;
     const mark = new Map();
-    this.$items.forEach((_, key) => {
+    this.$objs.forEach((_, key) => {
       mark.set(key, true);
     });
     data.forEach((elem) => {
@@ -115,12 +119,13 @@ export default class Provider extends Emitter {
         mark.delete(key);
       }
     });
-    this.$items.forEach((elem, key) => {
+    this.$objs.forEach((elem, key) => {
       if (mark.get(key)) {
         this.dispatchEvent(EVENT_DELETED, this, elem);
-        this.$items.delete(key);
+        this.$objs.delete(key);
       }
     });
+    return changed;
   }
 
   // objects property returns all objects loaded by provider

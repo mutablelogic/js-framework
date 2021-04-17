@@ -7,7 +7,7 @@ import Provider from './provider';
 
 // Views
 import View from './view';
-import ListView from './listview';
+import List from './list';
 import Toast from './toast';
 import Nav from './nav';
 import Button from './button';
@@ -18,11 +18,14 @@ import Error from './error';
 import Emitter from './events';
 import './string';
 
-// CSS
+// CSS and fonts
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap-icons/font/fonts/bootstrap-icons.woff';
+import 'bootstrap-icons/font/fonts/bootstrap-icons.woff2';
 import '../css/style.css';
 
 // Exports
 export {
-  Model, View, Controller, Provider, Error, Emitter, ListView, Nav, Toast, Button, Form,
+  Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,
 };

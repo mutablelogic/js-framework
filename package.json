@@ -1,19 +1,21 @@
 {
-  "name": "js-framework",
-  "version": "0.0.2",
+  "name": "@djthorpe/js-framework",
+  "version": "0.0.3",
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {
     "all": "npm-run-all js-lint js-compile js-minify",
     "js-lint": "eslint js",
     "js-compile": "rollup --name mvc --config config/rollup.config.js --sourcemap",
-    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js",
-    "copy-bootstrap": "copy-node-modules node_modules/bootstrap/dist dist"
+    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/djthorpe/js-framework.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },  
   "author": "",
   "license": "ISC",
   "bugs": {

@@ -8,4 +8,11 @@ implementation which provides the following classes:
   * __Model class__: subclass this for your JSON models, and separately define the members of your class;
   * __View classes__: classes are provided for form, list, button, etc.
 
+## Usage
+
+You'll need to use `npm` to install as a dependency in your module:
+
+```bash
+[bash] npm install github:djthorpe/js-framework
+```
 

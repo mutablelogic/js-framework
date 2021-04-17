@@ -1,0 +1,12 @@
+
+/* Plus Button */
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    margin: 40px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 36px;
+    line-height: 0;
+}

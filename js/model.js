@@ -18,100 +18,184 @@ const REGEXP_NOTALIASED = /^()(\{\}|\[\])?(\w+)$/i;
 
 export default class Model {
   constructor(data) {
-    // Set prototype
-    const proto = Model.models[this.constructor.name];
+    // Get prototype
+    const className = this.constructor.name;
+    const proto = Model.models[className];
     if (!proto) {
-      throw new Error(`Missing model definition for ${this.constructor.name}`);
-    } else {
-      let instance = Object.getPrototypeOf(this);
-      while (instance && instance.constructor.name !== 'Model') {
-        instance = Object.getPrototypeOf(instance);
-      }
-      Object.setPrototypeOf(instance, proto);
+      throw new Error(`Missing model definition for ${className}`);
     }
-    // Set values
-    this.$setv(data);
-    console.log(this);
-  }
 
-  // Function to set the values of a model
-  $setv(data) {
-    if (typeof data !== 'object') {
-      throw new Error(`Constructor requires object for ${this.constructor.name}`);
-    }
-    this.$data = {};
-    this.$type.forEach((v, k) => {
-      this.$data[k] = Model.$cast(data[v.alias], v.collection, v.primitive, v.model);
-    });
-  }
+    // Set prototype of instance prototype
+    Object.setPrototypeOf(Object.getPrototypeOf(this), proto);
 
-  // Covert to a string value
-  toString() {
-    return `<${this.className}>`;
+    // Set values of object
+    this.$setall(data);
   }
 
   static define(classConstructor, classProps) {
     if (typeof classConstructor !== 'function') {
       throw new Error('Called define without a class constructor');
     }
-    if (this.constructors[classConstructor.name]) {
-      throw new Error(`Class already defined ${classConstructor.name}`);
+    const className = classConstructor.name;
+    if (Model.constructors[className]) {
+      throw new Error(`Class already defined ${className}`);
     }
-    const proto = this.$newproto(classConstructor, classProps);
+    const proto = Model.$newproto(classConstructor, classProps);
     if (!proto) {
-      throw new Error(`No prototype for ${classConstructor.name}`);
-    } else {
-      this.constructors[classConstructor.name] = classConstructor;
-      this.models[classConstructor.name] = proto;
+      throw new Error(`No prototype for ${className}`);
     }
+    Model.constructors[className] = classConstructor;
+    Model.models[className] = proto;
   }
 
   static $newproto(classConstructor, classProps) {
+    const className = classConstructor.name;
     const proto = {};
 
     // $className property
     Object.defineProperty(proto, '$className', {
-      value: classConstructor.name,
+      value: className,
       writable: false,
       enumerable: false,
     });
 
     // $type property
+    Model.types[className] = new Map();
     Object.defineProperty(proto, '$type', {
-      // eslint-disable-next-line object-shorthand, func-names
-      get: function () {
-        return Model.types[classConstructor.name];
+      get() {
+        return Model.types[className];
+      },
+      enumerable: false,
+    });
+
+    // $json property
+    Object.defineProperty(proto, '$json', {
+      get() {
+        return JSON.stringify(this.$getall());
       },
       enumerable: false,
     });
 
     // Other properties
-    const types = new Map();
     Object.entries(classProps).forEach((entry) => {
       const key = entry[0];
-      const value = entry[1];
+      const decl = entry[1];
       // Parse type
-      const type = this.$parsetype(key, value);
+      const type = this.$parsetype(key, decl);
       if (!type) {
-        throw new Error(`Unable to parse ${value} for ${key}`);
+        throw new Error(`Unable to parse declaration ${decl} for ${key}`);
       } else {
-        types.set(key, type);
+        Model.types[className].set(key, type);
       }
       // Create getter and setter
       Object.defineProperty(proto, key, {
         enumerable: true,
-        // eslint-disable-next-line object-shorthand, func-names
-        get: function () {
+        get() {
           return this.$data[key];
+        },
+        set(value) {
+          const v = this.$type.get(key);
+          this.$data[key] = Model.$cast(value, v.collection, v.primitive, v.model);
         },
       });
     });
-    Model.types[classConstructor.name] = types;
 
-    console.log(classConstructor.name, '=>', proto, Model.types[classConstructor.name]);
+    // $get function
+    // eslint-disable-next-line func-names
+    proto.$get = function (key) {
+      return this.$data[key];
+    };
+
+    // $set function
+    // eslint-disable-next-line func-names
+    proto.$set = function (key, value) {
+      const v = this.$type.get(key);
+      this.$data[key] = Model.$cast(value, v.collection, v.primitive, v.model);
+    };
+
+    // $getall function
+    // eslint-disable-next-line func-names
+    proto.$getall = function () {
+      const obj = {};
+      this.$type.forEach((v, k) => {
+        const value = Model.$json(this.$data[k]);
+        if (value !== undefined) {
+          obj[v.alias] = value;
+        }
+      });
+      return obj;
+    };
+
+    // $setall function
+    // eslint-disable-next-line func-names
+    proto.$setall = function (data) {
+      if (typeof data !== 'object') {
+        throw new Error(`Constructor requires object for ${this.constructor.name}`);
+      }
+      this.$data = {};
+      this.$type.forEach((v, k) => {
+        this.$data[k] = Model.$cast(data[v.alias], v.collection, v.primitive, v.model);
+      });
+    };
+
+    // toString function
+    // eslint-disable-next-line func-names
+    proto.toString = function () {
+      let str = `<${this.$className}`;
+      this.$type.forEach((_, k) => {
+        const value = Model.$toString(this.$get(k));
+        str += ` ${k}=${value}`;
+      });
+      return `${str}>`;
+    };
+
+    // $equals function
+    // eslint-disable-next-line func-names
+    proto.$equals = function (other) {
+      if (!other) {
+        return false;
+      }
+      if (this.$className !== other.$className) {
+        return false;
+      }
+      return (this.$json === other.$json);
+    };
 
     // Return the prototype
     return proto;
+  }
+
+  static $toString(value) {
+    if (value === null || value === undefined) {
+      return '<nil>';
+    }
+    if (typeof value === 'string') {
+      return value.quote();
+    }
+    if (typeof value === 'boolean' || typeof value === 'number') {
+      return `${value}`;
+    }
+    if (typeof value !== 'object') {
+      return '[?? unsupported type]';
+    }
+    if (value instanceof Date) {
+      return `<${value.toLocaleString()}>`;
+    }
+    if (value instanceof Map) {
+      let str = '{ ';
+      value.forEach((elem, k) => {
+        str += `${k}:${this.$toString(elem)} `;
+      });
+      return `${str}}`;
+    }
+    if (value instanceof Array) {
+      let str = '[ ';
+      value.forEach((elem, i) => {
+        str += (i === 0 ? '' : ',') + this.$toString(elem);
+      });
+      return `${str} ]`;
+    }
+    return `${value}`;
   }
 
   static $parsetype(key, value) {
@@ -165,6 +249,33 @@ export default class Model {
     }
   }
 
+  static $json(value) {
+    if (typeof value === 'string' || typeof value === 'boolean' || typeof value === 'number') {
+      return value;
+    }
+    if (typeof value === 'object' && value instanceof Date) {
+      return value;
+    }
+    if (typeof value === 'object' && value instanceof Array) {
+      const arr = [];
+      value.forEach((elem) => {
+        arr.push(this.$json(elem));
+      });
+      return arr;
+    }
+    if (typeof value === 'object' && value instanceof Map) {
+      const map = {};
+      value.forEach((elem, key) => {
+        map[key] = this.$json(elem);
+      });
+      return map;
+    }
+    if (typeof value === 'object' && value.$getall) {
+      return value.$getall();
+    }
+    return undefined;
+  }
+
   static $cast(value, collection, primitive, model) {
     // If undefined then return
     if (value === null || value === undefined) {
@@ -200,7 +311,6 @@ export default class Model {
     const arr = [];
     if (Array.isArray(value)) {
       value.forEach((elem) => {
-        console.log('arr cast', elem, ' to ', primitive, ' model ', model);
         arr.push(this.$cast(elem, undefined, primitive, model));
       });
       return arr;
@@ -222,6 +332,9 @@ export default class Model {
   static $castobject(value, model) {
     const constructor = Model.constructors[model];
     if (constructor) {
+      if (value instanceof constructor) {
+        return value;
+      }
       return new constructor(value);
     }
     throw new Error(`Undefined Model of type ${model}`);

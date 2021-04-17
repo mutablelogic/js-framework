@@ -9,19 +9,42 @@ import Emitter from './events';
 const EVENT_ROOT = 'mvc.provider';
 const EVENT_COMPLETED = `${EVENT_ROOT}.completed`;
 const EVENT_ERROR = `${EVENT_ROOT}.error`;
+const EVENT_ADDED = `${EVENT_ROOT}.added`;
+const EVENT_CHANGED = `${EVENT_ROOT}.changed`;
+const EVENT_DELETED = `${EVENT_ROOT}.deleted`;
 
 // ////////////////////////////////////////////////////////////////////////////
 // PROVIDER CLASS
 
 export default class Provider extends Emitter {
-  constructor(root) {
+  constructor(constructor, origin) {
     super();
-    this.$root = root || '';
+    this.$origin = origin || '';
+    this.$constructor = typeof constructor === 'function' ? constructor : Object;
+    this.$objs = new Map();
+    this.$timer = null;
   }
 
-  fetch(url, req, userInfo) {
+  request(url, req, userInfo, interval) {
+    this.cancel();
+    if (!this.$timer) {
+      this.$fetch(url, req, userInfo);
+    }
+    if (interval) {
+      this.$timer = setInterval(this.$fetch.bind(this, url, req, userInfo));
+    }
+  }
+
+  cancel() {
+    if (this.$timer) {
+      clearTimeout(this.$timer);
+      this.$timer = null;
+    }
+  }
+
+  $fetch(url, req, userInfo) {
     let status;
-    fetch(this.$root + url, req)
+    fetch(this.$origin + url, req)
       .then((response) => {
         status = response;
         const contentType = response.headers ? response.headers.get('Content-Type') || '' : '';
@@ -30,6 +53,7 @@ export default class Provider extends Emitter {
           case 'text/json':
             return response.json();
           case 'text/plain':
+          case 'text/html':
             return response.text();
           default:
             return response.blob();
@@ -58,5 +82,64 @@ export default class Provider extends Emitter {
           throw error;
         }
       });
+  }
+
+  $object(data) {
+    const obj = new this.$constructor(data);
+    const key = typeof obj === 'object' ? obj.key : null;
+    if (key) {
+      if (this.$objs.has(key)) {
+        const existing = this.$objs.get(key);
+        this.$objs.set(key, obj);
+        if (obj.$equals && obj.$equals(existing) === false) {
+          this.dispatchEvent(EVENT_CHANGED, this, obj, existing);
+        }
+      } else {
+        this.$objs.set(key, obj);
+        this.dispatchEvent(EVENT_ADDED, this, obj);
+      }
+    } else {
+      this.dispatchEvent(EVENT_ADDED, this, obj);
+    }
+    return key;
+  }
+
+  $array(data) {
+    const mark = new Map();
+    this.$items.forEach((_, key) => {
+      mark.set(key, true);
+    });
+    data.forEach((elem) => {
+      const key = this.$object(elem);
+      if (key) {
+        mark.delete(key);
+      }
+    });
+    this.$items.forEach((elem, key) => {
+      if (mark.get(key)) {
+        this.dispatchEvent(EVENT_DELETED, this, elem);
+        this.$items.delete(key);
+      }
+    });
+  }
+
+  // objects property returns all objects loaded by provider
+  get objects() {
+    return Array.from(this.$objs.values());
+  }
+
+  // keys property returns all keys
+  get keys() {
+    return Array.from(this.$objs.keys());
+  }
+
+  // objectForKey returns an object for specific key
+  objectForKey(key) {
+    return this.$objs.get(key);
+  }
+
+  // removeAll resets the provider
+  removeAll() {
+    this.$objs.clear();
   }
 }

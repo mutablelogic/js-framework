@@ -2,62 +2,164 @@
 
 <head>
     <title>Test</title>
-    <script src="../dist/js/index.js"></script>
+    <script src="/js/index.js"></script>
 </head>
 
 <body>
-    <h1>Tests</h1>
+    <!-- NAV -->
+    <nav class="navbar sticky-top navbar navbar-dark navbar-expand-md bg-primary" id="nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><strong>The VFX Cooperative</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items"
+                aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-items">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" id="nav_home">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item" id="nav_projects">
+                        <a class="nav-link" href="/projects/">Projects</a>
+                    </li>
+                    <li class="nav-item" id="nav_dataio">
+                        <a class="nav-link" href="/dataio/">DataIO</a>
+                    </li>
+                    <li class="nav-item" id="nav_docs">
+                        <a class="nav-link" href="/docs/">Docs</a>
+                    </li>
+                    <li class="nav-item" id="nav_status">
+                        <a class="nav-link" href="/status/">Status</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PLUS BUTTON -->
+    <div class="fixed-bottom d-flex flex-row-reverse">
+        <button id="plus" class="btn btn-circle bg-danger text-white onclick-item" title="Add">+</button>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast-container position-absolute bottom-0 end-0 p-3 d-none" style="z-index: 9999;">
+        <div class="toast" id="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto _title"></strong>
+                <small class="text-muted _code"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body _reason"></div>
+        </div>
+    </div>
+
+
+    <!-- FORM -->
+    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Project</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="new-name" class="col-sm-4 col-form-label">Title</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="name" id="new-name" required>
+                                <div class="form-text">The name of the project</div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Radio Buttons</label>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="radio"
+                                        id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="radio"
+                                        id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">2</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="range" class="col-sm-4 col-form-label">Range</label>
+                            <div class="col-sm-6">
+                                <input type="range" class="form-range" id="range" name="range">
+                            </div>
+                            <div class="col-sm-2 _range">
+                                [V]
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="range" class="col-sm-4 col-form-label">Select</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" name="select" aria-label="Default select example" required>
+                                    <option value="" selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="create" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION -->
     <script>
-        class StrModel extends mvc.Model {
-            constructor(data) {
-                super({ value: data });
-            }
-        }
+        window.addEventListener("DOMContentLoaded", (event) => {
+            var app = mvc.Controller.New();
 
-        mvc.Model.define(StrModel, {
-            "value": "string",
-        });
+            // Models
+            class Project extends mvc.Model {};
 
-        class KeyModel extends mvc.Model {
-            constructor(data) {
-                super(data);
-            }
-            getClassName() {
-                return this.$className;
-            }
-            get override() {
-                return "done!";
-            }
-        }
+            // Add objects to the application
+            app.Add('nav', new mvc.Nav(document.querySelector("#nav")));
+            app.Add('toast', new mvc.Toast(document.querySelector("#toast")));
+            app.Add('plus', new mvc.Button(document.querySelector("#plus")));
+            app.Add('form', new mvc.Form(document.querySelector("#form")));
+            app.Add('projects', new mvc.Provider(Project,'https://rpi4b.mutablelogic.com'));
 
-        mvc.Model.define(KeyModel, {
-            "str": "_id string",
-            "map": "{}number",
-            "arr": "[]StrModel",
-            "override": "string",
-        });
+            // Show toast when button pressed
+            app.plus.addEventListener('mvc.button.click', (sender, target) => {
+                app.form.replace("._range",'');
+                app.form.show({ 
+                    name: 'default',
+                    radio: 'option2',
+                    range: '0',
+                    select: '3',
+                });
+            });
 
-        var obj = new KeyModel({ _id: "[this is the key]", map: { a: 1, b: 2 }, arr: ["a", "b"], override: "not done" });
-        obj.$type.forEach((v, k) => {
-            console.log(`${k} => `, v);
-        });
-        console.log("className=", obj.$className);
-        console.log("getClassName=", obj.getClassName());
-        console.log("str=", obj.str);
-        console.log("map=", obj.map);
-        console.log("arr=", obj.arr);
-        console.log("override=", obj.override);
-        console.log("toString=", "" + obj);
+            // Hide form when submitted
+            app.form.addEventListener('mvc.form.submit', (sender, target) => {
+                // Hide form
+                app.form.hide();
 
-        var provider = new mvc.Provider();
-        provider.addEventListener('mvc.provider.completed', (sender) => {
-            console.log("Completed", sender);
-        });
-        provider.addEventListener('mvc.provider.error', (sender, error) => {
-            console.log("Error", error);
-        });
-        provider.fetch('https://rpi4b.mutablelogic.com/', {
-            mode: 'no-cors',
+                // Show toast of values
+                app.toast.show(JSON.stringify(app.form.values), target.id);
+            });
+
+            // Form range value
+            app.form.addEventListener('mvc.form.change', (sender, target) => {
+                if (target.name == "range") {
+                    app.form.replace("._range", target.value);
+                }
+            });
+
+            // Request projects
+            app.projects.request('/api/project/');
+
         });
     </script>
 </body>

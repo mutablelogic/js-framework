@@ -6,8 +6,9 @@
   "scripts": {
     "all": "npm-run-all js-lint js-compile js-minify",
     "js-lint": "eslint js",
-    "js-compile": "rollup js/index.js --format iife --name mvc --file dist/js/index.js --sourcemap",
-    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js"
+    "js-compile": "rollup --name mvc --config config/rollup.config.js --sourcemap",
+    "js-minify": "terser --source-map \"content=dist/js/index.js.map\" --output dist/js/index.min.js -- dist/js/index.js",
+    "copy-bootstrap": "copy-node-modules node_modules/bootstrap/dist dist"
   },
   "repository": {
     "type": "git",
@@ -20,14 +21,18 @@
   },
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.2.1",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "npm-run-all": "^4.1.5",
     "rollup": "^2.45.2",
+    "rollup-plugin-import-css": "^2.0.1",
+    "rollup-plugin-postcss": "^4.0.0",
     "terser": "^5.1.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "all": "*",
     "bootstrap": "^5.0.0-beta3"
   }

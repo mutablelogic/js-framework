@@ -8,7 +8,10 @@ implementation which provides the following classes:
   * __Model class__: subclass this for your JSON models, and separately define the members of your class;
   * __View classes__: classes are provided for form, list, button, etc.
 
-## Clone
+It uses [Bootstrap](https://getbootstrap.com/) to implement the underlying user 
+interface, adding a few components.
+
+## Clone, Build, Release
 
 You'll need to use `npm` to install as a dependency in your module. Here is what
 I do on my Mac which has homebrew installed:
@@ -19,11 +22,28 @@ I do on my Mac which has homebrew installed:
 [bash] git clone git@github.com:djthorpe/js-framework.git
 [bash] cd js-framework
 [bash] npm install
+[bash] npm build
 ```
 
-## Test
+This will place the files in the `dist` folder. There is a github action which
+runs on a new release to publish the package.
 
-## Provider
+## Use
+
+Use the framework as follows:
+
+```bash
+[bash] brew install npm
+[bash] cd $PROJECTS
+[bash] git clone git@github.com:@owner/js-project.git
+[bash] cd js-project
+[bash] echo "@djthorpe:registry=https://npm.pkg.github.com" >> .npmrc
+[bash] npm install @djthorpe/js-framework
+```
+
+## Class Reference
+
+### Provider
 
 The provider is used to fetch JSON objects and arrays from a remote REST source, and stores them. To construct a provider with a model class called MyModelClass,
 

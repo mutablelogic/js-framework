@@ -37,46 +37,11 @@ Use the framework as follows:
 [bash] cd $PROJECTS
 [bash] git clone git@github.com:@owner/js-project.git
 [bash] cd js-project
+[bash] npm init
 [bash] echo "@djthorpe:registry=https://npm.pkg.github.com" >> .npmrc
 [bash] npm install @djthorpe/js-framework
 ```
 
 ## Class Reference
 
-### Provider
-
-The provider is used to fetch JSON objects and arrays from a remote REST source, and stores them. To construct a provider with a model class called MyModelClass,
-
-```javascript
-import Provider from '@djthorpe/js-framework';
-import MyModelClass from './models';
-
-const origin = 'https://awesome-data-service.com/';
-const provider = new Provider(MyModelClass,origin);
-```
-
-If the __Model__ class is not provided then a plain vanilla object
-is used. The origin is also optional.
-
-You can create a request to a remote API using the `request` method, which will
-return immediately, whilst firing events,
-
-```javascript
-const path = '/api/datasource';
-const req = { method: 'GET' };
-const userInfo = null;
-const interval = 30 * 1000; // Request every 30 seconds
-provider.request(path,req,userInfo,interval);
-```
-
-The `req`, `userInfo` and `interval` arguments are optional. If you use
-an interval, a request is immediately made and then again periodically. To
-cancel an interval, call `provider.cancel();`.
-
-The events fired are as followed:
-
-`mvc.provider.added` (sender,object)
-`mvc.provider.changed` (sender,object,existing)
-`mvc.provider.deleted` (sender,object)
-`mvc.provider.completed` (sender,changed)
-`mvc.provider.error` (sender,Error)
+The class reference is included in the `dist` folder of the module, and uses `jsdoc` in order to create from the Javascript source.

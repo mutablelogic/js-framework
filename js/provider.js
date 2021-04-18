@@ -1,7 +1,7 @@
 // Provider class to be subclassed by an actual provider
 
 import Error from './error';
-import Emitter from './events';
+import Emitter from './emitter';
 
 // ////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
@@ -71,8 +71,11 @@ export default class Provider extends Emitter {
           if (this.$array(data)) {
             changed = true;
           }
-        } else if (this.$object(data)) {
-          changed = true;
+        } else {
+          const result = this.$object(data);
+          if (result[1]) {
+            changed = true;
+          }
         }
       })
       .then(() => {
@@ -87,44 +90,65 @@ export default class Provider extends Emitter {
       });
   }
 
+  static $key(obj) {
+    return typeof obj === 'object' ? obj.key : null;
+  }
+
+  static $equals(a, b) {
+    return a.$equals ? a.$equals(b) : a === b;
+  }
+
   $object(data) {
     const obj = new this.$constructor(data);
-    const key = typeof obj === 'object' ? obj.key : null;
-    if (key) {
-      if (this.$objs.has(key)) {
-        const existing = this.$objs.get(key);
-        this.$objs.set(key, obj);
-        if (obj.$equals && obj.$equals(existing) === false) {
-          this.dispatchEvent(EVENT_CHANGED, this, obj, existing);
-        }
+    const key = this.constructor.$key(obj);
+    let changed = true;
+    if (key && this.$objs.has(key)) {
+      const existing = this.$objs.get(key);
+      this.$objs.set(key, obj);
+      if (this.constructor.$equals(obj, existing) === false) {
+        this.dispatchEvent(EVENT_CHANGED, this, obj, existing);
       } else {
-        this.$objs.set(key, obj);
-        this.dispatchEvent(EVENT_ADDED, this, obj);
+        changed = false;
       }
     } else {
+      if (key) {
+        this.$objs.set(key, obj);
+      }
       this.dispatchEvent(EVENT_ADDED, this, obj);
     }
-    return key;
+    return [key, changed];
   }
 
   $array(data) {
-    const changed = false;
+    let changed = false;
     const mark = new Map();
+
+    // Mark existing objects
     this.$objs.forEach((_, key) => {
       mark.set(key, true);
     });
+
+    // Add and change objects
     data.forEach((elem) => {
-      const key = this.$object(elem);
-      if (key) {
-        mark.delete(key);
+      const result = this.$object(elem);
+      if (result[0]) {
+        mark.delete(result[0]);
+      }
+      if (result[1]) {
+        changed = true;
       }
     });
+
+    // Delete objects which are still marked
     this.$objs.forEach((elem, key) => {
       if (mark.get(key)) {
+        changed = true;
         this.dispatchEvent(EVENT_DELETED, this, elem);
         this.$objs.delete(key);
       }
     });
+
+    // Return true if the items were changed
     return changed;
   }
 
@@ -143,8 +167,8 @@ export default class Provider extends Emitter {
     return this.$objs.get(key);
   }
 
-  // removeAll resets the provider
-  removeAll() {
+  // clear removes all objects from the provider
+  clear() {
     this.$objs.clear();
   }
 }

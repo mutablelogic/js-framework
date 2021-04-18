@@ -1,11 +1,13 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {
+    "all": "npm-run-all lint build docs",
     "build": "webpack --config config/webpack.config.js",
-    "js-lint": "eslint js"
+    "lint": "eslint js",
+    "docs": "jsdoc -c config/jsdoc.config.json"
   },
   "repository": {
     "type": "git",
@@ -21,10 +23,14 @@
   },
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
+    "@ckeditor/jsdoc-plugins": "^24.4.2",
+    "clean-jsdoc-theme": "^3.2.4",
     "css-loader": "^5.2.2",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "jsdoc": "^3.6.6",
+    "npm-run-all": "^4.1.5",
     "style-loader": "^2.0.0",
     "terser": "^5.1.0",
     "webpack": "^5.33.2",
@@ -36,6 +42,6 @@
     "bootstrap-icons": "^1.4.1"
   },
   "files": [
-    "dist/**/*.{js,map,woff,woff2,txt}"
+    "dist/**/*.{js,map,woff,woff2,txt,ttf,css,html}"
   ]
 }

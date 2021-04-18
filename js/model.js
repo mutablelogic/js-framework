@@ -32,24 +32,23 @@ export default class Model {
     this.$setall(data);
   }
 
-  static define(classConstructor, classProps) {
+  static define(classConstructor, classProps, className) {
     if (typeof classConstructor !== 'function') {
       throw new Error('Called define without a class constructor');
     }
-    const className = classConstructor.name;
-    if (Model.constructors[className]) {
-      throw new Error(`Class already defined ${className}`);
+    const classKey = className || classConstructor.name;
+    if (Model.constructors[classKey]) {
+      throw new Error(`Class already defined ${classKey}`);
     }
-    const proto = Model.$newproto(classConstructor, classProps);
+    const proto = Model.$newproto(classKey, classProps);
     if (!proto) {
-      throw new Error(`No prototype for ${className}`);
+      throw new Error(`No prototype for ${classKey}`);
     }
-    Model.constructors[className] = classConstructor;
-    Model.models[className] = proto;
+    Model.constructors[classKey] = classConstructor;
+    Model.models[classKey] = proto;
   }
 
-  static $newproto(classConstructor, classProps) {
-    const className = classConstructor.name;
+  static $newproto(className, classProps) {
     const proto = {};
 
     // $className property

@@ -1,6 +1,6 @@
 // View class to be subclassed by an actual view
 
-import Emitter from './events';
+import Emitter from './emitter';
 import Error from './error';
 
 /* eslint no-param-reassign: ["error", { "props": false }] */

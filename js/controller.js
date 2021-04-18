@@ -22,8 +22,8 @@ export default class Controller {
       copypaste.addEventListener('mvc.copypaste.click', (sender, target) => {
         copypaste.clipboard = target.innerText;
       });
-      copypaste.addEventListener('mvc.copypaste.change', (sender) => {
-        console.log('copied');
+      copypaste.addEventListener('mvc.copypaste.change', () => {
+        console.log('TODO: copied');
       });
     });
   }

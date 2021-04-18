@@ -15,7 +15,7 @@ import Form from './form';
 
 // Utils
 import Error from './error';
-import Emitter from './events';
+import Emitter from './emitter';
 import './string';
 
 // CSS and Fonts

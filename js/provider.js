@@ -20,18 +20,18 @@ export default class Provider extends Emitter {
   constructor(constructor, origin) {
     super();
     this.$origin = origin || '';
-    this.$constructor = typeof constructor === 'function' ? constructor : Object;
+    this.$constructor = constructor || Object;
     this.$objs = new Map();
     this.$timer = null;
   }
 
-  request(url, req, userInfo, interval) {
+  request(url, req, interval) {
     this.cancel();
     if (!this.$timer) {
-      this.$fetch(url, req, userInfo);
+      this.$fetch(url, req);
     }
     if (interval) {
-      this.$timer = setInterval(this.$fetch.bind(this, url, req, userInfo), interval);
+      this.$timer = setInterval(this.$fetch.bind(this, url, req), interval);
     }
   }
 
@@ -42,7 +42,7 @@ export default class Provider extends Emitter {
     }
   }
 
-  $fetch(url, req, userInfo) {
+  $fetch(url, req) {
     let status;
     let changed = false;
     fetch(this.$origin + url, req)
@@ -76,11 +76,11 @@ export default class Provider extends Emitter {
         }
       })
       .then(() => {
-        this.dispatchEvent(EVENT_COMPLETED, this, changed, userInfo);
+        this.dispatchEvent(EVENT_COMPLETED, this, changed);
       })
       .catch((error) => {
         if (error instanceof Error) {
-          this.dispatchEvent(EVENT_ERROR, this, error, userInfo);
+          this.dispatchEvent(EVENT_ERROR, this, error);
         } else {
           throw error;
         }

@@ -1,6 +1,6 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {

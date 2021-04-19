@@ -39,10 +39,12 @@ export default class Nav extends View {
   /// @private
   $set(node) {
     const { href } = node;
+    console.log(node, '=>', href);
     if (!href || href === '#') {
       node.addEventListener('click', (evt) => {
         evt.preventDefault();
         evt.cancelPropogation();
+        console.log(EVENT_CLICK, node.parentNode);
         this.dispatchEvent(EVENT_CLICK, this, node.parentNode);
       });
     } else {

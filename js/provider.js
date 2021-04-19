@@ -7,6 +7,7 @@ import Emitter from './emitter';
 // CONSTANTS
 
 const EVENT_ROOT = 'mvc.provider';
+const EVENT_STARTED = `${EVENT_ROOT}.started`;
 const EVENT_COMPLETED = `${EVENT_ROOT}.completed`;
 const EVENT_ERROR = `${EVENT_ROOT}.error`;
 const EVENT_ADDED = `${EVENT_ROOT}.added`;
@@ -16,6 +17,10 @@ const EVENT_DELETED = `${EVENT_ROOT}.deleted`;
 // ////////////////////////////////////////////////////////////////////////////
 // PROVIDER CLASS
 
+/**
+ * Provider requests data from a remote endpoint.
+ * @class
+*/
 export default class Provider extends Emitter {
   constructor(constructor, origin) {
     super();
@@ -45,6 +50,7 @@ export default class Provider extends Emitter {
   $fetch(url, req) {
     let status;
     let changed = false;
+    this.dispatchEvent(EVENT_STARTED, this, this.$origin + url);
     fetch(this.$origin + url, req)
       .then((response) => {
         status = response;

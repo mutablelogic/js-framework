@@ -1,6 +1,6 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Javascript UI Framework",
   "main": "dist/js/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "author": "David Thorpe",
-  "license": "ISC",
+  "license": "Apache",
   "bugs": {
     "url": "https://github.com/djthorpe/js-framework/issues"
   },

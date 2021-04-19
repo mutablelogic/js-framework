@@ -5,6 +5,13 @@ import View from './view';
 import Provider from './provider';
 import CopyPaste from './copypaste';
 
+/**
+ * Controller which acts as business logic between models, views and
+ * providers. In general, create a new controller using the New
+ * static method and then define properties of the controller. Call
+ * main to run the application.
+ * @class
+*/
 export default class Controller {
   constructor() {
     this.$providers = new Map();
@@ -28,7 +35,13 @@ export default class Controller {
     });
   }
 
-  Add(key, object) {
+  /**
+  * Define a view or provider for the controller. The object is then
+  * accessible as a property of the controller.
+  * @param {string} key - The name of the property
+  * @param {Provider|View} object - The object
+  */
+  define(key, object) {
     if (!key || this.$providers.has(key) || this.$views.has(key)) {
       throw Error(`Controller: Duplicate or invalid key ${key}`);
     }
@@ -47,6 +60,10 @@ export default class Controller {
     });
   }
 
+  /**
+  * Create and return a new controller
+  * @param {Controller} constructor - The constructor for the controller
+  */
   static New(constructor) {
     const C = constructor || Controller;
     if (C.prototype instanceof Controller) {

@@ -22,6 +22,16 @@ const EVENT_DELETED = `${EVENT_ROOT}.deleted`;
  * @class
 */
 export default class Provider extends Emitter {
+  /**
+  * Create a provider, with a model constructor and optionally
+  * a base URL for requests. If no model is provided then
+  * Object types will be emitted. Add event listeners for
+  * mvc.provider.{started,completed,added,changed,deleted} to
+  * tap into the request lifecycle and mvc.provider.error to
+  * deal with request errors.
+  * @param {Model} constructor - The model used to create objects from data.
+  * @param {string} origin - The base URL used for making requests.
+  */
   constructor(constructor, origin) {
     super();
     this.$origin = origin || '';
@@ -30,6 +40,14 @@ export default class Provider extends Emitter {
     this.$timer = null;
   }
 
+  /**
+  * Request data from a remote source, either once or by interval.
+  * Subsequent calls to this function will cancel any existing
+  * timers.
+  * @param {string} url - The endpoint of the data provider.
+  * @param {Object} req - Request data. See the documentaton for fetch.
+  * @param {number} interval - If provided, the number of milliseconds between each request.
+  */
   request(url, req, interval) {
     this.cancel();
     if (!this.$timer) {
@@ -40,6 +58,18 @@ export default class Provider extends Emitter {
     }
   }
 
+  /**
+  * Perform a request without interrupting any existing request interval timer.
+  * @param {string} url - The endpoint of the data provider.
+  * @param {Object} req - Request data. See the documentaton for fetch.
+  */
+  do(url, req) {
+    this.$fetch(url, req);
+  }
+
+  /**
+  * Cancel any existing request interval timer.
+  */
   cancel() {
     if (this.$timer) {
       clearTimeout(this.$timer);
@@ -158,22 +188,30 @@ export default class Provider extends Emitter {
     return changed;
   }
 
-  // objects property returns all objects loaded by provider
+  /**
+  * Return all objects which are registered with the provider.
+  */
   get objects() {
     return Array.from(this.$objs.values());
   }
 
-  // keys property returns all keys
+  /**
+  * Return all object keys which are registered with the provider.
+  */
   get keys() {
     return Array.from(this.$objs.keys());
   }
 
-  // objectForKey returns an object for specific key
+  /**
+  * Return an object which is registered with a key.
+  */
   objectForKey(key) {
     return this.$objs.get(key);
   }
 
-  // clear removes all objects from the provider
+  /**
+  * Remove any registered objects.
+  */
   clear() {
     this.$objs.clear();
   }

@@ -38,15 +38,15 @@ export default class Nav extends View {
 
   /// @private
   $set(node) {
-    const href = node.getAttribute('href');
-    if (!href || href === '#') {
+    const hrefattr = node.getAttribute('href');
+    if (!hrefattr || hrefattr === '#') {
       node.addEventListener('click', (evt) => {
         evt.preventDefault();
         evt.cancelPropogation();
         this.dispatchEvent(EVENT_CLICK, this, node.parentNode);
       });
     } else {
-      const navLink = new URL(href).pathname.pathSplit().join('/');
+      const navLink = new URL(node.href).pathname.pathSplit().join('/');
       if (node.parentNode.id) {
         this.$map.set(navLink, node.parentNode.id);
       }

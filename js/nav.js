@@ -9,23 +9,23 @@ const EVENT_ROOT = 'mvc.nav';
 const EVENT_CLICK = `${EVENT_ROOT}.click`;
 const CLASS_ACTIVE = 'active';
 
-// ////////////////////////////////////////////////////////////////////////////
-// NAV
-
+/**
+ * Nav is the navgation view, which emits a mvc.nav.click event whenever
+ * a navigational item is clicked which has an empty href in the navigation
+ * item.
+ * @class
+*/
 export default class Nav extends View {
   constructor(node) {
     super(node);
     this.$map = new Map();
 
-    // Set up nav items
-    this.queryAll('.nav-item a.nav-link').forEach((elem) => {
-      const navLink = new URL(elem.href).pathname.pathSplit().join('/');
-      if (elem.parentNode.id) {
-        this.$map.set(navLink, elem.parentNode.id);
-      }
-      elem.addEventListener('click', () => {
-        this.dispatchEvent(EVENT_CLICK, this, elem.parentNode);
-      });
+    // Set up nav items - those with HREF # dispatch events
+    this.queryAll('li a.nav-link').forEach((elem) => {
+      this.$set(elem);
+    });
+    this.queryAll('li a.dropdown-item').forEach((elem) => {
+      this.$set(elem);
     });
 
     // Determine current path and set the active link
@@ -36,8 +36,32 @@ export default class Nav extends View {
     }
   }
 
+  /// @private
+  $set(node) {
+    const { href } = node;
+    if (!href || href === '#') {
+      node.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        evt.cancelPropogation();
+        this.dispatchEvent(EVENT_CLICK, this, node.parentNode);
+      });
+    } else {
+      const navLink = new URL(href).pathname.pathSplit().join('/');
+      if (node.parentNode.id) {
+        this.$map.set(navLink, node.parentNode.id);
+      }
+    }
+  }
+
+  /**
+  * Set a class name on a specific navigational item and remove
+  * that class from other navigational items. Usually this is used
+  * to mark a specific dropdown item as active, for example.
+  * @param {string} key - The id of the navigational item
+  * @param {string} className - The class name which indicates
+  */
   setClassName(key, className) {
-    this.queryAll('.nav-item a.nav-link').forEach((elem) => {
+    this.queryAll('li a.nav-link').forEach((elem) => {
       if (elem.parentNode.id === key) {
         elem.classList.add(className);
       } else {

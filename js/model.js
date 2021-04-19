@@ -19,10 +19,10 @@ const REGEXP_NOTALIASED = /^()(\{\}|\[\])?(\w+)$/i;
 export default class Model {
   constructor(data) {
     // Get prototype
-    const className = this.constructor.name;
-    const proto = Model.models[className];
+    const classKey = this.constructor.name;
+    const proto = Model.models[classKey];
     if (!proto) {
-      throw new Error(`Missing model definition for ${className}`);
+      throw new Error(`Missing model definition for ${classKey}`);
     }
 
     // Set prototype of instance prototype
@@ -36,33 +36,33 @@ export default class Model {
     if (typeof classConstructor !== 'function') {
       throw new Error('Called define without a class constructor');
     }
-    const classKey = className || classConstructor.name;
+    const classKey = classConstructor.name;
     if (Model.constructors[classKey]) {
-      throw new Error(`Class already defined ${classKey}`);
+      throw new Error(`Class already defined ${className || classKey}`);
     }
-    const proto = Model.$newproto(classKey, classProps);
+    const proto = Model.$newproto(classKey, classProps, className);
     if (!proto) {
-      throw new Error(`No prototype for ${classKey}`);
+      throw new Error(`No prototype for ${className || classKey}`);
     }
     Model.constructors[classKey] = classConstructor;
     Model.models[classKey] = proto;
   }
 
-  static $newproto(className, classProps) {
+  static $newproto(classKey, classProps, className) {
     const proto = {};
 
     // $className property
     Object.defineProperty(proto, '$className', {
-      value: className,
+      value: className || classKey,
       writable: false,
       enumerable: false,
     });
 
     // $type property
-    Model.types[className] = new Map();
+    Model.types[classKey] = new Map();
     Object.defineProperty(proto, '$type', {
       get() {
-        return Model.types[className];
+        return Model.types[classKey];
       },
       enumerable: false,
     });
@@ -84,7 +84,7 @@ export default class Model {
       if (!type) {
         throw new Error(`Unable to parse declaration ${decl} for ${key}`);
       } else {
-        Model.types[className].set(key, type);
+        Model.types[classKey].set(key, type);
       }
       // Create getter and setter
       Object.defineProperty(proto, key, {

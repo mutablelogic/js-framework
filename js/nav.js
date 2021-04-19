@@ -42,7 +42,7 @@ export default class Nav extends View {
     if (!hrefattr || hrefattr === '#') {
       node.addEventListener('click', (evt) => {
         evt.preventDefault();
-        evt.cancelPropogation();
+        evt.stopPropagation();
         this.dispatchEvent(EVENT_CLICK, this, node.parentNode);
       });
     } else {

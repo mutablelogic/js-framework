@@ -11,11 +11,7 @@
     "encoding": "utf8",
     "readme": "./README.md",
     "destination": "./dist/doc",
-    "recurse": true,
-    "template": "./node_modules/clean-jsdoc-theme",
-    "theme_opts": {
-        "theme": "light"
-    }    
+    "recurse": true
   },
   "plugins": [
     "./node_modules/@ckeditor/jsdoc-plugins/lib/export-fixer/export-fixer.js"

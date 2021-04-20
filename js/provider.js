@@ -4,7 +4,7 @@ import Error from './error';
 import Emitter from './emitter';
 
 // ////////////////////////////////////////////////////////////////////////////
-// CONSTANTS
+// EVENTS
 
 const EVENT_ROOT = 'mvc.provider';
 const EVENT_STARTED = `${EVENT_ROOT}.started`;
@@ -13,6 +13,59 @@ const EVENT_ERROR = `${EVENT_ROOT}.error`;
 const EVENT_ADDED = `${EVENT_ROOT}.added`;
 const EVENT_CHANGED = `${EVENT_ROOT}.changed`;
 const EVENT_DELETED = `${EVENT_ROOT}.deleted`;
+
+/**
+ * Request start event, which is emitted when a request is initiated.
+ *
+ * @event mvc.provider.started
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {string} url - The url of the endpoint.
+ */
+
+/**
+ * Request completed event, which is emitted when a request is successfully completed.
+ *
+ * @event mvc.provider.completed
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {boolean} changed - When true, indicates that the request resulted in a change
+ *   to the objects stored in the provider.
+ */
+
+/**
+ * Request error event, which is emitted when a request is not completed successfully.
+ *
+ * @event mvc.provider.completed
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {Error} error - Provides the reason for the request not completing
+ *   successfully.
+ */
+
+/**
+ * Object added event, which is emitted when a request adds a new object to the provider.
+ *
+ * @event mvc.provider.added
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {Model} object - Provides the reason for the request not completing
+ *   successfully.
+ */
+
+/**
+ * Object changed event, which is emitted when a request replaces an existing object.
+ *
+ * @event mvc.provider.changed
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {Model} object - The object which has been added to the provider.
+ * @property {Model} existing - The object which has been replaced in the provider.
+*/
+
+/**
+ * Object deleted event, which is emitted when a request removes an object from
+ * the provider.
+ *
+ * @event mvc.provider.deleted
+ * @property {Provider} sender - The provider that emitted the event.
+ * @property {Model} object - The object which has been deleted from the provider.
+*/
 
 // ////////////////////////////////////////////////////////////////////////////
 // PROVIDER CLASS

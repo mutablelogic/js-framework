@@ -1,6 +1,6 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Javascript Framework",
   "main": "dist/js/index.js",
   "scripts": {
@@ -24,7 +24,6 @@
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
     "@ckeditor/jsdoc-plugins": "^24.4.2",
-    "clean-jsdoc-theme": "^3.2.4",
     "css-loader": "^5.2.2",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",

@@ -132,4 +132,13 @@ export default class List extends View {
       }
     }
   }
+
+  /**
+   * Clear all rows
+   */
+  clear() {
+    while (this.$node.firstChild) {
+      this.$node.removeChild(this.$node.firstChild);
+    }
+  }
 }

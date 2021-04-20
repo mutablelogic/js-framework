@@ -1,0 +1,20 @@
+name: Publish Docs
+on:
+  release:
+    types: [created]
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12.x'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@djthorpe'
+    - run: npm install
+    - run: npm run docs
+    - uses: LuisEnMarroquin/gh-pages-publish@v2.4.4
+      with:
+        FOLDER: dist/doc
+        SSHKEY: ${{ secrets.SSH }}

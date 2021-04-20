@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: nav.js</title>
+    <title>JSDoc: Source: toast.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: nav.js</h1>
+    <h1 class="page-title">Source: toast.js</h1>
 
     
 
@@ -26,92 +26,90 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// Nav class provides navigation
+            <pre class="prettyprint source linenums"><code>// Toast
 
+import { Toast as ToastBS } from 'bootstrap';
 import View from './view';
+import Error from './error';
 
 // ////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 
-const EVENT_ROOT = 'nav';
+const EVENT_ROOT = 'toast';
 
 /**
- * Navigational element click event
+ * Toast show event, which is emitted when a toast is about to be made visible.
  *
- * @event Nav#nav:click
- * @arg {Nav} sender - The provider that emitted the event.
- * @arg {Node} target - The target element clicked.
+ * @event Toast#toast:show
+ * @arg {Toast} sender - The view that emitted the event.
  */
-const EVENT_CLICK = `${EVENT_ROOT}:click`;
-
-const CLASS_ACTIVE = 'active';
+const EVENT_SHOW = `${EVENT_ROOT}:show`;
 
 /**
- * Nav manages a navigation component.
- * @class
+ * Toast hide event, which is emitted when a toast has been hidden.
+ *
+ * @event Toast#toast:hide
+ * @arg {Toast} sender - The view that emitted the event.
+ */
+const EVENT_HIDE = `${EVENT_ROOT}:hide`;
+
+// ////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @class Toast
  * @implements {View}
  * @classdesc This class is constructed with a DOM element and
  * controls an existing
- * [Bootstrap Nav element]{@link https://getbootstrap.com/docs/5.0/components/navs-tabs/}.
- * It expects the view element to include anchor elements wrapped in list items as per
- * the bootstrap documentation. Any anchor element with an empty href (or '#') will
- * emit a click event.
+ * [Bootstrap Toast]{@link https://getbootstrap.com/docs/5.0/components/toasts/}
+ * and is generally used for showing transient error and informational messages. It
+ * expects the view element to include display elements as described in the show method.
  *
  * @arg {Node} node - The node to attach the view to. Throws an error if the node
  *   is not provided.
  */
-export default class Nav extends View {
+export default class Toast extends View {
   constructor(node) {
     super(node);
-    this.$map = new Map();
-
-    // Set up nav items - those with HREF # dispatch events
-    this.queryAll('li a.nav-link').forEach((elem) => {
-      this.$set(elem);
+    this.$toast = new ToastBS(node, {});
+    node.addEventListener('show.bs.toast', () => {
+      node.parentNode.classList.remove('d-none');
+      this.dispatchEvent(EVENT_SHOW, this);
     });
-    this.queryAll('li a.dropdown-item').forEach((elem) => {
-      this.$set(elem);
+    node.addEventListener('hidden.bs.toast', () => {
+      node.parentNode.classList.add('d-none');
+      this.dispatchEvent(EVENT_HIDE, this);
     });
-
-    // Determine current path and set the active link
-    const path = window.location.pathname.pathSplit().join('/');
-    const key = this.$map.get(path);
-    if (key) {
-      this.setClassName(key, CLASS_ACTIVE);
-    }
-  }
-
-  $set(node) {
-    const hrefattr = node.getAttribute('href');
-    if (!hrefattr || hrefattr === '#') {
-      node.addEventListener('click', (evt) => {
-        evt.preventDefault();
-        evt.stopPropagation();
-        this.dispatchEvent(EVENT_CLICK, this, node.parentNode);
-      });
-    } else {
-      const navLink = new URL(node.href).pathname.pathSplit().join('/');
-      if (node.parentNode.id) {
-        this.$map.set(navLink, node.parentNode.id);
-      }
-    }
   }
 
   /**
-  * Set a class name on a specific navigational item and remove
-  * that class from other navigational items. Usually this is used
-  * to mark a specific dropdown item as active, for example.
-  * @param {string} key - The id of the navigational item
-  * @param {string} className - The class name which indicates
+  * Make the toast view visible with a reason and code.
+  * It is expected that there are three elements within the
+  * toast view with the class names _title, _reason and _code. An error is thrown if these
+  * elements do not exist.
+  * @arg {Error|string} reason - The body of the toast.
+  * @arg {string|number=} code - If the reason is not an error object, this code is used.
+  * @fires Toast#toast:show
+  * @throws Error
   */
-  setClassName(key, className) {
-    this.queryAll('li a.nav-link').forEach((elem) => {
-      if (elem.parentNode.id === key) {
-        elem.classList.add(className);
-      } else {
-        elem.classList.remove(className);
-      }
-    });
+  show(reason, code) {
+    if (reason instanceof Error) {
+      this.replace('._title', 'ERROR');
+      this.replace('._reason', reason.$reason);
+      this.replace('._code', reason.$code ? `Code ${reason.$code}` : '');
+    } else {
+      this.replace('._title', 'INFO');
+      this.replace('._reason', reason);
+      this.replace('._code', code ? `Code ${code}` : '');
+    }
+    this.$toast.show();
+  }
+
+  /**
+  * Make the toast view hidden.
+  * @fires Toast#toast:hide
+  */
+  hide() {
+    this.$toast.hide();
   }
 }
 </code></pre>

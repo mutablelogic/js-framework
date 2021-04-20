@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Nav</title>
+    <title>JSDoc: Class: Form</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Nav</h1>
+    <h1 class="page-title">Class: Form</h1>
 
     
 
@@ -28,14 +28,14 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Nav<span class="signature">(node)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Form<span class="signature">(node)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">This class is constructed with a DOM element and
 controls an existing
-<a href="https://getbootstrap.com/docs/5.0/components/navs-tabs/">Bootstrap Nav element</a>.
-It expects the view element to include anchor elements wrapped in list items as per
-the bootstrap documentation. Any anchor element with an empty href (or '#') will
-emit a click event.</div>
+<a href="https://getbootstrap.com/docs/5.0/forms/overview/">Bootstrap Form</a>
+and is generally used for validating, submitting and tracking form input. The form
+can be wrapped in a <a href="https://getbootstrap.com/docs/5.0/components/modal/">Bootstrap Modal</a>
+so that the show and hide methods can be used to set visibility.</div>
         
     
 </header>
@@ -50,7 +50,7 @@ emit a click event.</div>
     
 
     
-    <h4 class="name" id="Nav"><span class="type-signature"></span>new Nav<span class="signature">(node)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Form"><span class="type-signature"></span>new Form<span class="signature">(node)</span><span class="type-signature"></span></h4>
     
 
     
@@ -119,6 +119,81 @@ emit a click event.</div>
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>formdata</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">FormData</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Returns a form data object representing the form values</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>values</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Get and set the form values</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 <dl class="details">
 
     
@@ -155,7 +230,7 @@ emit a click event.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nav.js.html">nav.js</a>, <a href="nav.js.html#line35">line 35</a>
+        <a href="form.js.html">form.js</a>, <a href="form.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -178,6 +253,18 @@ emit a click event.</div>
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Error
+    
+    </div>
+
+
+    
 
 
 
@@ -211,7 +298,7 @@ emit a click event.</div>
     
 
     
-    <h4 class="name" id="setClassName"><span class="type-signature"></span>setClassName<span class="signature">(key, className)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="hide"><span class="type-signature"></span>hide<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -219,9 +306,96 @@ emit a click event.</div>
 
 
 <div class="description">
-    Set a class name on a specific navigational item and remove
-that class from other navigational items. Usually this is used
-to mark a specific dropdown item as active, for example.
+    If the form is modal, the modal is hidden.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form.js.html">form.js</a>, <a href="form.js.html#line104">line 104</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="show"><span class="type-signature"></span>show<span class="signature">(defaults)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the default values for the form and if the form is modal, the modal
+is show.
 </div>
 
 
@@ -257,13 +431,13 @@ to mark a specific dropdown item as active, for example.
 
         <tr>
             
-                <td class="name"><code>key</code></td>
+                <td class="name"><code>defaults</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Object.&lt;string, string></span>
 
 
             
@@ -273,30 +447,7 @@ to mark a specific dropdown item as active, for example.
 
             
 
-            <td class="description last">The id of the navigational item</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>className</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The class name which indicates</td>
+            <td class="description last">The values for the form controls.</td>
         </tr>
 
     
@@ -337,7 +488,7 @@ to mark a specific dropdown item as active, for example.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nav.js.html">nav.js</a>, <a href="nav.js.html#line79">line 79</a>
+        <a href="form.js.html">form.js</a>, <a href="form.js.html#line93">line 93</a>
     </li></ul></dd>
     
 
@@ -351,6 +502,13 @@ to mark a specific dropdown item as active, for example.
 
 
 
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="Form.html#event:form:submit">Form#form:submit</a></li>
+
+    <li><a href="Form.html#event:form:change">Form#form:change</a></li>
+</ul>
 
 
 
@@ -381,7 +539,7 @@ to mark a specific dropdown item as active, for example.
     
 
     
-    <h4 class="name" id="event:nav:click">nav:click</h4>
+    <h4 class="name" id="event:form:change">form:change</h4>
     
 
     
@@ -389,7 +547,8 @@ to mark a specific dropdown item as active, for example.
 
 
 <div class="description">
-    Navigational element click event
+    Form change event, which is emitted whenever an input control on the
+form is changed.
 </div>
 
 
@@ -431,7 +590,7 @@ to mark a specific dropdown item as active, for example.
             <td class="type">
             
                 
-<span class="param-type"><a href="Nav.html">Nav</a></span>
+<span class="param-type"><a href="Form.html">Form</a></span>
 
 
             
@@ -441,7 +600,7 @@ to mark a specific dropdown item as active, for example.
 
             
 
-            <td class="description last">The provider that emitted the event.</td>
+            <td class="description last">The form that emitted the event.</td>
         </tr>
 
     
@@ -464,7 +623,7 @@ to mark a specific dropdown item as active, for example.
 
             
 
-            <td class="description last">The target element clicked.</td>
+            <td class="description last">The input control that changed.</td>
         </tr>
 
     
@@ -505,7 +664,169 @@ to mark a specific dropdown item as active, for example.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="nav.js.html">nav.js</a>, <a href="nav.js.html#line10">line 10</a>
+        <a href="form.js.html">form.js</a>, <a href="form.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:form:submit">form:submit</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Form submit event, which is emitted whenever submission occurs on the
+form (with a button or other method). The event is only fired if the
+form validation checks passed.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Form.html">Form</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The form that emitted the event.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The input control or button that submitted the form.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form.js.html">form.js</a>, <a href="form.js.html#line12">line 12</a>
     </li></ul></dd>
     
 

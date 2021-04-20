@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: emitter.js</title>
+    <title>JSDoc: Source: string.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: emitter.js</h1>
+    <h1 class="page-title">Source: string.js</h1>
 
     
 
@@ -26,50 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Class to emit events to listener callbacks
- * @class
-*/
-export default class Emitter {
-  /**
-  * Create an Emitter.
-  */
-  constructor() {
-    this.$listeners = new Map();
-  }
+            <pre class="prettyprint source linenums"><code>/* eslint-disable func-names */
+/* eslint-disable no-extend-native */
 
-  /**
-  * Add a listener for emitted events.
-  * @param {string[]} types - An array or string of the events to listen for.
-  * @param {function} fn - The callback when an event is emitted.
-  */
-  addEventListener(types, fn) {
-    if (Array.isArray(types)) {
-      types.forEach((type) => {
-        this.addEventListener(type, fn);
-      });
-    } else {
-      if (!this.$listeners.has(types)) {
-        this.$listeners.set(types, []);
-      }
-      this.$listeners.get(types).push(fn);
-    }
-  }
+/**
+ * @function String.quote
+ *
+ * @returns string
+ * @description Make a string quoted (in speech marks)
+ */
+String.prototype.quote = function () {
+  return JSON.stringify(this);
+};
 
-  /**
-  * Dispatch an event to listeners with arguments.
-  * @param {string} type - The type of event to dispatch.
-  * @param {...*} args - The arguments to pass to the listener callback.
-  */
-  dispatchEvent(type, ...args) {
-    const listeners = this.$listeners.get(type);
-    if (listeners) {
-      listeners.forEach((fn) => {
-        fn(...args);
-      });
+/**
+ * @function String.pathSplit
+ *
+ * @description Split a path into elements, removing any initial and final
+ * path separators
+ * @returns string[]
+ */
+String.prototype.pathSplit = function () {
+  const parts = [];
+  this.split('/').forEach((part) => {
+    if (part) {
+      parts.push(part);
     }
-  }
-}
+  });
+  return parts;
+};
+
+/**
+ * @function String.removePrefix
+ *
+ * @description Remove a prefix from a string, or return the whole string if
+ * the prefix does not exist.
+ * @arg {string} prefix - The prefix to test for and remove
+ * @returns string
+ */
+String.prototype.removePrefix = function (prefix) {
+  const hasPrefix = this.indexOf(prefix) === 0;
+  return hasPrefix ? this.substr(prefix.length) : this.toString();
+};
 </code></pre>
         </article>
     </section>

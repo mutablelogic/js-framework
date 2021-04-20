@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: emitter.js</title>
+    <title>JSDoc: Source: error.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: emitter.js</h1>
+    <h1 class="page-title">Source: error.js</h1>
 
     
 
@@ -27,47 +27,21 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Class to emit events to listener callbacks
+ * Error represents an error message.
  * @class
-*/
-export default class Emitter {
-  /**
-  * Create an Emitter.
-  */
-  constructor() {
-    this.$listeners = new Map();
-  }
-
-  /**
-  * Add a listener for emitted events.
-  * @param {string[]} types - An array or string of the events to listen for.
-  * @param {function} fn - The callback when an event is emitted.
-  */
-  addEventListener(types, fn) {
-    if (Array.isArray(types)) {
-      types.forEach((type) => {
-        this.addEventListener(type, fn);
-      });
-    } else {
-      if (!this.$listeners.has(types)) {
-        this.$listeners.set(types, []);
-      }
-      this.$listeners.get(types).push(fn);
-    }
-  }
-
-  /**
-  * Dispatch an event to listeners with arguments.
-  * @param {string} type - The type of event to dispatch.
-  * @param {...*} args - The arguments to pass to the listener callback.
-  */
-  dispatchEvent(type, ...args) {
-    const listeners = this.$listeners.get(type);
-    if (listeners) {
-      listeners.forEach((fn) => {
-        fn(...args);
-      });
-    }
+ * @classdesc Errors are emitted by several components. The Error class is used
+ * to encapsulate an error and numerical code for the error.
+ *
+ * @arg {string} reason - The error description
+ * @arg {number} code - The numerical code for the error
+ *
+ * @property {string} $reason - Returns the error reason
+ * @property {number} $code - Return the error code
+ */
+export default class Error {
+  constructor(reason, code) {
+    this.$reason = reason;
+    this.$code = code;
   }
 }
 </code></pre>

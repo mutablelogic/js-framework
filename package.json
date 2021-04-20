@@ -1,6 +1,6 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Javascript Framework",
   "main": "dist/js/index.js",
   "scripts": {

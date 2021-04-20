@@ -1,4 +1,4 @@
-// Controller class to be subclassed by an actual controller
+/* eslint-disable class-methods-use-this */
 
 import { Tooltip } from 'bootstrap';
 import View from './view';
@@ -70,5 +70,13 @@ export default class Controller {
       return new C();
     }
     throw new Error(`Controller: Class ${C.name} is not a controller`);
+  }
+
+  /**
+  * Run your application. This function does nothing in the default implementation
+  * and you are expected to subclass it.
+  */
+  main() {
+
   }
 }

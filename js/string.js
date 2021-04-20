@@ -2,20 +2,24 @@
 /* eslint-disable no-extend-native */
 
 /**
- * @function String.quote
- *
- * @returns string
+ * @class String
+ */
+
+/**
+ * @function quote
+ * @memberof String
  * @description Make a string quoted (in speech marks)
+ * @returns string
  */
 String.prototype.quote = function () {
   return JSON.stringify(this);
 };
 
 /**
- * @function String.pathSplit
- *
+ * @function pathSplit
+ * @memberof String
  * @description Split a path into elements, removing any initial and final
- * path separators
+ *  path separators
  * @returns string[]
  */
 String.prototype.pathSplit = function () {
@@ -29,10 +33,10 @@ String.prototype.pathSplit = function () {
 };
 
 /**
- * @function String.removePrefix
- *
+ * @function removePrefix
+ * @memberof String
  * @description Remove a prefix from a string, or return the whole string if
- * the prefix does not exist.
+ *  the prefix does not exist.
  * @arg {string} prefix - The prefix to test for and remove
  * @returns string
  */

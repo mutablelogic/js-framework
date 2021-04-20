@@ -17,6 +17,8 @@ import Form from './form';
 import Error from './error';
 import Emitter from './emitter';
 import './string';
+import './date';
+import './number';
 
 // CSS and Fonts
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -116,6 +116,11 @@ export default class Model {
   static $newproto(classKey, classProps, className) {
     const proto = {};
 
+    // Set className alias
+    if (className) {
+      Model.alias[className] = classKey;
+    }
+
     // $className property
     Object.defineProperty(proto, '$className', {
       value: className || classKey,
@@ -383,14 +388,15 @@ export default class Model {
   }
 
   static $castobject(value, model) {
-    const constructor = Model.constructors[model];
+    const classKey = Model.alias[model] || model;
+    const constructor = Model.constructors[classKey];
     if (constructor) {
       if (value instanceof constructor) {
         return value;
       }
       return new constructor(value);
     }
-    throw new Error(`Undefined Model of type ${model}`);
+    throw new Error(`Undefined Model of type ${classKey}`);
   }
 
   static $castnumber(value) {
@@ -438,6 +444,7 @@ export default class Model {
 // GLOBALS
 
 Model.constructors = {};
+Model.alias = {};
 Model.models = {};
 Model.types = {};
 Model.primitive = Object.freeze({

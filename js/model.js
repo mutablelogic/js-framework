@@ -1,4 +1,4 @@
-// Model class to be subclassed by an actual model
+/* eslint-disable func-names */
 
 import Error from './error';
 
@@ -14,8 +14,21 @@ const REGEXP_ALIASED = /^([A-Za-z0-9-_]*)\s+(\{\}|\[\])?(\w+)$/i;
 const REGEXP_NOTALIASED = /^()(\{\}|\[\])?(\w+)$/i;
 
 // ////////////////////////////////////////////////////////////////////////////
-// MODEL CLASS
 
+/**
+ * Model manages data transfer between provider, form and internal representation.
+ * @class
+ * @classdesc This class is used as a base class to a model. You should extend
+ * this class and call the define method to describe the data model properties. When constructing
+ * a model, you can then access your properties as you would any other object.
+ *
+ * @arg {Object} data - The data which is parsed and used to construct the model instance.
+ *
+ * @property {string} $json - Returns JSON representation of the model values.
+ * @property {string} $className - Returns the class name of the model.
+ *
+ * @throws Error
+ */
 export default class Model {
   constructor(data) {
     // Get prototype
@@ -32,6 +45,22 @@ export default class Model {
     this.$setall(data);
   }
 
+  /**
+   * Define the object model. The model supports string, number, boolean and date
+   * as native values, and map, object and array as collections. You can define
+   * the model as an array of properties, each property is a string with an optional
+   * alias (the data key of the external representation) and the internal representation.
+   * For example, to define a string use "string" as the property, or for example "id string"
+   * if the external representation uses 'id' as the key. To define an object as a
+   * model member, use the name of the model (ie, 'User'). For a map, use '{}' before the
+   * type and for an array use '[]' before the type.
+   *
+   * @arg {function} classConstructor - The constructor for the model
+   * @arg {Object.<string,string>} classProps - The definition of the model properties
+   * @arg {string=} className - The name of the class referred to in class properties.
+   *   Uses constructor name if not given.
+   * @throws Error
+   */
   static define(classConstructor, classProps, className) {
     if (typeof classConstructor !== 'function') {
       throw new Error('Called define without a class constructor');
@@ -48,6 +77,42 @@ export default class Model {
     Model.models[classKey] = proto;
   }
 
+  /**
+   * @method Model#$get
+   * @arg {string} key - The key of the property
+   * @returns {string|number|boolean|Date|Map|Array|Model|undefined}
+   * @desc Return a property value or undefined
+   */
+  /**
+   * @method Model#$set
+   * @arg {string} key - The key of the property
+   * @arg {string|number|boolean|Date|Map|Array|Model|undefined} value - The value
+   *  for the property
+   * @returns {string|number|boolean|Date|Map|Array|Model|undefined}
+   * @desc Set a property value for a key
+   */
+  /**
+   * @method Model#$getall
+   * @returns {Object}
+   * @desc Get all property values that can be transmitted stored in external representation.
+   *  Does not include values which are undefined.
+   */
+  /**
+   * @method Model#$setall
+   * @desc Set all property values from external representation. Replaces all existing
+   * property values.
+   * @returns {Object}
+   */
+  /**
+   * @method Model#toString
+   * @desc Return object in string form, for debugging.
+   * @returns {string}
+   */
+  /**
+   * @method Model#$equals
+   * @desc Checks for equality between this object and another model.
+   * @returns {boolean}
+   */
   static $newproto(classKey, classProps, className) {
     const proto = {};
 
@@ -99,21 +164,16 @@ export default class Model {
       });
     });
 
-    // $get function
-    // eslint-disable-next-line func-names
     proto.$get = function (key) {
       return this.$data[key];
     };
 
-    // $set function
-    // eslint-disable-next-line func-names
     proto.$set = function (key, value) {
       const v = this.$type.get(key);
       this.$data[key] = Model.$cast(value, v.collection, v.primitive, v.model);
+      return this.$data[key];
     };
 
-    // $getall function
-    // eslint-disable-next-line func-names
     proto.$getall = function () {
       const obj = {};
       this.$type.forEach((v, k) => {
@@ -125,8 +185,6 @@ export default class Model {
       return obj;
     };
 
-    // $setall function
-    // eslint-disable-next-line func-names
     proto.$setall = function (data) {
       if (typeof data !== 'object') {
         throw new Error(`Constructor requires object for ${this.constructor.name}`);
@@ -137,8 +195,6 @@ export default class Model {
       });
     };
 
-    // toString function
-    // eslint-disable-next-line func-names
     proto.toString = function () {
       let str = `<${this.$className}`;
       this.$type.forEach((_, k) => {
@@ -148,8 +204,6 @@ export default class Model {
       return `${str}>`;
     };
 
-    // $equals function
-    // eslint-disable-next-line func-names
     proto.$equals = function (other) {
       if (!other) {
         return false;

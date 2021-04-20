@@ -5,16 +5,33 @@ import View from './view';
 // ////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 
-const EVENT_ROOT = 'mvc.nav';
-const EVENT_CLICK = `${EVENT_ROOT}.click`;
+const EVENT_ROOT = 'nav';
+
+/**
+ * Navigational element click event
+ *
+ * @event Nav#nav:click
+ * @arg {Nav} sender - The provider that emitted the event.
+ * @arg {Node} target - The target element clicked.
+ */
+const EVENT_CLICK = `${EVENT_ROOT}:click`;
+
 const CLASS_ACTIVE = 'active';
 
 /**
- * Nav is the navgation view, which emits a mvc.nav.click event whenever
- * a navigational item is clicked which has an empty href in the navigation
- * item.
+ * Nav manages a navigation component.
  * @class
-*/
+ * @implements {View}
+ * @classdesc This class is constructed with a DOM element and
+ * controls an existing
+ * [Bootstrap Nav element]{@link https://getbootstrap.com/docs/5.0/components/navs-tabs/}.
+ * It expects the view element to include anchor elements wrapped in list items as per
+ * the bootstrap documentation. Any anchor element with an empty href (or '#') will
+ * emit a click event.
+ *
+ * @arg {Node} node - The node to attach the view to. Throws an error if the node
+ *   is not provided.
+ */
 export default class Nav extends View {
   constructor(node) {
     super(node);
@@ -36,7 +53,6 @@ export default class Nav extends View {
     }
   }
 
-  /// @private
   $set(node) {
     const hrefattr = node.getAttribute('href');
     if (!hrefattr || hrefattr === '#') {

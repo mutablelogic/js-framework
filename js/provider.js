@@ -6,85 +6,87 @@ import Emitter from './emitter';
 // ////////////////////////////////////////////////////////////////////////////
 // EVENTS
 
-const EVENT_ROOT = 'mvc.provider';
-const EVENT_STARTED = `${EVENT_ROOT}.started`;
-const EVENT_COMPLETED = `${EVENT_ROOT}.completed`;
-const EVENT_ERROR = `${EVENT_ROOT}.error`;
-const EVENT_ADDED = `${EVENT_ROOT}.added`;
-const EVENT_CHANGED = `${EVENT_ROOT}.changed`;
-const EVENT_DELETED = `${EVENT_ROOT}.deleted`;
+const EVENT_ROOT = 'provider';
 
 /**
  * Request start event, which is emitted when a request is initiated.
  *
- * @event mvc.provider.started
- * @property {Provider} sender - The provider that emitted the event.
- * @property {string} url - The url of the endpoint.
+ * @event Provider#provider:started
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {string} url - The url of the endpoint.
  */
+const EVENT_STARTED = `${EVENT_ROOT}:started`;
 
 /**
  * Request completed event, which is emitted when a request is successfully completed.
  *
- * @event mvc.provider.completed
- * @property {Provider} sender - The provider that emitted the event.
- * @property {boolean} changed - When true, indicates that the request resulted in a change
+ * @event Provider#provider:completed
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {boolean} changed - When true, indicates that the request resulted in a change
  *   to the objects stored in the provider.
  */
+const EVENT_COMPLETED = `${EVENT_ROOT}:completed`;
 
 /**
  * Request error event, which is emitted when a request is not completed successfully.
  *
- * @event mvc.provider.completed
- * @property {Provider} sender - The provider that emitted the event.
- * @property {Error} error - Provides the reason for the request not completing
+ * @event Provider#provider:error
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {Error} error - Provides the reason for the request not completing
  *   successfully.
  */
+const EVENT_ERROR = `${EVENT_ROOT}:error`;
 
 /**
  * Object added event, which is emitted when a request adds a new object to the provider.
  *
- * @event mvc.provider.added
- * @property {Provider} sender - The provider that emitted the event.
- * @property {Model} object - Provides the reason for the request not completing
+ * @event Provider#provider:added
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {Model} object - Provides the reason for the request not completing
  *   successfully.
  */
+const EVENT_ADDED = `${EVENT_ROOT}:added`;
 
 /**
  * Object changed event, which is emitted when a request replaces an existing object.
  *
- * @event mvc.provider.changed
- * @property {Provider} sender - The provider that emitted the event.
- * @property {Model} object - The object which has been added to the provider.
- * @property {Model} existing - The object which has been replaced in the provider.
-*/
+ * @event Provider#provider:changed
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {Model} object - The object which has been added to the provider.
+ * @arg {Model} existing - The object which has been replaced in the provider.
+ */
+const EVENT_CHANGED = `${EVENT_ROOT}:changed`;
 
 /**
  * Object deleted event, which is emitted when a request removes an object from
  * the provider.
  *
- * @event mvc.provider.deleted
- * @property {Provider} sender - The provider that emitted the event.
- * @property {Model} object - The object which has been deleted from the provider.
-*/
+ * @event Provider#provider:deleted
+ * @arg {Provider} sender - The provider that emitted the event.
+ * @arg {Model} object - The object which has been deleted from the provider.
+ */
+const EVENT_DELETED = `${EVENT_ROOT}:deleted`;
 
 // ////////////////////////////////////////////////////////////////////////////
-// PROVIDER CLASS
 
 /**
  * Provider requests data from a remote endpoint.
  * @class
-*/
+ * @implements {Emitter}
+ * @classdesc The provider can store model objects which can be retrieved after
+ *  a request is completed. If no model is provided then Object types will be emitted.
+ *  Add event listeners to tap into the request lifecycle.
+ *  To create a provider, with a model constructor and optionally a base URL for
+ *  requests.
+ *
+ * @arg {Model=} constructor - The model used to create objects from data.
+ * @arg {string=} origin - The base URL used for making requests.
+ *
+ * @property {Object[]} objects - The objects stored in the provider.
+ * @property {string[]} keys - The unique keys for objects stored in the provider.
+ *
+ */
 export default class Provider extends Emitter {
-  /**
-  * Create a provider, with a model constructor and optionally
-  * a base URL for requests. If no model is provided then
-  * Object types will be emitted. Add event listeners for
-  * mvc.provider.{started,completed,added,changed,deleted} to
-  * tap into the request lifecycle and mvc.provider.error to
-  * deal with request errors.
-  * @param {Model} constructor - The model used to create objects from data.
-  * @param {string} origin - The base URL used for making requests.
-  */
   constructor(constructor, origin) {
     super();
     this.$origin = origin || '';
@@ -100,6 +102,12 @@ export default class Provider extends Emitter {
   * @param {string} url - The endpoint of the data provider.
   * @param {Object} req - Request data. See the documentaton for fetch.
   * @param {number} interval - If provided, the number of milliseconds between each request.
+  * @fires Provider#provider:started
+  * @fires Provider#provider:completed
+  * @fires Provider#provider:error
+  * @fires Provider#provider:added
+  * @fires Provider#provider:changed
+  * @fires Provider#provider:deleted
   */
   request(url, req, interval) {
     this.cancel();
@@ -115,6 +123,12 @@ export default class Provider extends Emitter {
   * Perform a request without interrupting any existing request interval timer.
   * @param {string} url - The endpoint of the data provider.
   * @param {Object} req - Request data. See the documentaton for fetch.
+  * @fires Provider#provider:started
+  * @fires Provider#provider:completed
+  * @fires Provider#provider:error
+  * @fires Provider#provider:added
+  * @fires Provider#provider:changed
+  * @fires Provider#provider:deleted
   */
   do(url, req) {
     this.$fetch(url, req);
@@ -241,22 +255,17 @@ export default class Provider extends Emitter {
     return changed;
   }
 
-  /**
-  * Return all objects which are registered with the provider.
-  */
   get objects() {
     return Array.from(this.$objs.values());
   }
 
-  /**
-  * Return all object keys which are registered with the provider.
-  */
   get keys() {
     return Array.from(this.$objs.keys());
   }
 
   /**
   * Return an object which is registered with a key.
+  * @param {string} key - The unique key for the model object.
   */
   objectForKey(key) {
     return this.$objs.get(key);

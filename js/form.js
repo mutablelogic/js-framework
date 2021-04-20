@@ -7,13 +7,52 @@ import Error from './error';
 // ////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 
-const EVENT_ROOT = 'mvc.form';
-const EVENT_SUBMIT = `${EVENT_ROOT}.submit`;
-const EVENT_CHANGE = `${EVENT_ROOT}.change`;
+const EVENT_ROOT = 'form';
+
+/**
+ * Form submit event, which is emitted whenever submission occurs on the
+ * form (with a button or other method). The event is only fired if the
+ * form validation checks passed.
+ *
+ * @event Form#form:submit
+ * @arg {Form} sender - The form that emitted the event.
+ * @arg {Node} target - The input control or button that submitted the form.
+ */
+const EVENT_SUBMIT = `${EVENT_ROOT}:submit`;
+
+/**
+ * Form change event, which is emitted whenever an input control on the
+ * form is changed.
+ *
+ * @event Form#form:change
+ * @arg {Form} sender - The form that emitted the event.
+ * @arg {Node} target - The input control that changed.
+ */
+const EVENT_CHANGE = `${EVENT_ROOT}:change`;
 
 // ////////////////////////////////////////////////////////////////////////////
-// FORM
 
+/**
+ * Form represents a HTML form, which can contain values entered by the user.
+ * @class
+ * @implements {View}
+ * @classdesc A list is a view which uses a 'row' template to added and remove
+ *  rows from a view.
+ * @classdesc This class is constructed with a DOM element and
+ * controls an existing
+ * [Bootstrap Form]{@link https://getbootstrap.com/docs/5.0/forms/overview/}
+ * and is generally used for validating, submitting and tracking form input. The form
+ * can be wrapped in a [Bootstrap Modal]{@link https://getbootstrap.com/docs/5.0/components/modal/}
+ * so that the show and hide methods can be used to set visibility.
+ *
+ * @arg {Node} node - The node to attach the view to. Throws an error if the node
+ *   is not provided.
+ *
+ * @property {FormData} formdata - Returns a form data object representing the form values
+ * @property {Object<string,string>} values - Get and set the form values
+ *
+ * @throws Error
+ */
 export default class Form extends View {
   constructor(node) {
     super(node);
@@ -44,6 +83,13 @@ export default class Form extends View {
     this.dispatchEvent(EVENT_CHANGE, this, evt.target);
   }
 
+  /**
+  * Sets the default values for the form and if the form is modal, the modal
+  * is show.
+  * @param {Object<string,string>} defaults - The values for the form controls.
+  * @fires Form#form:submit
+  * @fires Form#form:change
+  */
   show(defaults) {
     this.$form.classList.remove('was-validated');
     if (defaults) {
@@ -52,6 +98,9 @@ export default class Form extends View {
     this.$modal.show();
   }
 
+  /**
+  * If the form is modal, the modal is hidden.
+  */
   hide() {
     this.$modal.hide();
   }

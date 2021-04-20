@@ -26,6 +26,6 @@ import 'bootstrap-icons/font/fonts/bootstrap-icons.woff2';
 import '../css/style.css';
 
 // Exports
-export {
+export default {
   Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,
 };

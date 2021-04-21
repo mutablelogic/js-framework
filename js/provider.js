@@ -147,7 +147,7 @@ export default class Provider extends Emitter {
   $fetch(url, req) {
     let status;
     let changed = false;
-    this.dispatchEvent(EVENT_STARTED, this, this.$origin + url);
+    this.dispatchEvent(EVENT_STARTED, this, this.$origin + (url || ''));
     fetch(this.$origin + url, req)
       .then((response) => {
         status = response;

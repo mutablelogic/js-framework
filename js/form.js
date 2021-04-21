@@ -121,12 +121,39 @@ export default class Form extends View {
               elem.checked = true;
             }
             break;
+          case 'select':
+            if (elem.multiple) {
+              elem.options.forEach((opt) => {
+                // eslint-disable-next-line no-param-reassign
+                opt.selected = this.constructor.$selected(opt.value, value);
+              });
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              elem.value = `${value}`;
+            }
+            break;
           default:
             // eslint-disable-next-line no-param-reassign
             elem.value = `${value}`;
         }
       }
     });
+  }
+
+  static $selected(value, src) {
+    if (src) {
+      if (typeof src === 'string') {
+        return value === src;
+      }
+      if (Array.isArray(src)) {
+        for (let i = 0; i < src.length; i += 1) {
+          if (this.$selected(value, src[i])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   get values() {
@@ -137,6 +164,16 @@ export default class Form extends View {
         switch (elem.type) {
           case 'radio':
             if (elem.checked) {
+              values[key] = elem.value;
+            }
+            break;
+          case 'select':
+            if (elem.multiple) {
+              values[key] = [];
+              elem.selectedOptions.forEach((opt) => {
+                values[key].push(opt.value);
+              });
+            } else {
               values[key] = elem.value;
             }
             break;

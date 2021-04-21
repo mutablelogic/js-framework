@@ -147,8 +147,12 @@ export default class Provider extends Emitter {
   $fetch(url, req) {
     let status;
     let changed = false;
-    this.dispatchEvent(EVENT_STARTED, this, this.$origin + (url || ''));
-    fetch(this.$origin + url, req)
+    let absurl = this.$origin + (url || '');
+    if (!absurl.hasPrefix('/')) {
+      absurl = `/${absurl}`;
+    }
+    this.dispatchEvent(EVENT_STARTED, this, absurl);
+    fetch(absurl, req)
       .then((response) => {
         status = response;
         const contentType = response.headers ? response.headers.get('Content-Type') || '' : '';

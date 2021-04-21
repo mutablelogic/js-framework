@@ -44,3 +44,15 @@ String.prototype.removePrefix = function (prefix) {
   const hasPrefix = this.indexOf(prefix) === 0;
   return hasPrefix ? this.substr(prefix.length) : this.toString();
 };
+
+/**
+ * @function hasPrefix
+ * @memberof String
+ * @description Check for prefix on a string.
+ * @arg {string} prefix - The prefix to test for and remove
+ * @returns boolean
+ */
+String.prototype.hasPrefix = function (prefix) {
+  const hasPrefix = this.indexOf(prefix) === 0;
+  return hasPrefix;
+};

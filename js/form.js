@@ -121,16 +121,11 @@ export default class Form extends View {
               elem.checked = true;
             }
             break;
-          case 'select':
-            if (elem.multiple) {
-              elem.options.forEach((opt) => {
-                // eslint-disable-next-line no-param-reassign
-                opt.selected = this.constructor.$selected(opt.value, value);
-              });
-            } else {
+          case 'select-multiple':
+            Array.from(elem.options).forEach((option) => {
               // eslint-disable-next-line no-param-reassign
-              elem.value = `${value}`;
-            }
+              option.selected = this.constructor.$selected(option.value, value);
+            });
             break;
           default:
             // eslint-disable-next-line no-param-reassign
@@ -167,15 +162,11 @@ export default class Form extends View {
               values[key] = elem.value;
             }
             break;
-          case 'select':
-            if (elem.multiple) {
-              values[key] = [];
-              elem.selectedOptions.forEach((opt) => {
-                values[key].push(opt.value);
-              });
-            } else {
-              values[key] = elem.value;
-            }
+          case 'select-multiple':
+            values[key] = [];
+            Array.from(elem.selectedOptions).forEach((option) => {
+              values[key].push(option.value);
+            });
             break;
           default:
             values[key] = elem.value;

@@ -64,6 +64,7 @@ export default class Nav extends View {
     } else {
       const navLink = new URL(node.href).pathname.pathSplit().join('/');
       if (node.parentNode.id) {
+        console.log(`set ${navLink}`);
         this.$map.set(navLink, node.parentNode.id);
       }
     }

@@ -68,7 +68,7 @@ export default class Controller {
   static New(constructor, ...args) {
     const C = constructor || Controller;
     if (C.prototype instanceof Controller) {
-      return new C(args);
+      return new C(...args);
     }
     throw new Error(`Controller: Class ${C.name} is not a controller`);
   }

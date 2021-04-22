@@ -42,12 +42,12 @@ export default class List extends View {
       throw new Error(`Invalid List template with name ${classTemplate}`);
     }
 
-    // Hide the template
-    template.classList.add('d-none');
-
     // Create a prototype row
     this.$prototype = template.cloneNode(true);
     this.$prototype.classList.remove(this.$className);
+
+    // Remove node from parent
+    node.removeChild(template);
   }
 
   /**

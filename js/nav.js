@@ -38,6 +38,7 @@ export default class Nav extends View {
     this.$map = new Map();
 
     // Set up nav items - those with HREF # dispatch events
+    console.log('subnav', this.queryAll('li a.nav-link'));
     this.queryAll('li a.nav-link').forEach((elem) => {
       this.$set(elem);
     });
@@ -64,7 +65,6 @@ export default class Nav extends View {
     } else {
       const navLink = new URL(node.href).pathname.pathSplit().join('/');
       if (node.parentNode.id) {
-        console.log(`set ${navLink}`);
         this.$map.set(navLink, node.parentNode.id);
       }
     }

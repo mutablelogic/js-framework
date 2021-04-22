@@ -53,12 +53,11 @@ export default class List extends View {
   /**
   * Add or update an existing row. When adding a row, it is cloned from the template
   * and added to the end of the view element.
-  * @param {Model} obj - The object which should be represented in the view.
   * @param {string} key - A unique identifier for the row.
   * @returns View - The view added or to be updated in the list
   * @fires List#list:click
   */
-  set(obj, key) {
+  set(key) {
     let row = this.getForKey(key);
 
     // Clone a row

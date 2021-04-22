@@ -38,7 +38,6 @@ export default class Nav extends View {
     this.$map = new Map();
 
     // Set up nav items - those with HREF # dispatch events
-    console.log('subnav', this.queryAll('li a.nav-link'));
     this.queryAll('li a.nav-link').forEach((elem) => {
       this.$set(elem);
     });
@@ -48,9 +47,9 @@ export default class Nav extends View {
 
     // Determine current path and set the active link
     const path = window.location.pathname.pathSplit().join('/');
-    const key = this.$map.get(path);
-    if (key) {
-      this.setClassName(key, CLASS_ACTIVE);
+    const item = this.$map.get(path);
+    if (item) {
+      this.setClassName(item, CLASS_ACTIVE);
     }
   }
 
@@ -64,8 +63,8 @@ export default class Nav extends View {
       });
     } else {
       const navLink = new URL(node.href).pathname.pathSplit().join('/');
-      if (node.parentNode.id) {
-        this.$map.set(navLink, node.parentNode.id);
+      if (node.parentNode.tagName === 'LI') {
+        this.$map.set(navLink, node.parentNode);
       }
     }
   }
@@ -74,12 +73,12 @@ export default class Nav extends View {
   * Set a class name on a specific navigational item and remove
   * that class from other navigational items. Usually this is used
   * to mark a specific dropdown item as active, for example.
-  * @param {string} key - The id of the navigational item
+  * @param {Node} node - The navigational <li> which contains a link
   * @param {string} className - The class name which indicates
   */
-  setClassName(key, className) {
+  setClassName(node, className) {
     this.queryAll('li a.nav-link').forEach((elem) => {
-      if (elem.parentNode.id === key) {
+      if (elem.parentNode === node) {
         elem.classList.add(className);
       } else {
         elem.classList.remove(className);

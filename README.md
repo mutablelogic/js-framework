@@ -23,15 +23,10 @@ Add the framework as a dependency in your project:
 Import assets and create a controller in your JavaScript:
 
 ```javascript
-import '@djthorpe/js-framework/dist/assets/fonts/bootstrap-icons.woff';
-import '@djthorpe/js-framework/dist/assets/fonts/bootstrap-icons.woff2';
-
-// Controllers
-import { Controller } from '@djthorpe/js-framework';
+const jsframework = require('@djthorpe/js-framework');
 
 // Run application
 window.addEventListener('DOMContentLoaded', () => {
-  const jsframework = require('@djthorpe/js-framework');
   const app = jsframework.Controller.New(Controller);
   app.main();
 });

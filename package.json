@@ -1,12 +1,11 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.33",
+  "version": "0.0.35",
   "description": "Javascript Framework",
   "main": "dist/index.js",
   "scripts": {
-    "all": "npm-run-all lint esbuild docs",
-    "build": "webpack --config config/webpack.config.js",
-    "esbuild": "rm -fr dist && esbuild js/index.js --format=esm --minify --bundle --sourcemap --outdir=dist --loader:.woff=file --loader:.woff2=file",
+    "all": "npm-run-all lint build docs",
+    "build": "rm -fr dist && esbuild js/index.js --format=esm --minify --bundle --outdir=dist --sourcemap --loader:.woff=dataurl --loader:.woff2=dataurl",
     "lint": "eslint js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },
@@ -25,17 +24,12 @@
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
     "@ckeditor/jsdoc-plugins": "^24.4.2",
-    "css-loader": "^5.2.2",
+    "esbuild": "^0.11.12",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jsdoc": "^3.6.6",
-    "npm-run-all": "^4.1.5",
-    "style-loader": "^2.0.0",
-    "terser": "^5.1.0",
-    "webpack": "^5.33.2",
-    "webpack-cli": "^4.6.0",
-    "esbuild": "^0.11.12"
+    "npm-run-all": "^4.1.5"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",

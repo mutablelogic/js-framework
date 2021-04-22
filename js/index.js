@@ -26,6 +26,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../css/style.css';
 
 // Exports
-export default {
+export {
   Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,
 };

@@ -1,12 +1,12 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Javascript Framework",
   "main": "dist/js/index.js",
   "scripts": {
     "all": "npm-run-all lint esbuild docs",
     "build": "webpack --config config/webpack.config.js",
-    "esbuild": "rm -fr dist && esbuild js/index.js --bundle --minify --sourcemap --outdir=dist --define:process.env.NODE_ENV=\"production\" --loader:.woff=file --loader:.woff2=file",
+    "esbuild": "rm -fr dist && esbuild js/index.js --bundle --sourcemap --outdir=dist --loader:.woff=file --loader:.woff2=file",
     "lint": "eslint js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },

@@ -20,11 +20,9 @@ import './string';
 import './date';
 import './number';
 
-// CSS and Fonts
+// CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'bootstrap-icons/font/fonts/bootstrap-icons.woff';
-import 'bootstrap-icons/font/fonts/bootstrap-icons.woff2';
 import '../css/style.css';
 
 // Exports

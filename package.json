@@ -1,11 +1,12 @@
 {
   "name": "@djthorpe/js-framework",
-  "version": "0.0.28",
+  "version": "0.0.30",
   "description": "Javascript Framework",
   "main": "dist/js/index.js",
   "scripts": {
-    "all": "npm-run-all lint build docs",
+    "all": "npm-run-all lint esbuild docs",
     "build": "webpack --config config/webpack.config.js",
+    "esbuild": "rm -fr dist && esbuild js/index.js --bundle --minify --sourcemap --outdir=dist --define:process.env.NODE_ENV=\"production\" --loader:.woff=file --loader:.woff2=file",
     "lint": "eslint js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },
@@ -33,7 +34,8 @@
     "style-loader": "^2.0.0",
     "terser": "^5.1.0",
     "webpack": "^5.33.2",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "esbuild": "^0.11.12"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",

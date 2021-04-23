@@ -58,7 +58,6 @@ export default class Form extends View {
     super(node);
     this.$modal = new ModalBS(node);
     this.$form = super.query('form');
-
     if (!this.$form) {
       throw new Error('Form: Missing form element');
     }
@@ -105,6 +104,15 @@ export default class Form extends View {
     this.$modal.hide();
   }
 
+  /**
+   * Return a named form control
+   * @param {string} name - The name of the control.
+   * @returns Node|undefined - The control or undefined if the named control does not exist.
+   */
+  control(name) {
+    return name ? this.$form.elements[name] : undefined;
+  }
+
   get formdata() {
     return new FormData(this.$form);
   }
@@ -135,22 +143,6 @@ export default class Form extends View {
     });
   }
 
-  static $selected(value, src) {
-    if (src) {
-      if (typeof src === 'string') {
-        return value === src;
-      }
-      if (Array.isArray(src)) {
-        for (let i = 0; i < src.length; i += 1) {
-          if (this.$selected(value, src[i])) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
   get values() {
     const values = {};
     Array.from(this.$form.elements).forEach((elem) => {
@@ -175,5 +167,21 @@ export default class Form extends View {
       }
     });
     return values;
+  }
+
+  static $selected(value, src) {
+    if (src) {
+      if (typeof src === 'string') {
+        return value === src;
+      }
+      if (Array.isArray(src)) {
+        for (let i = 0; i < src.length; i += 1) {
+          if (this.$selected(value, src[i])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 }

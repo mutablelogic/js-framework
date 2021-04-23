@@ -75,7 +75,7 @@ export default class View extends Emitter {
   * @throws {Error}
   */
   replace(selector, ...args) {
-    const node = this.query(selector);
+    const node = selector ? this.query(selector) : this.$node;
     if (!node) {
       throw new Error(`View: Invalid selector ${selector}`);
     }

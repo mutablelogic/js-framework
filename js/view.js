@@ -87,8 +87,9 @@ export default class View extends Emitter {
   * Set visibility so that view is rendered.
   * @returns {View}
   */
-  $show() {
-    this.$node.style.visibility = 'visible';
+  show() {
+    this.$node.classList.add('visible');
+    this.$node.classList.remove('invisible');
     return this;
   }
 
@@ -96,8 +97,9 @@ export default class View extends Emitter {
   * Set visibility so that view is not rendered.
   * @returns {View}
   */
-  $hide() {
-    this.$node.style.visibility = 'hidden';
+  hide() {
+    this.$node.classList.add('invisible');
+    this.$node.classList.remove('visible');
     return this;
   }
 }

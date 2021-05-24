@@ -12,6 +12,7 @@ import Toast from './toast';
 import Nav from './nav';
 import Button from './button';
 import Form from './form';
+import Offcanvas from './view/offcanvas';
 
 // Utils
 import Error from './error';
@@ -27,5 +28,5 @@ import '../css/style.css';
 
 // Exports
 export {
-  Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,
+  Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form, Offcanvas,
 };

@@ -33,3 +33,4 @@ dist
 .dynamodb/
 .tern-port
 .DS_Store
+.apdisk

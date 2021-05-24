@@ -55,10 +55,10 @@ Date.prototype.relativeDate = function () {
   if (delta < 60) {
     return `${delta} secs ago`;
   }
-  if (delta === 60) {
+  const minutes = Math.floor(delta / 60);
+  if (minutes === 1) {
     return '1 min ago';
   }
-  const minutes = Math.floor(delta / 60);
   if (minutes < 60) {
     return `${minutes} mins ago`;
   }

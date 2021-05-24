@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: emitter.js</title>
+    <title>JSDoc: Source: view/offcanvas.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: emitter.js</h1>
+    <h1 class="page-title">Source: view/offcanvas.js</h1>
 
     
 
@@ -26,48 +26,73 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Class to emit events to listener callbacks
- * @class
-*/
-export default class Emitter {
-  /**
-  * Create an Emitter.
-  */
-  constructor() {
-    this.$listeners = new Map();
+            <pre class="prettyprint source linenums"><code>// Offcanvas element
+
+import { Offcanvas as OffcanvasBS } from 'bootstrap';
+import View from '../view';
+
+// ////////////////////////////////////////////////////////////////////////////
+// CONSTANTS
+
+const EVENT_ROOT = 'offcanvas';
+
+/**
+ * Offcanvas show event, which is emitted when a element is about to be made visible.
+ *
+ * @event Offcanvas#offcanvas:show
+ * @arg {Offcanvas} sender - The view that emitted the event.
+ */
+const EVENT_SHOW = `${EVENT_ROOT}:show`;
+
+/**
+ * Offcanvas hide event, which is emitted when a element has been hidden.
+ *
+ * @event Offcanvas#offcanvas:hide
+ * @arg {Offcanvas} sender - The view that emitted the event.
+ */
+const EVENT_HIDE = `${EVENT_ROOT}:hide`;
+
+// ////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @class Offcanvas
+ * @implements {View}
+ * @classdesc This class is constructed with a DOM element and
+ * controls an existing
+ * [Bootstrap Offcanvas]{@link https://getbootstrap.com/docs/5.0/components/offcanvas/}
+ * and is generally used for showing additional information on a modal canvas which is shown
+ * and hidden from one side of the window.
+ *
+ * @arg {Node} node - The node to attach the view to. Throws an error if the node
+ *   is not provided.
+ */
+export default class Offcanvas extends View {
+  constructor(node) {
+    super(node);
+    this.$offcanvas = new OffcanvasBS(node, {});
+    node.addEventListener('show.bs.offcanvas', () => {
+      this.dispatchEvent(EVENT_SHOW, this);
+    });
+    node.addEventListener('hidden.bs.offcanvas', () => {
+      this.dispatchEvent(EVENT_HIDE, this);
+    });
   }
 
   /**
-  * Add a listener for emitted events.
-  * @param {string[]} types - An array or string of the events to listen for.
-  * @param {function} fn - The callback when an event is emitted.
+  * Make the offcanvas view visible
+  * @fires Offcanvas#offcanvas:show
+  * @throws Error
   */
-  addEventListener(types, fn) {
-    if (Array.isArray(types)) {
-      types.forEach((type) => {
-        this.addEventListener(type, fn);
-      });
-    } else {
-      if (!this.$listeners.has(types)) {
-        this.$listeners.set(types, []);
-      }
-      this.$listeners.get(types).push(fn);
-    }
+  show() {
+    this.$offcanvas.show();
   }
 
   /**
-  * Dispatch an event to listeners with arguments.
-  * @param {string} type - The type of event to dispatch.
-  * @param {...*} args - The arguments to pass to the listener callback.
+  * Make the offcanvas view hidden.
+  * @fires Offcanvas#offcanvas:hide
   */
-  dispatchEvent(type, ...args) {
-    const listeners = this.$listeners.get(type);
-    if (listeners) {
-      listeners.forEach((fn) => {
-        fn(...args);
-      });
-    }
+  hide() {
+    this.$offcanvas.hide();
   }
 }
 </code></pre>

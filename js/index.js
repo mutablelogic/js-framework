@@ -13,6 +13,7 @@ import Nav from './nav';
 import Button from './button';
 import Form from './form';
 import Offcanvas from './view/offcanvas';
+import Tooltip from './view/tooltip';
 
 // Utils
 import Error from './error';
@@ -28,5 +29,6 @@ import '../css/style.css';
 
 // Exports
 export {
-  Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form, Offcanvas,
+  Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,
+  Offcanvas, Tooltip,
 };

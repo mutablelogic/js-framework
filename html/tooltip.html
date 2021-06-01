@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <h1>Tooltip Element</h1>
+
+    <!-- Javascript -->
+    <script type="module">
+        import { Tooltip, Button } from './index.js';
+        const tooltip = new Tooltip(document.querySelector('#tooltip'));
+        tooltip.addEventListener('tooltip:show',(sender) => {
+            console.log("Showing tooltip");
+        });
+        tooltip.addEventListener('tooltip:hide',(sender) => {
+            console.log("Hiding tooltip");
+        });
+
+        const show = new Button(document.querySelector('#show'));        
+        show.addEventListener('button:click',(sender) => {
+            tooltip.show();
+        });
+
+        const hide = new Button(document.querySelector('#hide'));        
+        hide.addEventListener('button:click',(sender) => {
+            tooltip.hide();
+        });
+
+</script>
+
+    <!-- HTML -->
+    <div>
+        <span class="border" id="tooltip" title="Some tooltip text!">Hello, world</span>
+    </div>
+
+    <button class="btn btn-primary" id="show">Show Tooltip</button>
+    <button class="btn btn-primary" id="hide">Hide Tooltip</button>
+</body>
+
+</html>

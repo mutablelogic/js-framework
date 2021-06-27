@@ -79,7 +79,7 @@ export default class Form extends View {
     }
 
     // Apply show hide events to modal
-    node.addEventListener('show.bs.modal', () => {
+    node.addEventListener('shown.bs.modal', () => {
       this.dispatchEvent(EVENT_SHOW, this);
     });
     node.addEventListener('hidden.bs.modal', () => {

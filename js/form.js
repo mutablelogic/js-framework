@@ -30,6 +30,22 @@ const EVENT_SUBMIT = `${EVENT_ROOT}:submit`;
  */
 const EVENT_CHANGE = `${EVENT_ROOT}:change`;
 
+/**
+ * Form show event, which is emitted when the modal is shown.
+ *
+ * @event Form#form:show
+ * @arg {Form} sender - The form that emitted the event.
+ */
+const EVENT_SHOW = `${EVENT_ROOT}:show`;
+
+/**
+ * Form hide event, which is emitted when the modal is hidden.
+ *
+ * @event Form#form:hide
+ * @arg {Form} sender - The form that emitted the event.
+ */
+const EVENT_HIDE = `${EVENT_ROOT}:hide`;
+
 // ////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -61,6 +77,14 @@ export default class Form extends View {
     if (!this.$form) {
       throw new Error('Form: Missing form element');
     }
+
+    // Apply show hide events to modal
+    node.addEventListener('show.bs.modal', () => {
+      this.dispatchEvent(EVENT_SHOW, this);
+    });
+    node.addEventListener('hidden.bs.modal', () => {
+      this.dispatchEvent(EVENT_HIDE, this);
+    });
 
     // Apply custom Bootstrap validation to form
     this.$form.addEventListener('submit', (evt) => this.$submit(evt));

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: toast.js</title>
+    <title>JSDoc: Source: view/tooltip.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: toast.js</h1>
+    <h1 class="page-title">Source: view/tooltip.js</h1>
 
     
 
@@ -26,90 +26,74 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// Toast
+            <pre class="prettyprint source linenums"><code>// Tooltip element
 
-import { Toast as ToastBS } from 'bootstrap';
-import View from './view';
-import Error from './error';
+import { Tooltip as TooltipBS } from 'bootstrap';
+import View from '../view';
 
 // ////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 
-const EVENT_ROOT = 'toast';
+const EVENT_ROOT = 'tooltip';
 
 /**
- * Toast show event, which is emitted when a toast is about to be made visible.
+ * Tooltip show event, which is emitted when a element is about to be made visible.
  *
- * @event Toast#toast:show
- * @arg {Toast} sender - The view that emitted the event.
+ * @event Tooltip#tooltip:show
+ * @arg {Tooltip} sender - The view that emitted the event.
  */
 const EVENT_SHOW = `${EVENT_ROOT}:show`;
 
 /**
- * Toast hide event, which is emitted when a toast has been hidden.
+ * Tooltip hide event, which is emitted when a element has been hidden.
  *
- * @event Toast#toast:hide
- * @arg {Toast} sender - The view that emitted the event.
+ * @event Tooltip#tooltip:hide
+ * @arg {Tooltip} sender - The view that emitted the event.
  */
 const EVENT_HIDE = `${EVENT_ROOT}:hide`;
 
 // ////////////////////////////////////////////////////////////////////////////
 
 /**
- * @class Toast
+ * @class Tooltip
  * @implements {View}
  * @classdesc This class is constructed with a DOM element and
  * controls an existing
- * [Bootstrap Toast]{@link https://getbootstrap.com/docs/5.0/components/toasts/}
- * and is generally used for showing transient error and informational messages. It
- * expects the view element to include display elements as described in the show method.
+ * [Bootstrap Tooltip]{@link https://getbootstrap.com/docs/5.0/components/tooltips/}
+ * and is generally used for showing additional information above an existing element.
  *
  * @arg {Node} node - The node to attach the view to. Throws an error if the node
- *   is not provided.
+ *   is not provided. Include the tooltip text in the "title" attribute of the view.
  */
-export default class Toast extends View {
+export default class Tooltip extends View {
   constructor(node) {
     super(node);
-    this.$toast = new ToastBS(node, {});
-    node.addEventListener('show.bs.toast', () => {
-      node.parentNode.classList.remove('d-none');
+    this.$tooltip = new TooltipBS(node, {
+      boundary: document.body,
+    });
+    node.addEventListener('show.bs.tooltip', () => {
       this.dispatchEvent(EVENT_SHOW, this);
     });
-    node.addEventListener('hidden.bs.toast', () => {
-      node.parentNode.classList.add('d-none');
+    node.addEventListener('hidden.bs.tooltip', () => {
       this.dispatchEvent(EVENT_HIDE, this);
     });
   }
 
   /**
-  * Make the toast view visible with a reason and code.
-  * It is expected that there are three elements within the
-  * toast view with the class names _title, _reason and _code. An error is thrown if these
-  * elements do not exist.
-  * @arg {Error|string} reason - The body of the toast.
-  * @arg {string|number=} code - If the reason is not an error object, this code is used.
-  * @fires Toast#toast:show
+  * Make the tooltip view visible
+  * @fires Offcanvas#offcanvas:show
   * @throws Error
   */
-  show(reason, code) {
-    if (reason instanceof Error) {
-      this.replace('._title', 'ERROR');
-      this.replace('._reason', reason.$reason);
-      this.replace('._code', reason.$code ? `Code ${reason.$code}` : '');
-    } else {
-      this.replace('._title', 'INFO');
-      this.replace('._reason', reason);
-      this.replace('._code', code ? `Code ${code}` : '');
-    }
-    this.$toast.show();
+  show() {
+    this.$tooltip.show();
   }
 
   /**
-  * Make the toast view hidden.
-  * @fires Toast#toast:hide
+  * Make the tooltip view hidden.
+  * @fires Offcanvas#offcanvas:hide
   */
   hide() {
-    this.$toast.hide();
+    this.$tooltip.hide();
   }
 }
 </code></pre>

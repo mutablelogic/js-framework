@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: String</title>
+    <title>JSDoc: Class: Tooltip</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: String</h1>
+    <h1 class="page-title">Class: Tooltip</h1>
 
     
 
@@ -28,7 +28,12 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>String<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Tooltip<span class="signature">(node)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">This class is constructed with a DOM element and
+controls an existing
+<a href="https://getbootstrap.com/docs/5.0/components/tooltips/">Bootstrap Tooltip</a>
+and is generally used for showing additional information above an existing element.</div>
         
     
 </header>
@@ -39,12 +44,14 @@
         
 
     
-
-    
-    <h4 class="name" id="String"><span class="type-signature"></span>new String<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h2>Constructor</h2>
     
 
     
+    <h4 class="name" id="Tooltip"><span class="type-signature"></span>new Tooltip<span class="signature">(node)</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
 
@@ -54,6 +61,56 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The node to attach the view to. Throws an error if the node
+  is not provided. Include the tooltip text in the "title" attribute of the view.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -73,6 +130,13 @@
     
 
     
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="View.html">View</a></li>
+        
+    </ul></dd>
+    
 
     
 
@@ -89,7 +153,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line4">line 4</a>
+        <a href="view_tooltip.js.html">view/tooltip.js</a>, <a href="view_tooltip.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -145,7 +209,7 @@
     
 
     
-    <h4 class="name" id=".hashCode"><span class="type-signature">(static) </span>hashCode<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="hide"><span class="type-signature"></span>hide<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -153,7 +217,7 @@
 
 
 <div class="description">
-    Return a hash code for a string.
+    Make the tooltip view hidden.
 </div>
 
 
@@ -181,6 +245,13 @@
     
 
     
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="View.html#hide">View#hide</a></li>
+        
+    </ul></dd>
+    
 
     
 
@@ -197,7 +268,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line60">line 60</a>
+        <a href="view_tooltip.js.html">view/tooltip.js</a>, <a href="view_tooltip.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -212,6 +283,10 @@
 
 
 
+<h5>Fires:</h5>
+<ul>
+    <li><a href="Offcanvas.html#event:offcanvas:hide">Offcanvas#offcanvas:hide</a></li>
+</ul>
 
 
 
@@ -222,16 +297,7 @@
 
 
 
-<h5>Returns:</h5>
 
-        
-<div class="param-desc">
-    number
-</div>
-
-
-
-    
 
 
 
@@ -243,7 +309,7 @@
     
 
     
-    <h4 class="name" id=".hasPrefix"><span class="type-signature">(static) </span>hasPrefix<span class="signature">(prefix)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="show"><span class="type-signature"></span>show<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -251,7 +317,127 @@
 
 
 <div class="description">
-    Check for prefix on a string.
+    Make the tooltip view visible
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="View.html#show">View#show</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="view_tooltip.js.html">view/tooltip.js</a>, <a href="view_tooltip.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="Offcanvas.html#event:offcanvas:show">Offcanvas#offcanvas:show</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Error
+    
+    </div>
+
+
+    
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:tooltip:hide">tooltip:hide</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Tooltip hide event, which is emitted when a element has been hidden.
 </div>
 
 
@@ -287,13 +473,13 @@
 
         <tr>
             
-                <td class="name"><code>prefix</code></td>
+                <td class="name"><code>sender</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="Tooltip.html">Tooltip</a></span>
 
 
             
@@ -303,7 +489,7 @@
 
             
 
-            <td class="description last">The prefix to test for and remove</td>
+            <td class="description last">The view that emitted the event.</td>
         </tr>
 
     
@@ -344,7 +530,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line48">line 48</a>
+        <a href="view_tooltip.js.html">view/tooltip.js</a>, <a href="view_tooltip.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -369,16 +555,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    boolean
-</div>
-
-
-
-    
 
 
 
@@ -390,7 +566,7 @@
     
 
     
-    <h4 class="name" id=".pathSplit"><span class="type-signature">(static) </span>pathSplit<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="event:tooltip:show">tooltip:show</h4>
     
 
     
@@ -398,205 +574,7 @@
 
 
 <div class="description">
-    Split a path into elements, removing any initial and final
- path separators
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line18">line 18</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    string[]
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".quote"><span class="type-signature">(static) </span>quote<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Make a string quoted (in speech marks)
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    string
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".removePrefix"><span class="type-signature">(static) </span>removePrefix<span class="signature">(prefix)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Remove a prefix from a string, or return the whole string if
- the prefix does not exist.
+    Tooltip show event, which is emitted when a element is about to be made visible.
 </div>
 
 
@@ -632,13 +610,13 @@
 
         <tr>
             
-                <td class="name"><code>prefix</code></td>
+                <td class="name"><code>sender</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="Tooltip.html">Tooltip</a></span>
 
 
             
@@ -648,7 +626,7 @@
 
             
 
-            <td class="description last">The prefix to test for and remove</td>
+            <td class="description last">The view that emitted the event.</td>
         </tr>
 
     
@@ -689,7 +667,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="string.js.html">string.js</a>, <a href="string.js.html#line35">line 35</a>
+        <a href="view_tooltip.js.html">view/tooltip.js</a>, <a href="view_tooltip.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -714,26 +692,12 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    string
-</div>
-
-
-
-    
 
 
 
 
 
         
-    
-
-    
-
     
 </article>
 

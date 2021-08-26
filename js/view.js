@@ -17,6 +17,8 @@ import Error from './error';
  *
  * @arg {Node} node - The node to attach the view to. Throws an error if the node
  *   is not provided.
+ *
+ * @property {View} parent - The parent view
  */
 export default class View extends Emitter {
   constructor(node) {
@@ -26,6 +28,11 @@ export default class View extends Emitter {
     if (!this.$node) {
       throw new Error('Invalid view');
     }
+  }
+
+  get parent() {
+    const parent = this.$node.parentElement;
+    return parent ? new View(parent) : null;
   }
 
   /**

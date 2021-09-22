@@ -1,20 +1,118 @@
 <!DOCTYPE html>
+
 <head>
+    <title>Storybook</title>
     <link rel="stylesheet" href="./index.css">
+    <script type="module" src="./index.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-    <h1>Storybook</h1>
-    <div class="row border">
-        <div class="col-md-2 bg-light">
-            <ul>
-                <li>Button</li>
-                <li>Offcanvas</li>
-                <li>Tooltip</li>
-            </ul>
-        </div>
-        <div class="col-md-10">
-            <iframe class="w-100" src="/tooltip.html"></iframe>
-        </div>
-    </div>
+    <navbar-view id="navbar">
+        <navitem-view>First</navitem-view>
+        <navitem-view active>Second</navitem-view>
+        <navitem-view>Third</navitem-view>
+    </navbar-view>
+
+    <row-view>
+        <col-view width="4" id="left-col"  style="border-right: 1px solid gray;">
+            <nav-view direction="column" id="left-nav">
+                <navitem-view>First</navitem-view>
+                <navitem-view active>Second</navitem-view>
+                <navitem-view>Third</navitem-view>
+            </nav-view>
+        </col-view>
+        <col-view width="8" id="right-col">
+            <nav-view class="m-4" id="nav">
+                <navitem-view active name="first">First</navitem-view>
+                <navitem-view name="second">Second</navitem-view>
+                <navitem-view disabled name="third">Third</navitem-view>
+            </nav-view>
+            <div class="container m-2">
+                <button-view id="btn-enable">Enabled</button-view>
+                <button-view id="btn-disabled" disabled>Disabled</button-view>
+            </div>
+            <div class="container m-2">
+                <row-view>
+                    <card-view width="6" background="light">
+                        <h4>Card1</h4>
+                        <p>This is some text within the card</p>
+                    </card-view>
+                    <card-view width="6">
+                        <h1>Card1</h1>
+                    </card-view>
+                    <card-view width="6">
+                        <h1>Card1</h1>
+                    </card-view>
+                    <card-view width="6">
+                        <h1>Card1</h1>
+                    </card-view>    
+                </row-view>
+            </div>
+        </col-view>
+    </row-view>
+
+    <model-provider id="provider" href="/api/sqlite3"></model-provider>
+
+    <stepper-view id="stepper">4</stepper-view>
+
+    <script>
+        const navBar = document.getElementById('navbar');
+        const nav = document.getElementById('nav');
+        const leftNav = document.getElementById('left-nav');
+        const stepper = document.getElementById('stepper');
+        const leftCol = document.getElementById('left-col');
+        const rightCol = document.getElementById('right-col');
+        const btnEnable = document.getElementById('btn-enable');
+        const btnDisable = document.getElementById('btn-disabled');
+        const p = document.getElementById('provider');
+
+        console.log(p);
+
+        btnEnable.addEventListener('button-view:click', (evt) => {
+            btnDisable.disabled = false;
+        });
+        btnDisable.addEventListener('button-view:click', (evt) => {
+            btnDisable.disabled = true;
+        });
+        navBar.addEventListener('navitem-view:click', (evt) => {
+            if (navBar.active != evt.detail) {
+                navBar.active = evt.detail;
+            }
+        });
+        nav.addEventListener('navitem-view:click', (evt) => {
+            if (nav.active != evt.detail) {
+                nav.active = evt.detail;
+            }
+        });
+        leftNav.addEventListener('navitem-view:click', (evt) => {
+            if (leftNav.active != evt.detail) {
+                leftNav.active = evt.detail;
+            }
+        });
+        stepper.addEventListener('stepper-view:click', (event) => {
+            switch (event.detail) {
+                case 'left':
+                    value = parseInt(stepper.textContent, 10);
+                    if (value > 1) {
+                        value = value - 1;
+                        stepper.textContent = value;
+                        leftCol.width = value;
+                        rightCol.width = 12 - value;
+                    }
+                    break;
+                case 'right':
+                    value = parseInt(stepper.textContent, 10);
+                    if (value < 11) {
+                        value = value + 1;
+                        stepper.textContent = value;
+                        leftCol.width = value;
+                        rightCol.width = 12 - value;
+                    }
+                    break;
+            }
+        });
+    </script>
 </body>
+
 </html>

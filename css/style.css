@@ -1,25 +1,103 @@
 
-/* Plus Button */
-.btn-circle {
-    width: 40px;
-    height: 40px;
-    padding: 0px;
-    margin: 40px;
-    border-radius: 20px;
-    text-align: center;
-    font-size: 36px;
-    line-height: 0;
-}
+:root {
+    /* colours */
+    --primary-color: #16f;
+    --secondary-color: #aaa;
+    --light-color: #eee;
+    --white-color: #fff;
+    --dark-color: #333;
+    --black-color: #000;
 
-/* Copy Paste */
-.mvc-copypaste:before {
-    content: "\f28b";
-    display: inline-block;
-    font-family: bootstrap-icons !important;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    margin: 1px;    
+    /* controls */
+    --control-color: #bbb;
+    --control-color-hover: #ccc;
+    --control-color-active: #ddd;
+    --control-color-disabled: #ddd;
+
+    /* fonts */
+    --font-size-normal: 0.9rem;
+    --font-size-small: 0.75rem;
+    --font-weight-normal: 500;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 700;
+
+    /* borders */
+    --border-radius: 0.25em;
+
+    /* badge-view */
+    --badge-background-color: var(--primary-color);
+    --badge-color: var(--light-color);
+    --badge-padding-x: 0.35em;
+    --badge-padding-y: 0.35em;
+    --badge-font-size: var(--font-size-small);
+    --badge-font-weight: var(--font-weight-bold);
+    --badge-border-radius: var(--border-radius);
+
+    /* button-view */
+    --button-background-color: var(--control-color);
+    --button-background-color-hover: var(--control-color-hover);
+    --button-background-color-active: var(--control-color-active);
+    --button-background-color-disabled: var(--control-color-disabled);
+    --button-color: var(--dark-color);
+    --button-color-hover: var(--dark-color);
+    --button-color-active: var(--light-color);
+    --button-color-disabled: var(--light-color);
+    --button-font-weight: var(--font-weight-bold);
+    --button-font-weight-hover: var(--font-weight-bold);
+    --button-font-weight-active: var(--font-weight-bold);
+    --button-font-weight-disabled: var(--font-weight-bold);
+    --button-border-radius: var(--border-radius);
+    --button-font-size: var(--font-size-normal);
+    --button-padding-x: 0.45em;
+    --button-padding-y: 0.45em;
+    --button-offset-active: 0.1em;
+
+    /* card view */
+    --card-margin: 0.05em;
+    --card-padding: 0.15em;
+    --card-background-color: none;
+    --card-border-color: var(--light-color);
+    --card-border-radius: var(--border-radius);
+
+    /* navbar-view */
+    --navbar-background-color: var(--light-color);
+    --navbar-color: var(--dark-color);
+    --navbar-border-color: var(--light-color);
+    --navbar-border-width: 0.5px;
+    --navbar-padding-y: 0.5em;
+    --navbar-padding-x: 0.5em;
+
+    /* nav-view */
+    --nav-border-bottom: 1px solid var(--secondary-color);
+
+    /* navitem-view */
+    --navitem-color: var(--dark-color);
+    --navitem-color-hover: var(--dark-color);
+    --navitem-color-active: var(--dark-color);
+    --navitem-color-disabled: var(--light-color);
+    --navitem-background-color: none;
+    --navitem-background-color-hover: none;
+    --navitem-background-color-active: none;
+    --navitem-background-color-disabled: none;
+    --navitem-font-weight: var(--font-weight-normal);
+    --navitem-font-weight-active: var(--font-weight-extrabold);
+    --navitem-font-weight-hover: var(--font-weight-bold);
+    --navitem-font-weight-disabled: var(--font-weight-normal);
+    --navitem-padding-x: 1rem;
+    --navitem-padding-y: .5rem;
+
+    /* stepper-view */
+    --stepper-background-color: var(--light-color);
+    --stepper-color: var(--dark-color);
+    --stepper-btn-color: var(--light-color);
+    --stepper-btn-background-color: var(--control-color);
+    --stepper-btn-background-color-hover: var(--control-color-hover);
+    --stepper-btn-background-color-active: var(--control-color-active);
+    --stepper-border-radius: var(--border-radius);
+    --stepper-padding-x: 0.35em;
+    --stepper-padding-y: 0.35em;
+
+    /* icons */
+    --icon-plus: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>');
+    --icon-minus: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>');
 }

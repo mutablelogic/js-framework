@@ -27,6 +27,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../css/style.css';
 
+// Web Components
+import './view/navbar-view';
+import './view/nav-view';
+import './view/navitem-view';
+import './view/badge-view';
+import './view/button-view';
+import './view/row-view';
+import './view/col-view';
+import './view/stepper-view';
+import './view/card-view';
+import './model/model-provider';
+
 // Exports
 export {
   Model, View, Controller, Provider, Error, Emitter, List, Nav, Toast, Button, Form,

@@ -15,23 +15,15 @@
             <div class="container m-1">
                 <h4>Text</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit
-                    anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit
-                    anim id est laborum.</p>
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt
+                    mollit anim id est laborum.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt
+                    mollit anim id est laborum.</p>
             </div>
 
             <div class="container m-1">
@@ -85,8 +77,17 @@
             </div>
 
             <div class="container m-1">
-                <h4>Input</h4>
-                <wc-input name="input" value="Placeholder">An input value</wc-input>
+                <h4>Form Elements</h4>
+                <wc-form action="/">
+                    <wc-input name="input-a" placeholder="Placeholder">First input value</wc-input>
+                    <wc-input name="input-b" placeholder="Placeholder">Second input value</wc-input>
+                    <wc-checkbox-group name="checkbox-c" radio>
+                        <wc-checkbox value="1">Checkbox 1</wc-checkbox>
+                        <wc-checkbox value="2" checked>Checkbox 2</wc-checkbox>
+                        <wc-checkbox value="3" disabled>Checkbox 3</wc-checkbox>
+                    </wc-checkbox-group>
+                    <wc-button>Submit</wc-button>
+                </wc-form>
             </div>
 
         </wc-col>

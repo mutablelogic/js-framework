@@ -1,45 +1,42 @@
 import { LitElement, html, css } from 'lit';
 
 /**
- * A form text input element
+ * A checkbox to be grouped within a wc-checkbox-group
  *
- * @slot - This element has a slot for text content, which forms the label for the input
- * @property {string} [value] - The value for the input
+ * @slot - This element has a slot for text which is the label for the checkbox
  */
-window.customElements.define('wc-input', class extends LitElement {
+window.customElements.define('wc-checkbox', class extends LitElement {
   static get properties() {
     return {
       /**
-       * The value for the input
+       * The name for the checkbox
+       * @type {string}
+       */
+      name: { type: String },
+
+      /**
+       * The type for the checkbox, if true then use radio
+       * @type {boolean}
+       */
+      radio: { type: Boolean },
+
+      /**
+       * The value for the checkbox
        * @type {string}
        */
       value: { type: String },
 
       /**
-       * The placeholder text for the input
+       * Whether the checkbox is checked
        * @type {string}
        */
-      placeholder: { type: String },
+      checked: { type: Boolean },
 
       /**
-        * Whether the input is required to be filled
-        * for the form to submit
-        * @type {boolean}
-      */
-      required: { type: Boolean },
-
-      /**
-        * The pattern used to validate the value on submission
-        * @type {string}
-      */
-      pattern: { type: String },
-
-      /**
-        * Whether auto-complete is enabled
-        * @type {boolean}
-      */
-      autocomplete: { type: Boolean },
-
+       * Whether the checkbox is disabled
+       * @type {string}
+       */
+      disabled: { type: Boolean },
     };
   }
 
@@ -51,6 +48,7 @@ window.customElements.define('wc-input', class extends LitElement {
           margin: var(--form-input-margin);
         }
         :host input {
+          cursor: pointer;
           background-color: var(--form-input-background-color); 
           color: var(--form-input-color);
           padding: var(--form-input-padding);
@@ -81,9 +79,22 @@ window.customElements.define('wc-input', class extends LitElement {
   render() {
     return html`
         <div class="input">
-            <label for="input"><slot></slot></label>
-            <input type="text" name="input" id="input" value="${this.value}" required="${this.required}" placeholder="${this.placeholder}" autocomplete="${this.autocomplete}" pattern="${this.pattern}">
+            <input type="${this.radio ? 'radio' : 'checkbox'}" name="${this.name}" id="checkbox" value="${this.value || this.textContent}" .checked=${this.checked} .disabled=${this.disabled}>
+            <label for="checkbox"><slot></slot></label>
         </div>
       `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // Type propogates from the wc-checkbox-group
+    if (!this.radio) {
+      this.radio = this.parentElement.getAttribute('radio');
+    }
+
+    // Name propogates from the wc-checkbox-group
+    if (!this.name) {
+      this.name = this.parentElement.getAttribute('name');
+    }
   }
 });

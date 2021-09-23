@@ -113,5 +113,27 @@
     --navitem-font-weight-hover: var(--font-weight-bold);
     --navitem-font-weight-disabled: var(--font-weight-light);
     --navitem-padding: calc(var(--spacer) * 0.5) var(--spacer);
+
+    /* forms */
+    --form-input-background-color: none;
+    --form-input-color: var(--dark-color);
+    --form-input-margin: calc(var(--spacer) * 0.5) 0;
+    --form-input-padding: calc(var(--spacer) * 0.5) calc(var(--spacer) * 0.5);
+    --form-input-font-size: var(--font-size-normal);
+    --form-input-font-weight: var(--font-weight-normal);
+    --form-input-line-height: 1;
+    --form-input-border: 0.5px solid var(--control-color);
+
+    --form-input-background-color-focus: none;
+    --form-input-color-focus: var(--dark-color);
+    --form-input-border-focus: 0.5px solid var(--dark-color);
+
+    --form-label-background-color: none;
+    --form-label-color: var(--dark-color);
+    --form-label-padding: calc(var(--spacer) * 0.5) calc(var(--spacer) * 0.5);
+    --form-label-font-size: var(--font-size-small);
+    --form-label-font-weight: var(--font-weight-light);
+    --form-label-line-height: 1;
+    --form-label-border: none;
 }
 

@@ -63,8 +63,19 @@ window.customElements.define('wc-button', class extends LitElement {
 
   render() {
     return html`
-        <button @click=${this.onClick} class="${this.disabled ? 'disabled' : ''}"><slot></slot></button>
+        <button @click=${this.onClick} class="${this.disabled ? 'disabled' : ''}" type="${this.hasParent('WC-FORM') ? 'submit' : ''}"><slot></slot></button>
       `;
+  }
+
+  hasParent(tagName) {
+    let parentNode = this.parentElement;
+    while (parentNode) {
+      if (parentNode.tagName === tagName) {
+        return true;
+      }
+      parentNode = parentNode.parentElement;
+    }
+    return false;
   }
 
   onClick() {

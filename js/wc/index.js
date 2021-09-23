@@ -14,4 +14,7 @@ import './grid/wc-col';
 import './nav/wc-nav';
 import './nav/wc-navbar';
 import './nav/wc-nav-item';
+import './form/wc-form';
 import './form/wc-input';
+import './form/wc-checkbox';
+import './form/wc-checkbox-group';

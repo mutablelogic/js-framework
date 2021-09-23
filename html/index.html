@@ -8,111 +8,89 @@
 </head>
 
 <body>
-    <navbar-view id="navbar">
-        <navitem-view>First</navitem-view>
-        <navitem-view active>Second</navitem-view>
-        <navitem-view>Third</navitem-view>
-    </navbar-view>
-
-    <row-view>
-        <col-view width="4" id="left-col"  style="border-right: 1px solid gray;">
-            <nav-view direction="column" id="left-nav">
-                <navitem-view>First</navitem-view>
-                <navitem-view active>Second</navitem-view>
-                <navitem-view>Third</navitem-view>
-            </nav-view>
-        </col-view>
-        <col-view width="8" id="right-col">
-            <nav-view class="m-4" id="nav">
-                <navitem-view active name="first">First</navitem-view>
-                <navitem-view name="second">Second</navitem-view>
-                <navitem-view disabled name="third">Third</navitem-view>
-            </nav-view>
-            <div class="container m-2">
-                <button-view id="btn-enable">Enabled</button-view>
-                <button-view id="btn-disabled" disabled>Disabled</button-view>
+    <wc-navbar>Storybook</wc-navbar>
+    <wc-row>
+        <wc-col width="2" style="background-color: lightgray">NAV</wc-col>
+        <wc-col width="10">
+            <div class="container m-1">
+                <h4>Text</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea
+                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est laborum.</p>
             </div>
-            <div class="container m-2">
-                <row-view>
-                    <card-view width="6" background="light">
-                        <h4>Card1</h4>
-                        <p>This is some text within the card</p>
-                    </card-view>
-                    <card-view width="6">
-                        <h1>Card1</h1>
-                    </card-view>
-                    <card-view width="6">
-                        <h1>Card1</h1>
-                    </card-view>
-                    <card-view width="6">
-                        <h1>Card1</h1>
-                    </card-view>    
-                </row-view>
+
+            <div class="container m-1">
+                <h4>Buttons</h4>
+                <wc-button>TEST</wc-button>
+                <wc-button disabled>DISABLED</wc-button>
             </div>
-        </col-view>
-    </row-view>
 
-    <model-provider id="provider" href="/api/sqlite3"></model-provider>
+            <div class="container m-1">
+                <h4>Button Group</h4>
+                <wc-button-group>
+                    <wc-button>LEFT</wc-button>
+                    <wc-button>MIDDLE</wc-button>
+                    <wc-button disabled>MIDDLE</wc-button>
+                    <wc-button>RIGHT</wc-button>
+                </wc-button-group>
+            </div>
 
-    <stepper-view id="stepper">4</stepper-view>
+            <div class="container m-1">
+                <h4>Badge</h4>
+                <wc-badge transform="uppercase" bg="danger">Primary Badge</wc-badge>
+            </div>
 
-    <script>
-        const navBar = document.getElementById('navbar');
-        const nav = document.getElementById('nav');
-        const leftNav = document.getElementById('left-nav');
-        const stepper = document.getElementById('stepper');
-        const leftCol = document.getElementById('left-col');
-        const rightCol = document.getElementById('right-col');
-        const btnEnable = document.getElementById('btn-enable');
-        const btnDisable = document.getElementById('btn-disabled');
-        const p = document.getElementById('provider');
+            <div class="container m-1">
+                <h4>Row</h4>
+                <wc-row>
+                    <wc-col width="4">Col A</wc-col>
+                    <wc-col width="4">Col B</wc-col>
+                    <wc-col width="4">Col C</wc-col>
+                </wc-row>
+            </div>
 
-        console.log(p);
+            <div class="container m-1">
+                <h4>Nav (Horizontal)</h4>
+                <wc-nav>
+                    <wc-nav-item active>Item A</wc-nav-item>
+                    <wc-nav-item>Item B</wc-nav-item>
+                    <wc-nav-item>Item C</wc-nav-item>
+                    <wc-nav-item disabled>Item D</wc-nav-item>
+                </wc-nav>
+            </div>
 
-        btnEnable.addEventListener('button-view:click', (evt) => {
-            btnDisable.disabled = false;
-        });
-        btnDisable.addEventListener('button-view:click', (evt) => {
-            btnDisable.disabled = true;
-        });
-        navBar.addEventListener('navitem-view:click', (evt) => {
-            if (navBar.active != evt.detail) {
-                navBar.active = evt.detail;
-            }
-        });
-        nav.addEventListener('navitem-view:click', (evt) => {
-            if (nav.active != evt.detail) {
-                nav.active = evt.detail;
-            }
-        });
-        leftNav.addEventListener('navitem-view:click', (evt) => {
-            if (leftNav.active != evt.detail) {
-                leftNav.active = evt.detail;
-            }
-        });
-        stepper.addEventListener('stepper-view:click', (event) => {
-            switch (event.detail) {
-                case 'left':
-                    value = parseInt(stepper.textContent, 10);
-                    if (value > 1) {
-                        value = value - 1;
-                        stepper.textContent = value;
-                        leftCol.width = value;
-                        rightCol.width = 12 - value;
-                    }
-                    break;
-                case 'right':
-                    value = parseInt(stepper.textContent, 10);
-                    if (value < 11) {
-                        value = value + 1;
-                        stepper.textContent = value;
-                        leftCol.width = value;
-                        rightCol.width = 12 - value;
-                    }
-                    break;
-            }
-        });
-    </script>
+            <div class="container m-1">
+                <h4>Nav (Vertical)</h4>
+                <wc-nav column>
+                    <wc-nav-item active>Item A</wc-nav-item>
+                    <wc-nav-item>Item B</wc-nav-item>
+                    <wc-nav-item>Item C</wc-nav-item>
+                    <wc-nav-item disabled>Item D</wc-nav-item>
+                </wc-nav>
+            </div>
+
+            <div class="container m-1">
+                <h4>Input</h4>
+                <wc-input name="input" value="Placeholder">An input value</wc-input>
+            </div>
+
+        </wc-col>
+    </wc-row>
 </body>
 
 </html>

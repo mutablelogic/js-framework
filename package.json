@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "all": "npm-run-all lint build docs",
-    "build": "rm -fr dist && install -d dist && cp -r html/* dist && esbuild js/index.js --format=esm --minify --bundle --outdir=dist --sourcemap --loader:.woff=dataurl --loader:.woff2=dataurl",
+    "build": "rm -fr dist && install -d dist && cp -r html/* dist && esbuild js/wc/index.js --format=esm --minify --bundle --outdir=dist --sourcemap --asset-names=assets/[name]-[hash] --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file",
     "lint": "eslint js",
     "docs": "jsdoc -c config/jsdoc.config.json",
     "watch": "npm-watch"
@@ -46,7 +46,7 @@
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
     "bootstrap-icons": "^1.4.1",
-    "lit": "^2.0.0-rc.4",
+    "lit": "^2.0.0",
     "lit-html": "^2.0.0-rc.5",
     "npm-watch": "^0.9.0"
   },

@@ -6,9 +6,8 @@
     <script type="module" src="./index.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-    <wc-navbar>Storybook</wc-navbar>
+    <wc-navbar>Web Components Storybook</wc-navbar>
     <wc-row>
         <wc-col width="2" style="background-color: lightgray">NAV</wc-col>
         <wc-col width="10">
@@ -79,15 +78,58 @@
             <div class="container m-1">
                 <h4>Form Elements</h4>
                 <wc-form action="/">
+                    <wc-form-head>Form to fill in</wc-form-head>
                     <wc-input name="input-a" placeholder="Placeholder">First input value</wc-input>
                     <wc-input name="input-b" placeholder="Placeholder">Second input value</wc-input>
-                    <wc-checkbox-group name="checkbox-c" radio>
-                        <wc-checkbox value="1">Checkbox 1</wc-checkbox>
-                        <wc-checkbox value="2" checked>Checkbox 2</wc-checkbox>
-                        <wc-checkbox value="3" disabled>Checkbox 3</wc-checkbox>
-                    </wc-checkbox-group>
+                    <wc-row>
+                        <wc-col width="6">
+                            <wc-checkbox-group name="checkbox-c">
+                                <wc-checkbox value="1">Checkbox 1</wc-checkbox>
+                                <wc-checkbox value="2" checked>Checkbox 2</wc-checkbox>
+                                <wc-checkbox value="3" disabled>Checkbox 3</wc-checkbox>
+                            </wc-checkbox-group>        
+                        </wc-col>
+                        <wc-col width="6">
+                            <wc-checkbox-group name="radio-d" radio>
+                                <wc-checkbox value="1">Radio 1</wc-checkbox>
+                                <wc-checkbox value="2" checked>Radio 2</wc-checkbox>
+                                <wc-checkbox value="3" disabled>Radio 3</wc-checkbox>
+                            </wc-checkbox-group>        
+                        </wc-col>
+                    </wc-row>
                     <wc-button>Submit</wc-button>
                 </wc-form>
+            </div>
+
+            <div class="container m-1">
+                <h4>Modal</h4>
+                <wc-button id="open-button">Open</wc-button>
+                <wc-modal id="modal-window" bg="white">
+                    <wc-close></wc-close>
+                    <h3>This is a modal box</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt
+                        mollit anim id est laborum.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt
+                        mollit anim id est laborum.</p>    
+                </wc-modal>
+                <script>
+                    var open = document.getElementById('open-button');
+                    var win = document.getElementById('modal-window');
+                    open.addEventListener('click', function() {
+                        win.style.display = 'block';
+                    });
+                </script>
+            </div>
+
+            <div class="container m-1">
+                <h4>Table</h4>
+                <wc-table columns="Col A, Col B, Col C" head foot data="fake-data"></wc-table>
             </div>
 
         </wc-col>

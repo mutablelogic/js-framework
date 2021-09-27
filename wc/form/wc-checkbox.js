@@ -9,12 +9,6 @@ window.customElements.define('wc-checkbox', class extends LitElement {
   static get properties() {
     return {
       /**
-       * The name for the checkbox
-       * @type {string}
-       */
-      name: { type: String },
-
-      /**
        * The type for the checkbox, if true then use radio
        * @type {boolean}
        */
@@ -49,20 +43,12 @@ window.customElements.define('wc-checkbox', class extends LitElement {
         }
         :host input {
           cursor: pointer;
-          background-color: var(--form-input-background-color); 
-          color: var(--form-input-color);
-          padding: var(--form-input-padding);
-          font-size: var(--form-input-font-size);
-          font-weight:  var(--form-input-font-weight);
-          line-height: var(--form-input-line-height);
-          border: var(--form-input-border);
+          background-color: var(--form-checkbox-background-color); 
+          color: var(--form-checkbox-color);
+          padding: var(--form-checkbox-padding);
+          margin: var(--form-checkbox-margin);
+          border: var(--form-checkbox-border);
         }
-        :host input:focus {
-          background-color: var(--form-input-background-color-focus);
-          color: var(--form-input-color-focus);
-          border: var(--form-input-border-focus);
-          outline: 0;
-       }
         :host label {
           background-color: var(--form-label-background-color); 
           color: var(--form-label-color);
@@ -87,12 +73,10 @@ window.customElements.define('wc-checkbox', class extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // Type propogates from the wc-checkbox-group
-    if (!this.radio) {
-      this.radio = this.parentElement.getAttribute('radio');
-    }
+    // Propogates from the wc-checkbox-group
+    this.radio = this.parentElement.hasAttribute('radio');
 
-    // Name propogates from the wc-checkbox-group
+    // Propogates from the wc-checkbox-group
     if (!this.name) {
       this.name = this.parentElement.getAttribute('name');
     }

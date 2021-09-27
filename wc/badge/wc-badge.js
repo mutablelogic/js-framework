@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import Event from '../event';
 
 /**
  * A basic badge element

@@ -27,7 +27,7 @@
     --control-color-hover: #ccc;
     --control-color-active: #ddd;
     --control-color-disabled: #ddd;
-
+    
     /* grids and spacing */
     --spacer: 1rem;
     --spacer-0: 0;
@@ -81,6 +81,14 @@
     --button-padding-y: 0.45em;
     --button-offset-active: 0.1em;
 
+    /* wc-close */
+    --button-close-size: 16px;
+    --button-close-padding: 0;
+    --button-close-color: var(--control-color);
+    --button-close-color-hover: var(--control-color-hover);
+    --button-close-color-active: var(--control-color-active);
+    --button-close-color-disabled: var(--control-color-disabled);
+
     /* wc-badge */
     --badge-background-color: var(--primary-color);
     --badge-color: var(--light-color);
@@ -128,6 +136,12 @@
     --form-input-color-focus: var(--dark-color);
     --form-input-border-focus: 0.5px solid var(--dark-color);
 
+    --form-checkbox-background-color: none;
+    --form-checkbox-color: var(--dark-color);
+    --form-checkbox-margin: calc(var(--spacer) * 0.5) 0;
+    --form-checkbox-padding: 1 0;
+    --form-checkbox-line-height: 1;
+
     --form-label-background-color: none;
     --form-label-color: var(--dark-color);
     --form-label-padding: calc(var(--spacer) * 0.5) calc(var(--spacer) * 0.5);
@@ -135,5 +149,13 @@
     --form-label-font-weight: var(--font-weight-light);
     --form-label-line-height: 1;
     --form-label-border: none;
+
+    /* modal */
+    --modal-margin: 20%;
+    --modal-padding: calc(var(--spacer) * 1.5);
+    --modal-color: var(--body-color);
+    --modal-background-color: var(--body-background-color);
+    --modal-border: 0.5px solid var(--control-color);
+    --modal-border-radius: var(--border-radius);
 }
 

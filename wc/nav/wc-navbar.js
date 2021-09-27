@@ -39,30 +39,3 @@ window.customElements.define('wc-navbar', class extends LitElement {
       `;
   }
 });
-
-/*
-      position: relative;
-        padding-top: var(--navbar-padding-y);
-        padding-right: var(--navbar-padding-x);
-        padding-bottom: var(--navbar-padding-y);
-        padding-left: var(--navbar-padding-x);
-        background-color: var(--navbar-background-color);
-        color: var(--navbar-color);
-        border-bottom: var(--navbar-border-width) solid var(--navbar-border-color);
-        display: flex;
-        justify-content: space-between;
-      }
-
-      slot {
-
-        align-items: center;
-        color: var(--navbar-color);
-      }
-
-      ::slotted(*) {
-        border-left: 1px solid var(--navbar-border-color);
-        margin: auto;
-        padding-left: var(--navbar-padding-x);
-        text-decoration: none;
-      }
-      */

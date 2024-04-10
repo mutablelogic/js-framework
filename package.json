@@ -1,54 +1,50 @@
 {
-  "name": "@djthorpe/js-framework",
-  "version": "0.0.48",
-  "description": "Javascript Framework",
-  "main": "dist/index.js",
-  "scripts": {
-    "all": "npm-run-all lint build docs",
-    "build": "rm -fr dist && install -d dist && cp -r html/* dist && cp etc/example.json dist && esbuild wc/index.js --format=esm --minify --bundle --outdir=dist --sourcemap --asset-names=assets/[name]-[hash] --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file",
-    "lint": "eslint js",
-    "docs": "jsdoc -c config/jsdoc.config.json",
-    "watch": "npm-watch"
-  },
-  "watch": {
-    "build": {
-      "patterns": [
-        "css",
-        "html",
-        "wc"
-      ],
-      "extensions": "html,css,js"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/djthorpe/js-framework.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "author": "David Thorpe",
-  "license": "Apache",
-  "bugs": {
-    "url": "https://github.com/djthorpe/js-framework/issues"
-  },
-  "homepage": "https://github.com/djthorpe/js-framework#readme",
-  "devDependencies": {
-    "@ckeditor/jsdoc-plugins": "^20.0.0",
-    "esbuild": "^0.11.12",
-    "eslint": "^7.24.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "jsdoc": "^3.6.6",
-    "npm-run-all": "^4.1.5",
-    "npm-watch": "^0.9.0"
-  },
-  "dependencies": {
-    "bootstrap-icons": "^1.4.1",
-    "lit": "^2.0.0",
-    "lit-html": "^2.0.0-rc.5"
-  },
-  "files": [
-    "dist/**/*.{js,map,woff,woff2,txt,ttf,css,html,svg}"
-  ]
+    "name": "@djthorpe/js-framework",
+    "version": "0.0.49",
+    "description": "Javascript Framework",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rm -fr dist && install -d dist && cp -r html/* dist && esbuild src/index.js --format=esm --minify --bundle --outdir=dist --sourcemap --asset-names=assets/[name]-[hash] --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file",
+        "lint": "eslint js",
+        "docs": "jsdoc -c config/jsdoc.config.json",
+        "serve": "wds --watch"
+    },
+    "watch": {
+        "build": {
+            "patterns": [
+                "html",
+                "src"
+            ],
+            "extensions": "html,css,js"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/djthorpe/js-framework.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
+    "author": "David Thorpe",
+    "license": "Apache",
+    "bugs": {
+        "url": "https://github.com/djthorpe/js-framework/issues"
+    },
+    "homepage": "https://github.com/djthorpe/js-framework#readme",
+    "devDependencies": {
+        "@ckeditor/jsdoc-plugins": "^20.0.0",
+        "@web/dev-server": "^0.1.31",
+        "esbuild": "^0.11.23",
+        "eslint": "^7.24.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "jsdoc": "^4.0.2"
+    },
+    "dependencies": {
+        "bootstrap-icons": "^1.4.1",
+        "lit": "^3.0.0"
+    },
+    "files": [
+        "dist/**/*.{js,map,woff,woff2,txt,ttf,css,html,svg}"
+    ]
 }

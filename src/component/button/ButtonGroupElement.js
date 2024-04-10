@@ -7,6 +7,10 @@ import { LitElement, html, css } from 'lit';
  * @slot - This element has a slot to include wc-button elements
  */
 export class ButtonGroupElement extends LitElement {
+    constructor() {
+        super();
+    }
+
     static get styles() {
         return css`
             :host {
@@ -24,13 +28,10 @@ export class ButtonGroupElement extends LitElement {
                 --button-border-radius-right: var(--button-border-radius);
             }
           `;
-      }
-    
+    }
+
     render() {
         return html`<slot></slot>`;
-    }
-    constructor() {
-        super();
     }
 }
 

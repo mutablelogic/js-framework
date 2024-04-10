@@ -36,7 +36,7 @@ export class ButtonElement extends LitElement {
 
   static get styles() {
     return css`
-    button {
+    .button {
       display: inline-block;
       position: relative;
       color: var(--button-color); 
@@ -50,20 +50,21 @@ export class ButtonElement extends LitElement {
       border-bottom-left-radius: var(--button-border-radius-left);
       border-top-right-radius: var(--button-border-radius-right);
       border-bottom-right-radius: var(--button-border-radius-right);      
+      text-decoration: none;
     }
-    button:active {          
+    .button:active {          
       top: var(--button-offset-active); 
       left: var(--button-offset-active); 
       color: var(--button-color-active); 
       background-color: var(--button-background-color-active); 
       font-weight: var(--button-font-weight-active);
     }
-    button:hover {
+    .button:hover {
       color: var(--button-color-hover); 
       background-color: var(--button-background-color-hover); 
       font-weight:  var(--button-font-weight-hover);
     }
-    button:disabled {
+    .button:disabled {
       pointer-events: none;
       color: var(--button-color-disabled); 
       background-color: var(--button-background-color-disabled); 
@@ -111,7 +112,11 @@ export class ButtonElement extends LitElement {
 
   onClick() {
     this.dispatchEvent(new CustomEvent(
-      Event.EVENT_CLICK, { detail: this.name || this.textContent },
+      Event.EVENT_CLICK, { 
+        bubbles: true,
+        composed: true,
+        detail: this.name || this.textContent 
+      },
     ));
   }
 }

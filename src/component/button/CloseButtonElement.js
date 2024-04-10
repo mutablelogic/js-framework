@@ -75,7 +75,11 @@ export class CloseButtonElement extends LitElement {
 
     onClick() {
         this.dispatchEvent(new CustomEvent(
-            Event.EVENT_CLICK, { detail: this.name },
+            Event.EVENT_CLICK, { 
+                bubbles: true,
+                composed: true,
+                detail: this.name 
+            },
         ));
     }
 }

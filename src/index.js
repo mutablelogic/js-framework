@@ -20,6 +20,17 @@ import './css/document.css';
 window.addEventListener('load', () => {
     new EventSource('/esbuild').addEventListener('change', () => location.reload());
 
+    // Button Group
+    document.querySelector('wc-button-group').addEventListener(Event.EVENT_CLICK, (evt) => {
+        console.log("Button Group Click",evt.detail);
+    });
+
+    // Card
+    document.querySelector('.wc-card').addEventListener(Event.EVENT_CLICK, (evt) => {
+        console.log("Card Click",evt.detail);
+    });
+
+    // Provider
     var p = new Provider("http://localhost:8000/");
     p.addEventListener(Event.EVENT_ERROR,(evt) => {
         console.log("Got error:",evt);

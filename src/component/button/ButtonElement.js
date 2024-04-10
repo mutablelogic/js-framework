@@ -2,6 +2,9 @@
 import { LitElement, html, css } from 'lit';
 import Event from '../../core/event';
 
+/**
+ * A button element
+ */
 export class ButtonElement extends LitElement {
   static get properties() {
     return {
@@ -40,7 +43,7 @@ export class ButtonElement extends LitElement {
       background-color: var(--button-background-color); 
       font-weight:  var(--button-font-weight);
       font-size: var(--button-font-size);
-      border: none;
+      border: var(--button-border) solid var(--button-border-color);
       margin: none;
       padding: var(--button-padding-y) var(--button-padding-x);
       border-top-left-radius: var(--button-border-radius-left);
@@ -48,7 +51,7 @@ export class ButtonElement extends LitElement {
       border-top-right-radius: var(--button-border-radius-right);
       border-bottom-right-radius: var(--button-border-radius-right);      
     }
-    button:active button:focus {          
+    button:active {          
       top: var(--button-offset-active); 
       left: var(--button-offset-active); 
       color: var(--button-color-active); 
@@ -113,5 +116,7 @@ export class ButtonElement extends LitElement {
   }
 }
 
-window.customElements.define('js-button', ButtonElement);
+
+customElements.define('wc-button', ButtonElement);
+
 

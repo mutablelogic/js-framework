@@ -8,6 +8,29 @@
     <link href="./index.css" rel="stylesheet">
 </head>
 <body>
-    <js-button>Button</js-button> 
+    <div class="container">
+        <h1>Button Group</h1>
+        <wc-button-group>
+            <wc-button name="save">Save</wc-button> 
+            <wc-button name="retry">Retry</wc-button> 
+            <wc-button name="cancel">Cancel</wc-button> 
+        </wc-button-group>    
+    </div>
+
+    <div class="container">
+        <h1>Close Button</h1>
+        <div style="position:relative; border: 1px solid red; margin: 0 100px 0 100px; padding: 5px;">
+            <wc-close></wc-close>
+            <p>Here is some content within a container</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Icon</h1>
+        <wc-icon name="0-circle-fill"></wc-icon>
+        </div>
+    </div>
+
+
 </body>
 </html>

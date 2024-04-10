@@ -53,14 +53,14 @@ export class ButtonElement extends LitElement {
       left: var(--button-offset-active); 
       color: var(--button-color-active); 
       background-color: var(--button-background-color-active); 
-      font-weight:  var(--button-font-weight-active);
+      font-weight: var(--button-font-weight-active);
     }
     button:hover {
       color: var(--button-color-hover); 
       background-color: var(--button-background-color-hover); 
       font-weight:  var(--button-font-weight-hover);
     }
-    button.disabled {
+    button:disabled {
       pointer-events: none;
       color: var(--button-color-disabled); 
       background-color: var(--button-background-color-disabled); 
@@ -90,7 +90,7 @@ export class ButtonElement extends LitElement {
             </a>
           `
         : html`
-            <button role="button" type="button" class="button ${this.transform ? `transform-${this.transform}` : ''}" ?disabled="${this.disabled}" role="presentation">
+            <button role="button" type="button" class="button ${this.transform ? `text-transform-${this.transform}` : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
               <slot></slot>
             </button>
           `}
@@ -99,22 +99,19 @@ export class ButtonElement extends LitElement {
 
   constructor() {
     super();
-    console.log("Hello from ButtonElement");
-    // Initialize properties
-    this.transform = 'none';
+    // Default properties
     this.disabled = false;
+    this.name = '';
+    this.link = '';
+    this.transform = 'none';
   }
 
   onClick() {
-    console.log('Button clicked');
     this.dispatchEvent(new CustomEvent(
       Event.EVENT_CLICK, { detail: this.name || this.textContent },
     ));
   }
-
-  updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {
-      console.log(`${propName} changed. oldValue: ${oldValue}`);
-    });
-  }
 }
+
+window.customElements.define('js-button', ButtonElement);
+

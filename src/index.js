@@ -1,14 +1,13 @@
 
 // This file defines all the styles and elements used for the web components
 
-// Styles
-//import './css/core.css';
-
 // Components
-//export { ButtonElement } from './component/button/ButtonElement';
-export { Test } from './component/button/Test';
+export { ButtonElement } from './component/button/ButtonElement';
+
+// CSS
+import './css/core.css';
 
 // Test
 window.addEventListener('load', () => {
-    console.log("Loaded Document");
+    new EventSource('/esbuild').addEventListener('change', () => location.reload());
 });

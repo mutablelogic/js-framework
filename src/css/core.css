@@ -66,7 +66,7 @@
     --button-background-color-active: var(--control-color-active);
     --button-background-color-disabled: var(--control-color-disabled);
     --button-color: var(--dark-color);
-    --button-color-hover: var(--dark-color);
+    --button-color-hover: var(--light-color);
     --button-color-active: var(--light-color);
     --button-color-disabled: var(--light-color);
     --button-font-weight: var(--font-weight-bold);

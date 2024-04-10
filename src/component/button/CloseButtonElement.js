@@ -1,6 +1,6 @@
 
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/event';
+import Event from '../../core/Event';
 
 /**
  * CloseButtonElement

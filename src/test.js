@@ -1,0 +1,31 @@
+
+
+// Core
+import Provider from './core/Provider';
+import Event from './core/Event';
+
+// Test
+window.addEventListener('load', () => {
+    // Button Group
+    document.querySelector('wc-button-group').addEventListener(Event.EVENT_CLICK, (evt) => {
+        console.log("Button Group Click",evt.detail);
+    });
+
+    // Card
+    document.querySelector('.wc-card').addEventListener(Event.EVENT_CLICK, (evt) => {
+        console.log("Card Click",evt.detail);
+    });
+
+    // Provider
+    var p = new Provider("http://localhost:8000/");
+    p.addEventListener(Event.EVENT_ERROR,(evt) => {
+        console.log("Got error:",evt);
+    });
+    p.addEventListener(Event.EVENT_START,(evt) => {
+        console.log("START",evt.detail);
+    });
+    p.addEventListener(Event.EVENT_DONE,(evt) => {
+        console.log("DONE",evt.detail);
+    });
+    p.fetch("/", {}, 5000);
+});

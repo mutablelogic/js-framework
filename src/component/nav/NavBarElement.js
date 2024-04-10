@@ -1,6 +1,5 @@
 
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/event';
 
 /**
  * NavBarElement
@@ -49,12 +48,6 @@ export class NavBarElement extends LitElement {
         // Default properties
         this.name = '';
         this.disabled = false;
-    }
-
-    onClick() {
-        this.dispatchEvent(new CustomEvent(
-            Event.EVENT_CLICK, { detail: this.name },
-        ));
     }
 }
 

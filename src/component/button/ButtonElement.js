@@ -1,6 +1,6 @@
 
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/event';
+import Event from '../../core/Event';
 
 /**
  * A button element
@@ -120,7 +120,6 @@ export class ButtonElement extends LitElement {
     ));
   }
 }
-
 
 customElements.define('wc-button', ButtonElement);
 

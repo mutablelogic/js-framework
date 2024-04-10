@@ -6,6 +6,8 @@ import './component/button/ButtonElement';
 import './component/button/ButtonGroupElement';
 import './component/button/CloseButtonElement';
 import './component/icon/IconElement';
+import './component/nav/NavBarElement';
+
 
 // CSS
 import './css/core.css';

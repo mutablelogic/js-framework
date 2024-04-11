@@ -33,6 +33,15 @@ export class FormElement extends LitElement {
             action: { type: String },
         };
     }
+    static get styles() {
+        return css`
+            form {
+              display: inline-block;
+              width: 100%;
+              margin: var(--form-margin);
+            }
+        `;
+    }
     render() {
         return html`
             <form method="${this.method}" action="${this.action}"><slot></slot></form>

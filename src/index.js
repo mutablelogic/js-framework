@@ -23,6 +23,7 @@ import './component/modal/SideModalElement';
 
 // Form Elements
 import './component/form/FormElement';
+import './component/form/FormInputElement';
 
 // CSS
 import './css/core.css';

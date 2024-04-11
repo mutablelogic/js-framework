@@ -17,13 +17,17 @@ import './component/icon/IconElement';
 import './component/nav/NavBarElement';
 import './component/nav/NavItemElement';
 
-// Modals
+// Modal Elements
 import './component/modal/ModalElement';
 import './component/modal/SideModalElement';
+
+// Form Elements
+import './component/form/FormElement';
 
 // CSS
 import './css/core.css';
 import './css/document.css';
 
+// Other
 import './esbuild.js';
 import './test.js';

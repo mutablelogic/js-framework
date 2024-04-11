@@ -23,16 +23,19 @@ export class NavBarElement extends LitElement {
 
     static get styles() {
         return css`
-        :host nav {            
+        nav {            
             position: relative;
-            padding: var(--navbar-padding);
+            padding: var(--navbar-padding-y) var(--navbar-padding-x) var(--navbar-padding-y) var(--navbar-padding-x);
             background-color: var(--navbar-background-color);
             color: var(--navbar-color);
+            border-bottom: 1px solid var(--navbar-border-edge-color);
+        }
+        ul {
+            list-style: none;
             display: flex;
             flex-flow: row wrap;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: var(--navbar-border-bottom);
+            justify-content: start;
+            padding-left: 0;
         }
         `;
     }

@@ -6,6 +6,12 @@ import Event from '../../core/Event';
  * CloseButtonElement
  */
 export class CloseButtonElement extends LitElement {
+    constructor() {
+        super();
+        // Default properties
+        this.name = 'wc-close';
+        this.disabled = false;
+    }
     static get properties() {
         return {
             /**
@@ -21,7 +27,6 @@ export class CloseButtonElement extends LitElement {
             disabled: { type: Boolean },
         };
     }
-
     static get styles() {
         return css`
             button {
@@ -31,12 +36,7 @@ export class CloseButtonElement extends LitElement {
                 padding: 0;
                 border: 0;
                 background: transparent;
-            }
-            button div {
-                position: relative;
-                width: var(--button-close-size);
-                height: var(--button-close-size);
-                padding: var(--button-close-padding);
+                cursor: pointer;
             }
             button wc-icon {
                 color: var(--button-close-color);          
@@ -57,22 +57,13 @@ export class CloseButtonElement extends LitElement {
             }
         `;
     }
-
     render() {
         return html`
-            <button role="button" @click=${this.onClick}>
-                <div><wc-icon name="x-circle"></wc-icon></div>
+            <button role="button" ?disabled="${this.disabled}" @click=${this.onClick}>
+                <wc-icon name="x-circle"></wc-icon>
             </button>
         `;
     }
-
-    constructor() {
-        super();
-        // Default properties
-        this.name = '';
-        this.disabled = false;
-    }
-
     onClick() {
         this.dispatchEvent(new CustomEvent(
             Event.EVENT_CLICK, { 

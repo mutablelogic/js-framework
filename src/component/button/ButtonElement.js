@@ -39,24 +39,30 @@ export class ButtonElement extends LitElement {
     .button {
       display: inline-block;
       position: relative;
+
+      margin: none;
+      padding: var(--button-padding-y) var(--button-padding-x);
+      border: var(--button-border) solid var(--button-border-color);      
+      border-top-left-radius: var(--button-border-radius-left);
+      border-bottom-left-radius: var(--button-border-radius-left);
+      border-top-right-radius: var(--button-border-radius-right);
+      border-bottom-right-radius: var(--button-border-radius-right);    
+
       color: var(--button-color); 
       background-color: var(--button-background-color); 
       font-weight:  var(--button-font-weight);
       font-size: var(--button-font-size);
-      border: var(--button-border) solid var(--button-border-color);
-      margin: none;
-      padding: var(--button-padding-y) var(--button-padding-x);
-      border-top-left-radius: var(--button-border-radius-left);
-      border-bottom-left-radius: var(--button-border-radius-left);
-      border-top-right-radius: var(--button-border-radius-right);
-      border-bottom-right-radius: var(--button-border-radius-right);      
+
+      cursor: pointer;
+    }
+    a {
       text-decoration: none;
     }
     .button:active {          
       top: var(--button-offset-active); 
       left: var(--button-offset-active); 
       color: var(--button-color-active); 
-      background-color: var(--button-background-color-active); 
+      background-color: var(--button-background-color-active)  !important; 
       font-weight: var(--button-font-weight-active);
     }
     .button:hover {

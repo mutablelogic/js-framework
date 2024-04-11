@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"> 
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storybook</title>
     <script type="module" src="./index.js" defer></script>
     <link href="./index.css" rel="stylesheet">
 </head>
+
 <body>
-    <wc-navbar name="navbar"></wc-navbar>
+    <wc-navbar name="navbar">
+        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+        <wc-nav-item>File</wc-nav-item>
+        <wc-nav-item>Edit</wc-nav-item>
+        <wc-nav-item>Selection</wc-nav-item>
+        <wc-nav-item>View</wc-nav-item>
+        <wc-nav-item disabled>Disabled</wc-nav-item>
+        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+    </wc-navbar>
 
     <div class="container">
-        <h1>Button Group</h1>
+        <h1>Buttons</h1>
+
+        <h2>Individual</h2>
+        <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+        <wc-button name="retry">Retry</wc-button>
+
+        <h2>Group</h2>
         <wc-button-group>
             <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
-            <wc-button name="retry">Retry</wc-button> 
+            <wc-button name="retry">Retry</wc-button>
             <wc-button name="cancel">Cancel</wc-button>
-        </wc-button-group>    
+        </wc-button-group>
     </div>
+    <hr>
 
     <div class="container">
         <h1>Badge</h1>
-        <wc-badge transform="uppercase">default</wc-badge>
-        <wc-badge transform="uppercase">info</wc-badge>
-        <wc-badge transform="uppercase">warn</wc-badge>
-        <wc-badge transform="uppercase">error</wc-badge>
-    </div>
 
+        <h2>Individual</h2>
+        <wc-badge transform="uppercase">default</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
+
+        <h2>Group</h2>
+        <wc-badge-group>
+            <wc-badge transform="uppercase">default</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
+        </wc-badge-group>
+    </div>
+    <hr>
 
     <div class="container wc-card">
         <h1>Close Button</h1>
-        <div style="position:relative; border: 1px solid red; margin: 0 100px 0 100px; padding: 5px;">
+        <div
+            style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
             <wc-close name="close"></wc-close>
             <p>Here is some content within a container</p>
         </div>
     </div>
+    <hr>
 
     <div class="container">
         <h1>Icon</h1>
-        <wc-icon name="0-circle-fill"></wc-icon>
-        </div>
+        <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
+        <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
+        <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
+        <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
+        <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
     </div>
+    </div>
+    <hr>
 
-
-
+    <div class="container">
+        <h1>Modal</h1>
+        <wc-button name="modal">Pop-up</wc-button>
+        <wc-modal>
+            <wc-close name="modal-close"></wc-close>
+            <p>Here is some content within a container</p>
+        </wc-modal>
+    </div>
 </body>
+
 </html>

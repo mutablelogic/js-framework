@@ -24,8 +24,8 @@
 
     /* controls */
     --control-color: #bbb;
-    --control-color-hover: #ccc;
-    --control-color-active: #ddd;
+    --control-color-hover: #222;
+    --control-color-active: #16f;
     --control-color-disabled: #ddd;
     
     /* grids and spacing */
@@ -56,6 +56,9 @@
     --heading-font-weight: var(--font-weight-bold);
     --heading-line-height: 1.2;
     --heading-color: inherit;
+
+    /* horizontal rule */
+    --horizontal-rule-color: var(--control-color);
 
     /* borders */
     --border-radius: 0.20em;
@@ -93,24 +96,36 @@
     --button-close-color-disabled: var(--control-color-disabled);
 
     /* badge */
-    --badge-background-color: var(--primary-color);
-    --badge-color: var(--light-color);
     --badge-padding-x: 0.35em;
     --badge-padding-y: 0.35em;
     --badge-font-size: var(--font-size-small);
     --badge-font-weight: var(--font-weight-bold);
     --badge-border-radius: var(--border-radius);
+    --badge-border-radius-left: var(--badge-border-radius);
+    --badge-border-radius-right: var(--badge-border-radius);
+    --badge-group-divider-color: var(--light-color);
 
-    /* nav */
-    --nav-border-bottom: 1px solid var(--secondary-color);
+    /* icon */
+    --icon-size-default: 1.5em;
+    --icon-size-small: 1em;
+    --icon-size-medium: 1.5em;
+    --icon-size-large: 2em;
+    --icon-size-xlarge: 3em;
 
     /* navbar */
-    --navbar-background-color: var(--primary-color);
     --navbar-color: var(--light-color);
-    --navbar-border-bottom:  0.5px solid var(--light-color);
-    --navbar-padding: calc(var(--spacer) * 0.5) calc(var(--spacer) * 1.5);
+    --navbar-background-color: var(--primary-color);
+    --navbar-border-edge-color: var(--secondary-color);
+    --navbar-padding-x: calc(var(--spacer) * 0.1);
+    --navbar-padding-y: calc(var(--spacer) * 0.2);
 
-    /* navitem-view */
+    /* nav-item */
+    --nav-item-padding-x: var(--spacer-1);
+    --nav-item-padding-y: calc(var(--spacer) * 0.2);
+    --nav-item-color: var(--light-color);
+    --nav-item-color-hover: var(--white-color);
+    --nav-item-color-disabled: var(--secondary-color);
+
     --navitem-color: var(--dark-color);
     --navitem-color-hover: var(--dark-color);
     --navitem-color-active: var(--dark-color);
@@ -154,11 +169,13 @@
     --form-label-border: none;
 
     /* modal */
-    --modal-margin: 20%;
+    --modal-margin-x: 20%;
     --modal-padding: calc(var(--spacer) * 1.5);
-    --modal-color: var(--body-color);
+    --modal-canvas-color: var(--black-color);
     --modal-background-color: var(--body-background-color);
-    --modal-border: 0.5px solid var(--control-color);
+    --modal-border: calc(var(--spacer) * 0.2);
     --modal-border-radius: var(--border-radius);
+    --modal-canvas-opacity: 0.7;
+    --modal-fadein-delay: 300ms;
+    --modal-fadeout-delay: 300ms;
 }
-

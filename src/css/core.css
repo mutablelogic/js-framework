@@ -112,6 +112,19 @@
     --icon-size-large: 2em;
     --icon-size-xlarge: 3em;
 
+    /* modal */
+    --modal-margin-x: 20%;
+    --modal-padding: calc(var(--spacer) * 1.5);
+    --modal-background-color: var(--body-background-color);
+    --modal-border: calc(var(--spacer) * 0.3);
+    --modal-border-radius: var(--border-radius);
+    --modal-fade-delay: 300ms;
+    --modal-position-delay: 300ms;
+    --modal-fadein-delay: var(-modal-fade-delay);
+    --modal-fadeout-delay: var(-modal-fade-delay);
+    --modal-canvas-color: var(--black-color);
+    --modal-canvas-opacity: 0.7;
+
     /* navbar */
     --navbar-color: var(--light-color);
     --navbar-background-color: var(--primary-color);
@@ -168,14 +181,4 @@
     --form-label-line-height: 1;
     --form-label-border: none;
 
-    /* modal */
-    --modal-margin-x: 20%;
-    --modal-padding: calc(var(--spacer) * 1.5);
-    --modal-canvas-color: var(--black-color);
-    --modal-background-color: var(--body-background-color);
-    --modal-border: calc(var(--spacer) * 0.2);
-    --modal-border-radius: var(--border-radius);
-    --modal-canvas-opacity: 0.7;
-    --modal-fadein-delay: 300ms;
-    --modal-fadeout-delay: 300ms;
 }

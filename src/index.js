@@ -19,6 +19,7 @@ import './component/nav/NavItemElement';
 
 // Modals
 import './component/modal/ModalElement';
+import './component/modal/SideModalElement';
 
 // CSS
 import './css/core.css';

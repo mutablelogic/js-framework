@@ -60,7 +60,7 @@ export class CloseButtonElement extends LitElement {
     render() {
         return html`
             <button role="button" ?disabled="${this.disabled}" @click=${this.onClick}>
-                <wc-icon name="x-circle"></wc-icon>
+                <wc-icon name="x-lg"></wc-icon>
             </button>
         `;
     }

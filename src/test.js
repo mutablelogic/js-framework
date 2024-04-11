@@ -48,11 +48,25 @@ window.addEventListener('load', () => {
             document.querySelector('wc-modal').hide();
         }
     });
+    document.querySelector('wc-sidemodal').addEventListener(Event.EVENT_CLICK, (evt) => {
+        if (evt.detail == "modal-close") {
+            document.querySelector('wc-sidemodal').hide();
+        }
+    });
 
     // NavItem
     document.querySelectorAll('wc-nav-item').forEach((navitem) => {
         navitem.addEventListener(Event.EVENT_CLICK, (evt) => {
-            console.log("NavItem Click", evt.detail);
+            switch (evt.detail) {
+                case "menu":
+                    document.querySelector('wc-sidemodal').toggle();
+                    break;
+                case 'help':
+                    document.querySelector('wc-sidemodal').toggle();
+                    break;
+                default:
+                    console.log("NavItem Click", evt.detail);
+            }
         });
     });
 });

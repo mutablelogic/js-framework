@@ -7,7 +7,7 @@
     --font-size-large: 1.25rem;
     --font-weight-light: 300;
     --font-weight-normal: 400;
-    --font-weight-bold: 600;
+    --font-weight-bold: 700;
     --font-weight-extrabold: 800;
 
     /* colours */
@@ -99,7 +99,7 @@
     --badge-padding-x: 0.35em;
     --badge-padding-y: 0.35em;
     --badge-font-size: var(--font-size-small);
-    --badge-font-weight: var(--font-weight-bold);
+    --badge-font-weight: var(--font-weight-normal);
     --badge-border-radius: var(--border-radius);
     --badge-border-radius-left: var(--badge-border-radius);
     --badge-border-radius-right: var(--badge-border-radius);
@@ -169,7 +169,7 @@
     --form-label-color: var(--dark-color);
     --form-label-padding-x: calc(var(--spacer) * 0.5);
     --form-label-padding-y: calc(var(--spacer) * 0.5);
-    --form-label-font-size: var(--font-size-small);
+    --form-label-font-size: var(--font-size-normal);
     --form-label-font-weight: var(--font-weight-bold);
     --form-label-line-height: 1;
     --form-label-border: none;

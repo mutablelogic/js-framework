@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
     p.addEventListener(Event.EVENT_DONE, (evt) => {
         console.log("DONE", evt.detail);
     });
-    p.fetch("/", {}, 5000);
+    p.fetch("/", {});
 
     // Buttons
     document.querySelectorAll('wc-button').forEach((button) => {

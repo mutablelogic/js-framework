@@ -6,6 +6,15 @@ import Event from '../../core/Event';
  * A button element
  */
 export class ButtonElement extends LitElement {
+  constructor() {
+    super();
+    // Default properties
+    this.name = '';
+    this.disabled = false;
+    this.link = '';
+    this.transform = 'none';
+    this.submit = false;
+  }
   static get properties() {
     return {
       /**
@@ -30,7 +39,13 @@ export class ButtonElement extends LitElement {
        * The text transform,  none, uppercase, lowercase,capitalize
        * @type {String}
        */
-      transform: { type: String },      
+      transform: { type: String },
+
+      /**
+       * The text transform,  none, uppercase, lowercase,capitalize
+       * @type {String}
+      */
+      submit: { type: Boolean },
     };
   }
 
@@ -90,7 +105,9 @@ export class ButtonElement extends LitElement {
     }        
     `;
   }
-
+  buttonType() {
+    return this.submit ? 'submit' : 'button';
+  }
   render() {
     return html`
       ${this.link
@@ -100,29 +117,19 @@ export class ButtonElement extends LitElement {
             </a>
           `
         : html`
-            <button role="button" type="button" class="button ${this.transform ? `text-transform-${this.transform}` : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
+            <button role="button" type="${this.buttonType()}" class="button ${this.transform ? `text-transform-${this.transform}` : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
               <slot></slot>
             </button>
           `}
     `;
   }
-
-  constructor() {
-    super();
-    // Default properties
-    this.disabled = false;
-    this.name = '';
-    this.link = '';
-    this.transform = 'none';
-  }
-
   onClick() {
     this.dispatchEvent(new CustomEvent(
-      Event.EVENT_CLICK, { 
-        bubbles: true,
-        composed: true,
-        detail: this.name || this.textContent 
-      },
+      Event.EVENT_CLICK, {
+      bubbles: true,
+      composed: true,
+      detail: this.name || this.textContent
+    },
     ));
   }
 }

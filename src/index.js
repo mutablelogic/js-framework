@@ -24,6 +24,7 @@ import './component/modal/SideModalElement';
 // Form Elements
 import './component/form/FormElement';
 import './component/form/FormInputElement';
+import './component/form/FormPasswordElement';
 
 // CSS
 import './css/core.css';

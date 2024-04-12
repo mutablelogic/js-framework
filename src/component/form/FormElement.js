@@ -44,8 +44,19 @@ export class FormElement extends LitElement {
     }
     render() {
         return html`
-            <form method="${this.method}" action="${this.action}"><slot></slot></form>
+            <form method="${this.method}" name="${this.name}" action="${this.action}" @submit=${this.onSubmit}>
+                <slot></slot>
+            </form>
           `;
+    }
+    submit() {
+        if(this.shadowRoot) {
+            this.shadowRoot.querySelector('form').submit();
+        }
+    }
+    onSubmit(event) {
+        event.preventDefault();
+        console.log('Form submitted');
     }
 }
 

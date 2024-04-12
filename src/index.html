@@ -103,16 +103,18 @@
     <hr>
 
     <div class="container">
-        <wc-form>
+        <form>
             <h1>Form</h1>
             <wc-form-input name="name" placeholder="Enter your name" required labelabove>Name</wc-form-input>
             <wc-form-input name="email" placeholder="Enter your email (optional)" autocomplete labelabove>Email</wc-form-input>
-            <wc-form-input name="address" placeholder="Enter your address" required labelabove>Address</wc-form-input>
+            <wc-form-input name="address" placeholder="Enter your address" required labelabove rows="4">Address</wc-form-input>
+            <wc-form-password name="password" placeholder="Enter a password" required>Password</wc-form-password>
+            <wc-form-password name="password2" placeholder="Enter the password again" required>Password (Again)</wc-form-password>
             <wc-button-group>
                 <wc-button name="save" submit>Save</wc-button>
                 <wc-button name="cancel">Cancel</wc-button>
             </wc-button-group>
-        </wc-form>
+        </form>
     </div>
     <hr>
 

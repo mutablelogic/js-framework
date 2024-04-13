@@ -24,14 +24,14 @@
         <h1>Buttons</h1>
 
         <h3>Individual</h3>
-        <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+        <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
         <wc-button name="retry">Retry</wc-button>
 
         <h3>Group</h3>
         <wc-button-group>
             <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
             <wc-button name="retry">Retry</wc-button>
-            <wc-button name="cancel">Cancel</wc-button>
+            <wc-button name="cancel" default>Cancel</wc-button>
         </wc-button-group>
     </div>
     <hr>
@@ -103,16 +103,15 @@
     <hr>
 
     <div class="container">
-        <form>
+        <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
             <h1>Form</h1>
-            <wc-form-input name="name" placeholder="Enter your name" required labelabove>Name</wc-form-input>
-            <wc-form-input name="email" placeholder="Enter your email (optional)" autocomplete labelabove>Email</wc-form-input>
-            <wc-form-input name="address" placeholder="Enter your address" required labelabove rows="4">Address</wc-form-input>
-            <wc-form-password name="password" placeholder="Enter a password" required>Password</wc-form-password>
-            <wc-form-password name="password2" placeholder="Enter the password again" required>Password (Again)</wc-form-password>
-            <wc-button-group>
+            <wc-form-input name="generic input"></wc-form-input>
+            <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
+            <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
+            <wc-form-text name="address" placeholder="Address" labelabove rows="4" description="Shipping address (optional)">Address</wc-form-text>
+            <wc-button-group style="border: 1px solid red">
                 <wc-button name="save" submit>Save</wc-button>
-                <wc-button name="cancel">Cancel</wc-button>
+                <wc-button name="save" submit>Cancel</wc-button>
             </wc-button-group>
         </form>
     </div>

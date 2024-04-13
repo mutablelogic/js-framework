@@ -6,14 +6,24 @@ import Event from '../../core/Event';
  * A button element
  */
 export class ButtonElement extends LitElement {
+  #internals;
+
   constructor() {
     super();
+
+    // Attach with the form
+    this.#internals = this.attachInternals();
+
     // Default properties
     this.name = '';
     this.disabled = false;
     this.link = '';
     this.transform = 'none';
     this.submit = false;
+    this.default = false;
+  }
+  static get formAssociated() {
+    return true;
   }
   static get properties() {
     return {
@@ -43,9 +53,15 @@ export class ButtonElement extends LitElement {
 
       /**
        * The text transform,  none, uppercase, lowercase,capitalize
-       * @type {String}
+       * @type {Boolean}
       */
       submit: { type: Boolean },
+
+      /**
+       * Whether the button is the default button
+       * @type {Boolean}
+      */
+      default: { type: Boolean },
     };
   }
 
@@ -91,6 +107,9 @@ export class ButtonElement extends LitElement {
       background-color: var(--button-background-color-disabled); 
       font-weight:  var(--button-font-weight-disabled);
     }
+    .default {
+      font-weight: var(--button-font-weight-default);
+    }
     .text-transform-capitalize {
       text-transform: capitalize;
     }
@@ -112,25 +131,49 @@ export class ButtonElement extends LitElement {
     return html`
       ${this.link
         ? html`
-            <a role="button" class="button ${this.transform ? `text-transform-${this.transform}` : ''}" href="${this.link}" ?disabled="${this.disabled}" @click=${this.onClick}>
+            <a role="button" class="button ${this.transform ? `text-transform-${this.transform}` : ''} ${this.default ? 'default' : ''}" href="${this.link}" ?disabled="${this.disabled}" @click=${this.onClick}>
               <slot></slot>
             </a>
           `
         : html`
-            <button role="button" type="${this.buttonType()}" class="button ${this.transform ? `text-transform-${this.transform}` : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
+            <button role="button" type="${this.buttonType()}" class="button ${this.transform ? `text-transform-${this.transform}` : ''} ${this.default ? 'default' : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
               <slot></slot>
             </button>
           `}
     `;
   }
-  onClick() {
+  onClick(evt) {
+    // If the button is in a form, then create a temporary button to submit the form
+    const form = this.formElement();
+    if (form && this.submit) {
+      evt.preventDefault();
+      const tmpButton = document.createElement("button");
+      tmpButton.type = "submit";
+      tmpButton.name = this.name;
+      tmpButton.value = this.textContent;
+      tmpButton.style.display = "none";
+      form.appendChild(tmpButton);
+      tmpButton.click();
+
+      let formData = new FormData(form, tmpButton);
+      let formValues = {};
+      for (let [key, value] of formData.entries()) {
+        formValues[key] = value;
+      }
+      tmpButton.remove();
+      console.log(formValues);
+    }
+
+    // Dispatch a click event
     this.dispatchEvent(new CustomEvent(
       Event.EVENT_CLICK, {
       bubbles: true,
       composed: true,
       detail: this.name || this.textContent
-    },
-    ));
+    }));
+  }
+  formElement() {
+    return this.#internals.form;
   }
 }
 

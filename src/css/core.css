@@ -7,6 +7,7 @@
     --font-size-large: 1.25rem;
     --font-weight-light: 300;
     --font-weight-normal: 400;
+    --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
 
@@ -75,7 +76,8 @@
     --button-font-weight: var(--font-weight-normal);
     --button-font-weight-hover: var(--font-weight-bold);
     --button-font-weight-active: var(--font-weight-bold);
-    --button-font-weight-disabled: var(--font-weight-bold);
+    --button-font-weight-disabled: var(--font-weight-normal);
+    --button-font-weight-default: var(--font-weight-semibold);
     --button-border: none;
     --button-border-color: var(--black-color);
     --button-border-radius: var(--border-radius);
@@ -155,28 +157,29 @@
 
     /* forms */
     --form-input-background-color: none;
-    --form-input-color: red;
+    --form-input-color: var(--dark-color);
+    --form-input-error-color: var(--error-color);
+    --form-input-placeholder-color: var(--secondary-color);
+    --form-input-description-color: var(--secondary-color);
     --form-input-margin-y: calc(var(--spacer) * 0.1);
     --form-input-margin-x: 0;
     --form-input-padding-y: calc(var(--spacer) * 0.5);
     --form-input-padding-x: calc(var(--spacer) * 0.5);
     --form-input-font-size: var(--font-size-normal);
+    --form-input-description-font-size: var(--font-size-small);
     --form-input-font-weight: var(--font-weight-normal);
+    --form-input-description-font-size: var(--font-size-small);
     --form-input-line-height: 1.2;
     --form-input-border: 0.5px solid var(--control-color);
-
     --form-label-background-color: none;
     --form-label-color: var(--dark-color);
     --form-label-padding-x: calc(var(--spacer) * 0.5);
     --form-label-padding-y: calc(var(--spacer) * 0.5);
     --form-label-font-size: var(--font-size-normal);
-    --form-label-font-weight: var(--font-weight-bold);
+    --form-label-font-weight: var(--font-weight-semibold);
     --form-label-line-height: 1;
     --form-label-border: none;
 
-    --form-input-background-color-focus: none;
-    --form-input-color-focus: var(--dark-color);
-    --form-input-border-focus: 0.5px solid var(--dark-color);
 
     --form-checkbox-background-color: none;
     --form-checkbox-color: var(--dark-color);

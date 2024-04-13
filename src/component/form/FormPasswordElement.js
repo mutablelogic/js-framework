@@ -1,12 +1,12 @@
 
 import { html } from 'lit';
-import { FormInputElement } from './FormInputElement.js';
+import { FormTextElement } from './FormTextElement.js';
 import icons from 'bootstrap-icons/bootstrap-icons.svg';
 
 /**
  * FormPasswordElement
  */
-export class FormPasswordElement extends FormInputElement {
+export class FormPasswordElement extends FormTextElement {
     constructor() {
         super();
     }

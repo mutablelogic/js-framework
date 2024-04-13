@@ -24,7 +24,10 @@ import './component/modal/SideModalElement';
 // Form Elements
 import './component/form/FormElement';
 import './component/form/FormTextElement';
-import './component/form/FormPasswordElement';
+import './component/form/FormDateElement';
+
+// Scaffold Elements
+import './component/spacer/SpacerElement';
 
 // CSS
 import './css/core.css';

@@ -82,7 +82,6 @@ export class FormElement extends LitElement {
             div {
                 display: flex; 
                 justify-content: start;
-                border: 1px solid red;
             }
             .labelbeside {
                 flex-direction: row;
@@ -91,14 +90,13 @@ export class FormElement extends LitElement {
                 flex-direction: column;
             }
             div.description {
+                flex: 1;
                 flex-direction: column;
                 color: var(--form-input-description-color);
                 font-size: var(--form-input-description-font-size);
                 font-weight:  var(--form-input-description-font-weight);
             }
             .control {
-                border: 1px solid red;
-                flex: 1;
                 background-color: var(--form-input-background-color); 
                 color: var(--form-input-color);
                 margin: var(--form-input-margin-y) var(--form-input-margin-x) var(--form-input-margin-y) var(--form-input-margin-x);

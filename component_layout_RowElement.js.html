@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: NavItemElement</title>
+    <title>JSDoc: Source: component/layout/RowElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,144 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: NavItemElement</h1>
+    <h1 class="page-title">Source: component/layout/RowElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>NavItemElement<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">NavItemElement</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="NavItemElement"><span class="type-signature"></span>new NavItemElement<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="component_nav_NavItemElement.js.html">component/nav/NavItemElement.js</a>, <a href="component_nav_NavItemElement.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="NavItemElement.html">NavItemElement</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, html, css } from 'lit';
+
+/**
+ * A row element which allows you to create a row with cells, either populating
+ * the row elements left to right or right to left.
+ * 
+ * @class
+ * 
+ * Example:
+ * 
+ * ```html
+ * &lt;wc-row ltr>
+ *  &lt;wc-row-6>
+ *      &lt;!-- content goes here -->
+ *  &lt;/wc-row-6>
+ * &lt;/wc-row>
+ * ```
+ */
+export class RowElement extends LitElement {
+  static localName = 'wc-row';
+
+  constructor() {
+    super();
+  }
+  static get styles() {
+    return css``;
+  }
+  render() {
+    return html`
+        &lt;div class="row">&lt;slot>&lt;/slot>&lt;/div>
+    `;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

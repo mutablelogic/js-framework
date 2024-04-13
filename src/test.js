@@ -3,13 +3,6 @@
 // Core
 import Provider from './core/Provider';
 import Event from './core/Event';
-import { Model } from './core/Model';
-
-// Create a model
-
-class MyModel extends Model {
-
-}
 
 // Test
 window.addEventListener('load', () => {
@@ -76,8 +69,4 @@ window.addEventListener('load', () => {
             }
         });
     });
-
-    // Print out model
-    var model = new MyModel({ name: "John Doe", age: 21});
-    console.log("" + model);
 });

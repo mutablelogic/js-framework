@@ -1,20 +1,31 @@
 name: Publish Docs
 on:
+  push:
+    branches:
+      - main
   release:
     types: [created]
 jobs:
   docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Node
+      uses: actions/setup-node@v4
       with:
-        node-version: '12.x'
+        node-version: 'latest'
         registry-url: 'https://npm.pkg.github.com'
         scope: '@djthorpe'
-    - run: npm install
-    - run: npm run docs
-    - uses: LuisEnMarroquin/gh-pages-publish@v2.4.4
+
+    - name: Generate Documentatin
+      run: |
+        npm install
+        npm run docs
+
+    - name: Deploy Documentation
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        FOLDER: dist/doc
-        SSHKEY: ${{ secrets.SSH }}
+        folder: dist/doc

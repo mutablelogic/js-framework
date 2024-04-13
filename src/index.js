@@ -1,6 +1,10 @@
 
 // This file defines all the styles and elements used for the web components
 
+// Core
+import './core/Model';
+import './core/Provider';
+
 // Buttons
 import './component/button/ButtonElement';
 import './component/button/ButtonGroupElement';

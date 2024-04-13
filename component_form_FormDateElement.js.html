@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Source: component/form/FormDateElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,145 +17,63 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Source: component/form/FormDateElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Model<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Model is the base class for all data models and is intended to be the base
-class for all data models.</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_Model.js.html">core/Model.js</a>, <a href="core_Model.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Model.html">Model</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { html, nothing } from 'lit';
+import { FormElement} from './FormElement';
+
+/**
+ * FormDateElement implements a date input element
+ */
+export class FormDateElement extends FormElement {
+    constructor() {
+        super();
+
+        // Default properties
+        this.pattern = '';
+        this.rows = 0;
+        this.minlength = null;
+        this.maxlength = null;
+    }
+    static get properties() {
+        return {
+            /**
+             * The minimum date allowed
+             */
+            min: { type: Date },
+
+            /**
+             * The maximum date allowed
+             */
+            max: { type: Date }
+        };
+    }
+    _renderInput() {
+        return html`&lt;input class="control"
+            name=${this.name || nothing}
+            type="date"
+            ?required=${this.required}
+            ?disabled=${this.disabled}
+            placeholder=${this.placeholder || nothing}
+            min=${this.min || nothing}
+            max=${this.max || nothing}
+            @input=${this._updateValue}>${this.value}&lt;/textarea>
+        `;
+    }
+}
+
+customElements.define('wc-form-date', FormDateElement);
+</code></pre>
+        </article>
+    </section>
 
 
 

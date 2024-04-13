@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Source: component/nav/NavItemElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,145 +17,81 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Source: component/nav/NavItemElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Model<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Model is the base class for all data models and is intended to be the base
-class for all data models.</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_Model.js.html">core/Model.js</a>, <a href="core_Model.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Model.html">Model</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, html, css } from 'lit';
+import Event from '../../core/Event';
+
+/**
+ * NavItemElement
+ */
+export class NavItemElement extends LitElement {
+    constructor() {
+        super();
+        // Default properties
+        this.name = '';
+        this.disabled = false;
+    }
+    static get properties() {
+        return {
+            /**
+             * Name of the item to use when firing the EVENT_CLICK event
+             * @type {String}
+             */
+            name: { type: String },
+
+            /**
+             * Whether the item is disabled
+             * @type {Boolean}
+             */
+            disabled: { type: Boolean },
+        };
+    }
+    static get styles() {
+        return css`
+        li {     
+            color: var(--nav-item-color);       
+            padding: var(--nav-item-padding-y) var(--nav-item-padding-x) var(--nav-item-padding-y) var(--nav-item-padding-x);
+            cursor: pointer;
+        }
+        li:hover {
+            color: var(--nav-item-color-hover);
+        }
+        li.disabled,li.disabled:hover {
+            color: var(--nav-item-color-disabled);
+            cursor: default;
+        }
+        `;
+    }
+    render() {
+        return html`
+            &lt;li class="${this.disabled ? 'disabled' : ''}" @click=${this.onClick}>&lt;slot>&lt;/slot>&lt;/li>
+        `;
+    }
+    onClick() {
+        if (!this.disabled) {
+            this.dispatchEvent(new CustomEvent(
+                Event.EVENT_CLICK, { 
+                  bubbles: true,
+                  composed: true,
+                  detail: this.name || this.textContent 
+                },
+              ));      
+        }
+    }
+}
+
+customElements.define('wc-nav-item', NavItemElement);</code></pre>
+        </article>
+    </section>
 
 
 

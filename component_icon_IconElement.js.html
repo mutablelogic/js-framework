@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Source: component/icon/IconElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,145 +17,89 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Source: component/icon/IconElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Model<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Model is the base class for all data models and is intended to be the base
-class for all data models.</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_Model.js.html">core/Model.js</a>, <a href="core_Model.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Model.html">Model</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, svg, css } from 'lit';
+import icons from 'bootstrap-icons/bootstrap-icons.svg';
+
+/**
+ * IconElement
+ */
+export class IconElement extends LitElement {
+    static get properties() {
+        return {
+            /**
+             * Name of the icon to display
+             * @type {String}
+             */
+            name: { type: String },
+            /**
+             * Size of the icon to display, either default, small, medium, large, xlarge
+             * @type {String}
+             */
+            size: { type: String },
+        };
+    }
+
+    static get styles() {
+        return css`
+        .size-default {
+            position: relative;
+            width: var(--icon-size-default);
+            height: var(--icon-size-default);
+        }
+        .size-small {
+            position: relative;
+            width: var(--icon-size-small);
+            height: var(--icon-size-small);
+        }
+        .size-medium {
+            position: relative;
+            width: var(--icon-size-medium);
+            height: var(--icon-size-medium);
+        }
+        .size-large {
+            position: relative;
+            width: var(--icon-size-large);
+            height: var(--icon-size-large);
+        }
+        .size-xlarge {
+            position: relative;
+            width: var(--icon-size-xlarge);
+            height: var(--icon-size-xlarge);
+        }
+        svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
+            }
+        `;
+    }
+
+    render() {
+        return svg`&lt;div class="size-${this.size}">&lt;svg>&lt;use href="${icons}#${this.name}"/>&lt;/svg>&lt;/div>`;
+    }
+
+    constructor() {
+        super();
+        // Default properties
+        this.name = 'bootstrap-reboot';
+        this.size = 'default';
+    }
+}
+
+customElements.define('wc-icon', IconElement);
+</code></pre>
+        </article>
+    </section>
 
 
 

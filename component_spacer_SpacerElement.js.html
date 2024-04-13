@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
+    <title>JSDoc: Source: component/spacer/SpacerElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,145 +17,74 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Model</h1>
+    <h1 class="page-title">Source: component/spacer/SpacerElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Model<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Model is the base class for all data models and is intended to be the base
-class for all data models.</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_Model.js.html">core/Model.js</a>, <a href="core_Model.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Model.html">Model</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, html, css } from 'lit';
+
+/**
+ * A vertical spacer element
+ */
+export class SpacerElement extends LitElement {
+  constructor() {
+    super();
+
+    // Default properties
+    this.y = 1;
+  }
+  static get properties() {
+    return {
+      /**
+       * Y space (0-6)
+       * @type {Number}
+       */
+      y: { type: Number },
+    };
+  }
+
+  static get styles() {
+    return css`
+        .m-0 {
+            margin: var(--spacer-0)
+        }
+        .m-1 {
+            margin: var(--spacer-1)
+        }
+        .m-2 {
+            margin: var(--spacer-2)
+        }
+        .m-3 {
+            margin: var(--spacer-3)
+        }
+        .m-4 {
+            margin: var(--spacer-4)
+        }
+        .m-5 {
+            margin: var(--spacer-5)
+        }
+        .m-6 {
+            margin: var(--spacer-6)
+        }
+    `;
+  }
+  render() {
+    return html`
+        &lt;div class="m-${this.y}">&lt;/div>
+    `;
+  }
+}
+
+customElements.define('wc-spacer', SpacerElement);
+</code></pre>
+        </article>
+    </section>
 
 
 

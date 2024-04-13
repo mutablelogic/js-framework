@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: component/modal/ModalElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: component/modal/ModalElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, html, css } from 'lit';
+
+/**
+ * A modal pop-up element which is hidden by default
+ */
+export class ModalElement extends LitElement {
+    constructor() {
+        super();
+        // Default properties
+        this.visible = false;
+    }
+    static get properties() {
+        return {
+            /**
+             * Whether the modal is visible
+             * @type {Boolean}
+             * @memberof ModalElement
+             */
+            visible: { type: Boolean },
+        };
+    }
+    static get styles() {
+        return css`
+        .canvas {
+            position: fixed; 
+            left: 0; 
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: var(--modal-canvas-color);   
+        }
+        .modal {
+            position: fixed; 
+            left: 0; 
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .hidden {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility var(--modal-fadeout-delay), opacity var(--modal-fadeout-delay); 
+        }
+        .visible {
+            visibility: visible;
+            opacity: var(--modal-canvas-opacity);
+            transition: visibility var(--modal-fadein-delay), opacity var(--modal-fadein-delay); 
+        }
+        .visible-2 {
+            visibility: visible;
+            opacity: 1;
+            transition: visibility var(--modal-fadein-delay), opacity var(--modal-fadein-delay); 
+        }
+        .wrapper {
+            position: relative;             
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            margin: 20%;
+            background-color: var(--modal-background-color);
+            border: 5px solid var(--modal-background-color);
+            padding: var(--modal-padding);
+            border-radius: var(--modal-border-radius);
+          }
+          slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+        `;
+    }
+    render() {
+        return html`
+            &lt;div class="canvas  ${this.visible ? 'visible' : 'hidden'}">&lt;/div>
+            &lt;div class="modal ${this.visible ? 'visible-2' : 'hidden'}">
+                &lt;div class="wrapper">&lt;slot>&lt;/slot>&lt;/div>
+            &lt;/div>
+        `;
+    }
+    toggle() {
+        this.visible = !this.visible;
+    }
+    show() {
+        this.visible = true;
+    }
+    hide() {
+        this.visible = false;
+    }
+}
+
+customElements.define('wc-modal', ModalElement);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BadgeElement.html">BadgeElement</a></li><li><a href="BadgeGroupElement.html">BadgeGroupElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ButtonGroupElement.html">ButtonGroupElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="FormDateElement.html">FormDateElement</a></li><li><a href="FormElement.html">FormElement</a></li><li><a href="FormTextElement.html">FormTextElement</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="Model.html">Model</a></li><li><a href="NavBarElement.html">NavBarElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="SideModalElement.html">SideModalElement</a></li><li><a href="SpacerElement.html">SpacerElement</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#autocomplete">autocomplete</a></li><li><a href="global.html#default">default</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#disabled">disabled</a></li><li><a href="global.html#labelabove">labelabove</a></li><li><a href="global.html#link">link</a></li><li><a href="global.html#max">max</a></li><li><a href="global.html#maxlength">maxlength</a></li><li><a href="global.html#min">min</a></li><li><a href="global.html#minlength">minlength</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#pattern">pattern</a></li><li><a href="global.html#placeholder">placeholder</a></li><li><a href="global.html#required">required</a></li><li><a href="global.html#rows">rows</a></li><li><a href="global.html#size">size</a></li><li><a href="global.html#submit">submit</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#value">value</a></li><li><a href="global.html#y">y</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 13 2024 08:45:23 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

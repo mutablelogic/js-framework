@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: component/button/ButtonElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: component/button/ButtonElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { LitElement, html, css } from 'lit';
+import Event from '../../core/Event';
+
+/**
+ * A button element
+ */
+export class ButtonElement extends LitElement {
+  #internals;
+
+  constructor() {
+    super();
+
+    // Attach with the form
+    this.#internals = this.attachInternals();
+
+    // Default properties
+    this.name = '';
+    this.disabled = false;
+    this.link = '';
+    this.transform = 'none';
+    this.submit = false;
+    this.default = false;
+  }
+  static get formAssociated() {
+    return true;
+  }
+  static get properties() {
+    return {
+      /**
+       * Name of the button to use when firing the EVENT_CLICK event
+       * @type {String}
+       */
+      name: { type: String },
+
+      /**
+       * Whether the button is disabled
+       * @type {Boolean}
+       */
+      disabled: { type: Boolean },
+
+      /**
+       * Set to URL to render &lt;a> element styled as button.
+       * @type {String}
+       */
+      link: { type: String },
+
+      /**
+       * The text transform,  none, uppercase, lowercase,capitalize
+       * @type {String}
+       */
+      transform: { type: String },
+
+      /**
+       * The text transform,  none, uppercase, lowercase,capitalize
+       * @type {Boolean}
+      */
+      submit: { type: Boolean },
+
+      /**
+       * Whether the button is the default button
+       * @type {Boolean}
+      */
+      default: { type: Boolean },
+    };
+  }
+
+  static get styles() {
+    return css`
+    .button {
+      display: inline-block;
+      position: relative;
+
+      margin: none;
+      padding: var(--button-padding-y) var(--button-padding-x);
+      border: var(--button-border) solid var(--button-border-color);      
+      border-top-left-radius: var(--button-border-radius-left);
+      border-bottom-left-radius: var(--button-border-radius-left);
+      border-top-right-radius: var(--button-border-radius-right);
+      border-bottom-right-radius: var(--button-border-radius-right);    
+
+      color: var(--button-color); 
+      background-color: var(--button-background-color); 
+      font-weight:  var(--button-font-weight);
+      font-size: var(--button-font-size);
+
+      cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+    }
+    .button:active {          
+      top: var(--button-offset-active); 
+      left: var(--button-offset-active); 
+      color: var(--button-color-active); 
+      background-color: var(--button-background-color-active)  !important; 
+      font-weight: var(--button-font-weight-active);
+    }
+    .button:hover {
+      color: var(--button-color-hover); 
+      background-color: var(--button-background-color-hover); 
+      font-weight:  var(--button-font-weight-hover);
+    }
+    .button:disabled {
+      pointer-events: none;
+      color: var(--button-color-disabled); 
+      background-color: var(--button-background-color-disabled); 
+      font-weight:  var(--button-font-weight-disabled);
+    }
+    .default {
+      font-weight: var(--button-font-weight-default);
+    }
+    .text-transform-capitalize {
+      text-transform: capitalize;
+    }
+    .text-transform-uppercase {
+      text-transform: uppercase;
+    }
+    .text-transform-lowercase {
+      text-transform: lowercase;
+    }
+    .text-transform-none {
+      text-transform: none;
+    }        
+    `;
+  }
+  buttonType() {
+    return this.submit ? 'submit' : 'button';
+  }
+  render() {
+    return html`
+      ${this.link
+        ? html`
+            &lt;a role="button" class="button ${this.transform ? `text-transform-${this.transform}` : ''} ${this.default ? 'default' : ''}" href="${this.link}" ?disabled="${this.disabled}" @click=${this.onClick}>
+              &lt;slot>&lt;/slot>
+            &lt;/a>
+          `
+        : html`
+            &lt;button role="button" type="${this.buttonType()}" class="button ${this.transform ? `text-transform-${this.transform}` : ''} ${this.default ? 'default' : ''}" ?disabled="${this.disabled}" @click=${this.onClick}>
+              &lt;slot>&lt;/slot>
+            &lt;/button>
+          `}
+    `;
+  }
+  onClick(evt) {
+    // If the button is in a form, then create a temporary button to submit the form
+    const form = this.formElement();
+    if (form &amp;&amp; this.submit) {
+      evt.preventDefault();
+      const tmpButton = document.createElement("button");
+      tmpButton.type = "submit";
+      tmpButton.name = this.name;
+      tmpButton.value = this.textContent;
+      tmpButton.style.display = "none";
+      form.appendChild(tmpButton);
+      tmpButton.click();
+
+      let formData = new FormData(form, tmpButton);
+      let formValues = {};
+      for (let [key, value] of formData.entries()) {
+        formValues[key] = value;
+      }
+      tmpButton.remove();
+      console.log(formValues);
+    }
+
+    // Dispatch a click event
+    this.dispatchEvent(new CustomEvent(
+      Event.EVENT_CLICK, {
+      bubbles: true,
+      composed: true,
+      detail: this.name || this.textContent
+    }));
+  }
+  formElement() {
+    return this.#internals.form;
+  }
+}
+
+customElements.define('wc-button', ButtonElement);
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BadgeElement.html">BadgeElement</a></li><li><a href="BadgeGroupElement.html">BadgeGroupElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ButtonGroupElement.html">ButtonGroupElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="FormDateElement.html">FormDateElement</a></li><li><a href="FormElement.html">FormElement</a></li><li><a href="FormTextElement.html">FormTextElement</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="Model.html">Model</a></li><li><a href="NavBarElement.html">NavBarElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="SideModalElement.html">SideModalElement</a></li><li><a href="SpacerElement.html">SpacerElement</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#autocomplete">autocomplete</a></li><li><a href="global.html#default">default</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#disabled">disabled</a></li><li><a href="global.html#labelabove">labelabove</a></li><li><a href="global.html#link">link</a></li><li><a href="global.html#max">max</a></li><li><a href="global.html#maxlength">maxlength</a></li><li><a href="global.html#min">min</a></li><li><a href="global.html#minlength">minlength</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#pattern">pattern</a></li><li><a href="global.html#placeholder">placeholder</a></li><li><a href="global.html#required">required</a></li><li><a href="global.html#rows">rows</a></li><li><a href="global.html#size">size</a></li><li><a href="global.html#submit">submit</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#value">value</a></li><li><a href="global.html#y">y</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 13 2024 08:45:23 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,8 +1,0 @@
-plugins:
-  - ../../bin/httpserver.plugin
-  - ../../bin/log.plugin
-  - ../../bin/static.plugin
-
-static:
-  "/": dist/
-  

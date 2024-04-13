@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storybook</title>
+    <script type="module" src="./index.js" defer></script>
+    <link href="./index.css" rel="stylesheet">
+</head>
+
+<body>
+    <wc-navbar name="navbar">
+        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+        <wc-nav-item>File</wc-nav-item>
+        <wc-nav-item>Edit</wc-nav-item>
+        <wc-nav-item>Selection</wc-nav-item>
+        <wc-nav-item>View</wc-nav-item>
+        <wc-nav-item disabled>Disabled</wc-nav-item>
+        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+    </wc-navbar>
+
+    <div class="container">
+        <h1>Buttons</h1>
+
+        <h3>Individual</h3>
+        <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
+        <wc-button name="retry">Retry</wc-button>
+
+        <h3>Group</h3>
+        <wc-button-group>
+            <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+            <wc-button name="retry">Retry</wc-button>
+            <wc-button name="cancel" default>Cancel</wc-button>
+        </wc-button-group>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h1>Badge</h1>
+
+        <h3>Individual</h3>
+        <wc-badge transform="uppercase">default</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
+        <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
+        <hr>
+
+        <h3>Group</h3>
+        <wc-badge-group>
+            <wc-badge transform="uppercase">default</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
+            <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
+        </wc-badge-group>
+
+    </div>
+    <hr>
+
+    <div class="container wc-card">
+        <h1>Close Button</h1>
+        <div
+            style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
+            <wc-close name="close"></wc-close>
+            <p>Here is some content within a container</p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h1>Icon</h1>
+        <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
+        <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
+        <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
+        <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
+        <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
+    </div>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h1>Modal</h1>
+        <wc-button name="modal">Pop-up</wc-button>
+        <wc-modal>
+            <wc-close name="modal-close"></wc-close>
+            <p>Here is some content within a modal</p>
+        </wc-modal>
+        <wc-sidemodal>
+            <wc-close name="modal-close"></wc-close>
+            <div class=""container">
+                <p>Here is some content within a sidemodal</p>
+            </div>
+        </wc-sidemodal>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
+            <h1>Form</h1>
+            <wc-form-input name="test" disabled placeholder="Generic input box without a label"></wc-form-input>
+            <wc-spacer></wc-spacer>
+            <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
+            <wc-spacer></wc-spacer>
+            <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
+            <wc-spacer></wc-spacer>
+            <wc-form-text name="address" placeholder="Address" labelabove rows="4" description="Shipping address (optional)">Address</wc-form-text>
+            <wc-spacer></wc-spacer>
+            <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of Birth</wc-form-date>
+            <wc-spacer></wc-spacer>
+            <wc-button-group style="border: 1px solid red">
+                <wc-button name="save" submit default>Save</wc-button>
+                <wc-button name="save" submit>Cancel</wc-button>
+            </wc-button-group>
+        </form>
+    </div>
+    <hr>
+
+</body>
+
+</html>

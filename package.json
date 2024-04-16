@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "rm -fr dist && install -d dist && esbuild src/index.html src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy  --watch --serve",
     "build": "rm -fr dist && install -d dist && esbuild src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
-    "lint": "eslint js",
+    "lint": "eslint -c config/eslint.config.mjs src/*.js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },
   "repository": {
@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/djthorpe/js-framework#readme",
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "esbuild": "^0.20.2",
     "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "jsdoc": "^4.0.2"
   },
   "dependencies": {

@@ -105,20 +105,28 @@
     <div class="container">
         <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
             <h1>Form</h1>
-            <wc-form-input name="test" disabled placeholder="Generic input box without a label"></wc-form-input>
-            <wc-spacer></wc-spacer>
-            <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
-            <wc-spacer></wc-spacer>
-            <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
-            <wc-spacer></wc-spacer>
-            <wc-form-text name="address" placeholder="Address" labelabove rows="4" description="Shipping address (optional)">Address</wc-form-text>
-            <wc-spacer></wc-spacer>
-            <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of Birth</wc-form-date>
-            <wc-spacer></wc-spacer>
-            <wc-button-group style="border: 1px solid red">
-                <wc-button name="save" submit default>Save</wc-button>
-                <wc-button name="save" submit>Cancel</wc-button>
-            </wc-button-group>
+            <wc-row backgroundColor="light">
+                <wc-row-6>
+                    <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
+                    <wc-spacer></wc-spacer>
+                    <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
+                    <wc-spacer></wc-spacer>
+                    <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of Birth</wc-form-date>
+                </wc-row-6>
+                <wc-row-6>
+                    <wc-form-text name="address" placeholder="Address" labelabove rows="6" description="Shipping address (optional)">Address</wc-form-text>
+                </wc-row-6>
+            </wc-row>
+            <wc-row backgroundColor="light">
+                <wc-row-12>                    
+                    <wc-spacer></wc-spacer>
+                    <wc-button-group>
+                        <wc-button name="save" submit default>Save</wc-button>
+                        <wc-button name="save" submit>Cancel</wc-button>
+                    </wc-button-group>        
+                    <wc-spacer></wc-spacer>
+                </wc-row-12>
+            </wc-row>
         </form>
     </div>
     <hr>
@@ -128,7 +136,7 @@
         <h1>Row Layout</h1>
 
         <h3>Two Columns</h3>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+        <wc-row backgroundColor="light">
             <wc-row-6>
                 Left Hand Side
             </wc-row-6>
@@ -180,13 +188,13 @@
             <wc-row-2>
                 Col 3
             </wc-row-2>
-            <wc-row-3>
+            <wc-row-2>
                 Col 4
             </wc-row-2>
-            <wc-row-3>
+            <wc-row-2>
                 Col 5
             </wc-row-2>
-            <wc-row-3>
+            <wc-row-2>
                 Col 6
             </wc-row-2>
         </wc-row>

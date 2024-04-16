@@ -5,19 +5,29 @@ import { LitElement, html, css } from 'lit';
  * A vertical spacer element
  */
 export class SpacerElement extends LitElement {
+  static localName = 'wc-spacer';
+
   constructor() {
     super();
 
     // Default properties
-    this.y = 1;
+    this.v = 1;
   }
   static get properties() {
     return {
       /**
-       * Y space (0-6)
-       * @type {Number}
+       * Vertical spacer: 0, 1, 2, 3, 4, 5, 6 which defaults to 1 space element
+       * 
+       * @type Number
+       * @memberof SpacerElement
+       * 
+       * Example:
+       * 
+       * ```html
+       * <wc-spacer v="3"></wc-spacer>
+       * ```
        */
-      y: { type: Number },
+      v: { type: Number },
     };
   }
 
@@ -48,9 +58,7 @@ export class SpacerElement extends LitElement {
   }
   render() {
     return html`
-        <div class="m-${this.y}"></div>
+        <div class="m-${this.v}"></div>
     `;
   }
 }
-
-customElements.define('wc-spacer', SpacerElement);

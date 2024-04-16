@@ -1,10 +1,18 @@
 
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, customElement } from 'lit';
 
 /**
- * A badge element
+ * A badge element class that can be used to display a badge with text or icon.
+ * For example:
+ * 
+ * ```html
+ * <wc-badge backgroundColor="primary" transform="uppercase">New</wc-badge>
+ * <wc-badge backgroundColor="primary"><wc-icon name="circle"></wc-icon></wc-badge>
+ * ```
  */
 export class BadgeElement extends LitElement {
+  static localName = 'wc-badge';
+
   constructor() {
     super();
     // Default properties
@@ -98,7 +106,4 @@ export class BadgeElement extends LitElement {
       `;
   }
 }
-
-customElements.define('wc-badge', BadgeElement);
-
 

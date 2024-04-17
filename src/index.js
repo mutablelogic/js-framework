@@ -11,7 +11,7 @@ import './component/button/ButtonGroupElement';
 import './component/button/CloseButtonElement';
 
 // Badges
-import './component/badge/BadgeElement';
+import { BadgeElement } from './component/badge/BadgeElement';
 import './component/badge/BadgeGroupElement';
 
 customElements.define(BadgeElement.localName, BadgeElement); // wc-badge
@@ -57,5 +57,5 @@ import './css/document.css';
 
 // Other
 import './esbuild.js';
-import './test.js'; import { BadgeElement } from './component/badge/BadgeElement';
+import './test.js';
 

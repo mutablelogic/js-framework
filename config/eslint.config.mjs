@@ -1,14 +1,14 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import globals from 'globals';
-import path from 'path';
+import {dirname } from 'path';
 import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 
 // mimic CommonJS variables -- not needed if using CommonJS
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(_filename);
 const compat = new FlatCompat({
-  baseDirectory: dirname,
+  baseDirectory: _dirname,
 });
 
 export default [
@@ -16,6 +16,8 @@ export default [
   {
     languageOptions: {
       globals: globals.browser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
   },
   ...compat.extends('airbnb-base'),

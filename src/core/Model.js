@@ -4,13 +4,15 @@
  * @class
 */
 export class Model {
-    constructor() {
-        // Initialize properties
-    }
-    static get properties() {
-        return {}
-    }
-    toString() {
-        return JSON.stringify(this);
-    }
+  constructor() {
+    // Initialize properties
+  }
+
+  static get properties() {
+    return {};
+  }
+
+  toString() {
+    return JSON.stringify(this);
+  }
 }

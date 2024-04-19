@@ -20,7 +20,6 @@ export class NavBarElement extends LitElement {
             disabled: { type: Boolean },
         };
     }
-
     static get styles() {
         return css`
         nav {            

@@ -1,8 +1,5 @@
-name: Publish Docs
+name: Publish Docs on Release
 on:
-  push:
-    branches:
-      - main
   release:
     types: [created]
 jobs:

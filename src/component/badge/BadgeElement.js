@@ -3,14 +3,14 @@ import {
 } from 'lit';
 
 /**
-* A badge element class that can be used to display a badge with text or icon.
-* For example:
+* BadgeElement - A badge element class that can be used to display a badge with text or icon.
 *
 * @example
 * <wc-badge backgroundColor="primary" transform="uppercase">New</wc-badge>
 * <wc-badge backgroundColor="primary"><wc-icon name="circle"></wc-icon></wc-badge>
 */
-export default class BadgeElement extends LitElement {
+// eslint-disable-next-line import/prefer-default-export
+export class BadgeElement extends LitElement {
   static get localName() {
     return 'wc-badge';
   }

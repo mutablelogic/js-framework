@@ -3,9 +3,14 @@ import { LitElement, html, css } from 'lit';
 /**
   *  wc-badge-group is a group of badges
   *
-  * @slot - This element has a slot to include wc-badge elements
+  * @example
+  * <wc-badge-group>
+  *   <wc-badge backgroundColor="primary" transform="uppercase">New</wc-badge>
+  *   <wc-badge backgroundColor="primary"><wc-icon name="circle"></wc-icon></wc-badge>
+  * </wc-badge-group>
   */
-export default class BadgeGroupElement extends LitElement {
+// eslint-disable-next-line import/prefer-default-export
+export class BadgeGroupElement extends LitElement {
   static get localName() {
     return 'wc-badge-group';
   }

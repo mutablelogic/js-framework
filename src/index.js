@@ -8,8 +8,9 @@ import './css/document.css';
 import './core/Model';
 import './core/Provider';
 
-// Badges
+// Badges, Nav
 import './badge';
+import './nav';
 
 // Other
 import './esbuild';

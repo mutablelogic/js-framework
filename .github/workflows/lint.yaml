@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-  release:
-    types: [created]
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -19,13 +17,7 @@ jobs:
         node-version: 'latest'
         registry-url: 'https://npm.pkg.github.com'
         scope: '@mutablelogic'
-
-    - name: Generate Documentatin
+    - name: Lint
       run: |
-        npm install
-        npm run docs
-
-    - name: Deploy Documentation
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: dist/doc
+        npm ci
+        npm run lint

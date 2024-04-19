@@ -1,20 +1,24 @@
-
 // This file defines all the styles and elements used for the web components
+
+// CSS
+import './css/core.css';
+import './css/document.css';
 
 // Core
 import './core/Model';
 import './core/Provider';
 
+// Badges
+import './badge';
+
+// Other
+import './esbuild';
+import './test';
+
 // Buttons
 import './component/button/ButtonElement';
 import './component/button/ButtonGroupElement';
 import './component/button/CloseButtonElement';
-
-// Badges
-import { BadgeElement } from './component/badge/BadgeElement';
-import './component/badge/BadgeGroupElement';
-
-customElements.define(BadgeElement.localName, BadgeElement); // wc-badge
 
 // Icons
 import './component/icon/IconElement';
@@ -34,7 +38,13 @@ import './component/form/FormDateElement';
 
 // Layout Elements
 import { SpacerElement } from './component/layout/SpacerElement';
-import { RowElement, RowCell1Element, RowCell2Element,RowCell3Element,RowCell4Element,RowCell5Element,RowCell6Element,RowCell7Element,RowCell8Element,RowCell9Element,RowCell10Element,RowCell11Element,RowCell12Element } from './component/layout/RowElement';
+import {
+  RowElement,
+  RowCell1Element, RowCell2Element, RowCell3Element,
+  RowCell4Element, RowCell5Element, RowCell6Element,
+  RowCell7Element, RowCell8Element, RowCell9Element,
+  RowCell10Element, RowCell11Element, RowCell12Element,
+} from './component/layout/RowElement';
 
 customElements.define(SpacerElement.localName, SpacerElement); // wc-spacer
 customElements.define(RowElement.localName, RowElement); // wc-row
@@ -50,12 +60,3 @@ customElements.define(RowCell9Element.localName, RowCell9Element); // wc-row-9
 customElements.define(RowCell10Element.localName, RowCell10Element); // wc-row-10
 customElements.define(RowCell11Element.localName, RowCell11Element); // wc-row-11
 customElements.define(RowCell12Element.localName, RowCell12Element); // wc-row-12
-
-// CSS
-import './css/core.css';
-import './css/document.css';
-
-// Other
-import './esbuild.js';
-import './test.js';
-

@@ -1,4 +1,4 @@
-name: Node.js Package Publish
+name: Package Publish on Release
 on:
   release:
     types: [created]
@@ -6,8 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@mutablelogic'
@@ -20,7 +20,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/delete-package-versions@v1
+      - uses: actions/delete-package-versions@v5
         with:
           package-name: js-framework
+          package-type: 'npm'
           num-old-versions-to-delete: 1
+          min-versions-to-keep: 2

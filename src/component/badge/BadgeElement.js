@@ -6,10 +6,9 @@ import {
 * BadgeElement - A badge element class that can be used to display a badge with text or icon.
 *
 * @example
-* <wc-badge backgroundColor="primary" transform="uppercase">New</wc-badge>
+* <wc-badge backgroundColor="primary" textTransform="uppercase">New</wc-badge>
 * <wc-badge backgroundColor="primary"><wc-icon name="circle"></wc-icon></wc-badge>
 */
-// eslint-disable-next-line import/prefer-default-export
 export class BadgeElement extends LitElement {
   static get localName() {
     return 'wc-badge';
@@ -111,7 +110,7 @@ export class BadgeElement extends LitElement {
     `;
   }
 
-  className() {
+  get className() {
     let className = '';
     if (this.textTransform) {
       className += `text-transform-${this.textTransform}`;
@@ -124,7 +123,7 @@ export class BadgeElement extends LitElement {
 
   render() {
     return html`
-    <span class=${this.className || nothing}><slot></slot></span>
+      <span class=${this.className || nothing}><slot></slot></span>
     `;
   }
 }

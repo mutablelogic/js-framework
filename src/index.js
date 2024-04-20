@@ -1,16 +1,18 @@
 // This file defines all the styles and elements used for the web components
 
-// CSS
-import './css/core.css';
-import './css/document.css';
-
 // Core
 import './core/Model';
 import './core/Provider';
+import './css/core.css';
+import './css/document.css';
 
-// Badges, Nav
-import './badge';
-import './nav';
+// Badges
+import './css/badge.css';
+import './js/badge';
+
+// Nav
+import './js/nav';
+import './css/nav.css';
 
 // Other
 import './esbuild';

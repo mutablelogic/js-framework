@@ -21,197 +21,209 @@
     </wc-navbar>
 
     <wc-sidebar>
-        <wc-sidebar-left>
-            <h1>This is a left sidebar</h1>
-        </wc-sidebar-left>
+        <wc-sidebar-nav>
+            <wc-nav>
+                <wc-nav-item>Text</wc-nav-item>
+                <wc-nav-item>Icon</wc-nav-item>
+                <wc-nav-item>Layout</wc-nav-item>
+                <wc-nav-item>Badge</wc-nav-item>
+                <wc-nav-item>Button</wc-nav-item>
+                <wv-nav-spacer/>
+                <wc-nav-item>Help</wc-nav-item>
+            </wc-nav>
+        </wc-sidebar-nav>
         <wc-sidebar-content>
-            <h1>This is content</h1>
+
+            <div class="container">
+                <h1>Buttons</h1>
+
+                <h3>Individual</h3>
+                <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
+                <wc-button name="retry">Retry</wc-button>
+
+                <h3>Group</h3>
+                <wc-button-group>
+                    <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+                    <wc-button name="retry">Retry</wc-button>
+                    <wc-button name="cancel" default>Cancel</wc-button>
+                </wc-button-group>
+            </div>
+            <hr>
+
+            <div class="container">
+                <h1>Badge</h1>
+
+                <h3>Individual</h3>
+                <wc-badge textTransform="uppercase">default</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+                <hr>
+
+                <h3>Group</h3>
+                <wc-badge-group>
+                    <wc-badge textTransform="uppercase">default</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+                    <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+                </wc-badge-group>
+            </div>
+            <hr>
+
+            <div class="container wc-card">
+                <h1>Close Button</h1>
+                <div
+                    style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
+                    <wc-close name="close"></wc-close>
+                    <p>Here is some content within a container</p>
+                </div>
+            </div>
+            <hr>
+
+            <div class="container">
+                <h1>Icon</h1>
+                <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
+                <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
+                <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
+                <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
+                <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
+            </div>
+            </div>
+            <hr>
+
+            <div class="container">
+                <h1>Modal</h1>
+                <wc-button name="modal">Pop-up</wc-button>
+                <wc-modal>
+                    <wc-close name="modal-close"></wc-close>
+                    <p>Here is some content within a modal</p>
+                </wc-modal>
+                <wc-sidemodal>
+                    <wc-close name="modal-close"></wc-close>
+                    <div class="" container">
+                        <p>Here is some content within a sidemodal</p>
+                    </div>
+                </wc-sidemodal>
+            </div>
+            <hr>
+
+            <div class="container">
+                <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
+                    <h1>Form</h1>
+                    <wc-row backgroundColor="light">
+                        <wc-row-6>
+                            <wc-form-text name="name" placeholder="Name" autocomplete required
+                                minlength="3">Name</wc-form-text>
+                            <wc-spacer></wc-spacer>
+                            <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$"
+                                description="Email Address (optional)" autocomplete minlength="3">Email
+                                Address</wc-form-text>
+                            <wc-spacer></wc-spacer>
+                            <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of
+                                Birth</wc-form-date>
+                        </wc-row-6>
+                        <wc-row-6>
+                            <wc-form-text name="address" placeholder="Address" labelabove rows="6"
+                                description="Shipping address (optional)">Address</wc-form-text>
+                        </wc-row-6>
+                    </wc-row>
+                    <wc-row backgroundColor="light">
+                        <wc-row-12>
+                            <wc-spacer></wc-spacer>
+                            <wc-button-group>
+                                <wc-button name="save" submit default>Save</wc-button>
+                                <wc-button name="save" submit>Cancel</wc-button>
+                            </wc-button-group>
+                            <wc-spacer></wc-spacer>
+                        </wc-row-12>
+                    </wc-row>
+                </form>
+            </div>
+            <hr>
+
+            <div class="container">
+                <h1>Row Layout</h1>
+
+                <h3>Two Columns</h3>
+                <wc-row backgroundColor="light">
+                    <wc-row-6>
+                        Left Hand Side
+                    </wc-row-6>
+                    <wc-row-6>
+                        Right Hand Side
+                    </wc-row-6>
+                </wc-row>
+                <hr />
+
+                <h3>Three Columns</h3>
+                <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+                    <wc-row-4>
+                        Left
+                    </wc-row-4>
+                    <wc-row-4>
+                        Middle
+                    </wc-row-4>
+                    <wc-row-4>
+                        Right
+                    </wc-row-4>
+                </wc-row>
+                <hr />
+
+                <h2>Four Columns</h2>
+                <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+                    <wc-row-3>
+                        Col 1
+                    </wc-row-3>
+                    <wc-row-3>
+                        Col 2
+                    </wc-row-3>
+                    <wc-row-3>
+                        Col 3
+                    </wc-row-3>
+                    <wc-row-3>
+                        Col 4
+                    </wc-row-3>
+                </wc-row>
+                <hr />
+
+                <h2>Six Columns</h2>
+                <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+                    <wc-row-2>
+                        Col 1
+                    </wc-row-2>
+                    <wc-row-2>
+                        Col 2
+                    </wc-row-2>
+                    <wc-row-2>
+                        Col 3
+                    </wc-row-2>
+                    <wc-row-2>
+                        Col 4
+                    </wc-row-2>
+                    <wc-row-2>
+                        Col 5
+                    </wc-row-2>
+                    <wc-row-2>
+                        Col 6
+                    </wc-row-2>
+                </wc-row>
+                <hr />
+
+            </div>
         </wc-sidebar-content>
-        <wc-sidebar-right>
+        <wc-sidebar-nav>
             <h1>This is a right sidebar</h1>
-        </wc-sidebar-right>
+        </wc-sidebar-nav>
     </wc-sidebar>
 
-    <div class="container">
-        <h1>Buttons</h1>
-
-        <h3>Individual</h3>
-        <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
-        <wc-button name="retry">Retry</wc-button>
-
-        <h3>Group</h3>
-        <wc-button-group>
-            <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
-            <wc-button name="retry">Retry</wc-button>
-            <wc-button name="cancel" default>Cancel</wc-button>
-        </wc-button-group>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Badge</h1>
-
-        <h3>Individual</h3>
-        <wc-badge transform="uppercase">default</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
-        <hr>
-
-        <h3>Group</h3>
-        <wc-badge-group>
-            <wc-badge transform="uppercase">default</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
-        </wc-badge-group>
-
-    </div>
-    <hr>
-
-    <div class="container wc-card">
-        <h1>Close Button</h1>
-        <div
-            style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
-            <wc-close name="close"></wc-close>
-            <p>Here is some content within a container</p>
-        </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Icon</h1>
-        <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
-        <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
-        <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
-        <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
-        <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
-    </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Modal</h1>
-        <wc-button name="modal">Pop-up</wc-button>
-        <wc-modal>
-            <wc-close name="modal-close"></wc-close>
-            <p>Here is some content within a modal</p>
-        </wc-modal>
-        <wc-sidemodal>
-            <wc-close name="modal-close"></wc-close>
-            <div class=""container">
-                <p>Here is some content within a sidemodal</p>
-            </div>
-        </wc-sidemodal>
-    </div>
-    <hr>
-
-    <div class="container">
-        <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
-            <h1>Form</h1>
-            <wc-row backgroundColor="light">
-                <wc-row-6>
-                    <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
-                    <wc-spacer></wc-spacer>
-                    <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
-                    <wc-spacer></wc-spacer>
-                    <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of Birth</wc-form-date>
-                </wc-row-6>
-                <wc-row-6>
-                    <wc-form-text name="address" placeholder="Address" labelabove rows="6" description="Shipping address (optional)">Address</wc-form-text>
-                </wc-row-6>
-            </wc-row>
-            <wc-row backgroundColor="light">
-                <wc-row-12>                    
-                    <wc-spacer></wc-spacer>
-                    <wc-button-group>
-                        <wc-button name="save" submit default>Save</wc-button>
-                        <wc-button name="save" submit>Cancel</wc-button>
-                    </wc-button-group>        
-                    <wc-spacer></wc-spacer>
-                </wc-row-12>
-            </wc-row>
-        </form>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Row Layout</h1>
-
-        <h3>Two Columns</h3>
-        <wc-row backgroundColor="light">
-            <wc-row-6>
-                Left Hand Side
-            </wc-row-6>
-            <wc-row-6>
-                Right Hand Side
-            </wc-row-6>
-        </wc-row>
-        <hr/>
-
-        <h3>Three Columns</h3>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-4>
-                Left
-            </wc-row-4>
-            <wc-row-4>
-                Middle
-            </wc-row-4>
-            <wc-row-4>
-                Right
-            </wc-row-4>
-        </wc-row>
-        <hr/>
-
-        <h2>Four Columns</h2>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-3>
-                Col 1
-            </wc-row-3>
-            <wc-row-3>
-                Col 2
-            </wc-row-3>
-            <wc-row-3>
-                Col 3
-            </wc-row-3>
-            <wc-row-3>
-                Col 4
-            </wc-row-3>
-        </wc-row>
-        <hr/>
-
-        <h2>Six Columns</h2>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-2>
-                Col 1
-            </wc-row-2>
-            <wc-row-2>
-                Col 2
-            </wc-row-2>
-            <wc-row-2>
-                Col 3
-            </wc-row-2>
-            <wc-row-2>
-                Col 4
-            </wc-row-2>
-            <wc-row-2>
-                Col 5
-            </wc-row-2>
-            <wc-row-2>
-                Col 6
-            </wc-row-2>
-        </wc-row>
-        <hr/>
-        
-    </div>
 </body>
 
 </html>

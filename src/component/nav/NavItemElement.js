@@ -1,34 +1,45 @@
-
 import { LitElement, html, css } from 'lit';
 import Event from '../../core/Event';
 
 /**
  * NavItemElement
+ * This class is used to create a navigational item, which responds to hover and click events
+ *
+ * @example
+ * <wc-nav vertical>
+ *   <wc-nav-item>File</wc-nav-item>
+ * </wc-nav>
  */
 export class NavItemElement extends LitElement {
-    constructor() {
-        super();
-        // Default properties
-        this.name = '';
-        this.disabled = false;
-    }
-    static get properties() {
-        return {
-            /**
-             * Name of the item to use when firing the EVENT_CLICK event
-             * @type {String}
-             */
-            name: { type: String },
+  static get localName() {
+    return 'wc-nav-item';
+  }
 
-            /**
-             * Whether the item is disabled
-             * @type {Boolean}
-             */
-            disabled: { type: Boolean },
-        };
-    }
-    static get styles() {
-        return css`
+  constructor() {
+    super();
+    // Default properties
+    this.name = '';
+    this.disabled = false;
+  }
+
+  static get properties() {
+    return {
+      /**
+       * Name of the item to use when firing the EVENT_CLICK event
+       * @type {String}
+       */
+      name: { type: String },
+
+      /**
+       * Whether the item is disabled
+       * @type {Boolean}
+       */
+      disabled: { type: Boolean },
+    };
+  }
+
+  static get styles() {
+    return css`
         li {     
             color: var(--nav-item-color);       
             padding: var(--nav-item-padding-y) var(--nav-item-padding-x) var(--nav-item-padding-y) var(--nav-item-padding-x);
@@ -42,23 +53,21 @@ export class NavItemElement extends LitElement {
             cursor: default;
         }
         `;
-    }
-    render() {
-        return html`
+  }
+
+  render() {
+    return html`
             <li class="${this.disabled ? 'disabled' : ''}" @click=${this.onClick}><slot></slot></li>
         `;
-    }
-    onClick() {
-        if (!this.disabled) {
-            this.dispatchEvent(new CustomEvent(
-                Event.EVENT_CLICK, { 
-                  bubbles: true,
-                  composed: true,
-                  detail: this.name || this.textContent 
-                },
-              ));      
-        }
-    }
-}
+  }
 
-customElements.define('wc-nav-item', NavItemElement);
+  onClick() {
+    if (!this.disabled) {
+      this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: this.name || this.textContent,
+      }));
+    }
+  }
+}

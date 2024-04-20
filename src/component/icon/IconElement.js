@@ -23,6 +23,10 @@ export class IconElement extends LitElement {
 
     static get styles() {
         return css`
+        :host {
+            display: inline-block;
+            vertical-align: middle;
+        }
         .size-default {
             position: relative;
             width: var(--icon-size-default);

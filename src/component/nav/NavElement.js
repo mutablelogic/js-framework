@@ -1,5 +1,5 @@
 import {
-  LitElement, html, css, nothing 
+  LitElement, html, css, nothing,
 } from 'lit';
 
 /**
@@ -30,19 +30,38 @@ export class NavElement extends LitElement {
 
   static get styles() {
     return css`
-          :host {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-items: stretch;
-          }
-        `;
+      ul {
+        display: flex;
+        margin: 0;
+        border: 0;
+        padding: 0;
+
+        list-style: none;
+        font-size: var(--nav-item-font-size);
+        font-weight: var(--nav-item-font-weight);
+      }
+      ul.horizontal {
+        flex-direction: row;
+      }
+      ul.vertical {
+        flex-direction: column;
+      }
+      ::slotted(*) {
+        color: var(--nav-item-color);
+        background-color: var(--nav-item-background-color);
+      }
+      .vertical ::slotted(*) {
+        border-bottom: 1px solid var(--nav-item-divider-color);
+      }
+    `;
   }
 
   get className() {
     let className = '';
     if (this.vertical) {
       className += 'vertical ';
+    } else {
+      className += 'horizontal ';
     }
     return className;
   }
@@ -50,7 +69,7 @@ export class NavElement extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return html`
-      <ul class={$this.className || nothing}><slot></slot></ul>
+      <ul class=${this.className || nothing}><slot></slot></ul>
     `;
   }
 }

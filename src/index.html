@@ -47,14 +47,20 @@
       </wc-nav>
     </wc-sidebar>
     <wc-content>
-      <!-- Table of data -->
-      <wc-table id="table">Table of Fruit</wc-table>
-      <script>
-        document.getElementById('table').data = [
+      <div class="container">
+        <h1>Tables</h1>
+
+        <!-- Table of data -->
+        <wc-table id="table">Table of Fruit</wc-table>
+        <script>
+          document.getElementById('table').data = [
             { fruit: 'apple', color: 'green', weight: '100gr' },
             { fruit: 'banana', color: 'yellow', weight: '140gr' }
           ];
-      </script>
+        </script>
+      </div>
+      <hr>
+      
       <div class="container">
         <h1>Buttons</h1>
 

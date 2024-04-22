@@ -5,6 +5,7 @@ import './core.css';
 import './document.css';
 import './badge/badge';
 import './nav/nav';
+import './table/table';
 
 // Other
 import './esbuild';

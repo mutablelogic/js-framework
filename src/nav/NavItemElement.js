@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/Event';
+import Event from '../core/Event';
 
 /**
  * NavItemElement
@@ -40,25 +40,20 @@ export class NavItemElement extends LitElement {
 
   static get styles() {
     return css`
-        li {     
-            color: var(--nav-item-color);       
-            padding: var(--nav-item-padding-y) var(--nav-item-padding-x) var(--nav-item-padding-y) var(--nav-item-padding-x);
-            cursor: pointer;
-        }
-        li:hover {
-            color: var(--nav-item-color-hover);
-        }
-        li.disabled,li.disabled:hover {
-            color: var(--nav-item-color-disabled);
-            cursor: default;
-        }
-        `;
+      li {     
+          padding: var(--nav-item-padding-y) var(--nav-item-padding-x) var(--nav-item-padding-y) var(--nav-item-padding-x);
+          cursor: pointer;
+      }
+      li.disabled,li.disabled:hover {
+          cursor: default;
+      }
+    `;
   }
 
   render() {
     return html`
-            <li class="${this.disabled ? 'disabled' : ''}" @click=${this.onClick}><slot></slot></li>
-        `;
+      <li class="${this.disabled ? 'disabled' : ''}" @click=${this.onClick}><slot></slot></li>
+    `;
   }
 
   onClick() {

@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/Event';
 
 /**
  * NavSpacerElement
@@ -23,18 +22,16 @@ export class NavSpacerElement extends LitElement {
 
   static get styles() {
     return css`
-    li {
-      flex-grow: 1;
-      flex-shrink: 0;
-      border: 1px solid red;
-    }
+      :host {
+        flex: 1;
+      }
     `;
   }
 
   // eslint-disable-next-line class-methods-use-this
   render() {
     return html`
-            <li>SPACER</li>
-        `;
+      <li class="disabled"></li>
+    `;
   }
 }

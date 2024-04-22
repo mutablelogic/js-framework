@@ -35,7 +35,6 @@ export class NavElement extends LitElement {
         margin: 0;
         border: 0;
         padding: 0;
-
         list-style: none;
         font-size: var(--nav-item-font-size);
         font-weight: var(--nav-item-font-weight);
@@ -46,12 +45,9 @@ export class NavElement extends LitElement {
       ul.vertical {
         flex-direction: column;
       }
-      ::slotted(*) {
-        color: var(--nav-item-color);
-        background-color: var(--nav-item-background-color);
-      }
-      .vertical ::slotted(*) {
-        border-bottom: 1px solid var(--nav-item-divider-color);
+      ::slotted(wc-nav-item:hover)  {
+        color: var(--light-color);
+        background-color: var(--primary-color);
       }
     `;
   }

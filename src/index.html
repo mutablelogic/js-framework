@@ -10,18 +10,20 @@
 </head>
 
 <body>
-    <wc-navbar name="navbar">
-        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
-        <wc-nav-item>File</wc-nav-item>
-        <wc-nav-item>Edit</wc-nav-item>
-        <wc-nav-item>Selection</wc-nav-item>
-        <wc-nav-item>View</wc-nav-item>
-        <wc-nav-item disabled>Disabled</wc-nav-item>
-        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
-    </wc-navbar>
-
-    <wc-sidebar>
-        <wc-sidebar-nav>
+    <wc-canvas>
+        <wc-navbar backgroundColor="dark">
+            <wc-nav>
+                <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+                <wc-nav-item>File</wc-nav-item>
+                <wc-nav-item>Edit</wc-nav-item>
+                <wc-nav-item>Selection</wc-nav-item>
+                <wc-nav-item>View</wc-nav-item>
+                <wc-nav-item disabled>Disabled</wc-nav-item>
+                <wc-nav-spacer></wc-nav-spacer>
+                <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+            </wc-nav>
+        </wc-navbar>
+        <wc-sidebar backgroundColor="light">
             <wc-nav vertical>
                 <wc-nav-item>
                     <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
@@ -43,8 +45,8 @@
                     <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
                 </wc-nav-item>
             </wc-nav>
-        </wc-sidebar-nav>
-        <wc-sidebar-content>
+        </wc-sidebar>
+        <wc-content>
 
             <div class="container">
                 <h1>Buttons</h1>
@@ -120,9 +122,27 @@
                 </wc-modal>
                 <wc-sidemodal>
                     <wc-close name="modal-close"></wc-close>
-                    <div class="" container">
-                        <p>Here is some content within a sidemodal</p>
-                    </div>
+                    <wc-nav vertical>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
+                        </wc-nav-item>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+                        </wc-nav-item>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+                        </wc-nav-item>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+                        </wc-nav-item>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+                        </wc-nav-item>
+                        <wc-nav-spacer></wc-nav-spacer>
+                        <wc-nav-item>
+                            <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+                        </wc-nav-item>
+                    </wc-nav>
                 </wc-sidemodal>
             </div>
             <hr>
@@ -230,8 +250,8 @@
                 <hr />
 
             </div>
-        </wc-sidebar-content>
-        <wc-sidebar-nav>
+        </wc-content>
+        <wc-sidebar>
             <wc-nav vertical>
                 <wc-nav-item>
                     <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
@@ -253,9 +273,21 @@
                     <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
                 </wc-nav-item>
             </wc-nav>
-        </wc-sidebar-nav>
-    </wc-sidebar>
+        </wc-sidebar>
 
+        <wc-navbar backgroundColor="light">
+            <wc-nav>
+                <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+                <wc-nav-item>File</wc-nav-item>
+                <wc-nav-item>Edit</wc-nav-item>
+                <wc-nav-item>Selection</wc-nav-item>
+                <wc-nav-item>View</wc-nav-item>
+                <wc-nav-item disabled>Disabled</wc-nav-item>
+                <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+            </wc-nav>
+        </wc-navbar>
+
+    </wc-canvas>
 </body>
 
 </html>

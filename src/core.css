@@ -21,7 +21,15 @@
     --white-color: #fff;
     --dark-color: #333;
     --black-color: #000;
-    --grey-900-color: #222;
+    --grey-10-color: #EAEAEA;
+    --grey-20-color: #D0D0D0;
+    --grey-30-color: #B6B6B6;
+    --grey-40-color: #9C9C9C;
+    --grey-50-color: #828282;
+    --grey-60-color: #6A6A6A;
+    --grey-70-color: #4E4E4E;
+    --grey-80-color: #343434;
+    --grey-90-color: #1A1A1A;
 
     /* controls */
     --control-color: #bbb;

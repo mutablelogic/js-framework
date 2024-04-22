@@ -1,6 +1,7 @@
-// Badges
-import { BadgeElement } from '../component/badge/BadgeElement';
-import { BadgeGroupElement } from '../component/badge/BadgeGroupElement';
+// Import assets
+import './badge.css';
+import { BadgeElement } from './BadgeElement';
+import { BadgeGroupElement } from './BadgeGroupElement';
 
 // Define the custom elements
 customElements.define(BadgeElement.localName, BadgeElement); // wc-badge

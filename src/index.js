@@ -1,18 +1,10 @@
 // This file defines all the styles and elements used for the web components
-
-// Core
 import './core/Model';
 import './core/Provider';
-import './css/core.css';
-import './css/document.css';
-
-// Badges
-import './css/badge.css';
-import './js/badge';
-
-// Nav
-import './js/nav';
-import './css/nav.css';
+import './core.css';
+import './document.css';
+import './badge/badge';
+import './nav/nav';
 
 // Other
 import './esbuild';
@@ -25,10 +17,6 @@ import './component/button/CloseButtonElement';
 
 // Icons
 import './component/icon/IconElement';
-
-// Navigation
-import './component/nav/NavBarElement';
-import './component/nav/NavItemElement';
 
 // Modal Elements
 import './component/modal/ModalElement';

@@ -1,6 +1,7 @@
+:root {
+    --table-cell-padding-x: calc(var(--spacer) * 0.2);
+    --table-cell-padding-y: calc(var(--spacer) * 0.2);
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--grey-10-color);
+    --table-row-filter-header: brightness(50%);
+    --table-row-filter-odd: brightness(90%);
 }

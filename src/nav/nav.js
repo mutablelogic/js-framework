@@ -9,6 +9,7 @@ import { NavSpacerElement } from './NavSpacerElement';
 import { CanvasElement } from './CanvasElement';
 import { SideBarElement } from './SideBarElement';
 import { ContentElement } from './ContentElement';
+import { TabElement } from './TabElement';
 
 // Web Components
 customElements.define(NavBarElement.localName, NavBarElement); // wc-navbar
@@ -18,3 +19,4 @@ customElements.define(NavSpacerElement.localName, NavSpacerElement); // wc-nav-s
 customElements.define(CanvasElement.localName, CanvasElement); // wc-canvas
 customElements.define(SideBarElement.localName, SideBarElement); // wc-sidebar
 customElements.define(ContentElement.localName, ContentElement); // wc-content
+customElements.define(TabElement.localName, TabElement); // wc-tab

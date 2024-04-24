@@ -6,6 +6,7 @@ import './document.css';
 import './badge/badge';
 import './nav/nav';
 import './table/table';
+import './layout/layout';
 
 // Other
 import './esbuild';

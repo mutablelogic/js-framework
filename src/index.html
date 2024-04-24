@@ -48,18 +48,35 @@
     </wc-sidebar>
     <wc-content>
 
+
+      <div class="container">
+        <h1>Code</h1>
+        <div style="background-color: #fcfcfc; padding: 5px;">
+          <wc-code language="javascript">
+            console.log('hello');
+            console.log('hello');
+            console.log('hello');
+
+            /* this is some more javascript */
+            console.log('hello');
+          </wc-code>
+        </div>
+      </div>
+      <hr>
+
       <div class="container">
         <h1>Tab Group</h1>
         <div style="background-color: #fcfcfc; padding: 5px;">
-        <wc-tab-group backgroundColor="light">
-          <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
-          <wc-tab name="tab-buttons">Buttons</wc-tab>
-          <wc-tab name="tab-badges">Badges</wc-tab>
-          <wc-tab name="tab-icons">Icons</wc-tab>
-          <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon> Disabled</wc-tab>
-        </wc-tab-group>
+          <wc-tab-group backgroundColor="light">
+            <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
+            <wc-tab name="tab-buttons">Buttons</wc-tab>
+            <wc-tab name="tab-badges">Badges</wc-tab>
+            <wc-tab name="tab-icons">Icons</wc-tab>
+            <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon>
+              Disabled</wc-tab>
+          </wc-tab-group>
+        </div>
       </div>
-    </div>
       <hr>
 
       <div class="container">
@@ -75,7 +92,7 @@
         </script>
       </div>
       <hr>
-      
+
       <div class="container">
         <h1>Buttons</h1>
 

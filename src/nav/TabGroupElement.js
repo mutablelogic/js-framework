@@ -142,11 +142,9 @@ export class TabGroupElement extends LitElement {
     tabs.forEach((tab) => {
       if (tab.name === name && !tab.disabled) {
         if (!tab.selected) {
-          console.log('SELECT', tab.name);
-          tab.selected = true;
+          tab.setAttribute('selected', true);
         }
       } else if (tab.selected) {
-        console.log('DESELECT', tab.name);
         tab.selected = false;
       }
     });

@@ -52,7 +52,10 @@ export class TabElement extends LitElement {
   static get styles() {
     return css`
       li {
-        text-align: center;
+        vertical-align: middle;
+      }
+      li.selected {
+        border-bottom: 2px solid var(--error-color);
       }
     `;
   }

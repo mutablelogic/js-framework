@@ -53,7 +53,17 @@ export class TabElement extends LitElement {
     return css``;
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  get className() {
+    const classes = [];
+    if (this.selected) {
+      classes.push('selected');
+    }
+    if (this.disabled) {
+      classes.push('disabled');
+    }
+    return classes.join(' ');
+  }
+
   render() {
     return html`
         <li class=${this.className || nothing}><slot></slot></li>

@@ -1,6 +1,7 @@
 import {
   LitElement, html, css, nothing,
 } from 'lit';
+import { TabElement } from './TabElement';
 
 /**
  * TabGroupElement
@@ -29,7 +30,6 @@ export class TabGroupElement extends LitElement {
 
   static get properties() {
     return {
-
       /**
        * Background color of the tab group, one of primary, secondary, light, white, dark, black
        *
@@ -104,15 +104,19 @@ export class TabGroupElement extends LitElement {
         border-bottom: none;
         border-color: var(--grey-40-color);
       }
-      .bg-color-light ::slotted(wc-tab:hover) {
+      .bg-color-light ::slotted(wc-tab:hover),::slotted(wc-tab:active),::slotted(wc-tab[selected]) {
         background-color: var(--primary-color);
         color: var(--white-color);
       }
       .bg-color-light ::slotted(wc-tab:active) {
-        background-color: var(--primary-color);
-        color: var(--white-color);
         font-weight: var(--font-weight-bold);
-      }      
+      }
+      .bg-color-light ::slotted(wc-tab[disabled]) {
+        background-color: inherit;
+        font-weight: inherit;
+        color: var(--grey-40-color);
+        cursor: inherit;
+      }
     `;
   }
 
@@ -137,23 +141,35 @@ export class TabGroupElement extends LitElement {
     this.addEventListener(Event.EVENT_CLICK, (evt) => this.onClick(evt));
   }
 
+  /**
+   * Select a tab by name, and deselect all other tabs
+   * @param {String} name: The name of the tab to select
+   * @returns The node that was selected, or null
+   */
   select(name) {
     const tabs = this.querySelectorAll('wc-tab');
+    let selectedNode = null;
     tabs.forEach((tab) => {
-      if (tab.name === name && !tab.disabled) {
-        if (!tab.selected) {
-          tab.setAttribute('selected', true);
-        }
-      } else if (tab.selected) {
-        tab.selected = false;
+      if (tab.name === name && !tab.selected) {
+        tab.setAttribute('selected', 'selected');
+        selectedNode = tab;
+      } else if (tab.name !== name && tab.selected) {
+        tab.removeAttribute('selected');
       }
     });
+    return selectedNode;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   onClick(event) {
-    if (event.target && event.target.name && !event.target.disabled) {
-      this.select(event.target.name);
+    if (event.target && event.target.name) {
+      const selected = this.select(event.target.name);
+      if (selected) {
+        this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+          bubbles: true,
+          composed: true,
+          detail: selected.name || selected.textContent,
+        }));
+      }
     }
   }
 }

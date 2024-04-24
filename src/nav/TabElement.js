@@ -54,9 +54,6 @@ export class TabElement extends LitElement {
       li {
         vertical-align: middle;
       }
-      li.selected {
-        border-bottom: 2px solid var(--error-color);
-      }
     `;
   }
 

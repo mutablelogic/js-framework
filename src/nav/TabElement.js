@@ -70,7 +70,17 @@ export class TabElement extends LitElement {
 
   render() {
     return html`
-        <li class=${this.className || nothing}><slot></slot></li>
+        <li class=${this.className || nothing} @click=${this.onClick}><slot></slot></li>
       `;
+  }
+
+  onClick() {
+    if (!this.disabled) {
+      this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: this.name || this.textContent,
+      }));
+    }
   }
 }

@@ -77,6 +77,9 @@ export class TabGroupElement extends LitElement {
       .bg-color-dark ::slotted(wc-tab) {
         background-color: var(--dark-color);
         color: var(--light-color);
+        border-width: 1px;
+        border-style: solid;
+        border-bottom: none;
         border-color: var(--grey-80-color);
       }
       .bg-color-dark ::slotted(wc-tab:hover) {
@@ -91,12 +94,15 @@ export class TabGroupElement extends LitElement {
 
       /* light theme */
       ul.bg-color-light {
-        border-bottom: 1px solid var(--grey-20-color);
+        border-bottom: 1px solid var(--grey-40-color);
       }
       .bg-color-light ::slotted(wc-tab) {
         background-color: var(--light-color);
         color: var(--dark-color);
-        border-color: var(--grey-20-color);
+        border-width: 1px;
+        border-style: solid;
+        border-bottom: none;
+        border-color: var(--grey-40-color);
       }
       .bg-color-light ::slotted(wc-tab:hover) {
         background-color: var(--primary-color);
@@ -125,5 +131,31 @@ export class TabGroupElement extends LitElement {
     return html`
       <ul class=${this.className || nothing}><slot></slot></ul>
     `;
+  }
+
+  firstUpdated() {
+    this.addEventListener(Event.EVENT_CLICK, (evt) => this.onClick(evt));
+  }
+
+  select(name) {
+    const tabs = this.querySelectorAll('wc-tab');
+    tabs.forEach((tab) => {
+      if (tab.name === name && !tab.disabled) {
+        if (!tab.selected) {
+          console.log('SELECT', tab.name);
+          tab.selected = true;
+        }
+      } else if (tab.selected) {
+        console.log('DESELECT', tab.name);
+        tab.selected = false;
+      }
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  onClick(event) {
+    if (event.target && event.target.name && !event.target.disabled) {
+      this.select(event.target.name);
+    }
   }
 }

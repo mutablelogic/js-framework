@@ -21,6 +21,12 @@ export class TabGroupElement extends LitElement {
     return 'wc-tab-group';
   }
 
+  constructor() {
+    super();
+    this.backgroundColor = 'light';
+    this.hidden = false;
+  }
+
   static get properties() {
     return {
 
@@ -28,7 +34,7 @@ export class TabGroupElement extends LitElement {
        * Background color of the tab group, one of primary, secondary, light, white, dark, black
        *
        * @type {String}
-       * @default primary
+       * @default light
        * @memberof TabGroupElement
        */
       backgroundColor: { type: String },
@@ -53,25 +59,54 @@ export class TabGroupElement extends LitElement {
         padding: 0;
         padding-left: 4px;
         list-style: none;
-        border-bottom: 1px solid red;
       }      
       ::slotted(wc-tab) {
-        border: 1px solid red;
         border-bottom: none;
         padding: 10px;
         margin-right: 4px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         cursor: pointer;
+        user-select: none;
       }
-      ul.bg-color-primary {
+
+      /* dark theme */
+      ul.bg-color-dark {
+        border-bottom: 1px solid var(--grey-80-color);
+      }
+      .bg-color-dark ::slotted(wc-tab) {
+        background-color: var(--dark-color);
+        color: var(--light-color);
         border-color: var(--grey-80-color);
       }
-      .bg-color-primary ::slotted(wc-tab) {
+      .bg-color-dark ::slotted(wc-tab:hover) {
         background-color: var(--primary-color);
         color: var(--white-color);
-        border-color: var(--grey-80-color);
       }
+      .bg-color-dark ::slotted(wc-tab:active) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-weight: var(--font-weight-bold);
+      }
+
+      /* light theme */
+      ul.bg-color-light {
+        border-bottom: 1px solid var(--grey-20-color);
+      }
+      .bg-color-light ::slotted(wc-tab) {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        border-color: var(--grey-20-color);
+      }
+      .bg-color-light ::slotted(wc-tab:hover) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+      .bg-color-light ::slotted(wc-tab:active) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-weight: var(--font-weight-bold);
+      }      
     `;
   }
 

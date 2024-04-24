@@ -50,7 +50,11 @@ export class TabElement extends LitElement {
   }
 
   static get styles() {
-    return css``;
+    return css`
+      li {
+        text-align: center;
+      }
+    `;
   }
 
   get className() {

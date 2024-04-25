@@ -1,7 +1,5 @@
-import {
-  LitElement, html, css, nothing,
-} from 'lit';
-import { TabElement } from './TabElement';
+import { LitElement, html, css, nothing } from 'lit';
+import { Event } from '../core/Event';
 
 /**
  * TabGroupElement
@@ -133,12 +131,8 @@ export class TabGroupElement extends LitElement {
 
   render() {
     return html`
-      <ul class=${this.className || nothing}><slot></slot></ul>
+      <ul class=${this.className || nothing} @click=${this.onClick}><slot></slot></ul>
     `;
-  }
-
-  firstUpdated() {
-    this.addEventListener(Event.EVENT_CLICK, (evt) => this.onClick(evt));
   }
 
   /**
@@ -146,8 +140,9 @@ export class TabGroupElement extends LitElement {
    * @param {String} name: The name of the tab to select
    * @returns The node that was selected, or null
    */
-  select(name) {
+  select(target) {
     const tabs = this.querySelectorAll('wc-tab');
+    const name = target.name || target.textContent;
     let selectedNode = null;
     tabs.forEach((tab) => {
       if (tab.name === name && !tab.selected) {
@@ -161,23 +156,13 @@ export class TabGroupElement extends LitElement {
   }
 
   onClick(event) {
-    if (event.target && event.target.name) {
-      const selected = this.select(event.target.name);
-      if (selected) {
-        this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
-          bubbles: true,
-          composed: true,
-          detail: selected.name || selected.textContent,
-        }));
-      }
+    const selected = this.select(event.target);
+    if (selected) {
+      this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: selected.name || selected.textContent,
+      }));
     }
-  }
-
-  hostConnected() {
-    console.log("hostConnected", this.host);
-  }
-
-  hostDisconnected() {
-    console.log("hostDiscnnected", this.host);
   }
 }

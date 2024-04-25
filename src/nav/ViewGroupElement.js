@@ -21,22 +21,8 @@ export class ViewGroupElement extends LitElement {
     return 'wc-view-group';
   }
 
-  constructor() {
-    super();
-    this.controller = null;
-  }
-
   static get properties() {
-    return {
-      /**
-       * The controller selector for the view group.
-       * This can either be a string selector or a reference to the
-       * controller element.
-       * @type {Object}
-       * @memberof ViewGroupElement
-       */
-      controller: {},
-    };
+    return {};
   }
 
   static get styles() {
@@ -55,23 +41,8 @@ export class ViewGroupElement extends LitElement {
     `;
   }
 
-  // Connect the controller
-  connectedCallback() {
-    super.connectedCallback();
-
-    if (typeof this.controller === 'string' && this.controller) {
-      this.controller = this.parentElement.querySelector(this.controller);
-    }
-    if (typeof this.controller === 'object') {
-      this.addController(this.controller);
-    }
-  }
-
-  // Disconnect the controller
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    if (this.controller) {
-      this.removeController(this.controller);
-    }
+  select(name) {
+    // TODO
+    console.log('select', this, name);
   }
 }

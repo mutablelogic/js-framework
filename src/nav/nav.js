@@ -1,7 +1,7 @@
 // CSS
 import './nav.css';
 
-// Web Components
+// Classes
 import { NavBarElement } from './NavBarElement';
 import { NavElement } from './NavElement';
 import { NavItemElement } from './NavItemElement';
@@ -13,6 +13,7 @@ import { TabElement } from './TabElement';
 import { TabGroupElement } from './TabGroupElement';
 import { ViewElement } from './ViewElement';
 import { ViewGroupElement } from './ViewGroupElement';
+import { ViewController } from './ViewController';
 
 // Web Components
 customElements.define(NavBarElement.localName, NavBarElement); // wc-navbar

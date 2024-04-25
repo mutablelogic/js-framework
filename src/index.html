@@ -47,108 +47,101 @@
       </wc-nav>
     </wc-sidebar>
     <wc-content>
+      <div style="background-color: #fcfcfc; padding: 5px;">
+        <wc-tab-group id="tab-group" backgroundColor="light">
+          <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
+          <wc-tab name="tab-buttons">Buttons</wc-tab>
+          <wc-tab name="tab-badges">Badges</wc-tab>
+          <wc-tab name="tab-icons">Icons</wc-tab>
+          <wc-tab name="tab-code">Code</wc-tab>
+          <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon>
+            Disabled</wc-tab>
+        </wc-tab-group>
+        <wc-view-group id="view-group" backgroundColor="light">
+          <wc-view name="tab-tables" selected>
+            <div class="container">
+              <h1>Tables</h1>
+              <wc-table id="table" backgroundColor="black" stripedRows>Table of Fruit</wc-table>
+              <script>
+                document.getElementById('table').data = [
+                  { fruit: 'apple', color: 'green', weight: '100gr' },
+                  { fruit: 'banana', color: 'yellow', weight: '140gr' }
+                ];
+              </script>
+            </div>
+          </wc-view>
+          <wc-view name="tab-buttons">
+            <div class="container">
+              <h1>Buttons</h1>
 
+              <h3>Individual</h3>
+              <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
+              <wc-button name="retry">Retry</wc-button>
 
-      <div class="container">
-        <h1>Code</h1>
-        <div style="background-color: #fcfcfc; padding: 5px;">
-          <wc-code language="javascript">
-            console.log('hello');
-            console.log('hello');
-            console.log('hello');
+              <h3>Group</h3>
+              <wc-button-group>
+                <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+                <wc-button name="retry">Retry</wc-button>
+                <wc-button name="cancel" default>Cancel</wc-button>
+              </wc-button-group>
+            </div>
+          </wc-view>
+          <wc-view name="tab-badges">
+            <div class="container">
+              <h1>Badge</h1>
 
-            /* this is some more javascript */
-            console.log('hello');
-          </wc-code>
-        </div>
-      </div>
-      <hr>
+              <h3>Individual</h3>
+              <wc-badge textTransform="uppercase">default</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+              <hr>
 
-      <div class="container">
-        <h1>Tab & View Group</h1>
-        <div style="background-color: #fcfcfc; padding: 5px;">
-          <wc-tab-group id="tab-group" backgroundColor="light">
-            <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
-            <wc-tab name="tab-buttons">Buttons</wc-tab>
-            <wc-tab name="tab-badges">Badges</wc-tab>
-            <wc-tab name="tab-icons">Icons</wc-tab>
-            <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon> Disabled</wc-tab>
-            <wc-tab name="tab-buttons">Buttons</wc-tab>
-            <wc-tab name="tab-badges">Badges</wc-tab>
-            <wc-tab name="tab-icons">Icons</wc-tab>
-          </wc-tab-group>
-          <wc-view-group id="view-group" backgroundColor="light">
-            <wc-view name="tab-tables" selected>
-              <div class="container">
-                <h1>Tables</h1>
-        
-                <!-- Table of data -->
-                <wc-table id="table" backgroundColor="black" stripedRows>Table of Fruit</wc-table>
-                <script>
-                  document.getElementById('table').data = [
-                    { fruit: 'apple', color: 'green', weight: '100gr' },
-                    { fruit: 'banana', color: 'yellow', weight: '140gr' }
-                  ];
-                </script>
+              <h3>Group</h3>
+              <wc-badge-group>
+                <wc-badge textTransform="uppercase">default</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+              </wc-badge-group>
+            </div>
+          </wc-view>
+          <wc-view name="tab-icons">
+            <div class="container">
+              <h1>Icon</h1>
+              <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
+              <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
+              <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
+              <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
+              <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
+            </div>
+          </wc-view>
+          <wc-view name="tab-code">
+            <div class="container">
+              <h1>Code</h1>
+              <div style="background-color: #fcfcfc; padding: 5px;">
+                <wc-code language="javascript">
+                  console.log('hello');
+                  console.log('hello');
+                  console.log('hello');
+
+                  /* this is some more javascript */
+                  console.log('hello');
+                </wc-code>
               </div>
-            </wc-view>
-            <wc-view name="tab-buttons">
-              BUTTONS CONTENT
-            </wc-view>
-            <wc-view name="tab-badges">
-              BADGES CONTENT
-            </wc-view>
-            <wc-view name="tab-icons">
-              ICONS CONTENT
-            </wc-view>
-          </wc-view-group>
-        </div>
+            </div>
+          </wc-view>
+        </wc-view-group>
       </div>
-      <hr>
-
-      <div class="container">
-        <h1>Buttons</h1>
-
-        <h3>Individual</h3>
-        <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
-        <wc-button name="retry">Retry</wc-button>
-
-        <h3>Group</h3>
-        <wc-button-group>
-          <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
-          <wc-button name="retry">Retry</wc-button>
-          <wc-button name="cancel" default>Cancel</wc-button>
-        </wc-button-group>
       </div>
-      <hr>
-
-      <div class="container">
-        <h1>Badge</h1>
-
-        <h3>Individual</h3>
-        <wc-badge textTransform="uppercase">default</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
-        <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
-        <hr>
-
-        <h3>Group</h3>
-        <wc-badge-group>
-          <wc-badge textTransform="uppercase">default</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
-          <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
-        </wc-badge-group>
-      </div>
-      <hr>
 
       <div class="container wc-card">
         <h1>Close Button</h1>
@@ -160,14 +153,6 @@
       </div>
       <hr>
 
-      <div class="container">
-        <h1>Icon</h1>
-        <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
-        <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
-        <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
-        <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
-        <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
-      </div>
       </div>
       <hr>
 

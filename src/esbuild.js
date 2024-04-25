@@ -1,5 +1,3 @@
-
 window.addEventListener('load', () => {
-    console.log('esbuild');
-    new EventSource('/esbuild').addEventListener('change', () => location.reload());
+  new EventSource('/esbuild').addEventListener('change', () => location.reload());
 });

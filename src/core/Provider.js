@@ -1,4 +1,4 @@
-import Event from './Event';
+import { Event } from './Event';
 
 /**
  * Provider of data. In general, add provider to the controller using

@@ -1,34 +1,35 @@
-
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/Event';
+import { Event } from '../../core/Event';
 
 /**
  * CloseButtonElement
  */
 export class CloseButtonElement extends LitElement {
-    constructor() {
-        super();
-        // Default properties
-        this.name = 'wc-close';
-        this.disabled = false;
-    }
-    static get properties() {
-        return {
-            /**
-             * Name of the button to use when firing the EVENT_CLICK event
-             * @type {String}
-             */
-            name: { type: String },
+  constructor() {
+    super();
+    // Default properties
+    this.name = 'wc-close';
+    this.disabled = false;
+  }
 
-            /**
-             * Whether the button is disabled
-             * @type {Boolean}
-             */
-            disabled: { type: Boolean },
-        };
-    }
-    static get styles() {
-        return css`
+  static get properties() {
+    return {
+      /**
+       * Name of the button to use when firing the EVENT_CLICK event
+       * @type {String}
+       */
+      name: { type: String },
+
+      /**
+       * Whether the button is disabled
+       * @type {Boolean}
+       */
+      disabled: { type: Boolean },
+    };
+  }
+
+  static get styles() {
+    return css`
             button {
                 position: absolute;
                 top: 0;
@@ -56,23 +57,23 @@ export class CloseButtonElement extends LitElement {
                 color: var(--button-close-color-disabled); 
             }
         `;
-    }
-    render() {
-        return html`
+  }
+
+  render() {
+    return html`
             <button role="button" ?disabled="${this.disabled}" @click=${this.onClick}>
                 <wc-icon name="x-lg"></wc-icon>
             </button>
         `;
-    }
-    onClick() {
-        this.dispatchEvent(new CustomEvent(
-            Event.EVENT_CLICK, { 
-                bubbles: true,
-                composed: true,
-                detail: this.name 
-            },
-        ));
-    }
+  }
+
+  onClick() {
+    this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+      bubbles: true,
+      composed: true,
+      detail: this.name,
+    }));
+  }
 }
 
 customElements.define('wc-close', CloseButtonElement);

@@ -1,6 +1,5 @@
-import {
-  LitElement, html, css, nothing,
-} from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
+import { Event } from '../core/Event';
 
 /**
  * ViewGroupElement
@@ -10,7 +9,7 @@ import {
  * between visible views.
  *
  * @example
- * <wc-view-group>
+ * <wc-view-group controller="#tabgroup">
  *   <wc-view name="view1" selected>View1</wc-tab>
  *   <wc-view name="view2">View2</wc-tab>
  *   <wc-view name="view3">View3</wc-tab>
@@ -22,24 +21,21 @@ export class ViewGroupElement extends LitElement {
     return 'wc-view-group';
   }
 
+  constructor() {
+    super();
+    this.controller = null;
+  }
+
   static get properties() {
     return {
       /**
-       * Whether the tab is selected. Only one tab within a group should
-       * be selected at a time.
-       * @type {Boolean}
-       * @default false
-       * @memberof TabElement
+       * The controller selector for the view group.
+       * This can either be a string selector or a reference to the
+       * controller element.
+       * @type {Object}
+       * @memberof ViewGroupElement
        */
-      selected: { type: Boolean },
-
-      /**
-       * The name of the tab, for click events.
-       * @type {String}
-       * @default ''
-       * @memberof TabElement
-       */
-      name: { type: String },
+      controller: {},
     };
   }
 
@@ -47,17 +43,35 @@ export class ViewGroupElement extends LitElement {
     return css``;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   get className() {
     const classes = [];
-    if (this.selected) {
-      classes.push('selected');
-    }
     return classes.join(' ');
   }
 
   render() {
     return html`
-            <div class=${this.className || nothing}><slot></slot></div>
-          `;
+      <div class=${this.className || nothing}><slot></slot></div>
+    `;
+  }
+
+  // Connect the controller
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (typeof this.controller === 'string' && this.controller) {
+      this.controller = this.parentElement.querySelector(this.controller);
+    }
+    if (typeof this.controller === 'object') {
+      this.addController(this.controller);
+    }
+  }
+
+  // Disconnect the controller
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.controller) {
+      this.removeController(this.controller);
+    }
   }
 }

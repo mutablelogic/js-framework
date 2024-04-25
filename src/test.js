@@ -2,7 +2,7 @@
 
 // Core
 import Provider from './core/Provider';
-import Event from './core/Event';
+import { Event } from './core/Event';
 
 // Test
 window.addEventListener('load', () => {

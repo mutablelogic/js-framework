@@ -172,4 +172,12 @@ export class TabGroupElement extends LitElement {
       }
     }
   }
+
+  hostConnected() {
+    console.log("hostConnected", this.host);
+  }
+
+  hostDisconnected() {
+    console.log("hostDiscnnected", this.host);
+  }
 }

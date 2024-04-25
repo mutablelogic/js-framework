@@ -1,6 +1,6 @@
 
 import { LitElement, html, css } from 'lit';
-import Event from '../../core/Event';
+import { Event } from '../../core/Event';
 
 /**
  * A button element

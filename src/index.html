@@ -65,16 +65,32 @@
       <hr>
 
       <div class="container">
-        <h1>Tab Group</h1>
+        <h1>Tab & View Group</h1>
         <div style="background-color: #fcfcfc; padding: 5px;">
-          <wc-tab-group backgroundColor="light">
+          <wc-tab-group id="controller" backgroundColor="light">
             <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
             <wc-tab name="tab-buttons">Buttons</wc-tab>
             <wc-tab name="tab-badges">Badges</wc-tab>
             <wc-tab name="tab-icons">Icons</wc-tab>
-            <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon>
-              Disabled</wc-tab>
+            <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon> Disabled</wc-tab>
+            <wc-tab name="tab-buttons">Buttons</wc-tab>
+            <wc-tab name="tab-badges">Badges</wc-tab>
+            <wc-tab name="tab-icons">Icons</wc-tab>
           </wc-tab-group>
+          <wc-view-group controller="wc-tab-group#controller" backgroundColor="light">
+            <wc-view name="tab-tables">
+              TABLES CONTENT
+            </wc-view>
+            <wc-view name="tab-buttons">
+              BUTTONS CONTENT
+            </wc-view>
+            <wc-view name="tab-badges">
+              BADGES CONTENT
+            </wc-view>
+            <wc-view name="tab-icons">
+              ICONS CONTENT
+            </wc-view>
+          </wc-view-group>
         </div>
       </div>
       <hr>

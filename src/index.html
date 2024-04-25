@@ -78,8 +78,19 @@
             <wc-tab name="tab-icons">Icons</wc-tab>
           </wc-tab-group>
           <wc-view-group id="view-group" backgroundColor="light">
-            <wc-view name="tab-tables">
-              TABLES CONTENT
+            <wc-view name="tab-tables" selected>
+              <div class="container">
+                <h1>Tables</h1>
+        
+                <!-- Table of data -->
+                <wc-table id="table" backgroundColor="black" stripedRows>Table of Fruit</wc-table>
+                <script>
+                  document.getElementById('table').data = [
+                    { fruit: 'apple', color: 'green', weight: '100gr' },
+                    { fruit: 'banana', color: 'yellow', weight: '140gr' }
+                  ];
+                </script>
+              </div>
             </wc-view>
             <wc-view name="tab-buttons">
               BUTTONS CONTENT
@@ -92,20 +103,6 @@
             </wc-view>
           </wc-view-group>
         </div>
-      </div>
-      <hr>
-
-      <div class="container">
-        <h1>Tables</h1>
-
-        <!-- Table of data -->
-        <wc-table id="table" backgroundColor="black" stripedRows>Table of Fruit</wc-table>
-        <script>
-          document.getElementById('table').data = [
-            { fruit: 'apple', color: 'green', weight: '100gr' },
-            { fruit: 'banana', color: 'yellow', weight: '140gr' }
-          ];
-        </script>
       </div>
       <hr>
 

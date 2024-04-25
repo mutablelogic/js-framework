@@ -11,6 +11,8 @@ import { SideBarElement } from './SideBarElement';
 import { ContentElement } from './ContentElement';
 import { TabElement } from './TabElement';
 import { TabGroupElement } from './TabGroupElement';
+import { ViewElement } from './ViewElement';
+import { ViewGroupElement } from './ViewGroupElement';
 
 // Web Components
 customElements.define(NavBarElement.localName, NavBarElement); // wc-navbar
@@ -22,3 +24,5 @@ customElements.define(SideBarElement.localName, SideBarElement); // wc-sidebar
 customElements.define(ContentElement.localName, ContentElement); // wc-content
 customElements.define(TabElement.localName, TabElement); // wc-tab
 customElements.define(TabGroupElement.localName, TabGroupElement); // wc-tab-group
+customElements.define(ViewElement.localName, ViewElement); // wc-view
+customElements.define(ViewGroupElement.localName, ViewGroupElement); // wc-view-group

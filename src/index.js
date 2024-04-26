@@ -7,10 +7,11 @@ import './badge/badge';
 import './nav/nav';
 import './table/table';
 import './layout/layout';
+import './app/app';
 
 // Other
 import './esbuild';
-import './test';
+import './app';
 
 // Buttons
 import './component/button/ButtonElement';

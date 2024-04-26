@@ -1,6 +1,6 @@
 // Core
-import Provider from './core/Provider';
-import { Event } from './core/Event';
+import Provider from './core/Provider.js';
+import { Event } from './core/Event.js';
 import { ViewController } from './nav/ViewController.js';
 
 // Test

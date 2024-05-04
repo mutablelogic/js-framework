@@ -11,4 +11,10 @@
     --form-switch-border-radius: var(--form-switch-width);
     --form-switch-background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8' fill='currentColor'><circle r='3'/></svg>");
     --form-switch-transition: 300ms;
+
+    /* Selects */
+    --form-select-padding-x: 0.5em;
+    --form-select-padding-y: 0.1em;
+    --form-select-border-color: var(--control-color);
+    --form-select-background-color: var(--control-color);
 }

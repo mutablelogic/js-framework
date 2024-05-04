@@ -1,5 +1,6 @@
 import { html, nothing } from 'lit';
 import { FormControlElement } from './FormControlElement';
+import { Event } from '../core/Event';
 
 /**
  * @class FormSwitchElement
@@ -53,9 +54,13 @@ export class FormSwitchElement extends FormControlElement {
 
   // Change the selected state when the input is changed
   onInput(event) {
-    if (!this.disabled) {
+    if (super.onInput(event)) {
       this.selected = event.target.checked;
+      this.dispatchEvent(new CustomEvent(Event.CHANGE, {
+        bubbles: true,
+        composed: true,
+        detail: this.name || this.textContent.trim(),
+      }));
     }
-    super.onInput(event);
   }
 }

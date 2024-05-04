@@ -1,5 +1,4 @@
 import { LitElement, html, nothing, css } from 'lit';
-import { Event } from '../core/Event';
 
 /**
  * @class FormControlElement
@@ -10,6 +9,7 @@ import { Event } from '../core/Event';
  * @property {String} value - The value of the control
  * @property {Boolean} disabled - Whether the form control is disabled
  * @property {Boolean} required - Whether the form control is required before submitting
+ * @property {Boolean} autocomplete - Whether the form control allows autocomplete
  *
  * @example
  * <wc-form-control>Power</wc-form-switch>
@@ -27,7 +27,10 @@ export class FormControlElement extends LitElement {
 
     // Default properties
     this.name = '';
+    this.value = '';
     this.disabled = false;
+    this.required = false;
+    this.autocomplete = false;
   }
 
   static get formAssociated() {
@@ -40,6 +43,7 @@ export class FormControlElement extends LitElement {
       value: { type: String },
       disabled: { type: Boolean },
       required: { type: Boolean },
+      autocomplete: { type: Boolean },
     };
   }
 
@@ -72,6 +76,25 @@ export class FormControlElement extends LitElement {
           background-position: right center;
         }
       }
+
+      label.select {
+        cursor: inherit;
+        
+        & select {
+          width: 100%;
+          cursor: pointer;
+          font-family: inherit;
+          appearance: none;
+          padding: var(--form-select-padding-y) var(--form-select-padding-x);
+          background-color: var(--form-select-background-color);
+          border: 1px solid var(--form-select-border-color);
+          border-radius: var(--form-select-border-radius);
+
+          &:focus {
+            outline: 0;
+          }
+        }
+      }
     `;
   }
 
@@ -83,6 +106,7 @@ export class FormControlElement extends LitElement {
           value=${this.value || nothing} 
           ?disabled=${this.disabled} 
           ?required=${this.required}
+          ?autocomplete=${this.autocomplete}
           @input=${this.onInput}>
         <slot></slot>
       </label>
@@ -121,14 +145,8 @@ export class FormControlElement extends LitElement {
     if (!this.disabled) {
       this.value = event.target.value;
       this.internals.setFormValue(this.value);
-
-      // Dispatch a click event
-      this.dispatchEvent(new CustomEvent(
-        Event.CHANGE, {
-          bubbles: true,
-          composed: true,
-          detail: this.name || this.textContent,
-        }));
+      return true;
     }
+    return false;
   }
 }

@@ -50,6 +50,30 @@ export class CardGroupElement extends LitElement {
         background-color: var(--success-color);
         color: var(--light-color);
       }
+      ::slotted(wc-card[backgroundColor="warning"]) {
+        background-color: var(--warning-color);
+        color: var(--light-color);
+      }
+      ::slotted(wc-card[backgroundColor="error"]) {
+        background-color: var(--error-color);
+        color: var(--light-color);
+      }
+      ::slotted(wc-card[backgroundColor="light"]) {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+      }
+      ::slotted(wc-card[backgroundColor="dark"]) {
+        background-color: var(--dark-color);
+        color: var(--light-color);
+      }
+      ::slotted(wc-card[backgroundColor="black"]) {
+        background-color: var(--black-color);
+        color: var(--white-color);
+      }
+      ::slotted(wc-card[backgroundColor="white"]) {
+        background-color: var(--white-color);
+        color: var(--black-color);
+      }
   `;
   }
 
@@ -68,24 +92,3 @@ export class CardGroupElement extends LitElement {
     return classes;
   }
 }
-
-/*
-      --primary-color: #16f;
-      --secondary-color: #aaa;
-      --success-color: #285;
-      --warning-color: #f72;
-      --error-color: #f55;
-      --light-color: #eee;
-      --white-color: #fff;
-      --dark-color: #333;
-      --black-color: #000;
-      --grey-10-color: #EAEAEA;
-      --grey-20-color: #D0D0D0;
-      --grey-30-color: #B6B6B6;
-      --grey-40-color: #9C9C9C;
-      --grey-50-color: #828282;
-      --grey-60-color: #6A6A6A;
-      --grey-70-color: #4E4E4E;
-      --grey-80-color: #343434;
-      --grey-90-color: #1A1A1A;
-  */

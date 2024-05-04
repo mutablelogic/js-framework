@@ -57,7 +57,9 @@ export class NavGroupElement extends LitElement {
       }
       ::slotted(wc-nav-item) {
         flex: 0;
+        margin: var(--nav-item-margin-y) var(--nav-item-margin-x);
         padding: var(--nav-item-padding-y) var(--nav-item-padding-x);
+        border-radius: var(--nav-item-border-radius);
       }
       ::slotted(wc-nav-spacer) {
         flex: 1;

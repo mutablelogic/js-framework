@@ -65,86 +65,43 @@
                 });
                 document.querySelector('wc-nav-group').addEventListener('wc-click', (e) => {
                     switch (e.detail) {
-                    case 'home':
-                    case 'dashboard':
-                    case 'orders':
-                    case 'products':
-                    case 'customers':
-                        e.target.select(e.detail);
+                        case 'home':
+                        case 'dashboard':
+                        case 'orders':
+                        case 'products':
+                        case 'customers':
+                            e.target.select(e.detail);
                     }
                 });
             </script>
         </wc-canvas-navbar>
         <wc-canvas-section flex>
-            <h1>Code</h1>
-            <wc-code language="javascript">
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-                console.log('hello');
-
-                /* this is some more javascript */
-                console.log('hello');
-            </wc-code>
+            <wc-card-group>
+                <wc-card backgroundColor="primary" width="2">
+                    <h4>Card</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </wc-card>
+                <wc-card backgroundColor="secondary" width="2">
+                    <h4>Card</h4>
+                    <wc-form-select name="backgroundColor" options='[ "primary", "secondary", "success" ]'>Background Colour</wc-form-select>
+                </wc-card>
+                <wc-card>
+                    <h1>Header</h1>
+                    <h2>Subtitle</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </wc-card>
+                <wc-card backgroundColor="success" width="12">
+                    <wc-icon name="check-circle-fill"></wc-icon> The operation was successful
+                </wc-card>
+            </wc-card-group>
         </wc-canvas-section>
         <wc-canvas-navbar id="end">END</wc-canvas-navbar>
     </wc-canvas>

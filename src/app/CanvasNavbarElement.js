@@ -38,7 +38,7 @@ export class CanvasNavbarElement extends CanvasSectionElement {
     div {
       display: flex;
       align-items: start;
-      flex: 1 0;
+      flex: 1;
     }
     `;
   }

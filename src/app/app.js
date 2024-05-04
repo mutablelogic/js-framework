@@ -10,6 +10,8 @@ import { NavItemElement } from './NavItemElement';
 import { NavSpacerElement } from './NavSpacerElement';
 import { NavDividerElement } from './NavDividerElement';
 import { IconElement } from './IconElement';
+import { CardGroupElement } from './CardGroupElement';
+import { CardElement } from './CardElement';
 
 // Web Components
 customElements.define(CanvasElement.localName, CanvasElement); // wc-canvas
@@ -20,3 +22,6 @@ customElements.define(NavItemElement.localName, NavItemElement); // wc-nav-item
 customElements.define(NavSpacerElement.localName, NavSpacerElement); // wc-nav-spacer
 customElements.define(NavDividerElement.localName, NavDividerElement); // wc-nav-divider
 customElements.define(IconElement.localName, IconElement); // wc-icon
+customElements.define(CardGroupElement.localName, CardGroupElement); // wc-card-group
+customElements.define(CardElement.localName, CardElement); // wc-card
+

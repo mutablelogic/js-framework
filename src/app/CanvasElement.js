@@ -45,14 +45,6 @@ export class CanvasElement extends LitElement {
         display: flex;
       }
 
-      div:not(.vertical) {
-        flex-direction: row;
-      }
-
-      div.vertical {
-        flex-direction: column;
-      }
-
       /* Any canvas section is in flexbox mode with a fixed size */
       ::slotted(wc-canvas-section),::slotted(wc-canvas-navbar) {
         display: flex;
@@ -60,28 +52,36 @@ export class CanvasElement extends LitElement {
         border-style: none;
       }
 
-      /* The first section in vertical mode gets a border below */
-      div.vertical > ::slotted(wc-canvas-navbar:first-child),div.vertical > ::slotted(wc-canvas-section:first-child) {
-        min-height: 40px;
-        border-bottom-style: solid;
+      div.vertical {
+        flex-direction: column;
+
+        /* The first section in vertical mode gets a border below */
+        > ::slotted(wc-canvas-navbar:first-child),::slotted(wc-canvas-section:first-child) {
+          min-height: 40px;
+          border-bottom-style: solid;
+        }
+
+        /* The last section in vertical mode gets a border above */
+        > ::slotted(wc-canvas-navbar:last-child),::slotted(wc-canvas-section:last-child) {
+            min-height: 30px;
+            border-top-style: solid;
+        }
       }
 
-      /* The first section in horizontal mode gets a border right */
-      div:not(.vertical) > ::slotted(wc-canvas-navbar:first-child), div:not(.vertical) > ::slotted(wc-canvas-section:first-child) {
-        min-width: 60px;
-        border-right-style: solid;
-      }
+      div:not(.vertical) {
+        flex-direction: row;
 
-      /* The last section in vertical mode gets a border above */
-      div.vertical > ::slotted(wc-canvas-navbar:last-child),div.vertical > ::slotted(wc-canvas-section:last-child) {
-        min-height: 30px;
-        border-top-style: solid;
-      }
+        /* The first section in horizontal mode gets a border right */
+        > ::slotted(wc-canvas-navbar:first-child),::slotted(wc-canvas-section:first-child) {
+          min-width: 60px;
+          border-right-style: solid;
+        }
 
-      /* The last section in horizonal mode gets a border left */
-      div:not(.vertical) > ::slotted(wc-canvas-navbar:last-child),div:not(.vertical) > ::slotted(wc-canvas-section:last-child) {
-        min-width: 60px;
-        border-left-style: solid;
+        /* The last section in horizonal mode gets a border left */
+        > ::slotted(wc-canvas-navbar:last-child),::slotted(wc-canvas-section:last-child) {
+          min-width: 60px;
+          border-left-style: solid;
+        }
       }
 
       /* Flex containers stretch */

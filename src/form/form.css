@@ -1,10 +1,15 @@
 /* Theme variables go here */
 :root {
-    --form-switch-padding-x: 0.5em;
+    /* General controls */
+    --form-control-padding-x: 0.5em;
+    --form-control-padding-y: 0.1em;
+
+    /* Switches */
     --form-switch-width: 2.5em;
     --form-switch-height: 1.5em;
-    --form-switch-color: var(--primary-color);
+    --form-switch-color: var(--primary-color); /* TODO: Does not work with the SVG yet */
     --form-switch-background-color: var(--control-color);
     --form-switch-border-radius: var(--form-switch-width);
-    --form-switch-background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8' fill='currentColor'><circle r='3'/></svg>")
+    --form-switch-background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8' fill='currentColor'><circle r='3'/></svg>");
+    --form-switch-transition: 300ms;
 }

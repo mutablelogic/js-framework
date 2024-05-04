@@ -87,7 +87,12 @@ export class CanvasElement extends LitElement {
       /* Flex containers stretch */
       ::slotted(wc-canvas-section[flex]) {
         flex: 999 0;
-        overflow: auto;
+        overflow: auto;        
+      }
+
+      /* Hidden navbars are hidden */
+      ::slotted(wc-canvas-navbar[hidden]) {
+        display: none;
       }
 
       /* Light theme setting colours and border widths */

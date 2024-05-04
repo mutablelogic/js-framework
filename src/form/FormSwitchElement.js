@@ -14,7 +14,6 @@ export class FormSwitchElement extends FormControlElement {
     return 'wc-form-switch';
   }
 
-
   constructor() {
     super();
 
@@ -46,6 +45,14 @@ export class FormSwitchElement extends FormControlElement {
     `;
   }
 
+  // Return classes for the switch control
+  get classes() {
+    const classes = super.classes;
+    classes.push('switch');
+    return classes;
+  }
+
+  // Change the selected state when the input is changed
   onInput(event) {
     if (!this.disabled) {
       this.selected = event.target.checked;

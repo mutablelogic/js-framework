@@ -58,31 +58,36 @@ export class FormControlElement extends LitElement {
       :host {
         display: inline-block;
         flex-shrink: 0;
-        padding-left: var(--form-switch-padding-x);
-        padding-right: var(--form-switch-padding-x);
+        padding: var(--form-control-padding-y) var(--form-control-padding-x);
       }
-      input {
-        width: var(--form-switch-width);
-        height: var(--form-switch-height);
-        border-radius: var(--form-switch-border-radius);
-        vertical-align: middle;
-        appearance: none;
-        transition: background-position .15s ease-in-out;
-        background-image: var(--form-switch-background-image);
-        background-color: var(--form-switch-background-color);
-        background-repeat: no-repeat;
-        background-position: left center;
-        background-size: contain;
+      label {
+        cursor: pointer;
+        user-select: none;
       }
-      input:checked {
-        background-position: right center;
+      label.switch {        
+        & input {
+          width: var(--form-switch-width);
+          height: var(--form-switch-height);
+          border-radius: var(--form-switch-border-radius);
+          vertical-align: middle;
+          appearance: none;
+          transition: background-position var(--form-switch-transition) ease-in-out;
+          background-image: var(--form-switch-background-image);
+          background-color: var(--form-switch-background-color);
+          background-repeat: no-repeat;
+          background-position: left center;
+          background-size: contain;          
+        }
+        & input:checked {
+          background-position: right center;
+        }
       }
     `;
   }
 
   render() {
     return html`
-      <label class=${this.className || nothing}>
+      <label class=${this.classes.join(' ') || nothing}>
         <input 
           name=${this.name || nothing} 
           value=${this.value || nothing} 
@@ -104,11 +109,6 @@ export class FormControlElement extends LitElement {
       classes.push('required');
     }
     return classes;
-  }
-
-  // Return class name for the classes
-  get className() {
-    return this.classes.join(' ');
   }
 
   // Form control properties

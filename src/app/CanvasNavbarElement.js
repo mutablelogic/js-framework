@@ -33,11 +33,7 @@ export class CanvasNavbarElement extends CanvasSectionElement {
   }
 
   static get styles() {
-    return css`
-    .hidden {
-      display: none;        
-    }
-    `;
+    return css``;
   }
 
   render() {

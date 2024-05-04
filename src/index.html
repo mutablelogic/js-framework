@@ -37,6 +37,13 @@
                         document.querySelector('wc-nav-group').removeAttribute('vertical');
                     }
                 });
+                document.querySelector('wc-form-switch#end').addEventListener('change', (e) => {
+                    if (e.target.selected) {
+                        document.querySelector('wc-canvas-navbar#end').setAttribute('hidden',true);
+                    } else {
+                        document.querySelector('wc-canvas-navbar#end').removeAttribute('hidden');
+                    }
+                });
             </script>
         </wc-canvas-navbar>
         <wc-canvas-section flex>
@@ -110,7 +117,7 @@
                 console.log('hello');
             </wc-code>
         </wc-canvas-section>
-        <wc-canvas-navbar>END</wc-canvas-navbar>
+        <wc-canvas-navbar id="end">END</wc-canvas-navbar>
     </wc-canvas>
 </body>
 

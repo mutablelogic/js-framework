@@ -7,16 +7,18 @@ import { CanvasSectionElement } from './CanvasSectionElement';
  * This class is a navigaton used to contain content boxes which are stacked
  * vertically or horizontally within the canvas.
  *
+ * @property {Boolean} hidden - Whether the navigation is hidden, default false
+ *
  * @example
- * <w2-canvas vertical>
- *  <w2-canvas-navbar>....</w2-canvas-navbar>
- *  <w2-canvas-section>....</w2-canvas-section>
- *  <w2-canvas-navbar>....</w2-canvas-navbar>
- * </w2-canvas>
+ * <wc-canvas vertical>
+ *  <wc-canvas-navbar>....</wc-canvas-navbar>
+ *  <wc-canvas-section>....</wc-canvas-section>
+ *  <wc-canvas-navbar>....</wc-canvas-navbar>
+ * </wc-canvas>
  */
-export class CanvasElement extends CanvasSectionElement {
+export class CanvasNavbarElement extends CanvasSectionElement {
   static get localName() {
-    return 'w2-canvas-navbar';
+    return 'wc-canvas-navbar';
   }
 
   constructor() {
@@ -26,18 +28,15 @@ export class CanvasElement extends CanvasSectionElement {
 
   static get properties() {
     return {
-      /**
-       * @property {Boolean} hidden - Whether the navigation is hidden
-       */
       hidden: { type: Boolean },
     };
   }
 
   static get styles() {
     return css`
-      .hidden {
-        display: none;        
-      }
+    .hidden {
+      display: none;        
+    }
     `;
   }
 
@@ -49,7 +48,6 @@ export class CanvasElement extends CanvasSectionElement {
     `;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   get className() {
     const classes = [];
     if (this.hidden) {

@@ -1,4 +1,4 @@
 window.addEventListener('load', () => {
-  // Initialize jere
+  // Initialize the application here
   console.log('App loaded');
 });

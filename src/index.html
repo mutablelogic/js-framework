@@ -10,9 +10,36 @@
 </head>
 
 <body>
-    <w2-canvas backgroundColor="light">
-        <w2-canvas-navbar>TOP</w2-canvas-navbar>
-        <w2-canvas-section flex>
+    <wc-canvas vertical backgroundColor="light">
+        <wc-canvas-navbar>
+            <wc-nav-group>
+                <wc-nav-item>
+                    <wc-form-switch name="theme">Dark Theme</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-spacer></wc-nav-spacer>
+                <wc-nav-item>
+                    <wc-form-switch id="vertical" name="vertical">Vertical</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <wc-form-switch id="end" name="end">EndNav</wc-form-switch>
+                </wc-nav-item>
+            </wc-nav-group>
+            <script>
+                document.querySelector('wc-form-switch').addEventListener('change', (e) => {
+                    document.querySelector('wc-canvas').setAttribute('backgroundColor', e.target.selected ? 'dark' : 'light');
+                });
+                document.querySelector('wc-form-switch#vertical').addEventListener('change', (e) => {
+                    if (e.target.selected) {
+                        document.querySelector('wc-canvas').removeAttribute('vertical');
+                        document.querySelector('wc-nav-group').setAttribute('vertical',true);
+                    } else {
+                        document.querySelector('wc-canvas').setAttribute('vertical', true);
+                        document.querySelector('wc-nav-group').removeAttribute('vertical');
+                    }
+                });
+            </script>
+        </wc-canvas-navbar>
+        <wc-canvas-section flex>
             <h1>Code</h1>
             <wc-code language="javascript">
                 console.log('hello');
@@ -21,10 +48,70 @@
 
                 /* this is some more javascript */
                 console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+                console.log('hello');
+
+                /* this is some more javascript */
+                console.log('hello');
             </wc-code>
-        </w2-canvas-section>
-        <w2-canvas-navbar>BOTTOM</w2-canvas-navbar>
-    </w2-canvas>
+        </wc-canvas-section>
+        <wc-canvas-navbar>END</wc-canvas-navbar>
+    </wc-canvas>
 </body>
 
 </html>

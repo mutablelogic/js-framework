@@ -115,13 +115,6 @@
     --badge-border-radius-right: var(--badge-border-radius);
     --badge-group-divider-color: var(--light-color);
 
-    /* icon */
-    --icon-size-default: 1.5em;
-    --icon-size-small: 1em;
-    --icon-size-medium: 1.5em;
-    --icon-size-large: 2em;
-    --icon-size-xlarge: 3em;
-
     /* modal */
     --modal-margin-x: 20%;
     --modal-padding: calc(var(--spacer) * 1.5);

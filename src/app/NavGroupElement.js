@@ -34,7 +34,11 @@ export class NavGroupElement extends LitElement {
 
   static get styles() {
     return css`
-    ul {
+      :host {
+        flex: 999 0;
+        height: 100%;
+      }
+      ul {
         display: flex;
         flex-direction: row;
         list-style-type: none;
@@ -43,6 +47,25 @@ export class NavGroupElement extends LitElement {
       }
       ul.vertical {
         flex-direction: column;
+        height: 100%;
+      }
+      ::slotted(*) {
+        cursor: pointer;
+        user-select: none;
+      }
+      ::slotted(wc-nav-item) {
+        flex: 0;
+        padding: var(--nav-item-padding-y) var(--nav-item-padding-x);
+      }
+      ::slotted(wc-nav-spacer) {
+        flex: 999;
+      }
+      ::slotted(wc-nav-item:hover) {
+        font-weight: var(--nav-item-hover-font-weight);
+      }
+      ::slotted(wc-nav-item[selected]) {
+        color: var(--nav-item-selected-color);
+        background-color: var(--nav-item-selected-background-color,red);
       }
     `;
   }

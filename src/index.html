@@ -13,10 +13,28 @@
     <wc-canvas vertical backgroundColor="light">
         <wc-canvas-navbar>
             <wc-nav-group>
+                <wc-nav-item selected>
+                    <nobr><wc-icon name="house"></wc-icon> Home</nobr>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+                </wc-nav-item>
+                <wc-nav-spacer></wc-nav-spacer>
                 <wc-nav-item>
                     <wc-form-switch name="theme">Dark Theme</wc-form-switch>
                 </wc-nav-item>
-                <wc-nav-spacer></wc-nav-spacer>
                 <wc-nav-item>
                     <wc-form-switch id="vertical" name="vertical">Vertical</wc-form-switch>
                 </wc-nav-item>
@@ -31,7 +49,7 @@
                 document.querySelector('wc-form-switch#vertical').addEventListener('change', (e) => {
                     if (e.target.selected) {
                         document.querySelector('wc-canvas').removeAttribute('vertical');
-                        document.querySelector('wc-nav-group').setAttribute('vertical',true);
+                        document.querySelector('wc-nav-group').setAttribute('vertical', true);
                     } else {
                         document.querySelector('wc-canvas').setAttribute('vertical', true);
                         document.querySelector('wc-nav-group').removeAttribute('vertical');
@@ -39,7 +57,7 @@
                 });
                 document.querySelector('wc-form-switch#end').addEventListener('change', (e) => {
                     if (e.target.selected) {
-                        document.querySelector('wc-canvas-navbar#end').setAttribute('hidden',true);
+                        document.querySelector('wc-canvas-navbar#end').setAttribute('hidden', true);
                     } else {
                         document.querySelector('wc-canvas-navbar#end').removeAttribute('hidden');
                     }

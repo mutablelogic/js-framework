@@ -1,1 +1,15 @@
-/* Theme variables go here */
+:root {
+    /* Navigational items */
+    --nav-item-padding-x: 0.5em;
+    --nav-item-padding-y: 0.5em;
+    --nav-item-hover-font-weight: var(--font-weight-semibold);
+    --nav-item-selected-color: var(--light-color);
+    --nav-item-selected-background-color: var(--primary-color);
+
+    /* icon */
+    --icon-size-default: 1.5em;
+    --icon-size-small: 1em;
+    --icon-size-medium: 1.5em;
+    --icon-size-large: 2em;
+    --icon-size-xlarge: 3em;
+}

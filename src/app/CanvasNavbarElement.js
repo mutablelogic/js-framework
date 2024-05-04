@@ -33,22 +33,29 @@ export class CanvasNavbarElement extends CanvasSectionElement {
   }
 
   static get styles() {
-    return css``;
+    return css`
+    /* Navbars are flexed to fill the available space */
+    div {
+      display: flex;
+      align-items: start;
+      flex: 999 0;
+    }
+    `;
   }
 
   render() {
     return html`
-      <div class=${this.className || nothing}>
+      <div class=${this.classes.join(' ') || nothing}>
         <slot></slot>
       </div>
     `;
   }
 
-  get className() {
+  get classes() {
     const classes = [];
     if (this.hidden) {
       classes.push('hidden');
     }
-    return classes.join(' ');
+    return classes;
   }
 }

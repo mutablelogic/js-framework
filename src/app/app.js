@@ -8,6 +8,7 @@ import { CanvasNavbarElement } from './CanvasNavbarElement';
 import { NavGroupElement } from './NavGroupElement';
 import { NavItemElement } from './NavItemElement';
 import { NavSpacerElement } from './NavSpacerElement';
+import { NavDividerElement } from './NavDividerElement';
 import { IconElement } from './IconElement';
 
 // Web Components
@@ -17,4 +18,5 @@ customElements.define(CanvasNavbarElement.localName, CanvasNavbarElement); // wc
 customElements.define(NavGroupElement.localName, NavGroupElement); // wc-nav-group
 customElements.define(NavItemElement.localName, NavItemElement); // wc-nav-item
 customElements.define(NavSpacerElement.localName, NavSpacerElement); // wc-nav-spacer
+customElements.define(NavDividerElement.localName, NavDividerElement); // wc-nav-divider
 customElements.define(IconElement.localName, IconElement); // wc-icon

@@ -13,25 +13,27 @@
     <wc-canvas vertical backgroundColor="light">
         <wc-canvas-navbar>
             <wc-nav-group>
-                <wc-nav-item selected>
+                <wc-nav-item name="home" selected>
                     <nobr><wc-icon name="house"></wc-icon> Home</nobr>
                 </wc-nav-item>
-                <wc-nav-item>
+                <wc-nav-item name="dashboard">
                     <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
                 </wc-nav-item>
-                <wc-nav-item>
+                <wc-nav-item name="orders">
                     <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
                 </wc-nav-item>
-                <wc-nav-item>
+                <wc-nav-item name="products">
                     <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
                 </wc-nav-item>
-                <wc-nav-item>
+                <wc-nav-item name="customers">
                     <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
                 </wc-nav-item>
-                <wc-nav-item>
+                <wc-nav-item name="help" disabled>
                     <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
                 </wc-nav-item>
+                <wc-nav-divider></wc-nav-divider>
                 <wc-nav-spacer></wc-nav-spacer>
+                <wc-nav-divider></wc-nav-divider>
                 <wc-nav-item>
                     <wc-form-switch name="theme">Dark Theme</wc-form-switch>
                 </wc-nav-item>
@@ -43,10 +45,10 @@
                 </wc-nav-item>
             </wc-nav-group>
             <script>
-                document.querySelector('wc-form-switch').addEventListener('change', (e) => {
+                document.querySelector('wc-form-switch').addEventListener('wc-change', (e) => {
                     document.querySelector('wc-canvas').setAttribute('backgroundColor', e.target.selected ? 'dark' : 'light');
                 });
-                document.querySelector('wc-form-switch#vertical').addEventListener('change', (e) => {
+                document.querySelector('wc-form-switch#vertical').addEventListener('wc-change', (e) => {
                     if (e.target.selected) {
                         document.querySelector('wc-canvas').removeAttribute('vertical');
                         document.querySelector('wc-nav-group').setAttribute('vertical', true);
@@ -55,11 +57,21 @@
                         document.querySelector('wc-nav-group').removeAttribute('vertical');
                     }
                 });
-                document.querySelector('wc-form-switch#end').addEventListener('change', (e) => {
+                document.querySelector('wc-form-switch#end').addEventListener('wc-change', (e) => {
                     if (e.target.selected) {
                         document.querySelector('wc-canvas-navbar#end').setAttribute('hidden', true);
                     } else {
                         document.querySelector('wc-canvas-navbar#end').removeAttribute('hidden');
+                    }
+                });
+                document.querySelector('wc-nav-group').addEventListener('wc-click', (e) => {
+                    switch (e.detail) {
+                    case 'home':
+                    case 'dashboard':
+                    case 'orders':
+                    case 'products':
+                    case 'customers':
+                        e.target.select(e.detail);
                     }
                 });
             </script>

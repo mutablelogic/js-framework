@@ -1,4 +1,5 @@
 import { LitElement, html, css, nothing } from 'lit';
+import { Event } from '../core/Event';
 
 /**
  * @class NavGroupElement
@@ -7,12 +8,13 @@ import { LitElement, html, css, nothing } from 'lit';
  *
  * @property {Boolean} vertical - Fill the canvas vertically rather than horizontally, default false
  * @property {Boolean} flex - Take up all available space, default false
+ * @event CLICK - Dispatched when a navigation item is clicked, which is not disabled
  *
  * @example
- * <wc-nav-group name="group" vertical>
- *  <wc-nav>....</wc-nav>
+ * <wc-nav-group vertical>
+ *  <wc-nav-item>....</wc-nav-item>
  *  <wc-nav-spacer></wc-nav-spacer>
- *  <wc-nav>....</wc-nav>
+ *  <wc-nav-item>....</wc-nav-item>
  * </wc-nav-group>
  */
 export class NavGroupElement extends LitElement {
@@ -60,25 +62,29 @@ export class NavGroupElement extends LitElement {
       ::slotted(wc-nav-spacer) {
         flex: 999;
       }
-      ::slotted(wc-nav-item:hover) {
+      ::slotted(wc-nav-item:not([disabled]):hover) {
         font-weight: var(--nav-item-hover-font-weight);
       }
       ::slotted(wc-nav-item[selected]) {
         color: var(--nav-item-selected-color);
         background-color: var(--nav-item-selected-background-color,red);
       }
+      ::slotted(wc-nav-item[disabled]) {
+        color: var(--nav-item-disabled-color);
+        cursor: default;
+      }
     `;
   }
 
   render() {
     return html`
-      <ul class=${this.className || nothing}>
+      <ul class=${this.classes.join(' ') || nothing} @click=${this.onClick}>
         <slot></slot>
       </ul>
     `;
   }
 
-  get className() {
+  get classes() {
     const classes = [];
     if (this.vertical) {
       classes.push('vertical');
@@ -86,6 +92,33 @@ export class NavGroupElement extends LitElement {
     if (this.flex) {
       classes.push('flex');
     }
-    return classes.join(' ');
+    return classes;
+  }
+
+  /**
+   * Select the named item from the list of wv-nav-item elements
+   *
+   * @param {String} name - Name of the item to select
+   */
+  select(name) {
+    this.querySelectorAll('wc-nav-item').forEach((item) => {
+      if (item.name === name) {
+        item.setAttribute('selected', true);
+      } else {
+        item.removeAttribute('selected');
+      }
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  onClick(event) {
+    const target = event.target.closest('wc-nav-item');
+    if (target && !target.disabled) {
+      this.dispatchEvent(new CustomEvent(Event.CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: target.name || target.textContent.trim(),
+      }));
+    }
   }
 }

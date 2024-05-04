@@ -6,6 +6,11 @@ import { Event } from '../core/Event';
  *
  * This class is used as a base class for all form elements
  *
+ * @property {String} name - The name of the switch
+ * @property {String} value - The value of the control
+ * @property {Boolean} disabled - Whether the form control is disabled
+ * @property {Boolean} required - Whether the form control is required before submitting
+ *
  * @example
  * <wc-form-control>Power</wc-form-switch>
  */
@@ -31,24 +36,9 @@ export class FormControlElement extends LitElement {
 
   static get properties() {
     return {
-      /**
-       * @property {String} name - The name of the switch
-       */
       name: { type: String },
-
-      /**
-       * @property {String} value - The value of the control
-       */
       value: { type: String },
-
-      /**
-       * @property {Boolean} disabled - Whether the form control is disabled
-       */
       disabled: { type: Boolean },
-
-      /**
-       * @property {Boolean} required - Whether the form control is required before submitting
-       */
       required: { type: Boolean },
     };
   }

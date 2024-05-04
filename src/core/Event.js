@@ -1,6 +1,11 @@
-// Define events used by web components
+/**
+ * Define events used by web components
+ * @readonly
+ * @enum {String}
+ */
 export const Event = {
-  CHANGE: 'change',
+  CHANGE: 'wc-change',
+  CLICK: 'wc-click',
   EVENT_CLICK: 'ws-click',
   EVENT_HOVER: 'ws-hover',
   EVENT_START: 'ws-start',

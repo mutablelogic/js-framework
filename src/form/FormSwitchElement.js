@@ -6,6 +6,8 @@ import { FormControlElement } from './FormControlElement';
  *
  * This class is used to create a binary switch
  *
+ * @property {Boolean} selected - Whether the switch is checked
+ *
  * @example
  * <wc-form-switch name="power" selected>Power</wc-form-switch>
  */
@@ -23,9 +25,6 @@ export class FormSwitchElement extends FormControlElement {
 
   static get properties() {
     return {
-      /**
-       * @property {Boolean} selected - Whether the switch is checked
-       */
       selected: { type: Boolean },
     };
   }

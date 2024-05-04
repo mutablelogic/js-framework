@@ -5,6 +5,7 @@
     --nav-item-hover-font-weight: var(--font-weight-semibold);
     --nav-item-selected-color: var(--light-color);
     --nav-item-disabled-color: var(--grey-40-color);
+    --nav-item-divider-color: var(--grey-20-color);
     --nav-item-selected-background-color: var(--primary-color);
 
     /* icon */

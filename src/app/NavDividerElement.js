@@ -1,4 +1,4 @@
-import { LitElement, html, css, nothing } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 
 /**
  * @class NavDividerElement
@@ -19,7 +19,7 @@ export class NavDividerElement extends LitElement {
 
   render() {
     return html`
-      <hr>
+      <li class=${this.classes.join(' ') || nothing}></li>
     `;
   }
 

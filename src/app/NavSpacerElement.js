@@ -20,7 +20,7 @@ export class NavSpacerElement extends LitElement {
   static get styles() {
     return css`
       :host {
-          flex: 999 0;
+          flex: 1 0;
       }
     `;
   }

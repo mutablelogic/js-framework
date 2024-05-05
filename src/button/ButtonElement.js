@@ -51,17 +51,55 @@ export class ButtonElement extends LitElement {
   get classes() {
     const classes = [];
     if (this.type) {
-      classes.push(this.type);
+      classes.push(this.type.toLowerCase());
     }
     if (this.textTransform) {
-      classes.push(`text-transform-${this.textTransform}`);
+      classes.push(`text-transform-${this.textTransform.toLowerCase()}`);
     }
     return classes;
   }
 
-  render() {
+  get controlButtonIcon() {
+    switch (this.type.toLowerCase()) {
+      case 'close':
+        return 'x-square';
+      case 'help':
+        return 'question-square';
+      case 'maximise':
+        return 'fullscreen';
+      case 'minimise':
+        return 'fullscreen-exit';
+      default:
+        return '';
+    }
+  }
+
+  renderButton() {
     return html`
       <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
     `;
+  }
+
+  renderSubmit() {
+    return html`
+      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
+    `;
+  }
+
+  renderControl() {
+    return html`
+      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
+    `;
+  }
+
+  render() {
+    switch (this.type.toLowerCase()) {
+      case 'control':
+        return this.renderControl();
+      case 'submit':
+        return this.renderSubmit();
+      default:
+        return this.renderButton();
+    }
   }
 }

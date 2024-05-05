@@ -6,12 +6,29 @@ import { LitElement, html, css, nothing } from 'lit';
  * This class is used as a group of control buttons, as decoration of a card, located on the
  * top right corner of the card.
  *
+ * @property {String} name - The name of the control group
+ *
  * @example
- * <wc-control-button-group name="controls"></wc-control-button-group>
+ * <wc-control-button-group name="controls">
+ *   <wc-button type="control">Close</wc-button>
+ * </wc-control-button-group>
  */
 export class ControlButtonGroupElement extends LitElement {
   static get localName() {
     return 'wc-control-button-group';
+  }
+
+  constructor() {
+    super();
+
+    // Default properties
+    this.name = '';
+  }
+
+  static get properties() {
+    return {
+      name: { type: String },
+    };
   }
 
   static get styles() {
@@ -37,8 +54,6 @@ export class ControlButtonGroupElement extends LitElement {
   render() {
     return html`
       <div class=${this.classes.join(' ') || nothing}>
-        <button class="control-button" title="Close">CLOSE</button>
-        <button class="control-button" title="Help">HELP</button>
         <slot></slot>
       </div>
     `;

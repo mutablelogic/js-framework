@@ -8,6 +8,7 @@ import './document.css';
 import './app/app';
 import './layout/layout';
 import './form/form';
+import './button/button';
 
 // Other
 import './esbuild';

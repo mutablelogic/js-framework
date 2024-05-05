@@ -79,14 +79,18 @@ export class FormControlElement extends LitElement {
 
       label.select {
         cursor: inherit;
-        
+
         & select {
           width: 100%;
           cursor: pointer;
           font-family: inherit;
           appearance: none;
           padding: var(--form-select-padding-y) var(--form-select-padding-x);
+          background-image: var(--form-select-background-image);
           background-color: var(--form-select-background-color);
+          background-repeat: no-repeat;
+          background-position: right center;
+          background-size: contain;          
           border: 1px solid var(--form-select-border-color);
           border-radius: var(--form-select-border-radius);
 

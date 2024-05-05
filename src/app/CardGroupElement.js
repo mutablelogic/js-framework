@@ -22,13 +22,14 @@ export class CardGroupElement extends LitElement {
       :host {
         flex: 0 1 auto;
       }
-      div.card-group {
+      div {
         display: flex;
         flex-wrap: wrap;
       }
 
       /* Colours */
       ::slotted(wc-card) {
+        position: relative;
         border: 1px solid var(--grey-20-color);
         border-radius: var(--card-border-radius);
         margin: var(--card-margin-y) var(--card-margin-x);

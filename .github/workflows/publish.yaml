@@ -6,13 +6,17 @@ jobs:
   var:
     name: Set variables
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.var.outputs.tag }}
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0      
     - name: Set variables
       id: var
       run: |
         TAG="$(git describe --tags)" && echo "tag=${TAG#v}" >> $GITHUB_OUTPUT
-    outputs:
-      tag: ${{ steps.var.outputs.tag }}
   build:
     name: Build
     needs: var    

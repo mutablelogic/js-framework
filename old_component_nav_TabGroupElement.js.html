@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: old/component/nav/TabGroupElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: old/component/nav/TabGroupElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LitElement, html, css, nothing } from 'lit';
+import { Event } from '../core/Event';
+
+/**
+ * TabGroupElement
+ * This class is used to create a tab group, which
+ * displays a tabbed navigation horizontally and allows
+ * selection of one tab within the group.
+ *
+ * @example
+ * &lt;wc-tab-group>
+ *   &lt;wc-tab name="tab1" selected>Tab1&lt;/wc-tab>
+ *   &lt;wc-tab name="tab2">Tab2&lt;/wc-tab>
+ *   &lt;wc-tab name="tab3">Tab3&lt;/wc-tab>
+ *   &lt;wc-tab name="tab4" disabled>Tab4&lt;/wc-tab>
+ * &lt;/wc-tab-group>
+ */
+export class TabGroupElement extends LitElement {
+  static get localName() {
+    return 'wc-tab-group';
+  }
+
+  constructor() {
+    super();
+    this.backgroundColor = 'light';
+    this.hidden = false;
+  }
+
+  static get properties() {
+    return {
+      /**
+       * Background color of the tab group, one of primary, secondary, light, white, dark, black
+       *
+       * @type {String}
+       * @default light
+       * @memberof TabGroupElement
+       */
+      backgroundColor: { type: String },
+
+      /**
+       * If true, tab group is hidden and takes up no space
+       *
+       * @type {Boolean}
+       * @default false
+       * @memberof TabGroupElement
+       */
+      hidden: { type: Boolean },
+    };
+  }
+
+  static get styles() {
+    return css`
+      ul {
+        display: flex;
+        margin: 0;
+        border: 0;
+        padding: 0;
+        padding-left: 4px;
+        list-style: none;
+      }      
+      ::slotted(wc-tab) {
+        border-bottom: none;
+        padding: 10px;
+        margin-right: 4px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      /* dark theme */
+      ul.bg-color-dark {
+        border-bottom: 1px solid var(--grey-80-color);
+      }
+      .bg-color-dark ::slotted(wc-tab) {
+        background-color: var(--dark-color);
+        color: var(--light-color);
+        border-width: 1px;
+        border-style: solid;
+        border-bottom: none;
+        border-color: var(--grey-80-color);
+      }
+      .bg-color-dark ::slotted(wc-tab:hover) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+      .bg-color-dark ::slotted(wc-tab:active) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-weight: var(--font-weight-bold);
+      }
+
+      /* light theme */
+      ul.bg-color-light {
+        border-bottom: 1px solid var(--grey-40-color);
+      }
+      .bg-color-light ::slotted(wc-tab) {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        border-width: 1px;
+        border-style: solid;
+        border-bottom: none;
+        border-color: var(--grey-40-color);
+      }
+      .bg-color-light ::slotted(wc-tab:hover),::slotted(wc-tab:active),::slotted(wc-tab[selected]) {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+      .bg-color-light ::slotted(wc-tab:active) {
+        font-weight: var(--font-weight-bold);
+      }
+      .bg-color-light ::slotted(wc-tab[disabled]) {
+        background-color: inherit;
+        font-weight: inherit;
+        color: var(--grey-40-color);
+        cursor: inherit;
+      }
+    `;
+  }
+
+  get className() {
+    const classes = [];
+    if (this.backgroundColor) {
+      classes.push(`bg-color-${this.backgroundColor}`);
+    }
+    if (this.hidden) {
+      classes.push('hidden');
+    }
+    return classes.join(' ');
+  }
+
+  render() {
+    return html`
+      &lt;ul class=${this.className || nothing} @click=${this.onClick}>&lt;slot>&lt;/slot>&lt;/ul>
+    `;
+  }
+
+  /**
+   * Select a tab by name, and deselect all other tabs
+   * @param {String} name: The name of the tab to select
+   * @returns The node that was selected, or null
+   */
+  select(target) {
+    const tabs = this.querySelectorAll('wc-tab');
+    const name = target.name || target.textContent;
+    let selectedNode = null;
+    tabs.forEach((tab) => {
+      if (tab.name === name &amp;&amp; !tab.selected) {
+        tab.setAttribute('selected', 'selected');
+        selectedNode = tab;
+      } else if (tab.name !== name &amp;&amp; tab.selected) {
+        tab.removeAttribute('selected');
+      }
+    });
+    return selectedNode;
+  }
+
+  onClick(event) {
+    const selected = this.select(event.target);
+    if (selected) {
+      this.dispatchEvent(new CustomEvent(Event.EVENT_CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: selected.name || selected.textContent,
+      }));
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badge%2520element%2520constructor.%2520Sets%2520the%2520default%2520properties,%2520textTransform%2520and%2520backgroundColor%250Ato%2520none%2520and%2520primary%2520respectively..html">Badge element constructor. Sets the default properties, textTransform and backgroundColor
+to none and primary respectively.</a></li><li><a href="BadgeElement.html">BadgeElement</a></li><li><a href="BadgeGroupElement.html">BadgeGroupElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ButtonGroupElement.html">ButtonGroupElement</a></li><li><a href="CanvasElement.html">CanvasElement</a></li><li><a href="CanvasNavbarElement.html">CanvasNavbarElement</a></li><li><a href="CanvasSectionElement.html">CanvasSectionElement</a></li><li><a href="CardElement.html">CardElement</a></li><li><a href="CardGroupElement.html">CardGroupElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="CodeElement.html">CodeElement</a></li><li><a href="ContentElement.html">ContentElement</a></li><li><a href="ControlButtonGroupElement.html">ControlButtonGroupElement</a></li><li><a href="FormControlElement.html">FormControlElement</a></li><li><a href="FormDateElement.html">FormDateElement</a></li><li><a href="FormElement.html">FormElement</a></li><li><a href="FormSelectElement.html">FormSelectElement</a></li><li><a href="FormSwitchElement.html">FormSwitchElement</a></li><li><a href="FormTextElement.html">FormTextElement</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="NavBarElement.html">NavBarElement</a></li><li><a href="NavDividerElement.html">NavDividerElement</a></li><li><a href="NavElement.html">NavElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="NavSpacerElement.html">NavSpacerElement</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="RowElement.html">RowElement</a></li><li><a href="SideBarElement.html">SideBarElement</a></li><li><a href="SideModalElement.html">SideModalElement</a></li><li><a href="SpacerElement.html">SpacerElement</a></li><li><a href="TabElement.html">TabElement</a></li><li><a href="TabGroupElement.html">TabGroupElement</a></li><li><a href="TableElement.html">TableElement</a></li><li><a href="ViewController.html">ViewController</a></li><li><a href="ViewElement.html">ViewElement</a></li><li><a href="ViewGroupElement.html">ViewGroupElement</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="CLICK%2520-%2520Dispatched%2520when%2520a%2520navigation%2520item%2520is%2520clicked.html#event:whichisnotdisabled"> which is not disabled</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li><li><a href="global.html#autocomplete">autocomplete</a></li><li><a href="global.html#default">default</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#disabled">disabled</a></li><li><a href="global.html#labelabove">labelabove</a></li><li><a href="global.html#link">link</a></li><li><a href="global.html#max">max</a></li><li><a href="global.html#maxlength">maxlength</a></li><li><a href="global.html#min">min</a></li><li><a href="global.html#minlength">minlength</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#pattern">pattern</a></li><li><a href="global.html#placeholder">placeholder</a></li><li><a href="global.html#required">required</a></li><li><a href="global.html#rows">rows</a></li><li><a href="global.html#size">size</a></li><li><a href="global.html#submit">submit</a></li><li><a href="global.html#transform">transform</a></li><li><a href="global.html#value">value</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon May 06 2024 11:47:08 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

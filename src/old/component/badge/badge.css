@@ -1,0 +1,12 @@
+
+/* badge */
+:root {
+    --badge-padding-x: 0.35em;
+    --badge-padding-y: 0.35em;
+    --badge-font-size: var(--font-size-small);
+    --badge-font-weight: var(--font-weight-normal);
+    --badge-border-radius: var(--border-radius);
+    --badge-border-radius-left: var(--badge-border-radius);
+    --badge-border-radius-right: var(--badge-border-radius);
+    --badge-group-divider-color: var(--light-color);
+}

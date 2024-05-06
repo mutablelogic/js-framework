@@ -3,11 +3,8 @@
  * class for all data models.
  * @class
 */
+// eslint-disable-next-line import/prefer-default-export
 export class Model {
-  constructor() {
-    // Initialize properties
-  }
-
   static get properties() {
     return {};
   }

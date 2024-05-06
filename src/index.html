@@ -10,196 +10,153 @@
 </head>
 
 <body>
-    <wc-navbar name="navbar">
-        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
-        <wc-nav-item>File</wc-nav-item>
-        <wc-nav-item>Edit</wc-nav-item>
-        <wc-nav-item>Selection</wc-nav-item>
-        <wc-nav-item>View</wc-nav-item>
-        <wc-nav-item disabled>Disabled</wc-nav-item>
-        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
-    </wc-navbar>
+    <wc-canvas vertical backgroundColor="light">
+        <wc-canvas-navbar>
+            <wc-nav-group>
+                <wc-nav-item name="home" selected>
+                    <nobr><wc-icon name="house"></wc-icon> Home</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="dashboard">
+                    <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="orders">
+                    <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="products">
+                    <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="customers">
+                    <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="help" disabled>
+                    <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+                </wc-nav-item>
+                <wc-nav-spacer></wc-nav-spacer>
+                <wc-nav-divider></wc-nav-divider>
+                <wc-nav-item>
+                    <wc-form-switch name="theme">Dark Theme</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <wc-form-switch id="vertical" name="vertical">Vertical</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <wc-form-switch id="end" name="end">EndNav</wc-form-switch>
+                </wc-nav-item>
+            </wc-nav-group>
+            <script>
+                document.querySelector('wc-form-switch').addEventListener('wc-change', (e) => {
+                    document.querySelector('wc-canvas').setAttribute('backgroundColor', e.target.selected ? 'dark' : 'light');
+                });
+                document.querySelector('wc-form-switch#vertical').addEventListener('wc-change', (e) => {
+                    if (e.target.selected) {
+                        document.querySelector('wc-canvas').removeAttribute('vertical');
+                        document.querySelector('wc-nav-group').setAttribute('vertical', true);
+                    } else {
+                        document.querySelector('wc-canvas').setAttribute('vertical', true);
+                        document.querySelector('wc-nav-group').removeAttribute('vertical');
+                    }
+                });
+                document.querySelector('wc-form-switch#end').addEventListener('wc-change', (e) => {
+                    if (e.target.selected) {
+                        document.querySelector('wc-canvas-navbar#end').setAttribute('hidden', true);
+                    } else {
+                        document.querySelector('wc-canvas-navbar#end').removeAttribute('hidden');
+                    }
+                });
+                document.querySelector('wc-nav-group').addEventListener('wc-click', (e) => {
+                    switch (e.detail) {
+                        case 'home':
+                        case 'dashboard':
+                        case 'orders':
+                        case 'products':
+                        case 'customers':
+                            e.target.select(e.detail);
+                    }
+                });
+            </script>
+        </wc-canvas-navbar>
+        <wc-canvas-section flex>
+            <wc-card-group>
+                <wc-card backgroundColor="primary" width="2">
+                    <h4>Card</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-    <div class="container">
-        <h1>Buttons</h1>
-
-        <h3>Individual</h3>
-        <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
-        <wc-button name="retry">Retry</wc-button>
-
-        <h3>Group</h3>
-        <wc-button-group>
-            <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
-            <wc-button name="retry">Retry</wc-button>
-            <wc-button name="cancel" default>Cancel</wc-button>
-        </wc-button-group>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Badge</h1>
-
-        <h3>Individual</h3>
-        <wc-badge transform="uppercase">default</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
-        <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
-        <hr>
-
-        <h3>Group</h3>
-        <wc-badge-group>
-            <wc-badge transform="uppercase">default</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="primary">primary</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="secondary">secondary</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="success">success</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="warning">warning</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="error">error</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="light">light</wc-badge>
-            <wc-badge transform="uppercase" backgroundColor="dark">dark</wc-badge>
-        </wc-badge-group>
-
-    </div>
-    <hr>
-
-    <div class="container wc-card">
-        <h1>Close Button</h1>
-        <div
-            style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
-            <wc-close name="close"></wc-close>
-            <p>Here is some content within a container</p>
-        </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Icon</h1>
-        <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
-        <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
-        <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
-        <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
-        <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
-    </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Modal</h1>
-        <wc-button name="modal">Pop-up</wc-button>
-        <wc-modal>
-            <wc-close name="modal-close"></wc-close>
-            <p>Here is some content within a modal</p>
-        </wc-modal>
-        <wc-sidemodal>
-            <wc-close name="modal-close"></wc-close>
-            <div class=""container">
-                <p>Here is some content within a sidemodal</p>
-            </div>
-        </wc-sidemodal>
-    </div>
-    <hr>
-
-    <div class="container">
-        <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
-            <h1>Form</h1>
-            <wc-row backgroundColor="light">
-                <wc-row-6>
-                    <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
-                    <wc-spacer></wc-spacer>
-                    <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)" autocomplete minlength="3">Email Address</wc-form-text>
-                    <wc-spacer></wc-spacer>
-                    <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of Birth</wc-form-date>
-                </wc-row-6>
-                <wc-row-6>
-                    <wc-form-text name="address" placeholder="Address" labelabove rows="6" description="Shipping address (optional)">Address</wc-form-text>
-                </wc-row-6>
-            </wc-row>
-            <wc-row backgroundColor="light">
-                <wc-row-12>                    
-                    <wc-spacer></wc-spacer>
-                    <wc-button-group>
-                        <wc-button name="save" submit default>Save</wc-button>
-                        <wc-button name="save" submit>Cancel</wc-button>
-                    </wc-button-group>        
-                    <wc-spacer></wc-spacer>
-                </wc-row-12>
-            </wc-row>
-        </form>
-    </div>
-    <hr>
-
-    <div class="container">
-        <h1>Row Layout</h1>
-
-        <h3>Two Columns</h3>
-        <wc-row backgroundColor="light">
-            <wc-row-6>
-                Left Hand Side
-            </wc-row-6>
-            <wc-row-6>
-                Right Hand Side
-            </wc-row-6>
-        </wc-row>
-        <hr/>
-
-        <h3>Three Columns</h3>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-4>
-                Left
-            </wc-row-4>
-            <wc-row-4>
-                Middle
-            </wc-row-4>
-            <wc-row-4>
-                Right
-            </wc-row-4>
-        </wc-row>
-        <hr/>
-
-        <h2>Four Columns</h2>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-3>
-                Col 1
-            </wc-row-3>
-            <wc-row-3>
-                Col 2
-            </wc-row-3>
-            <wc-row-3>
-                Col 3
-            </wc-row-3>
-            <wc-row-3>
-                Col 4
-            </wc-row-3>
-        </wc-row>
-        <hr/>
-
-        <h2>Six Columns</h2>
-        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
-            <wc-row-2>
-                Col 1
-            </wc-row-2>
-            <wc-row-2>
-                Col 2
-            </wc-row-2>
-            <wc-row-2>
-                Col 3
-            </wc-row-2>
-            <wc-row-2>
-                Col 4
-            </wc-row-2>
-            <wc-row-2>
-                Col 5
-            </wc-row-2>
-            <wc-row-2>
-                Col 6
-            </wc-row-2>
-        </wc-row>
-        <hr/>
-        
-    </div>
+                    <wc-button popup="poop">Toggle</wc-button>
+                    <wc-popup id="poop">
+                        <h4>Card</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        Popover content
+                    </wc-popup>
+                </wc-card>
+                <wc-card id="card" backgroundColor="secondary" width="2">
+                    <h4>Card</h4>
+                    <wc-form-select id="backgroundColor"
+                        options='[ "primary", "secondary", "light", "dark", "black", "white", "success", "warning", "error" ]'>Background
+                        Colour</wc-form-select>
+                    <script>
+                        document.querySelector('wc-form-select#backgroundColor').addEventListener('wc-change', (e) => {
+                            document.querySelector('wc-card#card').setAttribute('backgroundColor', e.detail);
+                        });
+                    </script>
+                    <wc-form-select id="width" options='["",1,2,3,4,5,6,7,8,9,10,11,12]'>Width</wc-form-select>
+                    <script>
+                        document.querySelector('wc-form-select#width').addEventListener('wc-change', (e) => {
+                            document.querySelector('wc-card#card').setAttribute('width', e.detail);
+                        });
+                    </script>
+                </wc-card>
+                <wc-card>
+                    <wc-control-button-group id="controls" name="controls">
+                        <wc-button name="close" type="control">Close</wc-button>
+                        <wc-button name="help" type="control" disabled>Help</wc-button>
+                    </wc-control-button-group>
+                    <h1>Header</h1>
+                    <h2>Subtitle</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <script>
+                        document.querySelector('wc-control-button-group#controls').addEventListener('wc-click', (e) => {
+                            var card = e.target.closest('wc-card');
+                            if (card) {
+                                card.setAttribute('hidden', true);
+                            }
+                        });
+                    </script>
+                </wc-card>
+                <wc-card backgroundColor="success" width="12">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
+                    <wc-icon name="check-circle-fill"></wc-icon> The operation was successful
+                </wc-card>
+                <wc-card backgroundColor="warning" width="6">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
+                    <wc-icon name="exclamation-circle-fill"></wc-icon> Warning: Something happened
+                </wc-card>
+                <wc-card backgroundColor="error" width="6">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
+                    <wc-icon name="x-circle-fill"></wc-icon> Error: An internal error occurred
+                </wc-card>
+            </wc-card-group>
+        </wc-canvas-section>
+        <wc-canvas-navbar id="end">END</wc-canvas-navbar>
+    </wc-canvas>
 </body>
 
 </html>

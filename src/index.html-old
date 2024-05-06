@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storybook</title>
+  <script type="module" src="index.js" defer></script>
+  <link href="index.css" rel="stylesheet">
+</head>
+
+<body>
+  <wc-canvas>
+    <wc-navbar backgroundColor="dark">
+      <wc-nav>
+        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+        <wc-nav-item>File</wc-nav-item>
+        <wc-nav-item>Edit</wc-nav-item>
+        <wc-nav-item>Selection</wc-nav-item>
+        <wc-nav-item>View</wc-nav-item>
+        <wc-nav-item disabled>Disabled</wc-nav-item>
+        <wc-nav-spacer></wc-nav-spacer>
+        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+      </wc-nav>
+    </wc-navbar>
+    <wc-sidebar backgroundColor="light">
+      <wc-nav vertical>
+        <wc-nav-item>
+          <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+        </wc-nav-item>
+        <wc-nav-spacer></wc-nav-spacer>
+        <wc-nav-item>
+          <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+        </wc-nav-item>
+      </wc-nav>
+    </wc-sidebar>
+    <wc-content>
+      <div style="background-color: #fcfcfc; padding: 5px;">
+        <wc-tab-group id="tab-group" backgroundColor="light">
+          <wc-tab name="tab-tables" selected><wc-icon name="table" size="medium"></wc-icon> Tables</wc-tab>
+          <wc-tab name="tab-buttons">Buttons</wc-tab>
+          <wc-tab name="tab-badges">Badges</wc-tab>
+          <wc-tab name="tab-icons">Icons</wc-tab>
+          <wc-tab name="tab-code">Code</wc-tab>
+          <wc-tab name="tab-disabled" disabled><wc-icon name="person-circle" size="medium"></wc-icon>
+            Disabled</wc-tab>
+        </wc-tab-group>
+        <wc-view-group id="view-group" backgroundColor="light">
+          <wc-view name="tab-tables" selected>
+            <div class="container">
+              <h1>Tables</h1>
+              <wc-table id="table" backgroundColor="black" stripedRows>Table of Fruit</wc-table>
+              <script>
+                document.getElementById('table').data = [
+                  { fruit: 'apple', color: 'green', weight: '100gr' },
+                  { fruit: 'banana', color: 'yellow', weight: '140gr' }
+                ];
+              </script>
+            </div>
+          </wc-view>
+          <wc-view name="tab-buttons">
+            <div class="container">
+              <h1>Buttons</h1>
+
+              <h3>Individual</h3>
+              <wc-button name="save" link="http://news.bbc.co.uk/" default>Save</wc-button>
+              <wc-button name="retry">Retry</wc-button>
+
+              <h3>Group</h3>
+              <wc-button-group>
+                <wc-button name="save" link="http://news.bbc.co.uk/">Save</wc-button>
+                <wc-button name="retry">Retry</wc-button>
+                <wc-button name="cancel" default>Cancel</wc-button>
+              </wc-button-group>
+            </div>
+          </wc-view>
+          <wc-view name="tab-badges">
+            <div class="container">
+              <h1>Badge</h1>
+
+              <h3>Individual</h3>
+              <wc-badge textTransform="uppercase">default</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+              <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+              <hr>
+
+              <h3>Group</h3>
+              <wc-badge-group>
+                <wc-badge textTransform="uppercase">default</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="primary">primary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="secondary">secondary</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="success">success</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="warning">warning</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="error">error</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="light">light</wc-badge>
+                <wc-badge textTransform="uppercase" backgroundColor="dark">dark</wc-badge>
+              </wc-badge-group>
+            </div>
+          </wc-view>
+          <wc-view name="tab-icons">
+            <div class="container">
+              <h1>Icon</h1>
+              <wc-icon name="0-circle-fill"></wc-icon> DEFAULT
+              <wc-icon name="1-circle-fill" size="small"></wc-icon> SMALL
+              <wc-icon name="2-circle-fill" size="medium"></wc-icon> MEDIUM
+              <wc-icon name="3-circle-fill" size="large"></wc-icon> LARGE
+              <wc-icon name="4-circle-fill" size="xlarge"></wc-icon> XLARGE
+            </div>
+          </wc-view>
+          <wc-view name="tab-code">
+            <div class="container">
+              <h1>Code</h1>
+              <div style="background-color: #fcfcfc; padding: 5px;">
+                <wc-code language="javascript">
+                  console.log('hello');
+                  console.log('hello');
+                  console.log('hello');
+
+                  /* this is some more javascript */
+                  console.log('hello');
+                </wc-code>
+              </div>
+            </div>
+          </wc-view>
+        </wc-view-group>
+      </div>
+      </div>
+
+      <div class="container wc-card">
+        <h1>Close Button</h1>
+        <div
+          style="position:relative; margin: 0 100px 0 100px; padding: 5px; border: 5px solid aliceblue; background-color: aliceblue;">
+          <wc-close name="close"></wc-close>
+          <p>Here is some content within a container</p>
+        </div>
+      </div>
+      <hr>
+
+      </div>
+      <hr>
+
+      <div class="container">
+        <h1>Modal</h1>
+        <wc-button name="modal">Pop-up</wc-button>
+        <wc-modal>
+          <wc-close name="modal-close"></wc-close>
+          <p>Here is some content within a modal</p>
+        </wc-modal>
+        <wc-sidemodal>
+          <wc-close name="modal-close"></wc-close>
+          <wc-nav vertical>
+            <wc-nav-item>
+              <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
+            </wc-nav-item>
+            <wc-nav-item>
+              <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+            </wc-nav-item>
+            <wc-nav-item>
+              <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+            </wc-nav-item>
+            <wc-nav-item>
+              <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+            </wc-nav-item>
+            <wc-nav-item>
+              <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+            </wc-nav-item>
+            <wc-nav-spacer></wc-nav-spacer>
+            <wc-nav-item>
+              <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+            </wc-nav-item>
+          </wc-nav>
+        </wc-sidemodal>
+      </div>
+      <hr>
+
+      <div class="container">
+        <form method="POST" action="#" onSubmit="console.log('submit'); return false;">
+          <h1>Form</h1>
+          <wc-row backgroundColor="light">
+            <wc-row-6>
+              <wc-form-text name="name" placeholder="Name" autocomplete required minlength="3">Name</wc-form-text>
+              <wc-spacer></wc-spacer>
+              <wc-form-text name="email" placeholder="Email" pattern="^\S+@\S+$" description="Email Address (optional)"
+                autocomplete minlength="3">Email
+                Address</wc-form-text>
+              <wc-spacer></wc-spacer>
+              <wc-form-date name="date" placeholder="Date of Birth" labelabove>Date of
+                Birth</wc-form-date>
+            </wc-row-6>
+            <wc-row-6>
+              <wc-form-text name="address" placeholder="Address" labelabove rows="6"
+                description="Shipping address (optional)">Address</wc-form-text>
+            </wc-row-6>
+          </wc-row>
+          <wc-row backgroundColor="light">
+            <wc-row-12>
+              <wc-spacer></wc-spacer>
+              <wc-button-group>
+                <wc-button name="save" submit default>Save</wc-button>
+                <wc-button name="save" submit>Cancel</wc-button>
+              </wc-button-group>
+              <wc-spacer></wc-spacer>
+            </wc-row-12>
+          </wc-row>
+        </form>
+      </div>
+      <hr>
+
+      <div class="container">
+        <h1>Row Layout</h1>
+
+        <h3>Two Columns</h3>
+        <wc-row backgroundColor="light">
+          <wc-row-6>
+            Left Hand Side
+          </wc-row-6>
+          <wc-row-6>
+            Right Hand Side
+          </wc-row-6>
+        </wc-row>
+        <hr />
+
+        <h3>Three Columns</h3>
+        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+          <wc-row-4>
+            Left
+          </wc-row-4>
+          <wc-row-4>
+            Middle
+          </wc-row-4>
+          <wc-row-4>
+            Right
+          </wc-row-4>
+        </wc-row>
+        <hr />
+
+        <h2>Four Columns</h2>
+        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+          <wc-row-3>
+            Col 1
+          </wc-row-3>
+          <wc-row-3>
+            Col 2
+          </wc-row-3>
+          <wc-row-3>
+            Col 3
+          </wc-row-3>
+          <wc-row-3>
+            Col 4
+          </wc-row-3>
+        </wc-row>
+        <hr />
+
+        <h2>Six Columns</h2>
+        <wc-row> <!-- 1, 2, 3, 4, 6, 9 and 12 are defined -->
+          <wc-row-2>
+            Col 1
+          </wc-row-2>
+          <wc-row-2>
+            Col 2
+          </wc-row-2>
+          <wc-row-2>
+            Col 3
+          </wc-row-2>
+          <wc-row-2>
+            Col 4
+          </wc-row-2>
+          <wc-row-2>
+            Col 5
+          </wc-row-2>
+          <wc-row-2>
+            Col 6
+          </wc-row-2>
+        </wc-row>
+        <hr />
+
+      </div>
+    </wc-content>
+    <wc-sidebar>
+      <wc-nav vertical>
+        <wc-nav-item>
+          <nobr><wc-icon name="house" size="medium"></wc-icon> Home</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+        </wc-nav-item>
+        <wc-nav-item>
+          <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+        </wc-nav-item>
+        <wc-nav-spacer></wc-nav-spacer>
+        <wc-nav-item>
+          <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+        </wc-nav-item>
+      </wc-nav>
+    </wc-sidebar>
+
+    <wc-navbar backgroundColor="light">
+      <wc-nav>
+        <wc-nav-item><wc-icon name="list">menu</wc-icon></wc-nav-item>
+        <wc-nav-item>File</wc-nav-item>
+        <wc-nav-item>Edit</wc-nav-item>
+        <wc-nav-item>Selection</wc-nav-item>
+        <wc-nav-item>View</wc-nav-item>
+        <wc-nav-item disabled>Disabled</wc-nav-item>
+        <wc-nav-item justify="right"><wc-icon name="question-square">help</wc-icon></wc-nav-item>
+      </wc-nav>
+    </wc-navbar>
+
+  </wc-canvas>
+</body>
+
+</html>

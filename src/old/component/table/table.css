@@ -1,0 +1,7 @@
+:root {
+    --table-cell-padding-x: calc(var(--spacer) * 0.2);
+    --table-cell-padding-y: calc(var(--spacer) * 0.2);
+
+    --table-row-filter-header: brightness(50%);
+    --table-row-filter-odd: brightness(90%);
+}

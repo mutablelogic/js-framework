@@ -1,0 +1,28 @@
+:root {
+    /* Navigational items */
+    --nav-item-padding-x: 0.5em;
+    --nav-item-padding-y: 0.5em;
+    --nav-item-margin-x: 0.5em;
+    --nav-item-margin-y: 0;
+    --nav-item-border-radius: var(--border-radius);
+    --nav-item-hover-font-weight: var(--font-weight-semibold);
+    --nav-item-selected-color: var(--light-color);
+    --nav-item-disabled-color: var(--grey-40-color);
+    --nav-item-divider-color: var(--grey-20-color);
+    --nav-item-selected-background-color: var(--primary-color);
+
+    /* icon */
+    --icon-size-default: 1.5em;
+    --icon-size-small: 1em;
+    --icon-size-medium: 1.5em;
+    --icon-size-large: 2em;
+    --icon-size-xlarge: 3em;
+
+    /* card */
+    --card-margin-x: 0.5em;
+    --card-margin-y: 0.5em;
+    --card-padding-x: 0.4em;
+    --card-padding-y: 0.4em;
+    --card-border-radius: var(--border-radius);
+    --card-transition-delay: 300ms;
+}

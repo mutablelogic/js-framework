@@ -1,4 +1,4 @@
-name: Package Publish on Release
+name: Publish Package on Release
 on:
   release:
     types: [created]

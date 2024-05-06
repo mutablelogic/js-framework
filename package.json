@@ -4,8 +4,8 @@
   "description": "Javascript Framework",
   "main": "dist/index.js",
   "scripts": {
-    "serve": "rm -fr dist && install -d dist && esbuild src/index.html src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy  --watch --serve",
-    "build": "rm -fr dist && install -d dist && esbuild src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
+    "serve": "rm -fr dist && install -d dist && esbuild src/index.html src/index.js src/esbuild.js --outdir=dist --asset-names=assets/[name]-[hash] --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy  --watch --serve",
+    "build": "rm -fr dist && install -d dist && esbuild src/index.js --outdir=dist --asset-names=assets/[name]-[hash] --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c config/eslint.config.mjs --cache --fix ./src/**/*.js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },

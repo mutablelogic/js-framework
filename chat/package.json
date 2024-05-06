@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "serve": "rm -fr dist && install -d dist && esbuild src/index.html src/index.js src/esbuild.js src/index.css --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy  --watch --serve",
+    "build": "rm -fr dist && install -d dist && esbuild src/index.js src/esbuild.js src/index.css --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@mutablelogic/js-framework": "^0.0.51"
+  }
 }

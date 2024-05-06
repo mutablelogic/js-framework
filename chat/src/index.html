@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="esbuild.js"></script>
+    <link href="index.css" rel="stylesheet">
+</head>
+<body>
+    <wc-canvas vertical backgroundColor="dark">
+        <wc-canvas-navbar>
+            <wc-nav-group>
+                <wc-nav-item name="home" selected>
+                    <nobr><wc-icon name="house"></wc-icon> Home</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="dashboard">
+                    <nobr><wc-icon name="speedometer" size="medium"></wc-icon> Dashboard</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="orders">
+                    <nobr><wc-icon name="table" size="medium"></wc-icon> Orders</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="products">
+                    <nobr><wc-icon name="grid" size="medium"></wc-icon> Products</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="customers">
+                    <nobr><wc-icon name="person-circle" size="medium"></wc-icon> Customers</nobr>
+                </wc-nav-item>
+                <wc-nav-item name="help" disabled>
+                    <nobr><wc-icon name="question-circle" size="medium"></wc-icon> Help</nobr>
+                </wc-nav-item>
+                <wc-nav-spacer></wc-nav-spacer>
+                <wc-nav-divider></wc-nav-divider>
+                <wc-nav-item>
+                    <wc-form-switch name="theme">Dark Theme</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <wc-form-switch id="vertical" name="vertical">Vertical</wc-form-switch>
+                </wc-nav-item>
+                <wc-nav-item>
+                    <wc-form-switch id="end" name="end">EndNav</wc-form-switch>
+                </wc-nav-item>
+            </wc-nav-group>
+        </wc-canvas-navbar>
+    </wc-canvas>
+</body>
+</html>

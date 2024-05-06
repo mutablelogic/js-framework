@@ -3,7 +3,7 @@
  * @readonly
  * @enum {String}
  */
-export const Event = {
+export const EventType = {
   CHANGE: 'wc-change',
   CLICK: 'wc-click',
   EVENT_CLICK: 'ws-click',

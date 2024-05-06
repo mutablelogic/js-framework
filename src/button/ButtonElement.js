@@ -1,4 +1,5 @@
 import { LitElement, html, css, nothing } from 'lit';
+import { EventType } from '../core/Event';
 
 /**
  * @class ButtonElement
@@ -104,7 +105,7 @@ export class ButtonElement extends LitElement {
 
   renderButton() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}>
+      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}>
         <slot></slot>
       </button>
     `;
@@ -112,7 +113,7 @@ export class ButtonElement extends LitElement {
 
   renderSubmit() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} type="submit" ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}><slot></slot></button>
+      <button class=${this.classes.join(' ') || nothing} type="submit" ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}><slot></slot></button>
     `;
   }
 
@@ -120,7 +121,7 @@ export class ButtonElement extends LitElement {
     const icon = this.controlButtonIcon;
     if (icon) {
       return html`
-        <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}>
+        <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}>
           <wc-icon name=${icon}></wc-icon>
         </button>
       `;
@@ -136,6 +137,17 @@ export class ButtonElement extends LitElement {
         return this.renderSubmit();
       default:
         return this.renderButton();
+    }
+  }
+
+  // Change the selected state when the input is changed
+  onClick() {
+    if (!this.disabled) {
+      this.dispatchEvent(new CustomEvent(EventType.CLICK, {
+        bubbles: true,
+        composed: true,
+        detail: this.name || this.buttonTitle,
+      }));
     }
   }
 }

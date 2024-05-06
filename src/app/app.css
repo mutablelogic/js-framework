@@ -24,4 +24,5 @@
     --card-padding-x: 0.4em;
     --card-padding-y: 0.4em;
     --card-border-radius: var(--border-radius);
+    --card-transition-delay: 300ms;
 }

@@ -102,9 +102,9 @@
                     </script>
                 </wc-card>
                 <wc-card>
-                    <wc-control-button-group name="controls">
-                        <wc-button type="control">Close</wc-button>
-                        <wc-button type="control" disabled>Help</wc-button>
+                    <wc-control-button-group id="controls" name="controls">
+                        <wc-button name="close" type="control">Close</wc-button>
+                        <wc-button name="help" type="control" disabled>Help</wc-button>
                     </wc-control-button-group>
                     <h1>Header</h1>
                     <h2>Subtitle</h2>
@@ -113,6 +113,14 @@
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                         voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                         non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <script>
+                        document.querySelector('wc-control-button-group#controls').addEventListener('wc-click', (e) => {
+                            var card = e.target.closest('wc-card');
+                            if(card) {
+                                card.setAttribute('hidden', true);
+                            }
+                        });
+                    </script>
                 </wc-card>
                 <wc-card backgroundColor="success" width="12">
                     <wc-control-button-group name="controls">

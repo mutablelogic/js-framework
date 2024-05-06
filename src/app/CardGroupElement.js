@@ -27,6 +27,11 @@ export class CardGroupElement extends LitElement {
         flex-wrap: wrap;
       }
 
+      /* Hidden Cards */
+      ::slotted(wc-card[hidden]) {
+        display: none;
+      }
+
       /* Colours */
       ::slotted(wc-card) {
         position: relative;

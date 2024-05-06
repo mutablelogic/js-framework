@@ -7,6 +7,7 @@ import { LitElement, html, css, nothing } from 'lit';
  *
  * @property {String} backgroundColor - The color theme of the card, default light
  * @property {Number} width - The width of the card in 1/12th of the available space
+ * @property {Boolean} hidden - Whether the card is hidden, default false
  *
  * @example
  * <wc-card-group>
@@ -26,18 +27,15 @@ export class CardElement extends LitElement {
     // Default properties
     this.backgroundColor = 'light';
     this.width = 0;
+    this.hidden = false;
   }
 
   static get properties() {
     return {
       backgroundColor: { type: String, attribute: true },
       width: { type: Number, attribute: true },
+      hidden: { type: Boolean, attribute: true },
     };
-  }
-
-  static get styles() {
-    return css`
-    `;
   }
 
   render() {

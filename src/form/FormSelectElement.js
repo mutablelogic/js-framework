@@ -1,6 +1,6 @@
 import { html, css, nothing } from 'lit';
 import { FormControlElement } from './FormControlElement';
-import { Event } from '../core/Event';
+import { EventType } from '../core/Event';
 /**
  * @class FormSelectElement
  *
@@ -60,7 +60,7 @@ export class FormSelectElement extends FormControlElement {
   // Change the selected state when the input is changed
   onInput(event) {
     if (super.onInput(event)) {
-      this.dispatchEvent(new CustomEvent(Event.CHANGE, {
+      this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
         bubbles: true,
         composed: true,
         detail: this.value,

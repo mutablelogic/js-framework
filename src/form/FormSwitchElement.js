@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit';
 import { FormControlElement } from './FormControlElement';
-import { Event } from '../core/Event';
+import { EventType } from '../core/Event';
 
 /**
  * @class FormSwitchElement
@@ -56,7 +56,7 @@ export class FormSwitchElement extends FormControlElement {
   onInput(event) {
     if (super.onInput(event)) {
       this.selected = event.target.checked;
-      this.dispatchEvent(new CustomEvent(Event.CHANGE, {
+      this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
         bubbles: true,
         composed: true,
         detail: this.name || this.textContent.trim(),

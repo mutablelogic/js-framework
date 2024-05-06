@@ -1,5 +1,5 @@
 import { LitElement, html, css, nothing } from 'lit';
-import { Event } from '../core/Event';
+import { EventType } from '../core/Event';
 
 /**
  * @class NavGroupElement
@@ -119,7 +119,7 @@ export class NavGroupElement extends LitElement {
   onClick(event) {
     const target = event.target.closest('wc-nav-item');
     if (target && !target.disabled) {
-      this.dispatchEvent(new CustomEvent(Event.CLICK, {
+      this.dispatchEvent(new CustomEvent(EventType.CLICK, {
         bubbles: true,
         composed: true,
         detail: target.name || target.textContent.trim(),

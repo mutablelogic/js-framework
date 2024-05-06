@@ -32,6 +32,6 @@ jobs:
         npm ci
         npm version ${{ needs.var.outputs.tag }} --no-git-tag-version --allow-same-version
         npm run build
-        npm publish
+        npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

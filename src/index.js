@@ -9,6 +9,7 @@ import './app/app';
 import './layout/layout';
 import './form/form';
 import './button/button';
+import './popup/popup';
 
 // Other
 import './esbuild';

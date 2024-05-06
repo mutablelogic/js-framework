@@ -13,6 +13,7 @@ import { EventType } from '../core/Event';
  * @property {String} textTransform - If the button text should be transformed
  *                                    (uppercase, lowercase, capitalize)
  * @property {Boolean} disabled - Whether the button is disabled
+ * @property {String} popup - The associated popup to show when the button is clicked
  *
  * @example
  * <wc-button type="control">Close</wc-button>
@@ -30,6 +31,7 @@ export class ButtonElement extends LitElement {
     this.type = '';
     this.textTransform = '';
     this.disabled = false;
+    this.popup = '';
   }
 
   static get properties() {
@@ -38,6 +40,7 @@ export class ButtonElement extends LitElement {
       type: { type: String },
       textTransform: { type: String },
       disabled: { type: Boolean },
+      popup: { type: String },
     };
   }
 
@@ -103,9 +106,23 @@ export class ButtonElement extends LitElement {
     }
   }
 
+  firstUpdated() {
+    if (this.popup) {
+      // Attach the popover target element
+      const buttonNode = this.shadowRoot.querySelector('button');
+      const targetNode = document.getElementById(this.popup);
+      if (buttonNode && targetNode) {
+        buttonNode.popoverTargetElement = targetNode;
+      }
+    }
+  }
+
   renderButton() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}>
+      <button class=${this.classes.join(' ') || nothing} 
+        name=${this.name || nothing} value=${this.buttonTitle || nothing}       
+        ?disabled=${this.disabled} 
+        @click=${this.onClick}>
         <slot></slot>
       </button>
     `;
@@ -113,7 +130,13 @@ export class ButtonElement extends LitElement {
 
   renderSubmit() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} type="submit" ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}><slot></slot></button>
+      <button class=${this.classes.join(' ') || nothing} 
+        type="submit" ?disabled=${this.disabled} 
+        name=${this.name || nothing} value=${this.buttonTitle || nothing} 
+        ?disabled=${this.disabled} 
+        @click=${this.onClick}>
+        <slot></slot>
+      </button>
     `;
   }
 
@@ -121,7 +144,10 @@ export class ButtonElement extends LitElement {
     const icon = this.controlButtonIcon;
     if (icon) {
       return html`
-        <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing} @click=${this.onClick}>
+        <button class=${this.classes.join(' ') || nothing} 
+          name=${this.name || nothing} value=${this.buttonTitle || nothing} 
+          ?disabled=${this.disabled} 
+          @click=${this.onClick}>
           <wc-icon name=${icon}></wc-icon>
         </button>
       `;

@@ -3,7 +3,19 @@ on:
   release:
     types: [created]
 jobs:
+  var:
+    name: Set variables
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set variables
+      id: var
+      run: |
+        TAG="$(git describe --tags)" && echo "tag=${TAG#v}" >> $GITHUB_OUTPUT
+    outputs:
+      tag: ${{ steps.var.outputs.tag }}
   build:
+    name: Build
+    needs: var    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -11,18 +23,11 @@ jobs:
       with:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@mutablelogic'
-    - run: npm install
-    - run: npm run build
-    - run: npm publish
+    - name: Publish
+      run: |
+        npm ci
+        npm version ${{ needs.var.outputs.tag }} --no-git-tag-version --allow-same-version
+        npm run build
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  delete:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: js-framework
-          package-type: 'npm'
-          num-old-versions-to-delete: 1
-          min-versions-to-keep: 2

@@ -104,7 +104,7 @@
                 <wc-card>
                     <wc-control-button-group name="controls">
                         <wc-button type="control">Close</wc-button>
-                        <wc-button type="control">Help</wc-button>
+                        <wc-button type="control" disabled>Help</wc-button>
                     </wc-control-button-group>
                     <h1>Header</h1>
                     <h2>Subtitle</h2>
@@ -115,12 +115,21 @@
                         non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </wc-card>
                 <wc-card backgroundColor="success" width="12">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
                     <wc-icon name="check-circle-fill"></wc-icon> The operation was successful
                 </wc-card>
                 <wc-card backgroundColor="warning" width="6">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
                     <wc-icon name="exclamation-circle-fill"></wc-icon> Warning: Something happened
                 </wc-card>
                 <wc-card backgroundColor="error" width="6">
+                    <wc-control-button-group name="controls">
+                        <wc-button type="control">Close</wc-button>
+                    </wc-control-button-group>
                     <wc-icon name="x-circle-fill"></wc-icon> Error: An internal error occurred
                 </wc-card>
             </wc-card-group>

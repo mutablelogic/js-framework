@@ -72,39 +72,6 @@
     /* borders */
     --border-radius: 0.20em;
 
-    /* button */
-    --button-background-color: var(--control-color);
-    --button-background-color-hover: var(--control-color-hover);
-    --button-background-color-active: var(--control-color-active);
-    --button-background-color-disabled: var(--control-color-disabled);
-    --button-color: var(--dark-color);
-    --button-color-hover: var(--light-color);
-    --button-color-active: var(--light-color);
-    --button-color-disabled: var(--light-color);
-    --button-font-weight: var(--font-weight-normal);
-    --button-font-weight-hover: var(--font-weight-bold);
-    --button-font-weight-active: var(--font-weight-bold);
-    --button-font-weight-disabled: var(--font-weight-normal);
-    --button-font-weight-default: var(--font-weight-semibold);
-    --button-border: none;
-    --button-border-color: var(--black-color);
-    --button-border-radius: var(--border-radius);
-    --button-border-radius-left: var(--button-border-radius);
-    --button-border-radius-right: var(--button-border-radius);
-    --button-font-size: var(--font-size-normal);
-    --button-padding-x: 0.45em;
-    --button-padding-y: 0.45em;
-    --button-offset-active: 0.1em;
-    --button-group-divider-color: var(--light-color);
-
-    /* close */
-    --button-close-size: 16px;
-    --button-close-padding: 0;
-    --button-close-color: var(--control-color);
-    --button-close-color-hover: var(--control-color-hover);
-    --button-close-color-active: var(--control-color-active);
-    --button-close-color-disabled: var(--control-color-disabled);
-
     /* badge */
     --badge-padding-x: 0.35em;
     --badge-padding-y: 0.35em;

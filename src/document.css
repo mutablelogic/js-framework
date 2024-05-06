@@ -46,7 +46,7 @@ h6 {
     font-size: var(--h6-font-size);
 }
 
-/* HR */
+/* Horizontal Ruler */
 hr {
     margin: var(--spacer-1) 0;
     height: 1px;
@@ -83,3 +83,15 @@ div.container {
     margin: var(--spacer-6) !important;
 }
 
+/* text transformation */
+.text-transform-uppercase {
+    text-transform: uppercase;
+}
+
+.text-transform-lowercase {
+    text-transform: lowercase;
+}
+
+.text-transform-capitalize {
+    text-transform: capitalize;
+}

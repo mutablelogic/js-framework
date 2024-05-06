@@ -42,8 +42,32 @@ export class ButtonElement extends LitElement {
 
   static get styles() {
     return css`
+      button {
+        display: inline-block;
+        position: relative;  
+        margin: none;
+        padding: var(--button-padding-y) var(--button-padding-x);
+        color: var(--button-color); 
+        background-color: var(--button-background-color); 
+        cursor: pointer;
+        user-select: none;
+      }
       button.control {
+        color: var(--button-control-color); 
         background: transparent;
+        border: none;
+        padding: var(--button-control-padding-y) var(--button-control-padding-x);
+
+        &:hover {
+          color: var(--button-control-color-hover);
+        }
+        &:active {
+          color: var(--button-control-color-active);
+        }
+        &:disabled {
+          color: var(--button-control-color-disabled);
+          cursor: default;
+        }
       }
     `;
   }
@@ -59,8 +83,12 @@ export class ButtonElement extends LitElement {
     return classes;
   }
 
+  get buttonTitle() {
+    return this.textContent.trim();
+  }
+
   get controlButtonIcon() {
-    switch (this.type.toLowerCase()) {
+    switch (this.buttonTitle.toLowerCase()) {
       case 'close':
         return 'x-square';
       case 'help':
@@ -76,20 +104,28 @@ export class ButtonElement extends LitElement {
 
   renderButton() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
+      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}>
+        <slot></slot>
+      </button>
     `;
   }
 
   renderSubmit() {
     return html`
-      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
+      <button class=${this.classes.join(' ') || nothing} type="submit" ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}><slot></slot></button>
     `;
   }
 
   renderControl() {
-    return html`
-      <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled}><slot></slot></button>
-    `;
+    const icon = this.controlButtonIcon;
+    if (icon) {
+      return html`
+        <button class=${this.classes.join(' ') || nothing} ?disabled=${this.disabled} name=${this.name || nothing} value=${this.buttonTitle || nothing}>
+          <wc-icon name=${icon}></wc-icon>
+        </button>
+      `;
+    }
+    return this.renderButton();
   }
 
   render() {

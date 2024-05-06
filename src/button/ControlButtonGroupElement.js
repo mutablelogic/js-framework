@@ -40,6 +40,7 @@ export class ControlButtonGroupElement extends LitElement {
         padding: 0;
         border: 0;
         background: transparent;
+        margin: var(--control-button-group-margin-y) var(--control-button-group-margin-x) ;
       }
     `;
   }

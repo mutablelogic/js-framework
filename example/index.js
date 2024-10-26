@@ -4,6 +4,9 @@
 import '../src/core/core';
 import '../src/element/element';
 
+// Styles
+import '../src/core/core.css';
+
 // Other
 import './esbuild';
 import './load';

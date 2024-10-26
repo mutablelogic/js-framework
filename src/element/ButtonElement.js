@@ -1,4 +1,4 @@
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { EventType } from '../core/EventType';
 
 /**
@@ -27,6 +27,35 @@ export class ButtonElement extends LitElement {
       textTransform: { type: String },
       disabled: { type: Boolean },
     };
+  }
+
+  static get styles() {
+    return css`
+      button {
+          display: inline-flex;
+          position: relative;  
+          margin: none;
+          padding: var(--button-padding);
+          cursor: pointer;
+          user-select: none;
+          color: var(--button-color);
+          background-color: var(--button-background-color);
+          border: var(--button-border-width) var(--button-border-style) var(--button-border-color);
+          border-radius: var(--button-border-radius);
+
+          &:hover {
+            color: var(--button-color-hover);
+          }
+          &:disabled {
+            color: var(--button-color-disabled);
+            cursor: default;
+          }          
+          &:not(:disabled):active {
+            color: var(--button-color-active);
+            transform: translate(0.05rem, 0.05rem);
+          }
+        }
+    `;
   }
 
   render() {

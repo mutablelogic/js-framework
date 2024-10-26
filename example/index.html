@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example</title>
     <script type="module" src="index.js" defer></script>
+    <link href="index.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Load data.json every 5 seconds -->
-     <div>
+     <js-container>
         PROVIDER
         <js-provider id="provider" interval="5"></js-provider>
-        <js-button disabled textTransform="uppercase" onClick="console.log('click');">Reload</js-button>    
-     </div>
-
-    TABLE
-    <js-table-body id="table"></js-table-body>
+    </js-container>
+    <js-button textTransform="uppercase">Reload</js-button>    
+    <js-container>
+        TABLE
+        <js-table-body id="table"></js-table-body>
+    </js-container>
 </body>
 
 </html>

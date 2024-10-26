@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    <script type="module" src="index.js" defer></script>
+</head>
+
+<body>
+    <!-- Load data.json every 5 seconds -->
+    PROVIDER
+    <js-provider id="provider" path="data.json" interval="5"></js-provider>
+
+    <!-- This is the object -->
+    MODEL
+    <js-geo-feature id="model" provider="provider"></js-geo-feature>
+</body>
+
+</html>

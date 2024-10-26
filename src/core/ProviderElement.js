@@ -139,6 +139,7 @@ export class ProviderElement extends LitElement {
   }
 
   #fetch(url, request) {
+    this.message = `FETCH ${url}`;
     this.dispatchEvent(new CustomEvent(EventType.FETCH, {
       detail: url
     }));

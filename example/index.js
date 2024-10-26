@@ -2,7 +2,7 @@
 
 // Components
 import '../src/core/core';
-import '../src/geojson/geojson';
+import '../src/element/element';
 
 // Other
 import './esbuild';

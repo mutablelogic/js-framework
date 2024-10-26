@@ -1,7 +1,7 @@
-import { ModelElement } from '../core/ModelElement';
+import { Model } from '../core/Model';
 
 /**
- * @class ShapeElement
+ * @class ShapeModel
  *
  * This class is a data store for an object.
  *
@@ -10,7 +10,7 @@ import { ModelElement } from '../core/ModelElement';
  * @example
  * <js-model provider="customprovider"></js-model>
  */
-export class ShapeElement extends ModelElement {
+export class ShapeModel extends Model {
   static get localName() {
     return 'js-geo-shape';
   }
@@ -20,5 +20,11 @@ export class ShapeElement extends ModelElement {
     properties.type = { type: String, reflect: true };
     properties.coordinates = { type: Array, reflect: true };
     return properties;
+  }
+
+  constructor() {
+    super();
+    this.type = 'Polygon';
+    this.coordinates = [];
   }
 }

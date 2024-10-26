@@ -10,4 +10,5 @@ export const EventType = {
   OBJECT: 'js-object',
   BLOB: 'js-blob',
   DONE: 'js-done',
+  CHANGE: 'js-change',
 };

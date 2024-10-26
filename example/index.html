@@ -10,12 +10,14 @@
 
 <body>
     <!-- Load data.json every 5 seconds -->
-    PROVIDER
-    <js-provider id="provider" path="data.json" interval="5"></js-provider>
+     <div>
+        PROVIDER
+        <js-provider id="provider" interval="5"></js-provider>
+        <js-button disabled textTransform="uppercase" onClick="console.log('click');">Reload</js-button>    
+     </div>
 
-    <!-- This is the object -->
-    MODEL
-    <js-geo-feature id="model" provider="provider"></js-geo-feature>
+    TABLE
+    <js-table-body id="table"></js-table-body>
 </body>
 
 </html>

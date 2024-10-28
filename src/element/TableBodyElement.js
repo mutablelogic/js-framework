@@ -94,7 +94,7 @@ export class TableBodyElement extends LitElement {
   render() {
     const rows = this.#renderRows();
     const head = this.#head ? this.#head.render() : html``;
-    return [html`<table>${head}<tbody>${rows}</tbody></table>`];
+    return html`<table>${head}<tbody>${rows}</tbody></table>`;
   }
 
   #renderRows() {

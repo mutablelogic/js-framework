@@ -11,8 +11,6 @@ import { LitElement, html, css, nothing } from 'lit';
  * </js-map>
  */
 export class MapSourceElement extends LitElement {
-  #source;
-
   static get localName() {
     return 'js-mapsource';
   }
@@ -20,7 +18,7 @@ export class MapSourceElement extends LitElement {
   static get properties() {
     return {
       type: { type: String, reflect: true },
-      data: { type: Object, reflect: true }
+      data: { type: Object, reflect: true },
     };
   }
 }

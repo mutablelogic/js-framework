@@ -1,6 +1,8 @@
 import { LitElement, html, css, nothing, unsafeCSS } from 'lit';
 import { Map } from 'mapbox-gl';
 import styles from './mapbox.css.txt';
+import { MapSourceElement } from './MapSourceElement';
+import { MapLayerElement } from './MapLayerElement';
 
 /**
  * @class MapElement
@@ -20,6 +22,8 @@ import styles from './mapbox.css.txt';
  */
 export class MapElement extends LitElement {
   #map;
+  #sources;
+  #layers;
 
   static get localName() {
     return 'js-map';
@@ -88,7 +92,30 @@ export class MapElement extends LitElement {
     });
     this.#map.on('load', () => {
       // Add map sources
-      console.log('Map loaded');
+      const sources = this.querySelectorAll(MapSourceElement.localName);
+      for (const source of sources) {
+        this.#map.addSource(source.id, {
+          type: source.type,
+          data: source.data,
+        });
+      }
+
+      // Add map layers
+      const layers = this.querySelectorAll(MapLayerElement.localName);
+      for (const layer of layers) {
+        const source = this.querySelector(`${layer.source}`);
+        if (!source) {
+          console.error(`Source ${layer.source} not found for layer ${layer.id}`);
+        } else {
+          console.log(`Adding layer ${layer.id} with source ${source.data}`);
+          this.#map.addLayer({
+            id: layer.id,
+            source: source.id,
+            type: layer.type,
+            paint: layer.paint,
+          });  
+        }
+      }
     });
   }
 

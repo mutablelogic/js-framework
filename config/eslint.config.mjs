@@ -16,7 +16,7 @@ export default [
   {
     languageOptions: {
       globals: globals.browser,
-      ecmaVersion: 'latest',
+      ecmaVersion: 13,
       sourceType: 'module',
     },
   },
@@ -24,6 +24,7 @@ export default [
   {
     rules: {
       'import/prefer-default-export': 'off',
+      'import/no-default-export': 'error'
     },
   }
 ];

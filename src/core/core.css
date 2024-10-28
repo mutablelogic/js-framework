@@ -1,0 +1,24 @@
+@import url(../assets/font/opensans.css);
+@import './core-tokens.css';
+
+:root {
+  color-scheme: light dark;
+}
+
+/* force light theme when this class is present */
+.light-mode {
+  color-scheme: only light;
+}
+
+/* force dark theme when this class is present */
+.dark-mode {
+  color-scheme: only dark;
+}
+
+body {
+  background-color: light-dark(var(--light-color), var(--dark-color));
+  color: light-dark(var(--dark-color), var(--light-color));
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-default);
+}

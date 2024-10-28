@@ -4,8 +4,10 @@
   "description": "Javascript Framework",
   "main": "dist/index.js",
   "scripts": {
-    "serve": "rm -fr dist && install -d dist && esbuild src/index.html src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy  --watch --serve",
-    "build": "rm -fr dist && install -d dist && esbuild src/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
+    "dev": "rm -fr dist && install -d dist && NODE_ENV=development node config/esbuild.config.mjs",
+    "build": "rm -fr dist && install -d dist && NODE_ENV=production node config/esbuild.config.mjs",
+    "devold": "rm -fr dist && install -d dist && esbuild example/index.html example/index.js example/data.json --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy --loader:.json=copy  --watch --serve",
+    "buildold": "rm -fr dist && install -d dist && esbuild example/index.js --outdir=dist --format=esm --sourcemap --minify --bundle --loader:.svg=file --loader:.woff=file --loader:.woff2=file --loader:.ttf=file --loader:.otf=file --loader:.html=copy",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c config/eslint.config.mjs --cache --fix ./src/**/*.js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },
@@ -26,6 +28,7 @@
     "@eslint/eslintrc": "^3.0.2",
     "@eslint/js": "^9.0.0",
     "esbuild": "^0.20.2",
+    "esbuild-plugin-css-modules": "^0.3.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
@@ -35,7 +38,8 @@
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
     "highlight.js": "^11.9.0",
-    "lit": "^3.1.2"
+    "lit": "^3.1.2",
+    "mapbox-gl": "^3.7.0"
   },
   "files": [
     "dist/**/*.{js,map,woff,woff2,txt,ttf,css,html,svg}"

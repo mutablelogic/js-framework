@@ -36,8 +36,5 @@ if (process.env.NODE_ENV === 'production') {
   let { host, port } = await ctx.serve({
     servedir: commonOptions.outdir,
   });
-  console.log(`Serving on http://${host}:${port}`);
-
   await ctx.watch();
-  console.log('watching');
 }

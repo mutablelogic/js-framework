@@ -1,4 +1,4 @@
-name: Publish Docs on Push to main
+name: Lint on Push to main
 on:
   push:
     branches:

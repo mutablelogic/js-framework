@@ -13,7 +13,8 @@ const commonOptions = {
     '.otf': 'file',
     '.html': 'copy',
     '.json': 'copy',
-  }
+  },
+  logLevel: 'info',
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -21,9 +22,6 @@ if (process.env.NODE_ENV === 'production') {
     ...commonOptions,
     minify: true,
     sourcemap: false,
-    define: {
-      'process.env.NODE_ENV': '"production"',
-    },
   }).catch(() => process.exit(1));
 } else {
   commonOptions.entryPoints.push('example/index.html', 'example/data.json');
@@ -31,9 +29,6 @@ if (process.env.NODE_ENV === 'production') {
     ...commonOptions,
     minify: false,
     sourcemap: true,
-    define: {
-      'process.env.NODE_ENV': '"development"',
-    },
   })
 
   let { host, port } = await ctx.serve({

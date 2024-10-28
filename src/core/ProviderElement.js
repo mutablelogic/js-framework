@@ -120,7 +120,7 @@ export class ProviderElement extends LitElement {
 
   #pathChanged(newVal, oldVal) {
     if (newVal) {
-      if(newVal !== oldVal) {
+      if (newVal !== oldVal) {
         this.fetch();
       }
     } else {
@@ -130,7 +130,7 @@ export class ProviderElement extends LitElement {
 
   #intervalChanged(newVal, oldVal) {
     if (newVal) {
-      if(newVal !== oldVal) {
+      if (newVal !== oldVal) {
         this.fetch();
       }
     } else {
@@ -193,12 +193,12 @@ export class ProviderElement extends LitElement {
   #fetchdata(data) {
     if (typeof data == "string") {
       this.#fetchtext(data);
-    } else if (data instanceof Array) {
-      data.forEach((item) => {
-        this.#fetchobject(data);
-      });      
+    } else if (Array.isArray(data)) {
+      data.forEach((item) => {    
+        this.#fetchobject(item);    
+      });
     } else if (data instanceof Object) {
-      this.#fetchobject(data);
+      this.#fetchobject(data);    
     } else {
       this.#fetchblob(data);
     }

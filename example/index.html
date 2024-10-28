@@ -10,9 +10,12 @@
 </head>
 
 <body>
-    <js-container>
-        <js-tag transform="uppercase">Data</js-tag>
 
+    <!-- toast which persists on the screen for 10 seconds -->
+    <js-toast id="toast" duration="10"></js-toast>
+
+    <!-- header -->
+    <js-container>
         <!-- where the data comes from -->
         <js-provider id="provider" origin="http://localhost:8080/" path="aktek/area" interval="5"></js-provider>
 
@@ -34,7 +37,8 @@
                 <js-mapsource id="area" type="geojson" data="#array"></js-mapsource>
 
                 <!-- display the source on the map as polygons -->
-                <js-maplayer id="points" source="#area" type="fill" paint='{ "fill-opacity": 0.2, "fill-color": "#aa0000" }'></js-maplayer>
+                <js-maplayer id="points" source="#area" type="fill"
+                    paint='{ "fill-opacity": 0.2, "fill-color": "#aa0000" }'></js-maplayer>
             </js-map>
         </div>
     </js-container>

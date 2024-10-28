@@ -115,6 +115,49 @@
   --tag-font-size-xlarge: var(--font-size-xlarge);
 }
 
+/* toast */
+:root {
+  --toast-background-color-primary: var(--primary-color);
+  --toast-color-primary: var(--light-color);
+  --toast-border-color-primary: var(--primary-color);
+
+  --toast-background-color-secondary: var(--secondary-color);
+  --toast-color-secondary: var(--light-color);
+  --toast-border-color-secondary: var(--dark-color);
+
+  --toast-background-color-success: var(--success-color);
+  --toast-color-success: var(--light-color);
+  --toast-border-color-success: var(--success-color);
+
+  --toast-background-color-warning: var(--warning-color);
+  --toast-color-warning: var(--light-color);
+  --toast-border-color-warning: var(--warning-color);
+
+  --toast-background-color-error: var(--error-color);
+  --toast-color-error: var(--light-color);
+  --toast-border-color-error: var(--error-color);
+
+  --toast-background-color-light: var(--light-color);
+  --toast-color-light: var(--dark-color);
+  --toast-border-color-light: var(--dark-color);
+
+  --toast-background-color-dark: var(--dark-color);
+  --toast-color-dark: var(--light-color);
+  --toast-border-color-dark: var(--dark-color);
+
+  --toast-background-color-white: var(--white-color);
+  --toast-color-white: var(--black-color);
+  --toast-border-color-white: var(--black-color);
+
+  --toast-background-color-black: var(--black-color);
+  --toast-color-black: var(--white-color);
+  --toast-border-color-black: var(--black-color);
+
+  --toast-margin: 1rem;
+  --toast-padding: 0.5rem;
+  --toast-border: 0.05rem solid var(--dark-color);
+}
+
 /* icons */
 :root {
   --icon-size-small: 1.1em;

@@ -10,11 +10,11 @@
 </head>
 
 <body>
-     <js-container>
+    <js-container>
         <js-tag transform="uppercase">Provider</js-tag>
         <js-provider id="provider"></js-provider>
     </js-container>
-    <js-button textTransform="uppercase">Reload</js-button>    
+    <js-button textTransform="uppercase">Reload</js-button>
     <js-container>
         <js-tag transform="uppercase">Table</js-tag>
         <js-table-body id="table"></js-table-body>
@@ -22,9 +22,12 @@
 
     <js-container>
         <js-tag transform="uppercase"><js-icon size="small">compass</js-icon></js-tag>
-        <js-map id="map" accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
-            <js-mapsource type="geojson" data="{}"></js-mapsource>
-        </js-map>
+        <div style="border: 1px solid red; height: 500px;">
+            <js-map id="map"
+                accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
+                <js-mapsource type="geojson" data="{}"></js-mapsource>
+            </js-map>
+        </div>
     </js-container>
 
     <js-container>

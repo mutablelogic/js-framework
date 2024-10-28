@@ -28,7 +28,7 @@ export class ButtonElement extends LitElement {
       disabled: { type: Boolean },
     };
   }
-
+ 
   static get styles() {
     return css`
       button {

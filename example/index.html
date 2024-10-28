@@ -10,16 +10,61 @@
 </head>
 
 <body>
-    <!-- Load data.json every 5 seconds -->
      <js-container>
-        PROVIDER
-        <js-provider id="provider" interval="5"></js-provider>
+        <js-tag transform="uppercase">Provider</js-tag>
+        <js-provider id="provider"></js-provider>
     </js-container>
     <js-button textTransform="uppercase">Reload</js-button>    
     <js-container>
-        TABLE
+        <js-tag transform="uppercase">Table</js-tag>
         <js-table-body id="table"></js-table-body>
     </js-container>
+
+    <js-container>
+        <js-tag transform="uppercase"><js-icon size="small">compass</js-icon></js-tag>
+        <js-map id="map" accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
+            <js-mapsource type="geojson" data="{}"></js-mapsource>
+        </js-map>
+    </js-container>
+
+    <js-container>
+        TAG COLOR
+        <js-tag color="primary" texttransform="uppercase">Primary</js-tag>
+        <js-tag color="secondary" texttransform="uppercase">Secondary</js-tag>
+        <js-tag color="success" texttransform="uppercase">Success</js-tag>
+        <js-tag color="warning" texttransform="uppercase">Warning</js-tag>
+        <js-tag color="error" texttransform="uppercase">Error</js-tag>
+        <js-tag color="light" texttransform="uppercase">Light</js-tag>
+        <js-tag color="dark" texttransform="uppercase">Dark</js-tag>
+        <js-tag color="white" texttransform="uppercase">White</js-tag>
+        <js-tag color="black" texttransform="uppercase">Black</js-tag>
+
+        TAG SIZE
+        <js-tag color="light" size="small" texttransform="lowercase">Small</js-tag>
+        <js-tag color="light" size="medium" texttransform="lowercase">Medium</js-tag>
+        <js-tag color="light" size="large" texttransform="lowercase">Large</js-tag>
+        <js-tag color="light" size="xlarge" texttransform="lowercase">XLarge</js-tag>
+    </js-container>
+
+    <js-container>
+        ICON COLOR
+        <js-tag color="primary" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="secondary" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="success" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="warning" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="error" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="light" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="dark" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="white" texttransform="uppercase"><js-icon></js-icon></js-tag>
+        <js-tag color="black" texttransform="uppercase"><js-icon></js-icon></js-tag>
+
+        ICON SIZE
+        <js-tag color="light" size="small"><js-icon size="small"></js-icon> small</js-tag>
+        <js-tag color="light" size="medium"><js-icon size="medium"></js-icon> medium</js-tag>
+        <js-tag color="light" size="large"><js-icon size="large"></js-icon> large</js-tag>
+        <js-tag color="light" size="xlarge"><js-icon size="xlarge"></js-icon> xlarge</js-tag>
+    </js-container>
+
 </body>
 
 </html>

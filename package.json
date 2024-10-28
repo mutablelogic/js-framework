@@ -35,7 +35,8 @@
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
     "highlight.js": "^11.9.0",
-    "lit": "^3.1.2"
+    "lit": "^3.1.2",
+    "mapbox-gl": "^3.7.0"
   },
   "files": [
     "dist/**/*.{js,map,woff,woff2,txt,ttf,css,html,svg}"

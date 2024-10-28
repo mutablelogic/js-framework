@@ -20,5 +20,5 @@ body {
   color: light-dark(var(--dark-color), var(--light-color));
   margin: 0;
   font-family: var(--font-family-base);
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-default);
 }

@@ -1,9 +1,13 @@
 /* fonts */
 :root {
   --font-family-base: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  --font-size-normal: 0.85rem;
+
+  --font-size-medium: 0.85rem;
   --font-size-small: 0.75rem;
   --font-size-large: 1.25rem;
+  --font-size-xlarge: 1.50rem;
+  --font-size-default: var(--font-size-medium);
+
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-semibold: 600;
@@ -44,10 +48,77 @@
   --button-color: var(--light-color);
   --button-color-hover: var(--white-color);
   --button-color-active: var(--white-color);
-  --button-color-disabled: var(--grey-50-color);  
+  --button-color-disabled: var(--grey-50-color);
   --button-background-color: var(--primary-color);
   --button-border-radius: 2px;
   --button-border-width: 1px;
   --button-border-color: var(--secondary-color);
   --button-border-style: solid;
+}
+
+/* tags */
+:root {
+  --tag-background-color-primary: var(--primary-color);
+  --tag-color-primary: var(--light-color);
+  --tag-border-color-primary: var(--primary-color);
+
+  --tag-background-color-secondary: var(--secondary-color);
+  --tag-color-secondary: var(--light-color);
+  --tag-border-color-secondary: var(--dark-color);
+
+  --tag-background-color-success: var(--success-color);
+  --tag-color-success: var(--light-color);
+  --tag-border-color-success: var(--success-color);
+
+  --tag-background-color-warning: var(--warning-color);
+  --tag-color-warning: var(--light-color);
+  --tag-border-color-warning: var(--warning-color);
+
+  --tag-background-color-error: var(--error-color);
+  --tag-color-error: var(--light-color);
+  --tag-border-color-error: var(--error-color);
+
+  --tag-background-color-light: var(--light-color);
+  --tag-color-light: var(--dark-color);
+  --tag-border-color-light: var(--dark-color);
+
+  --tag-background-color-dark: var(--dark-color);
+  --tag-color-dark: var(--light-color);
+  --tag-border-color-dark: var(--dark-color);
+
+  --tag-background-color-white: var(--white-color);
+  --tag-color-white: var(--black-color);
+  --tag-border-color-white: var(--black-color);
+
+  --tag-background-color-black: var(--black-color);
+  --tag-color-black: var(--white-color);
+  --tag-border-color-black: var(--black-color);
+
+  --tag-border-radius-small: 0.15rem;
+  --tag-border-small: 0.05rem solid;
+  --tag-padding-small: 0.2rem 0.2rem;
+  --tag-font-size-small: var(--font-size-small);
+
+  --tag-border-radius-medium: 0.15rem;
+  --tag-border-medium: 0.05rem solid;
+  --tag-padding-medium: 0.2rem 0.4rem;
+  --tag-font-size-medium: var(--font-size-medium);
+
+  --tag-border-radius-large: 0.15rem;
+  --tag-border-large: 0.05rem solid;
+  --tag-padding-large: 0.2rem 0.4rem;
+  --tag-font-size-large: var(--font-size-large);
+
+  --tag-border-radius-xlarge: 0.15rem;
+  --tag-border-xlarge: 0.05rem solid;
+  --tag-padding-xlarge: 0.2rem 0.4rem;
+  --tag-font-size-xlarge: var(--font-size-xlarge);
+}
+
+/* icons */
+:root {
+  --icon-size-small: 1.1em;
+  --icon-size-medium: 1.2em;
+  --icon-size-large: 1.3em;
+  --icon-size-xlarge: 1.4em;
 }

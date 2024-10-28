@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: element/TableBodyElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: element/TableBodyElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LitElement, html, css } from 'lit';
+import { Model } from '../core/Model';
+import { EventType } from '../core/EventType';
+import { TableHeadElement } from './TableHeadElement';
+
+/**
+ * @class TableBodyElement
+ *
+ * This class provides a table body element.
+ *
+ * @example
+ * &lt;js-tablebody data="#data-source-id">&lt;/js-tablebody>
+ */
+export class TableBodyElement extends LitElement {
+  #data = null;
+  #head = null;
+
+  static get localName() {
+    return 'js-tablebody';
+  }
+
+  static get properties() {
+    return {
+      data: { type: String, reflect: true },
+      columns: { type: Array, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+      }
+      table {
+        border-spacing: 0;
+      }
+      td, th {
+        vertical-align: top;
+        border-left: 1px solid #aaa;
+        border-top: 1px solid #aaa;
+      }
+      td:last-child, th:last-child {
+        border-right: 1px solid #aaa;
+      }
+      tr:last-child td {
+        border-bottom: 1px solid #aaa;
+      }
+      th {
+        text-transform: capitalize;
+      }
+      .wrap {
+        max-height: 40px;
+        overflow: hidden;        
+      }
+    `;
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    super.attributeChangedCallback(name, oldVal, newVal);
+    if (name === 'data') {
+      this.#dataChanged(newVal, oldVal);
+    }
+  }
+
+  #dataChanged(newVal, oldVal) {
+    if (oldVal != null &amp;&amp; this.#data &amp;&amp; newVal !== oldVal) {
+      this.#data.removeEventListener(EventType.CHANGE, this.#dataUpdate.bind(this));
+      this.#data = null;
+      this.columns = null;
+    }
+    if (newVal != null &amp;&amp; newVal !== oldVal) {
+      this.#data = document.querySelector(newVal);
+      this.columns = new Array();
+      if (this.#data) {
+        this.#data.addEventListener(EventType.CHANGE, this.#dataUpdate.bind(this));
+      } else {
+        throw new Error(`Data Source "${newVal}" not found`);
+      }
+    }
+  }
+
+  #dataUpdate() {
+    this.requestUpdate();
+    this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
+      detail: this
+    }));
+  }
+
+  firstUpdated() {
+    // Set the table header
+    this.#head = this.querySelector(TableHeadElement.localName);
+  }
+
+  render() {
+    const rows = this.#renderRows();
+    const head = this.#head ? this.#head.render() : html``;
+    return html`&lt;table>${head}&lt;tbody>${rows}&lt;/tbody>&lt;/table>`;
+  }
+
+  #renderRows() {
+    if (!this.#data) {
+      return html``;
+    }
+    let rows = [];
+    for (let i = 0; i &lt; this.#data.length; i++) {
+      rows.push(html`&lt;tr>${this.#renderColumns(this.#data.at(i))}&lt;/tr>`);
+    }
+    return rows;
+  }
+
+  #renderColumns(row) {
+    let columns = [];
+
+    if (row instanceof Object) {
+      for (let key in row) {
+        if (this.columns.indexOf(key) === -1) {
+          this.columns.push(key);
+        }
+        columns.push(html`&lt;td>&lt;div class="wrap">${this.#renderCell(row[key])}&lt;/div>&lt;/td>`);
+      }
+    } else {
+      this.columns.push('value');    
+      columns.push(html`&lt;td>${this.#renderCell(row)}&lt;/td>`);
+    }
+
+    return columns;
+  }
+
+  #renderCell(cell) {
+    if (cell instanceof Object) {
+      return html`&lt;code>${JSON.stringify(cell)}&lt;/code>`;
+    }
+    return html`${cell}`;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ContainerElement.html">ContainerElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="Model.html">Model</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Oct 28 2024 13:20:22 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

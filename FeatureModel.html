@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ButtonElement</title>
+    <title>JSDoc: Class: FeatureModel</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ButtonElement</h1>
+    <h1 class="page-title">Class: FeatureModel</h1>
 
     
 
@@ -28,11 +28,11 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ButtonElement<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>FeatureModel<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">ButtonElement
+            <div class="class-description">FeatureModel
 
-This class provides a button element.</div>
+This class is a data store for a GeoJSON feature object.</div>
         
     
 </header>
@@ -47,7 +47,7 @@ This class provides a button element.</div>
     
 
     
-    <h4 class="name" id="ButtonElement"><span class="type-signature"></span>new ButtonElement<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="FeatureModel"><span class="type-signature"></span>new FeatureModel<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -92,29 +92,6 @@ This class provides a button element.</div>
 
         <tr>
             
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The name of the button</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>type</code></td>
             
 
@@ -131,14 +108,14 @@ This class provides a button element.</div>
 
             
 
-            <td class="description last">The type of the button if not standard (control, submit)</td>
+            <td class="description last">Type of feature</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>textTransform</code></td>
+                <td class="name"><code>title</code></td>
             
 
             <td class="type">
@@ -154,21 +131,20 @@ This class provides a button element.</div>
 
             
 
-            <td class="description last">If the button text should be transformed (uppercase,
- lowercase, capitalize)</td>
+            <td class="description last">Title of feature</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>disabled</code></td>
+                <td class="name"><code>geometry</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">ShapeElement</span>
 
 
             
@@ -178,7 +154,30 @@ This class provides a button element.</div>
 
             
 
-            <td class="description last">Whether the button is disabled</td>
+            <td class="description last">Geometry of feature</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>properties</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Properties of feature</td>
         </tr>
 
     
@@ -217,7 +216,7 @@ This class provides a button element.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="element_ButtonElement.js.html">element/ButtonElement.js</a>, <a href="element_ButtonElement.js.html#line18">line 18</a>
+        <a href="geojson_FeatureModel.js.html">geojson/FeatureModel.js</a>, <a href="geojson_FeatureModel.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -248,7 +247,7 @@ This class provides a button element.</div>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>&lt;js-button>OK&lt;/js-button></code></pre>
+    <pre class="prettyprint"><code>&lt;js-model provider="customprovider">&lt;/js-model></code></pre>
 
 
 
@@ -259,6 +258,13 @@ This class provides a button element.</div>
 
     
 
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="FeatureModel.html">FeatureModel</a></dt>
+            <dd></dd>
+        </dl>
     
 
     

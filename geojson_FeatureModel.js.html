@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: IconElement</title>
+    <title>JSDoc: Source: geojson/FeatureModel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,151 +17,58 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: IconElement</h1>
+    <h1 class="page-title">Source: geojson/FeatureModel.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>IconElement<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">IconElement
-
-This class provides an icon element</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="IconElement"><span class="type-signature"></span>new IconElement<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="element_IconElement.js.html">element/IconElement.js</a>, <a href="element_IconElement.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;js-icon size="large">1-circle&lt;/js-icon></code></pre>
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="IconElement.html">IconElement</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Model } from '../core/Model';
+import { ShapeModel } from './ShapeModel';
+
+/**
+ * @class FeatureModel
+ *
+ * This class is a data store for a GeoJSON feature object.
+ *
+ * @property {String} type - Type of feature
+ * @property {String} title - Title of feature
+ * @property {ShapeElement} geometry - Geometry of feature
+ * @property {Object} properties - Properties of feature
+ *
+ * @example
+ * &lt;js-model provider="customprovider">&lt;/js-model>
+ */
+export class FeatureModel extends Model {
+  static get localName() {
+    return 'js-geo-feature';
+  }
+
+  static get properties() {
+    const properties = super.properties;
+    properties.type = { type: String, reflect: true };
+    properties.title = { type: String, reflect: true };
+    properties.geometry = { type: ShapeModel, reflect: true };
+    properties.properties = { type: Object, reflect: true };
+    return properties;
+  }
+
+  constructor(provider) {
+    super(provider);
+
+    // Set the default properties
+    this.type = 'Feature';
+    this.title = '';
+    this.geometry = null;
+    this.properties = {};
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

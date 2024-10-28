@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: mapbox/MapElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: mapbox/MapElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { LitElement, html, css, nothing, unsafeCSS } from 'lit';
+import { Map } from 'mapbox-gl';
+import styles from './mapbox.css.txt';
+import { MapSourceElement } from './MapSourceElement';
+import { MapLayerElement } from './MapLayerElement';
+import { EventType } from '../core/EventType';
+
+/**
+ * @class MapElement
+ *
+ * This class provides a map container
+ *
+ * @property {Number} lon - The longitude of the map center
+ * @property {Number} lat - The latitude of the map center
+ * @property {Number} zoom - The zoom level of the map
+ * @property {Number} pitch - The pitch of the map
+ * @property {Number} bearing - The bearing of the map
+ * @property {String} mapstyle - The map style (mapbox://styles/mapbox/streets-v11)
+ * @property {String} accessToken - The map access token
+ * 
+ * @example
+ * &lt;js-map accessToken=".....">&lt;/js-map>
+ */
+export class MapElement extends LitElement {
+  #map;
+  #sources;
+  #layers;
+
+  static get localName() {
+    return 'js-map';
+  }
+
+  static get properties() {
+    return {
+      lon: { type: Number, reflect: true },
+      lat: { type: Number, reflect: true },
+      zoom: { type: Number, reflect: true },
+      pitch: { type: Number, reflect: true },
+      bearing: { type: Number, reflect: true },
+      mapstyle: { type: String, reflect: true },
+      accessToken: { type: String }
+    };
+  }
+
+  static get styles() {
+    return css`
+      ${unsafeCSS(styles)}
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      .mapboxgl-ctrl-logo {
+        display: none !important;
+      }
+    `;
+  }
+
+  constructor() {
+    super();
+
+    // Default properties
+    this.lon = 0;
+    this.lat = 0;
+    this.zoom = 0;
+    this.pitch = 0;
+    this.bearing = 0;
+    this.mapstyle = 'mapbox://styles/mapbox/streets-v11';
+  }
+
+  firstUpdated() {
+    super.firstUpdated();
+    if (!this.#map) {
+      this.#initMap();
+    }
+  }
+
+  render() {
+    return html`
+      &lt;div id="map" class=${this.classes.join(' ') || nothing}>&lt;/div>      
+    `;
+  }
+
+  #initMap() {
+    this.#map = new Map({
+      container: this.shadowRoot.querySelector('#map'),
+      style: this.mapstyle,
+      center: [this.lon, this.lat],
+      zoom: this.zoom,
+      pitch: this.pitch,
+      bearing: this.bearing,
+      accessToken: this.accessToken,
+      attributionControl: false,
+    });
+    this.#map.on('load', () => {
+      // Add map sources
+      const sources = this.querySelectorAll(MapSourceElement.localName);
+      for (const source of sources) {
+        this.#map.addSource(source.id, {
+          type: source.type,
+          data: source.geojson
+        });
+
+        // Watch source data changes
+        source.addEventListener(EventType.CHANGE, (evt) => {
+          // Source data has changed, update the source
+          const mapSource = this.#map.getSource(evt.detail.id);
+          if (mapSource &amp;&amp; evt.detail.geojson) {
+            mapSource.setData(evt.detail.geojson);
+          }
+        });
+      }
+
+      // Add map layers
+      const layers = this.querySelectorAll(MapLayerElement.localName);
+      for (const layer of layers) {
+        const source = this.querySelector(`${layer.source}`);
+        if (!source) {
+          throw new Error(`Source ${layer.source} not found for layer ${layer.id}`);
+        }
+        this.#map.addLayer({
+          id: layer.id,
+          source: source.id,
+          type: layer.type,
+          paint: layer.paint || {},
+        });
+      }
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  get classes() {
+    const classes = [];
+    return classes;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ContainerElement.html">ContainerElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="Model.html">Model</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Oct 28 2024 13:20:22 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

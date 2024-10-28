@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: core/Model.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: core/Model.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { EventType } from './EventType';
+import { ProviderElement } from './ProviderElement';
+
+/**
+ * @class Model
+ *
+ * This class is a model base class for storing data. It can store
+ * scalar types and objects, and be subclassed to store more complex
+ * data.
+ * 
+ * You can attach a provider to the model to fetch data from a remote
+ * source, in which case EventType.CHANGE will be dispatched when the
+ * data is updated.
+ * 
+ * @example
+ * var model = new Model(data, provider);
+ */
+export class Model extends EventTarget {
+  #provider;
+  #data;
+
+  static get localName() {
+    return 'js-model';
+  }
+
+  constructor(provider) {
+    super();
+
+    // Listen for provider events
+    this.#provider = provider instanceof ProviderElement ? provider : null;
+    if (this.#provider) {
+      this.#provider.addEventListener(EventType.FETCH, () => {
+        // Data is being fetched from the provider
+      });
+      this.#provider.addEventListener(EventType.DONE, () => {
+        // Data has been fetched from the provider
+      });
+      this.#provider.addEventListener(EventType.TEXT, (evt) => {
+        this.data = evt.detail;
+      });
+      this.#provider.addEventListener(EventType.OBJECT, (evt) => {
+        this.data = evt.detail;
+      });
+      this.#provider.addEventListener(EventType.BLOB, (evt) => {
+        this.data = evt.detail;
+      });
+    }
+  }
+
+  static get properties() {
+    return {};
+  }
+
+  get data() {
+    return this.#data;
+  }
+
+  set data(data) {
+    let modified = false;
+
+    if (data === null || data === undefined) {
+      // Null type
+      modified = (this.data !== null);
+      this.#data = null;
+    } else if (Model.#isScalar(data)) {
+      // Scalar type
+      modified = (this.data === data);
+      this.#data = data;
+    } else if (data instanceof Model) {
+      // Model type      
+      console.log('TODO: Model');
+    } else if (data instanceof Object) {
+      var data = this.#newObject(data);
+      modified = (this.data === data);
+      this.#data = data;
+    } else if (data instanceof Array) {
+      // Array type
+      console.log('TODO: Array');
+    } else {
+      // Cannot handle this type yet
+      throw new Error(`Cannot handle data type ${data.localName}`);
+    }
+
+    // Emit a change event if the data was modified
+    if (modified) {
+      this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
+        detail: this
+      }));
+    }
+  }
+
+  static #isScalar(value) {
+    if (value === null) {
+      return true;
+    }
+    if (value instanceof String || typeof value === 'string') {
+      return true;
+    }
+    if (value instanceof Number || typeof value === 'number') {
+      return true;
+    }
+    if (value instanceof Boolean || typeof value === 'boolean') {
+      return true;
+    }
+    if (value instanceof Date) {
+      return true;
+    }
+    return false;
+  }
+
+  static #isSubclassOf(subClass, superClass) {
+    let prototype = subClass.prototype;
+    while (prototype) {
+      if (prototype === superClass.prototype) {
+        return true;
+      }
+      prototype = Object.getPrototypeOf(prototype);
+    }
+    return false;
+  }
+
+  static #isScalarType(type) {
+    if (this.#isSubclassOf(type, String)) {
+      return true;
+    }
+    if (this.#isSubclassOf(type, Number)) {
+      return true;
+    }
+    if (this.#isSubclassOf(type, Boolean)) {
+      return true;
+    }
+    if (this.#isSubclassOf(type, Date)) {
+      return true;
+    }
+    return false;
+  }
+
+  #newObject(data) {
+    const properties = this.constructor.properties;
+
+    // If the Model has no properties, return the data directly
+    if (!properties || Object.keys(properties).length === 0) {
+      return data;
+    }
+
+    // Iterate over the properties and set the data
+    let obj = {};
+    for (const key in properties) {
+      let value = data[key];
+
+      // 'data' is the only reserved property name
+      if (value === undefined || key === 'data') {
+        continue;
+      }
+
+      // Create a new value
+      if (Model.#isSubclassOf(properties[key].type, String)) {
+        if (value instanceof String) {
+          // Do nothing
+        } else if (typeof value === 'string') {
+          value = new String(value);
+        } else {
+          console.error(`Invalid string value for ${key}`);
+        }
+      } else if (Model.#isSubclassOf(properties[key].type, Number)) {
+        // Number type
+        value = new Number(value);
+      } else if (Model.#isSubclassOf(properties[key].type, Boolean)) {
+        value = new Boolean(value);
+      } else if (Model.#isSubclassOf(properties[key].type, Date)) {
+        value = new Date(value);
+      } else if (Model.#isSubclassOf(properties[key].type, Model)) {
+        const model = new properties[key].type();
+        model.data = value;
+        value = model;
+      } else if (Model.#isSubclassOf(properties[key].type, Array)) {
+        // Array type
+        const array = new(Array);
+        console.log(`TODO: Create a new array value for ${key} ${value}`);
+      }
+
+      // Create a new object for the property
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  toString() {
+    return JSON.stringify(this);
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ContainerElement.html">ContainerElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="Model.html">Model</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Oct 28 2024 13:20:22 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

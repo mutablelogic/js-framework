@@ -13,7 +13,6 @@ const commonOptions = {
     '.otf': 'file',
     '.html': 'copy',
     '.json': 'copy',
-    '.css2': 'copy',
   }
 };
 
@@ -34,7 +33,6 @@ if (process.env.NODE_ENV === 'production') {
     sourcemap: true,
     define: {
       'process.env.NODE_ENV': '"development"',
-      'window.IS_DEVELOPMENT': 'true',
     },
   })
 

@@ -23,6 +23,7 @@ export class ArrayElement extends LitElement {
     static get properties() {
         return {
             provider: { type: String, reflect: true },
+            select: { type: String, reflect: true },
         };
     }
 
@@ -77,8 +78,22 @@ export class ArrayElement extends LitElement {
     }
 
     #providerObject(event) {
-        // Add the object to the data container
-        this.#newdata.push(event.detail);
+        var data = event.detail;
+        if (this.select) {
+            if(data instanceof Object) {
+                data = data[this.select];
+                if (data === undefined) {
+                    throw new Error(`Property "${this.select}" not found in object`);
+                } else if (Array.isArray(data)) {
+                    this.#newdata = this.#newdata.concat(data);
+                } else {
+                    this.#newdata.push(data);
+                }
+            }
+        } else {
+            // Add the object to the data container
+            this.#newdata.push(data);
+        }
     }
 
     #providerDone() {
@@ -96,7 +111,7 @@ export class ArrayElement extends LitElement {
 
         // Copy over the data
         this.#data = this.#newdata;
-        
+
         // Emit a change event if the data was modified
         if (modified) {
             this.dispatchEvent(new CustomEvent(EventType.CHANGE, {

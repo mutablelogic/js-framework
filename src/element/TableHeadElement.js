@@ -55,7 +55,6 @@ export class TableHeadElement extends LitElement {
   }
 
   #renderColumns(row) {
-    console.log(row);
     const columns = new Array();
     for (let cell in row) {
       columns.push(html`<th>${this.#renderCell(row[cell])}</th>`);

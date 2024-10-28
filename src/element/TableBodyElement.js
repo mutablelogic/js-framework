@@ -109,22 +109,21 @@ export class TableBodyElement extends LitElement {
   }
 
   #renderColumns(row) {
-    if (!row) {
-      return html``;
-    }
+    let columns = [];
+
     if (row instanceof Object) {
-      let columns = [];
       for (let key in row) {
         if (this.columns.indexOf(key) === -1) {
           this.columns.push(key);
         }
         columns.push(html`<td><div class="wrap">${this.#renderCell(row[key])}</div></td>`);
       }
-      return columns;
+    } else {
+      this.columns.push('value');    
+      columns.push(html`<td>${this.#renderCell(row)}</td>`);
     }
 
-    // TODO: Other types
-    return html``;
+    return columns;
   }
 
   #renderCell(cell) {

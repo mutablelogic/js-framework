@@ -48,6 +48,9 @@ export class ProviderElement extends LitElement {
     if (name === 'path') {
       this.#pathChanged(newVal, oldVal);
     }
+    if (name === 'interval') {
+      this.#intervalChanged(newVal, oldVal);
+    }
   }
 
   render() {
@@ -118,8 +121,17 @@ export class ProviderElement extends LitElement {
   #pathChanged(newVal, oldVal) {
     if (newVal) {
       if(newVal !== oldVal) {
-        console.log(`path changed: ${oldVal} => ${newVal}`);
-        this.fetch(newVal);
+        this.fetch();
+      }
+    } else {
+      this.cancel();
+    }
+  }
+
+  #intervalChanged(newVal, oldVal) {
+    if (newVal) {
+      if(newVal !== oldVal) {
+        this.fetch();
       }
     } else {
       this.cancel();

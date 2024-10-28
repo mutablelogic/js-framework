@@ -3,6 +3,7 @@ import { Map } from 'mapbox-gl';
 import styles from './mapbox.css.txt';
 import { MapSourceElement } from './MapSourceElement';
 import { MapLayerElement } from './MapLayerElement';
+import { EventType } from '../core/EventType';
 
 /**
  * @class MapElement
@@ -96,7 +97,16 @@ export class MapElement extends LitElement {
       for (const source of sources) {
         this.#map.addSource(source.id, {
           type: source.type,
-          data: source.data,
+          data: source.geojson
+        });
+
+        // Watch source data changes
+        source.addEventListener(EventType.CHANGE, (evt) => {
+          // Source data has changed, update the source
+          const mapSource = this.#map.getSource(evt.detail.id);
+          if (mapSource && evt.detail.geojson) {
+            mapSource.setData(evt.detail.geojson);
+          }
         });
       }
 
@@ -105,16 +115,14 @@ export class MapElement extends LitElement {
       for (const layer of layers) {
         const source = this.querySelector(`${layer.source}`);
         if (!source) {
-          console.error(`Source ${layer.source} not found for layer ${layer.id}`);
-        } else {
-          console.log(`Adding layer ${layer.id} with source ${source.data}`);
-          this.#map.addLayer({
-            id: layer.id,
-            source: source.id,
-            type: layer.type,
-            paint: layer.paint,
-          });  
+          throw new Error(`Source ${layer.source} not found for layer ${layer.id}`);
         }
+        this.#map.addLayer({
+          id: layer.id,
+          source: source.id,
+          type: layer.type,
+          paint: layer.paint || {},
+        });
       }
     });
   }

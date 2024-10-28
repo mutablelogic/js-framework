@@ -13,7 +13,7 @@ import { EventType } from './EventType';
  */
 export class ArrayElement extends LitElement {
     #data = new Array();
-    #newdata = null;
+    #newdata = new Array();
     #provider = null;
 
     static get localName() {
@@ -54,24 +54,24 @@ export class ArrayElement extends LitElement {
 
     #providerChanged(newVal, oldVal) {
         if (oldVal != null && this.#provider && newVal !== oldVal) {
-            this.#provider.removeEventListener(EventType.OBJECT, this.#providerFetch.bind(this));
+            this.#provider.removeEventListener(EventType.FETCH, this.#providerFetch.bind(this));
             this.#provider.removeEventListener(EventType.OBJECT, this.#providerObject.bind(this));
-            this.#provider.removeEventListener(EventType.OBJECT, this.#providerDone.bind(this));
+            this.#provider.removeEventListener(EventType.DONE, this.#providerDone.bind(this));
             this.#provider = null;
         }
         if (newVal != null && newVal !== oldVal) {
             this.#provider = document.querySelector(newVal);
             if (this.#provider) {
-                this.#provider.addEventListener(EventType.OBJECT, this.#providerFetch.bind(this));
+                this.#provider.addEventListener(EventType.FETCH, this.#providerFetch.bind(this));
                 this.#provider.addEventListener(EventType.OBJECT, this.#providerObject.bind(this));
-                this.#provider.addEventListener(EventType.OBJECT, this.#providerDone.bind(this));
+                this.#provider.addEventListener(EventType.DONE, this.#providerDone.bind(this));
             } else {
                 throw new Error(`Provider "${newVal}" not found`);
             }
         }
     }
 
-    #providerFetch(event) {
+    #providerFetch() {
         // Reset the data container
         this.#newdata = new Array();
     }
@@ -81,7 +81,7 @@ export class ArrayElement extends LitElement {
         this.#newdata.push(event.detail);
     }
 
-    #providerDone(event) {
+    #providerDone() {
         let modified = false;
         if (this.#newdata.length !== this.#data.length) {
             modified = true;

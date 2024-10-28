@@ -29,10 +29,11 @@
         <div style="height: 500px;">
             <js-map id="map"
                 accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
-                <js-mapsource id="area" type="geojson"
-                    data='{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [0,0] } }'></js-mapsource>
-                <js-maplayer id="points" source="#area" type="circle" paint='{ "circle-color" : "red" , "circle-radius"
-                    : 4, "circle-stroke-width" : 2, "circle-stroke-color" : "red" }'></js-maplayer>
+                <!-- add a source from the array (must currently be an array of GeoJSON features) -->
+                <js-mapsource id="area" type="geojson" data="#array"></js-mapsource>
+
+                <!-- display the source on the map as polygons -->
+                <js-maplayer id="points" source="#area" type="fill" paint='{ "fill-opacity": 0.2, "fill-color": "#aa0000" }'></js-maplayer>
             </js-map>
         </div>
     </js-container>

@@ -1,5 +1,5 @@
 /**
- * Define event tyoes used by web components
+ * Define event types used by web components
  * @readonly
  * @enum {String}
  */

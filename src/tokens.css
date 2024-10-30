@@ -1,6 +1,7 @@
 /* fonts */
 :root {
-  --font-family-base: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-family-base: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-family-monospace: "IBM Plex Mono", "Courier New", monospace;
 
   --font-size-medium: 0.85rem;
   --font-size-small: 0.75rem;
@@ -15,9 +16,9 @@
   --font-weight-extrabold: 800;
 }
 
-/* containers */
+/* content */
 :root {
-  --container-padding: 1rem;
+  --content-padding: 1rem;
 }
 
 /* colours */
@@ -109,6 +110,7 @@
   --button-padding-xlarge: 0.4rem 0.8rem;
   --button-font-size-xlarge: var(--font-size-xlarge);
 
+  --button-margin: 0.1rem;
   --button-opacity-disabled: 0.5;
 }
 
@@ -217,7 +219,25 @@
 /* icons */
 :root {
   --icon-size-small: 1.1em;
-  --icon-size-medium: 1.2em;
-  --icon-size-large: 1.3em;
-  --icon-size-xlarge: 1.4em;
+  --icon-size-medium: 1.5em;
+  --icon-size-large: 2em;
+  --icon-size-xlarge: 3em;
+}
+
+/* images */
+:root {
+  --image-size-small: 1em;
+  --image-size-medium: 2em;
+  --image-size-large: 4em;
+  --image-size-xlarge: 8em;
+}
+
+/* navigation */
+:root {
+  --nav-border: 0.05rem solid var(--black-color);
+  --nav-background-color-primary: var(--dark-color);
+  --nav-color-primary: var(--light-color);
+  --nav-item-padding: 0.7em 0.7em;
+  --nav-item-border: 0.2rem solid transparent;
+  --nav-item-border-hover: 0.2rem solid white;
 }

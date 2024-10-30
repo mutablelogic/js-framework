@@ -52,6 +52,9 @@ export class TableBodyElement extends LitElement {
         max-height: 40px;
         overflow: hidden;        
       }
+      code, pre {
+        font-family: var(--font-family-monospace);
+      }
     `;
   }
 

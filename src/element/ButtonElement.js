@@ -38,8 +38,7 @@ export class ButtonElement extends LitElement {
       button {
         display: inline-flex;
         position: relative;  
-        margin: none;
-        padding: var(--button-padding);
+        margin: var(--button-margin);
         cursor: pointer;
         user-select: none;
         border: var(--button-border);

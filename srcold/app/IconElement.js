@@ -10,7 +10,7 @@ import icons from 'bootstrap-icons/bootstrap-icons.svg';
  * @property {Boolean} size - The size of the icon
  *
  * @example
- * <wc-icon name="test" size="medium">
+ * <wc-icon src="test" size="medium">
  */
 export class IconElement extends LitElement {
   static get localName() {
@@ -19,13 +19,13 @@ export class IconElement extends LitElement {
 
   constructor() {
     super();
-    this.name = 'bootstrap-reboot';
+    this.src = 'bootstrap-reboot';
     this.size = 'default';
   }
 
   static get properties() {
     return {
-      name: { type: String },
+      src: { type: String },
       size: { type: String },
     };
   }

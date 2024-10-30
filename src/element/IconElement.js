@@ -34,22 +34,18 @@ export class IconElement extends LitElement {
           vertical-align: middle;
       }
       .size-small {
-          position: relative;
           width: var(--icon-size-small);
           height: var(--icon-size-small);
       }
       .size-medium, .size-default {
-          position: relative;
           width: var(--icon-size-medium);
           height: var(--icon-size-medium);
       }
       .size-large {
-          position: relative;
           width: var(--icon-size-large);
           height: var(--icon-size-large);
       }
       .size-xlarge {
-          position: relative;
           width: var(--icon-size-xlarge);
           height: var(--icon-size-xlarge);
       }
@@ -72,6 +68,6 @@ export class IconElement extends LitElement {
   }
 
   render() {
-    return svg`<div class=${this.classes.join(' ') || nothing}><svg><use href="${icons}#${this.name}"/></svg></div>`;
+    return svg`<div class=${this.classes.join(' ') || nothing}><svg class=${this.classes.join(' ') || nothing}><use href="${icons}#${this.name}"/></svg></div>`;
   }
 }

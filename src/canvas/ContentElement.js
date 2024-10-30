@@ -3,16 +3,16 @@ import {
 } from 'lit';
 
 /**
- * @class ContainerElement
+ * @class ContentElement
  *
  * This class provides a content container
  *
  * @example
- * <js-container>OK</js-container>
+ * <js-content>OK</js-content>
  */
-export class ContainerElement extends LitElement {
+export class ContentElement extends LitElement {
   static get localName() {
-    return 'js-container';
+    return 'js-content';
   }
 
   static get properties() {
@@ -21,17 +21,17 @@ export class ContainerElement extends LitElement {
 
   static get styles() {
     return css`
-      div {
-        display: block;
-        padding: var(--container-padding);
-      } 
-    `;
+        div {
+          display: block;
+          padding: var(--content-padding);
+        } 
+      `;
   }
 
   render() {
     return html`
-      <div class=${this.classes.join(' ') || nothing}><slot></slot></div>      
-    `;
+        <div class=${this.classes.join(' ') || nothing}><slot></slot></div>      
+      `;
   }
 
   // eslint-disable-next-line class-methods-use-this

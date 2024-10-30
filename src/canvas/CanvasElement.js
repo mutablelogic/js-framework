@@ -36,9 +36,6 @@ export class CanvasElement extends LitElement {
             flex-direction: row;
           }
         }
-        ::slotted(test) {
-          border: 0.05rem solid red;
-        }
       `;
   }
 

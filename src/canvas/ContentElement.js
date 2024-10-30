@@ -21,22 +21,15 @@ export class ContentElement extends LitElement {
 
   static get styles() {
     return css`
-        div {
-          display: block;
-          padding: var(--content-padding);
-        } 
-      `;
+      :host {
+        flex: 1;
+      }
+    `;
   }
 
   render() {
     return html`
-        <div class=${this.classes.join(' ') || nothing}><slot></slot></div>      
+        <slot></slot>
       `;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  get classes() {
-    const classes = [];
-    return classes;
   }
 }

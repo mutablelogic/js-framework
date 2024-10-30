@@ -49,9 +49,13 @@ export class MapElement extends LitElement {
   static get styles() {
     return css`
       ${unsafeCSS(styles)}
-      #map {
+      :host {
+        display: flex;
         width: 100%;
         height: 100%;
+      }
+      #map {
+        flex: 1;
       }
       .mapboxgl-ctrl-logo {
         display: none !important;

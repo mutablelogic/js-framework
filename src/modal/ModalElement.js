@@ -50,14 +50,9 @@ export class ModalElement extends LitElement {
         margin: var(--modal-margin);
         border: var(--modal-border);
         border-radius: var(--modal-border-radius);        
-      }
-      .wrapper {
         display: flex;
-        position: relative;             
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-      }        
+        flex-direction: column;
+      }
     `;
   }
 
@@ -65,7 +60,7 @@ export class ModalElement extends LitElement {
     return html`
       <div class=${this.canvasClasses.join(' ') || nothing}></div>
       <div class=${this.contentClasses.join(' ') || nothing}">
-        <div class="wrapper"><slot></slot></div>
+        <slot></slot>
       </div>
     `;
   }

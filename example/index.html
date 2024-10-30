@@ -115,22 +115,6 @@
       </js-tablebody>
     </js-content>
 
-    <js-content>
-      <js-tag texttransform="uppercase"><js-icon size="small">compass</js-icon> Map</js-tag>
-      <div style="height: 500px;">
-        <js-map id="map"
-          accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
-          <!-- add a source from the array (must currently be an array of GeoJSON features) -->
-          <js-mapsource id="area" type="geojson" data="#array"></js-mapsource>
-
-          <!-- display the source on the map as polygons -->
-          <js-maplayer id="points" source="#area" type="fill"
-            paint='{ "fill-opacity": 0.2, "fill-color": "#aa0000" }'></js-maplayer>
-        </js-map>
-      </div>
-    </js-content>
-
-
   </js-canvas>
 
   <!-- toast which persists on the screen for 10 seconds -->
@@ -145,6 +129,19 @@
         <js-close></js-close>
       </js-navitem>
     </js-nav>
+
+    <js-content>
+      <js-map id="map"
+      accessToken="pk.eyJ1IjoiZGp0aG9ycGUiLCJhIjoiY2x5ZnJhZjAzMDJsYTJqcjd6eWQ3cjRvcSJ9.LvoT_wihG5VQtv008P-MPw">
+        <!-- add a source from the array (must currently be an array of GeoJSON features) -->
+        <js-mapsource id="area" type="geojson" data="#array"></js-mapsource>
+
+        <!-- display the source on the map as polygons -->
+        <js-maplayer id="points" source="#area" type="fill"
+          paint='{ "fill-opacity": 0.2, "fill-color": "#aa0000" }'></js-maplayer>
+      </js-map>
+    </js-content> 
+
   </js-modal>
 
 </body>

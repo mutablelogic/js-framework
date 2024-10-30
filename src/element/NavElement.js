@@ -27,7 +27,7 @@ export class NavElement extends LitElement {
   static get styles() {
     return css`
       :host {
-        flex: 1 0;
+        flex: 0;
       }
       ul {
         display: flex;

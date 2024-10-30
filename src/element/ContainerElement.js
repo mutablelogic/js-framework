@@ -1,4 +1,6 @@
-import { LitElement, html, css, nothing } from 'lit';
+import {
+  LitElement, html, css, nothing,
+} from 'lit';
 
 /**
  * @class ContainerElement

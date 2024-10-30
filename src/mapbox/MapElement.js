@@ -1,4 +1,6 @@
-import { LitElement, html, css, nothing, unsafeCSS } from 'lit';
+import {
+  LitElement, html, css, nothing, unsafeCSS,
+} from 'lit';
 import { Map } from 'mapbox-gl';
 import styles from './mapbox.css.txt';
 import { MapSourceElement } from './MapSourceElement';
@@ -17,13 +19,15 @@ import { EventType } from '../core/EventType';
  * @property {Number} bearing - The bearing of the map
  * @property {String} mapstyle - The map style (mapbox://styles/mapbox/streets-v11)
  * @property {String} accessToken - The map access token
- * 
+ *
  * @example
  * <js-map accessToken="....."></js-map>
  */
 export class MapElement extends LitElement {
   #map;
+
   #sources;
+
   #layers;
 
   static get localName() {
@@ -38,7 +42,7 @@ export class MapElement extends LitElement {
       pitch: { type: Number, reflect: true },
       bearing: { type: Number, reflect: true },
       mapstyle: { type: String, reflect: true },
-      accessToken: { type: String }
+      accessToken: { type: String },
     };
   }
 
@@ -97,7 +101,7 @@ export class MapElement extends LitElement {
       for (const source of sources) {
         this.#map.addSource(source.id, {
           type: source.type,
-          data: source.geojson
+          data: source.geojson,
         });
 
         // Watch source data changes

@@ -1,4 +1,6 @@
-import { LitElement, html, svg, css, nothing } from 'lit';
+import {
+  LitElement, svg, css, nothing,
+} from 'lit';
 import icons from 'bootstrap-icons/bootstrap-icons.svg';
 
 /**

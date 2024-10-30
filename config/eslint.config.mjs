@@ -1,6 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import globals from 'globals';
-import {dirname } from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 
@@ -18,6 +18,9 @@ export default [
       globals: globals.browser,
       ecmaVersion: 13,
       sourceType: 'module',
+      parserOptions: {
+        ecmaVersion: 13,
+      },
     },
   },
   ...compat.extends('airbnb-base'),

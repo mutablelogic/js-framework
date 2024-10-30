@@ -1,4 +1,4 @@
-import { LitElement, html, css, nothing } from 'lit';
+import { LitElement } from 'lit';
 import { EventType } from '../core/EventType';
 import { ArrayElement } from '../core/ArrayElement';
 
@@ -37,11 +37,11 @@ export class MapSourceElement extends LitElement {
     if (this.type !== 'geojson') {
       return null;
     }
-    const featurecollection = new Object();
+    const featurecollection = {};
     featurecollection.type = 'FeatureCollection';
-    featurecollection.features = new Array();
+    featurecollection.features = [];
     if (this.#data instanceof ArrayElement) {
-      for(let i = 0; i < this.#data.length; i++) {
+      for (let i = 0; i < this.#data.length; i += 1) {
         featurecollection.features.push(this.#data.at(i));
       }
     }
@@ -63,10 +63,10 @@ export class MapSourceElement extends LitElement {
     }
   }
 
-  #dataFetch(event) {
+  #dataFetch() {
     // Change event
     this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
-      detail: this 
+      detail: this,
     }));
   }
 }

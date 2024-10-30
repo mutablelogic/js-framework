@@ -1,4 +1,6 @@
-import { LitElement, html, css, nothing } from 'lit';
+import {
+  LitElement, html, css, nothing,
+} from 'lit';
 
 /**
  * @class ToastElement
@@ -9,6 +11,8 @@ import { LitElement, html, css, nothing } from 'lit';
  * <js-toast>Error</js-toast>
  */
 export class ToastElement extends LitElement {
+  #timer;
+
   static get localName() {
     return 'js-toast';
   }
@@ -30,15 +34,16 @@ export class ToastElement extends LitElement {
         margin: var(--toast-margin);
         padding: var(--toast-padding);
         border: var(--toast-border);
-
+        transition: visibility 0.2s, opacity 0.2s ease-in-out;
+        
         &.visible {
-          display: block;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          visibility: visible;
+          opacity: 1;
         }
 
         &.hidden {
-          display: none;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          visibility: hidden;
+          opacity: 0;
         }
       }
       .color-primary {
@@ -98,6 +103,24 @@ export class ToastElement extends LitElement {
     return html`
       <div class=${this.classes.join(' ') || nothing}><slot></slot></div>      
     `;
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    super.attributeChangedCallback(name, oldVal, newVal);
+    if (name === 'visible' && oldVal !== newVal) {
+      this.#visibleChanged(newVal !== null, oldVal !== null);
+    }
+  }
+
+  #visibleChanged(newVal) {
+    if (newVal && this.duration > 0) {
+      if (this.#timer) {
+        clearTimeout(this.#timer);
+      }
+      this.#timer = setTimeout(() => {
+        this.visible = false;
+      }, this.duration * 1000);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this

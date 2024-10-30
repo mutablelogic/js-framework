@@ -5,11 +5,12 @@ import { EventType } from './EventType';
  * @class ProviderElement
  *
  * This class is a "provider" of data from external sources.
- * 
+ *
  * @property {String} origin - The origin of the resource
  * @property {String} path - The path to the resource
  * @property {String} method - The method to use to fetch the resource
- * @property {Number} interval - The interval to fetch the resource in seconds. If undefined, only fetch once
+ * @property {Number} interval - The interval to fetch the resource in seconds. If undefined,
+ *   only fetch once
  * @property {String} message - The status message to display
  *
  * @example
@@ -59,17 +60,17 @@ export class ProviderElement extends LitElement {
 
   /**
    * Fetch data from a remote source
-   * 
+   *
    * @param {String} path - The path to the resource. If NULL, use the path property.
    * @param {Object} request - The request object. If NULL, use the method property.
    * @param {Number} interval - The interval to fetch the data. If NULL, use the interval property.
-   * 
+   *
    * @memberof ProviderElement
    */
   fetch(path, request, interval) {
     // Set default path and request
     if (!path) {
-      path = this.path || "/";
+      path = this.path || '/';
     }
     if (!request) {
       request = this.#request;
@@ -82,12 +83,11 @@ export class ProviderElement extends LitElement {
     let url;
     try {
       url = new URL(path, this.#origin);
-    }
-    catch (error) {
+    } catch (error) {
       this.message = `${error}`;
       this.dispatchEvent(new ErrorEvent(EventType.ERROR, {
-        error: error,
-        message: this.message
+        error,
+        message: this.message,
       }));
       return;
     }
@@ -108,7 +108,7 @@ export class ProviderElement extends LitElement {
 
   /**
    * Cancel any existing request interval timer.
-   * 
+   *
    * @memberof ProviderElement
    */
   cancel() {
@@ -144,16 +144,16 @@ export class ProviderElement extends LitElement {
 
   get #request() {
     return {
-      method: this.method || "GET",
+      method: this.method || 'GET',
       body: null,
-      headers: {}
+      headers: {},
     };
   }
 
   #fetch(url, request) {
     this.message = `FETCH ${url}`;
     this.dispatchEvent(new CustomEvent(EventType.FETCH, {
-      detail: url
+      detail: url,
     }));
     fetch(url, request).then((response) => {
       if (!response.ok) {
@@ -166,17 +166,18 @@ export class ProviderElement extends LitElement {
     }).catch((error) => {
       this.message = `${error}`;
       this.dispatchEvent(new ErrorEvent(EventType.ERROR, {
-        error: error,
-        message: this.message
+        error,
+        message: `${error}`,
       }));
     }).finally(() => {
       this.message = `DONE ${url}`;
       this.dispatchEvent(new CustomEvent(EventType.DONE, {
-        detail: url
+        detail: url,
       }));
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   #fetchresponse(contentType, response) {
     switch (contentType.split(';')[0]) {
       case 'application/json':
@@ -191,14 +192,14 @@ export class ProviderElement extends LitElement {
   }
 
   #fetchdata(data) {
-    if (typeof data == "string") {
+    if (typeof data === 'string') {
       this.#fetchtext(data);
     } else if (Array.isArray(data)) {
-      data.forEach((item) => {    
-        this.#fetchobject(item);    
+      data.forEach((item) => {
+        this.#fetchobject(item);
       });
     } else if (data instanceof Object) {
-      this.#fetchobject(data);    
+      this.#fetchobject(data);
     } else {
       this.#fetchblob(data);
     }
@@ -207,22 +208,21 @@ export class ProviderElement extends LitElement {
   #fetchtext(data) {
     this.message = data;
     this.dispatchEvent(new CustomEvent(EventType.TEXT, {
-      detail: data
+      detail: data,
     }));
   }
 
   #fetchobject(data) {
     this.message = data;
     this.dispatchEvent(new CustomEvent(EventType.OBJECT, {
-      detail: data
+      detail: data,
     }));
   }
 
   #fetchblob(data) {
     this.message = data;
     this.dispatchEvent(new CustomEvent(EventType.BLOB, {
-      detail: data
+      detail: data,
     }));
   }
 }
-

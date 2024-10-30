@@ -14,10 +14,33 @@
     <!-- toast which persists on the screen for 10 seconds -->
     <js-toast id="toast" duration="10"></js-toast>
 
+    <js-container>
+        BUTTON COLOR
+        <js-button color="primary" texttransform="uppercase">Primary</js-button>
+        <js-button color="secondary" texttransform="uppercase">Secondary</js-button>
+        <js-button color="success" texttransform="uppercase">Success</js-button>
+        <js-button color="warning" texttransform="uppercase">Warning</js-button>
+        <js-button color="error" texttransform="uppercase">Error</js-button>
+        <js-button color="light" texttransform="uppercase">Light</js-button>
+        <js-button color="dark" texttransform="uppercase">Dark</js-button>
+        <js-button color="white" texttransform="uppercase">White</js-button>
+        <js-button color="black" texttransform="uppercase">Black</js-button>
+
+        BUTTON SIZE
+        <js-button size="small" texttransform="lowercase">Small</js-button>
+        <js-button size="medium" texttransform="lowercase">Medium</js-button>
+        <js-button size="large" texttransform="lowercase">Large</js-button>
+        <js-button size="xlarge" texttransform="lowercase">XLarge</js-button>
+
+        DISABLED
+        <js-button color="primary" texttransform="uppercase" disabled>Disabled</js-button>
+
+    </js-container>
+
     <!-- header -->
     <js-container>
         <!-- where the data comes from -->
-        <js-provider id="provider" origin="http://localhost:8080/" path="aktek/area" interval="5"></js-provider>
+        <js-provider id="provider" origin="http://localhost:8080/" path="aktek/area?format=geojson" interval="5"></js-provider>
 
         <!-- model, areas come from the body element -->
         <js-array id="array" provider="#provider" select="body"></js-array>
@@ -42,6 +65,7 @@
             </js-map>
         </div>
     </js-container>
+
     <js-container>
         TAG COLOR
         <js-tag color="primary" texttransform="uppercase">Primary</js-tag>

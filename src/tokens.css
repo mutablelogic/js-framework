@@ -241,3 +241,14 @@
   --nav-item-border: 0.2rem solid transparent;
   --nav-item-border-hover: 0.2rem solid white;
 }
+
+/* modals */
+:root {
+  --modal-background-color-canvas: var(--black-color);
+  --modal-background-color: var(--white-color);
+  --modal-opacity-canvas: 0.3;
+  --modal-fadein-delay: 0.5s;
+  --modal-margin: 20vh 20vh;
+  --modal-border-radius: 0.2rem;
+  --modal-border: 0.05rem solid var(--black-color);
+}

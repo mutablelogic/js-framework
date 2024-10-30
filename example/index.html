@@ -135,6 +135,18 @@
 
   <!-- toast which persists on the screen for 10 seconds -->
   <js-toast id="toast" duration="10"></js-toast>
+
+  <!-- Modal Dialog -->
+  <js-modal id="modal" visible toggle="js-button">
+    <js-nav vertical>
+      <js-navitem texttransform="uppercase">Home</js-navitem>
+      <js-navspacer></js-navspacer>
+      <js-navitem disabled>
+        <js-close></js-close>
+      </js-navitem>
+    </js-nav>
+  </js-modal>
+
 </body>
 
 </html>

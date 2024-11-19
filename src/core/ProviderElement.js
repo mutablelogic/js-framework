@@ -19,6 +19,8 @@ import { EventType } from './EventType';
 export class ProviderElement extends LitElement {
   #timer;
 
+  #eventsource;
+
   static get localName() {
     return 'js-provider';
   }
@@ -32,6 +34,7 @@ export class ProviderElement extends LitElement {
     this.method = 'GET';
     this.interval = 0;
     this.message = '';
+    this.eventsource = null;
   }
 
   static get properties() {
@@ -41,6 +44,7 @@ export class ProviderElement extends LitElement {
       path: { type: String, reflect: true },
       method: { type: String, reflect: true },
       interval: { type: Number, reflect: true },
+      eventsource: { type: String, reflect: true },
     };
   }
 
@@ -51,6 +55,9 @@ export class ProviderElement extends LitElement {
     }
     if (name === 'interval') {
       this.#intervalChanged(newVal, oldVal);
+    }
+    if (name === 'eventsource') {
+      this.#eventsourceChanged(newVal, oldVal);
     }
   }
 
@@ -138,6 +145,20 @@ export class ProviderElement extends LitElement {
     }
   }
 
+  #eventsourceChanged(newVal) {
+    // Cancel any existing event source
+    if (this.#eventsource) {
+      this.#eventsource.removeEventListener('change', this.#eventmessage.bind(this));
+      this.#eventsource.close();
+      this.#eventsource = null;
+    }
+    // Create a new event source
+    if (newVal) {
+      this.#eventsource = new EventSource(newVal);
+      this.#eventsource.addEventListener('change', this.#eventmessage.bind(this));
+    }
+  }
+
   get #origin() {
     return this.origin || window.location.href;
   }
@@ -148,6 +169,11 @@ export class ProviderElement extends LitElement {
       body: null,
       headers: {},
     };
+  }
+
+  #eventmessage() {
+    // Re-fetch the data
+    this.fetch();
   }
 
   #fetch(url, request) {
@@ -161,20 +187,23 @@ export class ProviderElement extends LitElement {
       }
       const contentType = response.headers ? response.headers.get('Content-Type') || '' : '';
       return this.#fetchresponse(contentType.split(';')[0], response);
-    }).then((data) => {
-      this.#fetchdata(data);
-    }).catch((error) => {
-      this.message = `${error}`;
-      this.dispatchEvent(new ErrorEvent(EventType.ERROR, {
-        error,
-        message: `${error}`,
-      }));
-    }).finally(() => {
-      this.message = `DONE ${url}`;
-      this.dispatchEvent(new CustomEvent(EventType.DONE, {
-        detail: url,
-      }));
-    });
+    })
+      .then((data) => {
+        this.#fetchdata(data);
+      })
+      .catch((error) => {
+        this.message = `${error}`;
+        this.dispatchEvent(new ErrorEvent(EventType.ERROR, {
+          error,
+          message: `${error}`,
+        }));
+      })
+      .finally(() => {
+        this.message = `DONE ${url}`;
+        this.dispatchEvent(new CustomEvent(EventType.DONE, {
+          detail: url,
+        }));
+      });
   }
 
   // eslint-disable-next-line class-methods-use-this

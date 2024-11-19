@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import {
   LitElement, html, css, nothing, unsafeCSS,
 } from 'lit';
@@ -99,6 +100,7 @@ export class MapElement extends LitElement {
       accessToken: this.accessToken,
       attributionControl: false,
     });
+
     this.#map.on('load', () => {
       // Add map sources
       const sources = this.querySelectorAll(MapSourceElement.localName);
@@ -133,6 +135,17 @@ export class MapElement extends LitElement {
         });
       }
     });
+
+    // Add click actions for layers
+    const layers = this.querySelectorAll(MapLayerElement.localName);
+    for (const layer of layers) {
+      this.#map.on('click', layer.id, (e) => {
+        // TODO: Dispatch a custom event with the layer data
+        const source = this.querySelector(`${layer.source}`);
+        console.log('layer', layer);
+        console.log('source', this.#map.getSource(source.id));
+      });
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -141,3 +154,11 @@ export class MapElement extends LitElement {
     return classes;
   }
 }
+
+/*
+new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML(e.features[0].properties.name)
+.addTo(this.#map);
+});
+*/

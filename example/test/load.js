@@ -1,4 +1,4 @@
-import { EventType } from '../src/core/EventType';
+import { EventType } from '../../src/core/EventType';
 import hala from './hala-white-132x132.svg';
 
 window.addEventListener('load', () => {

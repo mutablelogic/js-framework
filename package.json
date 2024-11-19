@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "geojson-dev": "rm -fr dist && install -d dist && NODE_ENV=development node config/esbuild.geojson.mjs",
-    "geojson-build": "rm -fr dist && install -d dist && NODE_ENV=production node config/esbuild.geojson.mjs",
+    "build": "rm -fr dist && install -d dist && NODE_ENV=production node config/esbuild.geojson.mjs",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c config/eslint.config.mjs --cache --fix ./src/**/*.js",
     "docs": "jsdoc -c config/jsdoc.config.json"
   },

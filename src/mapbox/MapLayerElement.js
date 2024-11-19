@@ -1,6 +1,4 @@
-import { LitElement, html, css, nothing } from 'lit';
-import { Map } from 'mapbox-gl';
-import styles from 'mapbox-gl/dist/mapbox-gl.css';
+import { LitElement } from 'lit';
 
 /**
  * @class MapLayerElement

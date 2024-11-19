@@ -1,0 +1,254 @@
+/* fonts */
+:root {
+  --font-family-base: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-family-monospace: "IBM Plex Mono", "Courier New", monospace;
+
+  --font-size-medium: 0.85rem;
+  --font-size-small: 0.75rem;
+  --font-size-large: 1.25rem;
+  --font-size-xlarge: 1.50rem;
+  --font-size-default: var(--font-size-medium);
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+
+/* content */
+:root {
+  --content-padding: 1rem;
+}
+
+/* colours */
+:root {
+  --primary-color: #16f;
+  --secondary-color: #aaa;
+  --success-color: #285;
+  --warning-color: #f72;
+  --error-color: #f55;
+  --light-color: #eee;
+  --white-color: #fff;
+  --dark-color: #333;
+  --black-color: #000;
+  --grey-10-color: #EAEAEA;
+  --grey-20-color: #D0D0D0;
+  --grey-30-color: #B6B6B6;
+  --grey-40-color: #9C9C9C;
+  --grey-50-color: #828282;
+  --grey-60-color: #6A6A6A;
+  --grey-70-color: #4E4E4E;
+  --grey-80-color: #343434;
+  --grey-90-color: #1A1A1A;
+}
+
+/* buttons */
+:root {
+  --button-background-color-primary: var(--primary-color);
+  --button-color-primary: var(--light-color);
+  --button-border-color-primary: var(--primary-color);
+  --button-color-hover-primary: var(--white-color);
+
+  --button-background-color-secondary: var(--secondary-color);
+  --button-color-secondary: var(--light-color);
+  --button-border-color-secondary: var(--dark-color);
+  --button-color-hover-secondary: var(--white-color);
+
+  --button-background-color-success: var(--success-color);
+  --button-color-success: var(--light-color);
+  --button-border-color-success: var(--success-color);
+  --button-color-hover-success: var(--white-color);
+
+  --button-background-color-warning: var(--warning-color);
+  --button-color-warning: var(--light-color);
+  --button-border-color-warning: var(--warning-color);
+  --button-color-hover-warning: var(--white-color);
+
+  --button-background-color-error: var(--error-color);
+  --button-color-error: var(--light-color);
+  --button-border-color-error: var(--error-color);
+  --button-color-hover-error: var(--white-color);
+
+  --button-background-color-light: var(--light-color);
+  --button-color-light: var(--dark-color);
+  --button-border-color-light: var(--dark-color);
+  --button-color-hover-light: var(--black-color);
+
+  --button-background-color-dark: var(--dark-color);
+  --button-color-dark: var(--light-color);
+  --button-border-color-dark: var(--dark-color);
+  --button-color-hover-dark: var(--white-color);
+
+  --button-background-color-white: var(--white-color);
+  --button-color-white: var(--black-color);
+  --button-border-color-white: var(--black-color);
+  --button-color-hover-white: var(--dark-color);
+
+  --button-background-color-black: var(--black-color);
+  --button-color-black: var(--white-color);
+  --button-border-color-black: var(--black-color);
+  --button-color-hover-black: var(--light-color);
+
+  --button-border-radius-small: 0.15rem;
+  --button-border-small: 0.05rem solid;
+  --button-padding-small: 0.4rem 0.4rem;
+  --button-font-size-small: var(--font-size-small);
+
+  --button-border-radius-medium: 0.15rem;
+  --button-border-medium: 0.05rem solid;
+  --button-padding-medium: 0.4rem 0.8rem;
+  --button-font-size-medium: var(--font-size-medium);
+
+  --button-border-radius-large: 0.15rem;
+  --button-border-large: 0.05rem solid;
+  --button-padding-large: 0.4rem 0.8rem;
+  --button-font-size-large: var(--font-size-large);
+
+  --button-border-radius-xlarge: 0.15rem;
+  --button-border-xlarge: 0.05rem solid;
+  --button-padding-xlarge: 0.4rem 0.8rem;
+  --button-font-size-xlarge: var(--font-size-xlarge);
+
+  --button-margin: 0.1rem;
+  --button-opacity-disabled: 0.5;
+}
+
+/* tags */
+:root {
+  --tag-background-color-primary: var(--primary-color);
+  --tag-color-primary: var(--light-color);
+  --tag-border-color-primary: var(--primary-color);
+
+  --tag-background-color-secondary: var(--secondary-color);
+  --tag-color-secondary: var(--light-color);
+  --tag-border-color-secondary: var(--dark-color);
+
+  --tag-background-color-success: var(--success-color);
+  --tag-color-success: var(--light-color);
+  --tag-border-color-success: var(--success-color);
+
+  --tag-background-color-warning: var(--warning-color);
+  --tag-color-warning: var(--light-color);
+  --tag-border-color-warning: var(--warning-color);
+
+  --tag-background-color-error: var(--error-color);
+  --tag-color-error: var(--light-color);
+  --tag-border-color-error: var(--error-color);
+
+  --tag-background-color-light: var(--light-color);
+  --tag-color-light: var(--dark-color);
+  --tag-border-color-light: var(--dark-color);
+
+  --tag-background-color-dark: var(--dark-color);
+  --tag-color-dark: var(--light-color);
+  --tag-border-color-dark: var(--dark-color);
+
+  --tag-background-color-white: var(--white-color);
+  --tag-color-white: var(--black-color);
+  --tag-border-color-white: var(--black-color);
+
+  --tag-background-color-black: var(--black-color);
+  --tag-color-black: var(--white-color);
+  --tag-border-color-black: var(--black-color);
+
+  --tag-border-radius-small: 0.15rem;
+  --tag-border-small: 0.05rem solid;
+  --tag-padding-small: 0.2rem 0.2rem;
+  --tag-font-size-small: var(--font-size-small);
+
+  --tag-border-radius-medium: 0.15rem;
+  --tag-border-medium: 0.05rem solid;
+  --tag-padding-medium: 0.2rem 0.4rem;
+  --tag-font-size-medium: var(--font-size-medium);
+
+  --tag-border-radius-large: 0.15rem;
+  --tag-border-large: 0.05rem solid;
+  --tag-padding-large: 0.2rem 0.4rem;
+  --tag-font-size-large: var(--font-size-large);
+
+  --tag-border-radius-xlarge: 0.15rem;
+  --tag-border-xlarge: 0.05rem solid;
+  --tag-padding-xlarge: 0.2rem 0.4rem;
+  --tag-font-size-xlarge: var(--font-size-xlarge);
+}
+
+/* toast */
+:root {
+  --toast-background-color-primary: var(--primary-color);
+  --toast-color-primary: var(--light-color);
+  --toast-border-color-primary: var(--primary-color);
+
+  --toast-background-color-secondary: var(--secondary-color);
+  --toast-color-secondary: var(--light-color);
+  --toast-border-color-secondary: var(--dark-color);
+
+  --toast-background-color-success: var(--success-color);
+  --toast-color-success: var(--light-color);
+  --toast-border-color-success: var(--success-color);
+
+  --toast-background-color-warning: var(--warning-color);
+  --toast-color-warning: var(--light-color);
+  --toast-border-color-warning: var(--warning-color);
+
+  --toast-background-color-error: var(--error-color);
+  --toast-color-error: var(--light-color);
+  --toast-border-color-error: var(--error-color);
+
+  --toast-background-color-light: var(--light-color);
+  --toast-color-light: var(--dark-color);
+  --toast-border-color-light: var(--dark-color);
+
+  --toast-background-color-dark: var(--dark-color);
+  --toast-color-dark: var(--light-color);
+  --toast-border-color-dark: var(--dark-color);
+
+  --toast-background-color-white: var(--white-color);
+  --toast-color-white: var(--black-color);
+  --toast-border-color-white: var(--black-color);
+
+  --toast-background-color-black: var(--black-color);
+  --toast-color-black: var(--white-color);
+  --toast-border-color-black: var(--black-color);
+
+  --toast-margin: 1rem;
+  --toast-padding: 0.5rem;
+  --toast-border: 0.05rem solid var(--dark-color);
+}
+
+/* icons */
+:root {
+  --icon-size-small: 1.1em;
+  --icon-size-medium: 1.5em;
+  --icon-size-large: 2em;
+  --icon-size-xlarge: 3em;
+}
+
+/* images */
+:root {
+  --image-size-small: 1em;
+  --image-size-medium: 2em;
+  --image-size-large: 4em;
+  --image-size-xlarge: 8em;
+}
+
+/* navigation */
+:root {
+  --nav-border: 0.05rem solid var(--black-color);
+  --nav-background-color-primary: var(--dark-color);
+  --nav-color-primary: var(--light-color);
+  --nav-item-padding: 0.7em 0.7em;
+  --nav-item-border: 0.2rem solid transparent;
+  --nav-item-border-hover: 0.2rem solid white;
+}
+
+/* modals */
+:root {
+  --modal-background-color-canvas: var(--black-color);
+  --modal-background-color: var(--white-color);
+  --modal-opacity-canvas: 0.3;
+  --modal-fadein-delay: 0.5s;
+  --modal-margin: 20vh 20vh;
+  --modal-border-radius: 0.2rem;
+  --modal-border: 0.05rem solid var(--black-color);
+}

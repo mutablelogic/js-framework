@@ -1,5 +1,5 @@
-@import url(../assets/font/opensans.css);
-@import './core-tokens.css';
+@import url(../assets/font/ibmplexsans.css);
+@import url(../assets/font/ibmplexmono.css);
 
 :root {
   color-scheme: light dark;

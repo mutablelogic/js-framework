@@ -1,7 +1,6 @@
 import esbuild from 'esbuild';
 
 const commonOptions = {
-  entryPoints: ['example/index.js'],
   outdir: 'dist',
   format: 'esm',
   bundle: true,
@@ -13,34 +12,29 @@ const commonOptions = {
     '.otf': 'file',
     '.html': 'copy',
     '.json': 'copy',
-  }
+  },
+  logLevel: 'info',
+  entryPoints: [],
 };
 
 if (process.env.NODE_ENV === 'production') {
+  commonOptions.entryPoints.push('src/index.js');
   await esbuild.build({
     ...commonOptions,
+    entryPoints: ['src/index.js'],
     minify: true,
     sourcemap: false,
-    define: {
-      'process.env.NODE_ENV': '"production"',
-    },
   }).catch(() => process.exit(1));
 } else {
-  commonOptions.entryPoints.push('example/index.html', 'example/data.json');
+  commonOptions.entryPoints.push('example/index.html', 'example/index.js');
   let ctx = await esbuild.context({
     ...commonOptions,
     minify: false,
     sourcemap: true,
-    define: {
-      'process.env.NODE_ENV': '"development"',
-    },
   })
 
   let { host, port } = await ctx.serve({
     servedir: commonOptions.outdir,
   });
-  console.log(`Serving on http://${host}:${port}`);
-
   await ctx.watch();
-  console.log('watching');
 }

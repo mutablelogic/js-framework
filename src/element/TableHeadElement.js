@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { EventType } from '../core/EventType';
 
 /**
@@ -55,13 +55,14 @@ export class TableHeadElement extends LitElement {
   }
 
   #renderColumns(row) {
-    const columns = new Array();
-    for (let cell in row) {
+    const columns = [];
+    for (const cell in row) {
       columns.push(html`<th>${this.#renderCell(row[cell])}</th>`);
     }
     return columns;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   #renderCell(cell) {
     return html`${cell}`;
   }

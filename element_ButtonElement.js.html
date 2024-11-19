@@ -26,7 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { LitElement, html, css, nothing } from 'lit';
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
 import { EventType } from '../core/EventType';
 
 /**
@@ -50,40 +52,163 @@ export class ButtonElement extends LitElement {
 
   static get properties() {
     return {
-      name: { type: String },
-      type: { type: String },
-      textTransform: { type: String },
-      disabled: { type: Boolean },
+      name: { type: String, reflect: true },
+      type: { type: String, reflect: true },
+      color: { type: String, reflect: true },
+      texttransform: { type: String, reflect: true },
+      size: { type: String, reflect: true },
+      disabled: { type: Boolean, reflect: true },
     };
   }
- 
+
   static get styles() {
     return css`
       button {
-          display: inline-flex;
-          position: relative;  
-          margin: none;
-          padding: var(--button-padding);
-          cursor: pointer;
-          user-select: none;
-          color: var(--button-color);
-          background-color: var(--button-background-color);
-          border: var(--button-border-width) var(--button-border-style) var(--button-border-color);
-          border-radius: var(--button-border-radius);
-
-          &amp;:hover {
-            color: var(--button-color-hover);
-          }
-          &amp;:disabled {
-            color: var(--button-color-disabled);
-            cursor: default;
-          }          
-          &amp;:not(:disabled):active {
-            color: var(--button-color-active);
-            transform: translate(0.05rem, 0.05rem);
-          }
+        display: inline-flex;
+        position: relative;  
+        margin: var(--button-margin);
+        cursor: pointer;
+        user-select: none;
+        border: var(--button-border);
+        border-radius: var(--button-border-radius);
+        
+        &amp;:disabled {
+          opacity: var(--button-opacity-disabled);
+          cursor: default;
+        }          
+        &amp;:not(:disabled):active {
+          color: var(--button-color-active);
+          transform: translate(0.05rem, 0.05rem);
         }
+      }
+      .size-small {
+        border: var(--button-border-small);
+        border-radius: var(--button-border-radius-small);
+        font-size: var(--font-size-small);
+        padding: var(--button-padding-small);
+      }
+      .size-medium, .size-default {
+        border: var(--button-border-medium);
+        border-radius: var(--button-border-radius-medium);
+        font-size: var(--font-size-medium);
+        padding: var(--button-padding-medium);
+      }
+      .size-large {
+        border: var(--button-border-large);
+        border-radius: var(--button-border-radius-large);
+        font-size: var(--font-size-large);
+        padding: var(--button-padding-large);
+      }
+      .size-xlarge {
+        border: var(--button-border-xlarge);
+        border-radius: var(--button-border-radius-xlarge);
+        font-size: var(--font-size-xlarge);
+        padding: var(--button-padding-xlarge);
+      }
+      .color-primary {
+        background-color: var(--button-background-color-primary);
+        color: var(--button-color-primary);
+        border-color: var(--button-border-color-primary);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-primary);
+        }
+      }
+      .color-secondary {
+        background-color: var(--button-background-color-secondary);
+        color: var(--button-color-secondary);
+        border-color: var(--button-border-color-secondary);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-secondary);
+        }
+      }
+      .color-success {
+        background-color: var(--button-background-color-success);
+        color: var(--button-color-success);
+        border-color: var(--button-border-color-success);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-success);
+        }
+      }
+      .color-warning {
+        background-color: var(--button-background-color-warning);
+        color: var(--button-color-warning);
+        border-color: var(--button-border-color-warning);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-warning);
+        }
+      }
+      .color-error {
+        background-color: var(--button-background-color-error);
+        color: var(--button-color-error);
+        border-color: var(--button-border-color-error);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-error);
+        }
+      }
+      .color-light {
+        background-color: var(--button-background-color-light);
+        color: var(--button-color-light);
+        border-color: var(--button-border-color-light);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-light);
+        }
+      }
+      .color-dark {
+        background-color: var(--button-background-color-dark);
+        color: var(--button-color-dark);
+        border-color: var(--button-border-color-dark);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-dark);
+        }
+      }
+      .color-white {
+        background-color: var(--button-background-color-white);
+        color: var(--button-color-white);
+        border-color: var(--button-border-color-white);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-white);
+        }
+      }
+      .color-black {
+        background-color: var(--button-background-color-black);
+        color: var(--button-color-black);
+        border-color: var(--button-border-color-black);
+
+        &amp;:not(:disabled):hover {
+          color: var(--button-color-hover-black);
+        }
+      }
+      .text-transform-uppercase {
+        text-transform: uppercase;
+      }
+      .text-transform-lowercase {
+        text-transform: lowercase;
+      }
+      .text-transform-capitalize {
+        text-transform: capitalize;
+      }
+      .text-transform-none {
+        text-transform: none;
+      }
     `;
+  }
+
+  constructor() {
+    super();
+    this.name = '';
+    this.type = '';
+    this.color = 'primary';
+    this.texttransform = 'none';
+    this.size = 'default';
+    this.disabled = false;
   }
 
   render() {
@@ -108,9 +233,9 @@ export class ButtonElement extends LitElement {
     if (this.type) {
       classes.push(this.type.toLowerCase());
     }
-    if (this.textTransform) {
-      classes.push(`text-transform-${this.textTransform.toLowerCase()}`);
-    }
+    classes.push(`color-${this.color}`);
+    classes.push(`size-${this.size}`);
+    classes.push(`text-transform-${this.texttransform}`);
     return classes;
   }
 }
@@ -124,13 +249,13 @@ export class ButtonElement extends LitElement {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ContainerElement.html">ContainerElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="Model.html">Model</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="CanvasElement.html">CanvasElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="ContentElement.html">ContentElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ImageElement.html">ImageElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapPopupElement.html">MapPopupElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="NavElement.html">NavElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="NavSpacerElement.html">NavSpacerElement</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li><li><a href="ToastElement.html">ToastElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Oct 28 2024 13:20:22 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 19 2024 15:27:28 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core/EventType.js</title>
+    <title>JSDoc: Source: modal/ModalElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: core/EventType.js</h1>
+    <h1 class="page-title">Source: modal/ModalElement.js</h1>
 
     
 
@@ -26,20 +26,91 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Define event types used by web components
- * @readonly
- * @enum {String}
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
+
+/**
+ * @class ModalElement
+ *
+ * This class provides a modal content container which is initially hidden
+ *
+ * @example
+ * &lt;js-modal select="#button">OK&lt;/js-modal>
  */
-export const EventType = {
-  ERROR: 'js-error',
-  FETCH: 'js-fetch',
-  TEXT: 'js-text',
-  OBJECT: 'js-object',
-  BLOB: 'js-blob',
-  DONE: 'js-done',
-  CHANGE: 'js-change',
-};
+export class ModalElement extends LitElement {
+  static get localName() {
+    return 'js-modal';
+  }
+
+  static get properties() {
+    return {
+      visible: { type: Boolean, reflect: true },
+      select: { type: String, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`
+      div {
+        position: fixed; 
+        left: 0; 
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: visibility var(--modal-fade-delay), opacity var(--modal-fade-delay); 
+      }
+      .visible {
+          display: block;
+          visibility: visible;
+      }
+      .canvas {
+        background-color: var(--modal-background-color-canvas);
+        opacity: 0;
+        &amp;.visible {
+          opacity: var(--modal-opacity-canvas);
+        }
+      }
+      .content {
+        background-color: var(--modal-background-color);
+        margin: var(--modal-margin);
+        border: var(--modal-border);
+        border-radius: var(--modal-border-radius);        
+        display: flex;
+        flex-direction: column;
+      }
+    `;
+  }
+
+  render() {
+    return html`
+      &lt;div class=${this.canvasClasses.join(' ') || nothing}>&lt;/div>
+      &lt;div class=${this.contentClasses.join(' ') || nothing}">
+        &lt;slot>&lt;/slot>
+      &lt;/div>
+    `;
+  }
+
+  get canvasClasses() {
+    const classes = [];
+    classes.push('canvas');
+    if (this.visible) {
+      classes.push('visible');
+    }
+    return classes;
+  }
+
+  get contentClasses() {
+    const classes = [];
+    classes.push('content');
+    if (this.visible) {
+      classes.push('visible');
+    }
+    return classes;
+  }
+}
 </code></pre>
         </article>
     </section>

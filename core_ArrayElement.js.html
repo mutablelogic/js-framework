@@ -33,106 +33,122 @@ import { EventType } from './EventType';
  * @class ArrayElement
  *
  * This class is a store of arrays of objects of one type.
- * 
+ *
  * @property {String} provider - The provider for data
  *
  * @example
  * &lt;js-array provider="provider">&lt;/js-array>
  */
 export class ArrayElement extends LitElement {
-    #data = new Array();
-    #newdata = new Array();
-    #provider = null;
+  #data = [];
 
-    static get localName() {
-        return 'js-array';
+  #newdata = [];
+
+  #provider = null;
+
+  static get localName() {
+    return 'js-array';
+  }
+
+  static get properties() {
+    return {
+      provider: { type: String, reflect: true },
+      select: { type: String, reflect: true },
+    };
+  }
+
+  firstUpdated() {
+    // Set up a listener for data changes
+    this.addEventListener(EventType.CHANGE, () => {
+      this.requestUpdate();
+    });
+  }
+
+  render() {
+    return html`&lt;div>Array contains ${this.length} elements, provider=${this.provider}&lt;/div>`;
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    super.attributeChangedCallback(name, oldVal, newVal);
+    if (name === 'provider') {
+      this.#providerChanged(newVal, oldVal);
     }
+  }
 
-    static get properties() {
-        return {
-            provider: { type: String, reflect: true },
-        };
+  get length() {
+    return this.#data.length;
+  }
+
+  at(index) {
+    return this.#data[index];
+  }
+
+  #providerChanged(newVal, oldVal) {
+    if (oldVal != null &amp;&amp; this.#provider &amp;&amp; newVal !== oldVal) {
+      this.#provider.removeEventListener(EventType.FETCH, this.#providerFetch.bind(this));
+      this.#provider.removeEventListener(EventType.OBJECT, this.#providerObject.bind(this));
+      this.#provider.removeEventListener(EventType.DONE, this.#providerDone.bind(this));
+      this.#provider = null;
     }
-
-    firstUpdated() {
-        // Set up a listener for data changes
-        this.addEventListener(EventType.CHANGE, () => {
-            this.requestUpdate();
-        });
+    if (newVal != null &amp;&amp; newVal !== oldVal) {
+      this.#provider = document.querySelector(newVal);
+      if (this.#provider) {
+        this.#provider.addEventListener(EventType.FETCH, this.#providerFetch.bind(this));
+        this.#provider.addEventListener(EventType.OBJECT, this.#providerObject.bind(this));
+        this.#provider.addEventListener(EventType.DONE, this.#providerDone.bind(this));
+      } else {
+        throw new Error(`Provider "${newVal}" not found`);
+      }
     }
+  }
 
-    render() {
-        return html`&lt;div>Array contains ${this.length} elements, provider=${this.provider}&lt;/div>`;
-    }
+  #providerFetch() {
+    // Reset the data container
+    this.#newdata = [];
+  }
 
-    attributeChangedCallback(name, oldVal, newVal) {
-        super.attributeChangedCallback(name, oldVal, newVal);
-        if (name === 'provider') {
-            this.#providerChanged(newVal, oldVal);
-        }
-    }
-
-    get length() {
-        return this.#data.length;
-    }
-
-    at(index) {
-        return this.#data[index];
-    }
-
-    #providerChanged(newVal, oldVal) {
-        if (oldVal != null &amp;&amp; this.#provider &amp;&amp; newVal !== oldVal) {
-            this.#provider.removeEventListener(EventType.FETCH, this.#providerFetch.bind(this));
-            this.#provider.removeEventListener(EventType.OBJECT, this.#providerObject.bind(this));
-            this.#provider.removeEventListener(EventType.DONE, this.#providerDone.bind(this));
-            this.#provider = null;
-        }
-        if (newVal != null &amp;&amp; newVal !== oldVal) {
-            this.#provider = document.querySelector(newVal);
-            if (this.#provider) {
-                this.#provider.addEventListener(EventType.FETCH, this.#providerFetch.bind(this));
-                this.#provider.addEventListener(EventType.OBJECT, this.#providerObject.bind(this));
-                this.#provider.addEventListener(EventType.DONE, this.#providerDone.bind(this));
-            } else {
-                throw new Error(`Provider "${newVal}" not found`);
-            }
-        }
-    }
-
-    #providerFetch() {
-        // Reset the data container
-        this.#newdata = new Array();
-    }
-
-    #providerObject(event) {
-        // Add the object to the data container
-        this.#newdata.push(event.detail);
-    }
-
-    #providerDone() {
-        let modified = false;
-        if (this.#newdata.length !== this.#data.length) {
-            modified = true;
+  #providerObject(event) {
+    let data = event.detail;
+    if (this.select) {
+      if (data instanceof Object) {
+        data = data[this.select];
+        if (data === undefined) {
+          throw new Error(`Property "${this.select}" not found in object`);
+        } else if (Array.isArray(data)) {
+          this.#newdata = this.#newdata.concat(data);
         } else {
-            for (let i = 0; i &lt; this.#newdata.length; i++) {
-                if (this.#newdata[i] !== this.#data[i]) {
-                    modified = true;
-                    break;
-                }
-            }
+          this.#newdata.push(data);
         }
-
-        // Copy over the data
-        this.#data = this.#newdata;
-        
-        // Emit a change event if the data was modified
-        if (modified) {
-            this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
-                detail: this
-            }));
-        }
-
+      }
+    } else {
+      // Add the object to the data container
+      this.#newdata.push(data);
     }
+  }
+
+  #providerDone() {
+    let modified = false;
+    if (this.#newdata.length !== this.#data.length) {
+      modified = true;
+    } else {
+      for (let i = 0; i &lt; this.#newdata.length; i += 1) {
+        if (this.#newdata[i] !== this.#data[i]) {
+          modified = true;
+          break;
+        }
+      }
+    }
+
+    // Copy over the data
+    this.#data = this.#newdata;
+
+    // Emit a change event if the data was modified
+    if (modified) {
+      this.dispatchEvent(new CustomEvent(EventType.CHANGE, {
+        detail: this,
+      }));
+    }
+  }
 }
 </code></pre>
         </article>
@@ -144,13 +160,13 @@ export class ArrayElement extends LitElement {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="ContainerElement.html">ContainerElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="Model.html">Model</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="CanvasElement.html">CanvasElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="ContentElement.html">ContentElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ImageElement.html">ImageElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapPopupElement.html">MapPopupElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="NavElement.html">NavElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="NavSpacerElement.html">NavSpacerElement</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li><li><a href="ToastElement.html">ToastElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Oct 28 2024 13:20:22 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 19 2024 15:27:28 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

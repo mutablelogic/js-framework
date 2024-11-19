@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: element/ToastElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: element/ToastElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
+
+/**
+ * @class ToastElement
+ *
+ * This class provides a popup toast element
+ *
+ * @example
+ * &lt;js-toast>Error&lt;/js-toast>
+ */
+export class ToastElement extends LitElement {
+  #timer;
+
+  static get localName() {
+    return 'js-toast';
+  }
+
+  static get properties() {
+    return {
+      color: { type: String, reflect: true },
+      visible: { type: Boolean, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`
+      :host div {
+        position: fixed;
+        z-index: 1000;
+        right: 0;
+        bottom: 0;
+        margin: var(--toast-margin);
+        padding: var(--toast-padding);
+        border: var(--toast-border);
+        transition: visibility 0.2s, opacity 0.2s ease-in-out;
+        
+        &amp;.visible {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        &amp;.hidden {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+      .color-primary {
+        background-color: var(--toast-background-color-primary);
+        color: var(--toast-color-primary);
+        border-color: var(--toast-border-color-primary);
+      }
+      .color-secondary {
+        background-color: var(--toast-background-color-secondary);
+        color: var(--toast-color-secondary);
+        border-color: var(--toast-border-color-secondary);
+      }
+      .color-success {
+        background-color: var(--toast-background-color-success);
+        color: var(--toast-color-success);
+        border-color: var(--toast-border-color-success);
+      }
+      .color-warning {
+        background-color: var(--toast-background-color-warning);
+        color: var(--toast-color-warning);
+        border-color: var(--toast-border-color-warning);
+      }
+      .color-error {
+        background-color: var(--toast-background-color-error);
+        color: var(--toast-color-error);
+        border-color: var(--toast-border-color-error);
+      }
+      .color-light {
+        background-color: var(--toast-background-color-light);
+        color: var(--toast-color-light);
+        border-color: var(--toast-border-color-light);
+      }
+      .color-dark {
+        background-color: var(--toast-background-color-dark);
+        color: var(--toast-color-dark);
+        border-color: var(--toast-border-color-dark);
+      }
+      .color-white {
+        background-color: var(--toast-background-color-white);
+        color: var(--toast-color-white);
+        border-color: var(--toast-border-color-white);
+      }
+      .color-black {
+        background-color: var(--toast-background-color-black);
+        color: var(--toast-color-black);
+        border-color: var(--toast-border-color-black);
+      }        
+    `;
+  }
+
+  constructor() {
+    super();
+    this.color = 'error';
+  }
+
+  render() {
+    return html`
+      &lt;div class=${this.classes.join(' ') || nothing}>&lt;slot>&lt;/slot>&lt;/div>      
+    `;
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    super.attributeChangedCallback(name, oldVal, newVal);
+    if (name === 'visible' &amp;&amp; oldVal !== newVal) {
+      this.#visibleChanged(newVal !== null, oldVal !== null);
+    }
+  }
+
+  #visibleChanged(newVal) {
+    if (newVal &amp;&amp; this.duration > 0) {
+      if (this.#timer) {
+        clearTimeout(this.#timer);
+      }
+      this.#timer = setTimeout(() => {
+        this.visible = false;
+      }, this.duration * 1000);
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  get classes() {
+    const classes = [];
+    classes.push(`color-${this.color}`);
+    if (this.visible) {
+      classes.push('visible');
+    } else {
+      classes.push('hidden');
+    }
+    return classes;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayElement.html">ArrayElement</a></li><li><a href="ButtonElement.html">ButtonElement</a></li><li><a href="CanvasElement.html">CanvasElement</a></li><li><a href="CloseButtonElement.html">CloseButtonElement</a></li><li><a href="ContentElement.html">ContentElement</a></li><li><a href="FeatureModel.html">FeatureModel</a></li><li><a href="IconElement.html">IconElement</a></li><li><a href="ImageElement.html">ImageElement</a></li><li><a href="MapElement.html">MapElement</a></li><li><a href="MapLayerElement.html">MapLayerElement</a></li><li><a href="MapPopupElement.html">MapPopupElement</a></li><li><a href="MapSourceElement.html">MapSourceElement</a></li><li><a href="ModalElement.html">ModalElement</a></li><li><a href="NavElement.html">NavElement</a></li><li><a href="NavItemElement.html">NavItemElement</a></li><li><a href="NavSpacerElement.html">NavSpacerElement</a></li><li><a href="ProviderElement.html">ProviderElement</a></li><li><a href="ShapeModel.html">ShapeModel</a></li><li><a href="TableBodyElement.html">TableBodyElement</a></li><li><a href="TableHeadElement.html">TableHeadElement</a></li><li><a href="TagElement.html">TagElement</a></li><li><a href="ToastElement.html">ToastElement</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EventType">EventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 19 2024 15:27:28 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

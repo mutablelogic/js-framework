@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Source: element/ImageElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,168 +17,91 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Source: element/ImageElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="EventType"><span class="type-signature">(constant) </span>EventType<span class="type-signature"> :String</span></h4>
-
-
-
-
-<div class="description">
-    Define event types used by web components
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">String</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventType.js.html">core/EventType.js</a>, <a href="core_EventType.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
+
+/**
+ * @class ImageElement
+ *
+ * This class provides a image element
+ *
+ * @example
+ * &lt;js-image src="url">Caption for the image&lt;/js-image>
+ */
+export class ImageElement extends LitElement {
+  static get localName() {
+    return 'js-image';
+  }
+
+  static get properties() {
+    return {
+      src: { type: String, reflect: true },
+      size: { type: String, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`
+        :host {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .size-small {
+          width: var(--image-size-small);
+        }
+        .size-medium, .size-default {
+          width: var(--image-size-medium);
+        }
+        .size-large {
+          width: var(--image-size-large);
+        }
+        .size-xlarge {
+          width: var(--image-size-xlarge);
+        }
+      `;
+  }
+
+  constructor() {
+    super();
+    this.size = 'default';
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  get classes() {
+    const classes = [];
+    if (this.size) {
+      classes.push(`size-${this.size}`);
+    }
+    return classes;
+  }
+
+  get caption() {
+    return this.textContent.trim();
+  }
+
+  render() {
+    return html`
+      &lt;img 
+        class=${this.classes.join(' ') || nothing}
+        src="${this.src || nothing}" 
+        alt="${this.caption || nothing}">
+      &lt;/img>
+    `;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

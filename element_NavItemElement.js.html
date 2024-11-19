@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Source: element/NavItemElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,168 +17,82 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Source: element/NavItemElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="EventType"><span class="type-signature">(constant) </span>EventType<span class="type-signature"> :String</span></h4>
-
-
-
-
-<div class="description">
-    Define event types used by web components
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">String</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventType.js.html">core/EventType.js</a>, <a href="core_EventType.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
+
+/**
+ * @class NavItemElement
+ *
+ * This class provides a navigation element.
+ *
+ * @example
+ * &lt;js-nav>
+ *   &lt;js-navitem>&lt;js-icon>Bootstrap&lt;/js-icon>&lt;/js-navitem>
+ * &lt;/js-nav>
+ */
+export class NavItemElement extends LitElement {
+  static get localName() {
+    return 'js-navitem';
+  }
+
+  static get properties() {
+    return {
+      name: { type: String, reflect: true },
+      texttransform: { type: String, reflect: true },
+      disabled: { type: Boolean, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`  
+      .text-transform-uppercase {
+        text-transform: uppercase;
+      }
+      .text-transform-lowercase {
+        text-transform: lowercase;
+      }
+      .text-transform-capitalize {
+        text-transform: capitalize;
+      }
+      .text-transform-none {
+        text-transform: none;
+      }
+    `;
+  }
+
+  render() {
+    return html`
+      &lt;li 
+        class=${this.classes.join(' ') || nothing}>
+        &lt;slot>&lt;/slot>
+      &lt;/li>      
+    `;
+  }
+
+  get classes() {
+    const classes = [];
+    if (this.texttransform) {
+      classes.push(`text-transform-${this.texttransform}`);
+    }
+    if (this.disabled) {
+      classes.push('disabled');
+    }
+    return classes;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

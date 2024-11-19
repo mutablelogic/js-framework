@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Source: canvas/CanvasElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,168 +17,74 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Source: canvas/CanvasElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="EventType"><span class="type-signature">(constant) </span>EventType<span class="type-signature"> :String</span></h4>
-
-
-
-
-<div class="description">
-    Define event types used by web components
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">String</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventType.js.html">core/EventType.js</a>, <a href="core_EventType.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  LitElement, html, css, nothing,
+} from 'lit';
+
+/**
+ * @class CanvasElement
+ *
+ * This class provides a canvas element for content elements. The content
+ * can be displayed in a vertical or horizontal layout.
+ *
+ * @example
+ * &lt;js-canvas vertical>
+ *   &lt;js-content>OK&lt;/js-content>
+ * &lt;/js-canvas>
+ */
+export class CanvasElement extends LitElement {
+  static get localName() {
+    return 'js-canvas';
+  }
+
+  static get properties() {
+    return {
+      vertical: { type: Boolean, reflect: true },
+    };
+  }
+
+  static get styles() {
+    return css`
+        div {
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          &amp;.vertical {
+            flex-direction: row;
+          }
+        }
+      `;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    return html`
+      &lt;div class=${this.classes.join(' ') || nothing}>&lt;slot>&lt;/slot>&lt;/div>
+    `;
+  }
+
+  get classes() {
+    const classes = [];
+    if (this.vertical) {
+      classes.push('vertical');
+    }
+    return classes;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

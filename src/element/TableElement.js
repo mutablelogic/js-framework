@@ -1,22 +1,32 @@
 import { LitElement, html, css } from 'lit';
 import { EventType } from '../core/EventType';
 import { TableHeadElement } from './TableHeadElement';
+import { TableColumnElement } from './TableColumnElement';
 
 /**
- * @class TableBodyElement
+ * @class TableElement
  *
- * This class provides a table body element.
+ * This class provides a table element, in which the header, footer
+ * and columns are rendered.
  *
  * @example
- * <js-tablebody data="#data-source-id"></js-tablebody>
+ * <js-table data="#data-source-id"><!-- .... --></js-table>
  */
-export class TableBodyElement extends LitElement {
+export class TableElement extends LitElement {
+  // Data source node
   #data = null;
 
+  // Table header node
   #head = null;
 
+  // Table column renderers
+  #renderer = {};
+
+  // Default renderer
+  #default;
+
   static get localName() {
-    return 'js-tablebody';
+    return 'js-table';
   }
 
   static get properties() {
@@ -48,8 +58,7 @@ export class TableBodyElement extends LitElement {
       th {
         text-transform: capitalize;
       }
-      .wrap {
-        max-height: 40px;
+      .cell {
         overflow: hidden;        
       }
       code, pre {
@@ -92,6 +101,27 @@ export class TableBodyElement extends LitElement {
   firstUpdated() {
     // Set the table header
     this.#head = this.querySelector(TableHeadElement.localName);
+
+    // Get the table columns
+    const elements = this.childNodes;
+    for (let i = 0; i < elements.length; i += 1) {
+      if (elements[i] instanceof TableColumnElement) {
+        // Column name and title
+        const name = elements[i].getAttribute('name');
+        // If the name is not empty, add it to the column list
+        if (name && name !== '') {
+          // Append the column to the list
+          if (this.columns.indexOf(name) === -1) {
+            this.columns.push(elements[i].getAttribute('name'));
+          }
+          // Set column renderer
+          this.#renderer[name] = elements[i];
+        } else {
+          // Set the default renderer
+          this.#default = elements[i];
+        }
+      }
+    }
   }
 
   render() {
@@ -111,29 +141,46 @@ export class TableBodyElement extends LitElement {
     return rows;
   }
 
-  #renderColumns(row) {
-    const columns = [];
+  #rendererFor(key) {
+    const renderer = this.#renderer[key];
+    if (renderer) {
+      return renderer;
+    }
+    return this.#default;
+  }
 
+  #hidden(key) {
+    return this.#rendererFor(key).hidden;
+  }
+
+  #renderColumns(row) {
+    const cells = [];
     if (row instanceof Object) {
       Object.keys(row).forEach((key) => {
-        if (this.columns.indexOf(key) === -1) {
-          this.columns.push(key);
+        if (!this.#hidden(key)) {
+          if (this.columns.indexOf(key) === -1) {
+            this.columns.push(key);
+          }
+          cells[this.columns.indexOf(key)] = html`<td><div class="cell">${this.#renderCell(row, key)}</div></td>`;
         }
-        columns.push(html`<td><div class="wrap">${this.#renderCell(row[key])}</div></td>`);
       });
     } else {
       this.columns.push('value');
-      columns.push(html`<td>${this.#renderCell(row)}</td>`);
+      cells.push(html`<td>${this.#renderCell(row)}</td>`);
     }
 
-    return columns;
+    // Any missing columns we fill
+    for (let i = 0; i < this.columns.length; i += 1) {
+      if (!cells[i]) {
+        cells[i] = html`<td></td>`;
+      }
+    }
+
+    // Return cells for rendering in a row
+    return cells;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  #renderCell(cell) {
-    if (cell instanceof Object) {
-      return html`<code>${JSON.stringify(cell)}</code>`;
-    }
-    return html`${cell}`;
+  #renderCell(value, key) {
+    return this.#rendererFor(key).render(value, key);
   }
 }

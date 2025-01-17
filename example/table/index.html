@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nanoradio</title>
+  <script type="module" src="index.js" defer></script>
+  <link href="index.css" rel="stylesheet">
+  <style type="text/css">
+    .content-scroll {
+      overflow-y: scroll;
+    }
+    body {
+        overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+  <js-canvas>
+    <js-nav>
+      <js-navitem>Home</js-navitem>
+    </js-nav>
+    <js-content class="content-scroll">
+        <js-table id="items-table" data="#items-data">
+          <!-- Table columns -->
+          <js-itemcol name="title"></js-itemcol>
+
+          <!-- Hide other columns by default -->
+          <js-tablecol hidden></js-tablecol>
+        </js-table>  
+    </js-content>
+    <js-nav>
+      <!-- data source and model for items -->
+      <js-provider id="items-provider" path="http://cm5.lan:8000/feed/v1/document?limit=50"></js-provider>
+      <js-array id="items-data" provider="#items-provider" select="body"></js-array>
+    </js-nav>
+  </js-canvas>
+</body>
+
+</html>

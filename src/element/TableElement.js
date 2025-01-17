@@ -13,9 +13,17 @@ import { TableColumnElement } from './TableColumnElement';
  * <js-table data="#data-source-id"><!-- .... --></js-table>
  */
 export class TableElement extends LitElement {
+  // Data source node
   #data = null;
 
+  // Table header node
   #head = null;
+
+  // Table column renderers
+  #renderer = {};
+
+  // Default renderer
+  #default;
 
   static get localName() {
     return 'js-table';
@@ -98,13 +106,19 @@ export class TableElement extends LitElement {
     const elements = this.childNodes;
     for (let i = 0; i < elements.length; i += 1) {
       if (elements[i] instanceof TableColumnElement) {
+        // Column name and title
         const name = elements[i].getAttribute('name');
+        // If the name is not empty, add it to the column list
         if (name && name !== '') {
           // Append the column to the list
           if (this.columns.indexOf(name) === -1) {
             this.columns.push(elements[i].getAttribute('name'));
           }
-          // TODO: Set this column as the renderer
+          // Set column renderer
+          this.#renderer[name] = elements[i];
+        } else {
+          // Set the default renderer
+          this.#default = elements[i];
         }
       }
     }
@@ -127,14 +141,28 @@ export class TableElement extends LitElement {
     return rows;
   }
 
+  #rendererFor(key) {
+    const renderer = this.#renderer[key];
+    if (renderer) {
+      return renderer;
+    }
+    return this.#default;
+  }
+
+  #hidden(key) {
+    return this.#rendererFor(key).hidden;
+  }
+
   #renderColumns(row) {
     const cells = [];
     if (row instanceof Object) {
       Object.keys(row).forEach((key) => {
-        if (this.columns.indexOf(key) === -1) {
-          this.columns.push(key);
+        if (!this.#hidden(key)) {
+          if (this.columns.indexOf(key) === -1) {
+            this.columns.push(key);
+          }
+          cells[this.columns.indexOf(key)] = html`<td><div class="cell">${this.#renderCell(row, key)}</div></td>`;
         }
-        cells[this.columns.indexOf(key)] = html`<td><div class="cell">${this.#renderCell(row[key])}</div></td>`;
       });
     } else {
       this.columns.push('value');
@@ -152,14 +180,7 @@ export class TableElement extends LitElement {
     return cells;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  #renderCell(cell) {
-    if (cell === null || cell === undefined || cell === '') {
-      return html`nil`;
-    }
-    if (cell instanceof Object) {
-      return html`<code>${JSON.stringify(cell)}</code>`;
-    }
-    return html`${cell}`;
+  #renderCell(value, key) {
+    return this.#rendererFor(key).render(value, key);
   }
 }

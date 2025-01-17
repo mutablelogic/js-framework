@@ -1,5 +1,6 @@
 // This file defines all the styles and elements used for the web components
 import '../../src/index';
+import './item.js'
 
 /* Code to reload in the esbuild serve development environment */
 window.addEventListener('load', () => {

@@ -19,22 +19,23 @@
 
 <body>
   <js-canvas>
-    <js-nav vertical>
+    <js-nav>
       <js-navitem>Home</js-navitem>
     </js-nav>
     <js-content class="content-scroll">
         <js-table id="items-table" data="#items-data">
-        <js-tablehead body="#items-table"></js-tablehead>
-        <js-tablecol name="author">Author</js-tablecol>
-        <js-tablecol name="pubdate">Date</js-tablecol>
-        <js-tablecol name="title">Title</js-tablecol>
-        <js-tablecol name="desc">Description</js-tablecol>
-        <js-tablecol name="media">Media</js-tablecol>
+          <!-- Table columns -->
+          <js-itemcol name="title"></js-itemcol>
+
+          <!-- Hide other columns by default -->
+          <js-tablecol hidden></js-tablecol>
         </js-table>  
     </js-content>
-    <!-- data source and model for items -->
-    <js-provider id="items-provider" path="http://cm5.lan:8000/feed/v1/document"></js-provider>
-    <js-array id="items-data" provider="#items-provider" select="body"></js-array>
+    <js-nav>
+      <!-- data source and model for items -->
+      <js-provider id="items-provider" path="http://cm5.lan:8000/feed/v1/document?limit=50"></js-provider>
+      <js-array id="items-data" provider="#items-provider" select="body"></js-array>
+    </js-nav>
   </js-canvas>
 </body>
 

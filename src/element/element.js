@@ -1,6 +1,4 @@
 // Elements
-import { TableBodyElement } from './TableBodyElement';
-import { TableHeadElement } from './TableHeadElement';
 import { ButtonElement } from './ButtonElement';
 import { CloseButtonElement } from './CloseButtonElement';
 import { TagElement } from './TagElement';
@@ -12,9 +10,11 @@ import { NavElement } from './NavElement';
 import { NavItemElement } from './NavItemElement';
 import { NavSpacerElement } from './NavSpacerElement';
 
+import { TableElement } from './TableElement';
+import { TableHeadElement } from './TableHeadElement';
+import { TableColumnElement } from './TableColumnElement';
+
 // Define Web Components
-customElements.define(TableBodyElement.localName, TableBodyElement); // js-tablebody
-customElements.define(TableHeadElement.localName, TableHeadElement); // js-tablehead
 customElements.define(ButtonElement.localName, ButtonElement); // js-button
 customElements.define(CloseButtonElement.localName, CloseButtonElement); // js-close
 customElements.define(TagElement.localName, TagElement); // js-tag
@@ -25,3 +25,7 @@ customElements.define(ToastElement.localName, ToastElement); // js-toast
 customElements.define(NavElement.localName, NavElement); // js-nav
 customElements.define(NavItemElement.localName, NavItemElement); // js-navitem
 customElements.define(NavSpacerElement.localName, NavSpacerElement); // js-navspacer
+
+customElements.define(TableElement.localName, TableElement); // js-table
+customElements.define(TableHeadElement.localName, TableHeadElement); // js-tablehead
+customElements.define(TableColumnElement.localName, TableColumnElement); // js-tablecol

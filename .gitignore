@@ -26,6 +26,7 @@ jspm_packages/
 .next
 .nuxt
 dist
+build
 .cache/
 .vuepress/dist
 .serverless/

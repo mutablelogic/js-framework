@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: canvas/ContentElement.js</title>
+    <title>JSDoc: Class: TableElement</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,53 +17,145 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: canvas/ContentElement.js</h1>
+    <h1 class="page-title">Class: TableElement</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import {
-  LitElement, html, css, nothing,
-} from 'lit';
+        <h2><span class="attribs"><span class="type-signature"></span></span>TableElement<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">TableElement
 
-/**
- * @class ContentElement
- *
- * This class provides a content container
- *
- * @example
- * &lt;js-content>OK&lt;/js-content>
- */
-export class ContentElement extends LitElement {
-  static get localName() {
-    return 'js-content';
-  }
+This class provides a table element, in which the header, footer
+and columns are rendered.</div>
+        
+    
+</header>
 
-  static get properties() {
-    return {};
-  }
+<article>
+    <div class="container-overview">
+    
+        
 
-  static get styles() {
-    return css`
-      :host {
-        flex: 1;
-      }
-    `;
-  }
+    
+    <h2>Constructor</h2>
+    
 
-  render() {
-    return html`
-        &lt;slot>&lt;/slot>
-      `;
-  }
-}
-</code></pre>
-        </article>
-    </section>
+    
+    <h4 class="name" id="TableElement"><span class="type-signature"></span>new TableElement<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="element_TableElement.js.html">element/TableElement.js</a>, <a href="element_TableElement.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;js-table data="#data-source-id">&lt;!-- .... -->&lt;/js-table></code></pre>
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

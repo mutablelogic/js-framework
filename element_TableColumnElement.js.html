@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: canvas/ContentElement.js</title>
+    <title>JSDoc: Source: element/TableColumnElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: canvas/ContentElement.js</h1>
+    <h1 class="page-title">Source: element/TableColumnElement.js</h1>
 
     
 
@@ -26,39 +26,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  LitElement, html, css, nothing,
-} from 'lit';
+            <pre class="prettyprint source linenums"><code>import { LitElement, html } from 'lit';
 
 /**
- * @class ContentElement
+ * @class TableColumnElement
  *
- * This class provides a content container
+ * This class provides a table column element, for rendering
+ * a table cell. It also provides properties for the column.
+ * The name property is used to identify the column in the
+ * table, and the hidden property is used to hide the column.
  *
  * @example
- * &lt;js-content>OK&lt;/js-content>
+ * &lt;js-tablecol name="id">ID&lt;/js-tablecol>
  */
-export class ContentElement extends LitElement {
+export class TableColumnElement extends LitElement {
   static get localName() {
-    return 'js-content';
+    return 'js-tablecol';
   }
 
   static get properties() {
-    return {};
+    return {
+      name: { type: String, reflect: true },
+      hidden: { type: Boolean, reflect: true },
+    };
   }
 
-  static get styles() {
-    return css`
-      :host {
-        flex: 1;
-      }
-    `;
+  /**
+   * Get the column title.
+   *
+   * @returns {string}
+   */
+  get title() {
+    return this.textContent;
   }
 
-  render() {
-    return html`
-        &lt;slot>&lt;/slot>
-      `;
+  // eslint-disable-next-line class-methods-use-this
+  render(value, key) {
+    const cell = value instanceof Object ? value[key] : value;
+    if (cell instanceof Object) {
+      return html`&lt;code>${JSON.stringify(cell)}&lt;/code>`;
+    }
+    return html`${cell}`;
   }
 }
 </code></pre>
